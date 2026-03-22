@@ -52,6 +52,33 @@ export default {
       ringColor: {
         primary: "var(--color-primary)",
       },
+      /* Semantic spacing tokens — extend Tailwind's default numeric scale */
+      spacing: {
+        xs: "var(--spacing-xs)",
+        sm: "var(--spacing-sm)",
+        md: "var(--spacing-md)",
+        lg: "var(--spacing-lg)",
+        xl: "var(--spacing-xl)",
+        "2xl": "var(--spacing-2xl)",
+        "3xl": "var(--spacing-3xl)",
+        "4xl": "var(--spacing-4xl)",
+        "5xl": "var(--spacing-5xl)",
+      },
+      /* Border radius tokens */
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)",
+        xl: "var(--radius-xl)",
+        "2xl": "var(--radius-2xl)",
+        full: "var(--radius-full)",
+      },
+      /* Font families */
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        heading: ["var(--font-heading)"],
+        mono: ["var(--font-mono)"],
+      },
     },
   },
   plugins: [],

@@ -51,7 +51,7 @@ src/
     │   └─ types/
     ├─ pages/          # Route-level containers
     ├─ widgets/        # Layout pieces (AppShell, Header, Sidebar)
-    ├─ styles/         # tokens.css, Tailwind entry
+    ├─ styles/         # tokens/ (colors, spacing, typography, radii, themes), Tailwind entry
     └─ main.tsx        # App bootstrap
 ```
 
@@ -97,9 +97,30 @@ Unidirectional flow:
 
 ## UI & Design System
 
-- Design tokens live in `src/styles/tokens.css` and are exposed to Tailwind via CSS variables.
+- Design tokens are split across `src/styles/tokens/` by category, each with inline documentation:
+  - `colors.css` — primitive ramps (green, purple, gray) and all semantic color tokens.
+  - `spacing.css` — named spacing scale (`xs`–`5xl`) based on a 4 px unit.
+  - `typography.css` — font families, size scale, weights, line heights, letter spacing.
+  - `radii.css` — border radius scale (`none`, `sm`, `md`, `lg`, `xl`, `2xl`, `full`).
+  - `themes.css` — dark mode overrides scoped to `.dark`.
+  - `index.css` — single entrypoint that imports the above in the correct order.
+- All tokens are exposed to Tailwind via `tailwind.config.js` so utilities like `p-md`, `rounded-lg`, `font-heading` work alongside the CSS variables.
 - Shared UI atoms live under `shared/ui/` and are small, accessible, and theme-aware.
 - Components favor composition: small presentational components wrapped by feature-specific containers.
+
+### Dark mode
+
+Dark mode is controlled by Tailwind's `darkMode: 'class'` strategy. The `.dark` class on `<html>` activates the overrides defined in `tokens/themes.css`.
+
+```js
+// Toggle dark mode
+document.documentElement.classList.toggle('dark');
+
+// Persist preference
+localStorage.setItem('theme', 'dark');
+```
+
+This gives the user explicit control independent of their OS preference.
 
 ## Authentication & Security
 

@@ -1,0 +1,47 @@
+/*
+ * Typography Tokens
+ *
+ * Font families, size scale, weights, line heights, and letter spacing.
+ * Components should reference these tokens rather than hard-coded values
+ * so type decisions are adjusted in one place.
+ *
+ * Font families map to Tailwind via `theme.extend.fontFamily`.
+ * Size/weight/line-height can be used directly as CSS vars in component styles.
+ */
+
+:root {
+  /* ===== FONT FAMILIES ===== */
+  --font-sans:    system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    ui-monospace, Consolas, monospace;
+
+  /* ===== FONT SIZE SCALE ===== */
+  /* Named for semantic intent: xs → base → display */
+  --font-size-xs:   0.75rem;    /* 12px — captions, meta, labels */
+  --font-size-sm:   0.875rem;   /* 14px — helper text, secondary UI */
+  --font-size-base: 1rem;       /* 16px — standard body (desktop) */
+  --font-size-md:   1.125rem;   /* 18px — comfortable reading body */
+  --font-size-lg:   1.25rem;    /* 20px — subheadings, larger labels */
+  --font-size-xl:   1.5rem;     /* 24px — section headings (h2) */
+  --font-size-2xl:  1.875rem;   /* 30px — major headings */
+  --font-size-3xl:  2.25rem;    /* 36px — page headings (h1 mobile) */
+  --font-size-4xl:  3rem;       /* 48px — hero / display (h1 desktop) */
+
+  /* ===== FONT WEIGHTS ===== */
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ===== LINE HEIGHTS ===== */
+  --line-height-tight:   1.15;   /* headings, hero text */
+  --line-height-snug:    1.275;  /* subheadings */
+  --line-height-normal:  1.45;   /* body copy */
+  --line-height-relaxed: 1.625;  /* long-form content */
+  --line-height-loose:   2;      /* UI labels that need breathing room */
+
+  /* ===== LETTER SPACING ===== */
+  --tracking-tight:  -0.04em;   /* large display headings */
+  --tracking-normal:  0.01em;   /* body text */
+  --tracking-wide:    0.05em;   /* uppercase labels, badges */
+}

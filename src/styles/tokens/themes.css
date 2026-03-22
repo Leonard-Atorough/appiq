@@ -1,0 +1,55 @@
+/*
+ * Theme Overrides
+ *
+ * Dark-mode overrides using Tailwind's `darkMode: 'class'` strategy.
+ * The `.dark` class must be present on <html> (or <body>) to activate.
+ *
+ * Toggle in JavaScript:
+ *   document.documentElement.classList.toggle('dark');
+ *
+ * Persist the user preference to localStorage and re-apply on load.
+ * Only color semantic tokens are overridden here — primitives (ramps)
+ * stay the same; the semantic layer re-maps to different ramp stops.
+ *
+ * NOTE: This file must be imported AFTER colors.css so the primitive
+ *       ramps (--green-*, --gray-*, etc.) are already defined.
+ */
+
+.dark {
+  /* ===== BACKGROUNDS & SURFACES ===== */
+  --color-bg:       var(--gray-900);
+  --color-surface:  hsl(210 15% 12%);
+  --color-muted-bg: var(--gray-800);
+
+  /* ===== PRIMARY ===== */
+  --color-primary:            var(--green-400); /* brighter stop for dark bg contrast */
+  --color-primary-hover:      var(--green-500);
+  --color-primary-active:     var(--green-600);
+  --color-primary-light:      var(--green-900);
+  --color-primary-foreground: hsl(210 20% 98%); /* light text on green, dark mode */
+
+  /* ===== SECONDARY ===== */
+  --color-secondary:            var(--purple-300);
+  --color-secondary-light:      var(--purple-700);
+  --color-secondary-foreground: hsl(210 20% 98%);
+
+  /* ===== TEXT ===== */
+  --color-text:           var(--gray-100);
+  --color-text-secondary: var(--gray-300);
+  --color-text-muted:     var(--gray-400);
+  --color-text-light:     var(--gray-500);
+
+  /* ===== BORDERS ===== */
+  --color-border:       var(--gray-700);
+  --color-border-muted: var(--gray-800);
+
+  /* ===== FEEDBACK ===== */
+  --color-success:       var(--green-400);
+  --color-success-light: var(--green-900);
+  --color-warning:       hsl(45  90% 65%);
+  --color-warning-light: hsl(45  80% 15%);
+  --color-error:         hsl(0   84% 70%);
+  --color-error-light:   hsl(0   78% 22%);
+  --color-info:          hsl(210 88% 66%);
+  --color-info-light:    hsl(210 90% 20%);
+}

@@ -45,7 +45,7 @@ src/
   │   ├─ api/           # HTTP client, retry policies
   │   ├─ storage/       # Dexie repositories, db adapters
   │   └─ lib/           # Hooks (useAsync, useFetch), utils
-  ├─ styles/            # tokens.css (design tokens as CSS variables)
+  ├─ styles/tokens/     # Design tokens (colors, spacing, typography, radii)
   └─ main.tsx
 ```
 

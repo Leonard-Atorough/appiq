@@ -1,0 +1,28 @@
+/*
+ * Border Radius Tokens
+ *
+ * A consistent curve scale from sharp (none) to fully-round (pill/avatar).
+ * Use semantic names in component styles rather than arbitrary px values.
+ *
+ * Registered in `tailwind.config.js` as `theme.extend.borderRadius` so you
+ * can use Tailwind utilities: rounded-sm, rounded-md, rounded-lg, etc.
+ *
+ * Scale intent:
+ *   none → no rounding (tables, code blocks, flush containers)
+ *   sm   → fine details (icon buttons, tags, tooltip corners)
+ *   md   → standard inputs, select, badges
+ *   lg   → cards, dropdowns, popovers
+ *   xl   → modals, sheet panels
+ *   2xl  → large containers, hero sections
+ *   full → pills, avatars, toggles
+ */
+
+:root {
+  --radius-none: 0;
+  --radius-sm:   0.25rem;   /*  4px */
+  --radius-md:   0.375rem;  /*  6px */
+  --radius-lg:   0.5rem;    /*  8px */
+  --radius-xl:   0.75rem;   /* 12px */
+  --radius-2xl:  1rem;      /* 16px */
+  --radius-full: 9999px;
+}

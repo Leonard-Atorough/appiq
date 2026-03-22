@@ -19,6 +19,13 @@ AppIQ's semantic design system powered by CSS variables + Tailwind. One source o
 
 ## Token Categories
 
+### Radii
+
+[Border radius scale](./references/radii-tokens.md):
+
+- `--radius-sm` (4px), `--radius-md` (6px), `--radius-lg` (8px), `--radius-xl` (12px), `--radius-2xl` (16px), `--radius-full` (9999px)
+- Use `rounded-sm`, `rounded-md`, etc. in Tailwind or `var(--radius-*)` in CSS
+
 ### Colors
 
 [Complete color reference](./references/color-tokens.md) with:
@@ -45,45 +52,56 @@ AppIQ's semantic design system powered by CSS variables + Tailwind. One source o
 - `--font-weight-normal`, `--font-weight-semibold`, `--font-weight-bold`
 - `--line-height-tight`, `--line-height-normal`, `--line-height-relaxed`
 
-## CSS Variables in tokens.css
+## CSS Variables in tokens/
 
-Location: `src/styles/tokens.css`
+Location: `src/styles/tokens/` (split by category)
 
-All design tokens are defined as CSS variables:
+| File | Contents |
+|------|----------|
+| `colors.css` | Primitive ramps (green, purple, gray) + semantic color tokens |
+| `spacing.css` | Named spacing scale xs–5xl |
+| `typography.css` | Font families, sizes, weights, line heights, tracking |
+| `radii.css` | Border radius scale sm–full |
+| `themes.css` | Dark mode overrides under `.dark` |
+| `index.css` | Single import entrypoint |
+
+All token files are imported via `src/styles/tokens/index.css`:
 
 ```css
+/* src/styles/tokens/colors.css */
 :root {
   /* Colors - Light mode */
-  --color-primary: hsl(200 100% 50%);
-  --color-success: hsl(120 100% 40%);
-  --color-warning: hsl(40 100% 50%);
-  --color-error: hsl(0 100% 50%);
-  --color-text: hsl(0 0% 20%);
-  --color-text-muted: hsl(0 0% 60%);
-  --color-surface: hsl(0 0% 100%);
-  --color-border: hsl(0 0% 90%);
+  --color-primary: hsl(119 43% 52%);
+  --color-success: hsl(119 43% 45%);
+  --color-warning: hsl(45 93% 56%);
+  --color-error:   hsl(0 84% 60%);
+  --color-text:    hsl(210 12% 18%);
+  --color-text-muted: hsl(210 10% 52%);
+  --color-surface: hsl(210 20% 100%);
+  --color-border:  hsl(210 16% 90%);
 
   /* Spacing */
-  --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
 
   /* Typography */
-  --font-size-sm: 0.875rem;
+  --font-sans: system-ui, "Segoe UI", sans-serif;
   --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
+  --font-size-md:   1.125rem;
+
+  /* Radii */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.375rem;
+  --radius-lg:   0.5rem;
+  --radius-full: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: hsl(0 0% 95%);
-    --color-surface: hsl(0 0% 12%);
-    --color-border: hsl(0 0% 25%);
-  }
+/* src/styles/tokens/themes.css */
+.dark {
+  --color-text:    hsl(210 20% 96%);
+  --color-surface: hsl(210 15% 12%);
+  --color-border:  hsl(210 10% 32%);
 }
 ```
 
@@ -111,13 +129,23 @@ Prefer Method 1 (Tailwind) for consistency.
 
 ## Dark Mode Strategy
 
-Dark mode is handled via `prefers-color-scheme: dark` media query in `tokens.css`.
+Dark mode is controlled by Tailwind's **`darkMode: 'class'`** strategy. Add or remove the `.dark` class on `<html>` to switch themes. The color overrides live in `src/styles/tokens/themes.css`.
 
-**No special class needed** — CSS variables automatically switch when system dark mode is enabled.
+```js
+// Toggle dark mode
+document.documentElement.classList.toggle('dark');
+
+// Restore persisted preference on load
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+```
+
+This gives users explicit control independent of their OS preference.
 
 Testing in browser DevTools:
 
-1. DevTools → Rendering tab → `prefers-color-scheme`
+1. DevTools → Console: `document.documentElement.classList.add('dark')`
 2. Toggle between `light` and `dark`
 3. Observe color changes without page reload
 

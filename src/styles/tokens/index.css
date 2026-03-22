@@ -1,0 +1,18 @@
+/*
+ * Design Tokens — Entry Point
+ *
+ * Import this single file to pull in the complete AppIQ design system.
+ * See individual files for documentation on each token category.
+ *
+ * Import order matters: `themes.css` must come after `colors.css` because
+ * dark-mode overrides reference the primitive color ramps defined there.
+ *
+ * Usage in src/index.css:
+ *   @import "./styles/tokens/index.css";
+ */
+
+@import "./colors.css";
+@import "./spacing.css";
+@import "./typography.css";
+@import "./radii.css";
+@import "./themes.css";
