@@ -1,0 +1,392 @@
+---
+description: "Generate copy-paste Tailwind + token styling recipes for common UI patterns."
+argument-hint: "Pattern name and options (e.g., button primary, card dark-mode, form-group)"
+---
+
+# Tailwind + Token Styling Recipe
+
+Quick styling patterns for common UI components using AppIQ's design system.
+
+## Patterns Included
+
+- **Button** (variants: primary, secondary, danger, loading)
+- **Card** (minimal, with hover, dark mode)
+- **Badge/Chip** (status colors, dismissible)
+- **Form Group** (input, label, error, helper text)
+- **Header** (page title, subtitle, actions)
+- **Table Row** (clickable, selectable, alternating)
+- **Modal Header** (title, close button)
+- **Link** (external, internal, underline)
+- **Loading State** (skeleton, spinner, shimmer)
+
+## Example: Primary Button
+
+**Input:**
+
+```
+Pattern: button primary
+Options: href, disabled, size
+```
+
+**Output:**
+
+```tsx
+// Default button
+<button className="
+  px-4 py-2 rounded font-semibold
+  bg-[var(--color-primary)] text-white
+  hover:opacity-90 active:opacity-75
+  focus:outline-2 focus:outline-offset-2 focus:outline-[var(--color-primary)]
+  disabled:opacity-50 disabled:cursor-not-allowed
+  transition-opacity duration-200
+">
+  Click me
+</button>
+
+// As link (href)
+<a href="/applications" className="
+  inline-block px-4 py-2 rounded font-semibold
+  bg-[var(--color-primary)] text-white
+  hover:opacity-90 active:opacity-75
+  focus:outline-2 focus:outline-offset-2 focus:outline-[var(--color-primary)]
+  transition-opacity duration-200
+">
+  View Applications
+</a>
+
+// Large button
+<button className="
+  px-6 py-3 rounded font-semibold text-lg
+  bg-[var(--color-primary)] text-white
+  ...
+">
+  Large button
+</button>
+
+// Loading state
+<button className="
+  px-4 py-2 rounded font-semibold
+  bg-[var(--color-primary)] text-white opacity-75
+  cursor-wait flex items-center gap-2
+"
+  disabled>
+  <span className="animate-spin">⏳</span>
+  Loading...
+</button>
+```
+
+## Example: Card
+
+```tsx
+// Basic card
+<div className="
+  rounded-lg border border-[var(--color-border)]
+  bg-[var(--color-surface)]
+  p-6
+">
+  <h2 className="text-lg font-bold text-[var(--color-text)]">
+    Card title
+  </h2>
+  <p className="text-sm text-[var(--color-text-muted)]">
+    Card content
+  </p>
+</div>
+
+// Hoverable card (clickable)
+<div className="
+  rounded-lg border border-[var(--color-border)]
+  bg-[var(--color-surface)]
+  p-6
+  hover:shadow-md hover:border-[var(--color-primary)]
+  transition-all duration-200
+  cursor-pointer
+">
+  {/* content */}
+</div>
+
+// Card with divider
+<div className="
+  rounded-lg border border-[var(--color-border)]
+  bg-[var(--color-surface)]
+  overflow-hidden
+">
+  <div className="p-6 border-b border-[var(--color-border)]">
+    Header
+  </div>
+  <div className="p-6">
+    Body
+  </div>
+  <div className="p-6 border-t border-[var(--color-border)]">
+    Footer
+  </div>
+</div>
+```
+
+## Example: Form Input
+
+```tsx
+// Text input with label & error
+<div className="flex flex-col gap-2">
+  <label htmlFor="title" className="
+    text-sm font-semibold text-[var(--color-text)]
+  ">
+    Title
+    <span className="text-[var(--color-error)]">*</span>
+  </label>
+
+  <input
+    id="title"
+    type="text"
+    placeholder="Enter title"
+    aria-invalid="false"
+    className="
+      px-3 py-2 rounded-md
+      border-2 border-[var(--color-border)]
+      bg-[var(--color-surface)]
+      text-[var(--color-text)]
+      placeholder-[var(--color-text-muted)]
+      focus:outline-none focus:border-[var(--color-primary)]
+      disabled:opacity-50 disabled:cursor-not-allowed
+      transition-colors duration-200
+    "
+  />
+
+  <span className="text-xs text-[var(--color-text-muted)]">
+    Helper text
+  </span>
+</div>
+
+// With error
+<div className="flex flex-col gap-2">
+  {/* label ... */}
+  <input
+    aria-invalid="true"
+    aria-describedby="title-error"
+    className="
+      px-3 py-2 rounded-md
+      border-2 border-[var(--color-error)]
+      ...
+      focus:border-[var(--color-error)]
+    "
+  />
+  <span
+    id="title-error"
+    className="text-sm text-[var(--color-error)]"
+    role="alert"
+  >
+    Title is required
+  </span>
+</div>
+```
+
+## Example: Status Badge
+
+```tsx
+// Color-coded status
+<span className={`
+  px-3 py-1 rounded-full text-sm font-semibold
+  ${
+    status === 'success'
+      ? 'bg-[var(--color-success)]/10 text-[var(--color-success)]'
+      : status === 'warning'
+        ? 'bg-[var(--color-warning)]/10 text-[var(--color-warning)]'
+        : status === 'error'
+          ? 'bg-[var(--color-error)]/10 text-[var(--color-error)]'
+          : 'bg-[var(--color-info)]/10 text-[var(--color-info)]'
+  }
+`}>
+  {status}
+</span>
+
+// Dismissible chip
+<div className="
+  inline-flex items-center gap-2 px-3 py-1 rounded-full
+  bg-[var(--color-primary)]/10 text-[var(--color-primary)]
+">
+  <span className="text-sm font-semibold">{label}</span>
+  <button
+    onClick={onDismiss}
+    className="focus:outline-none hover:text-[var(--color-primary)]"
+    aria-label={`Remove ${label}`}
+  >
+    ✕
+  </button>
+</div>
+```
+
+## Example: Table Row
+
+```tsx
+// Table with hover state
+<table className="w-full border-collapse">
+  <tbody>
+    {items.map((item) => (
+      <tr
+        key={item.id}
+        onClick={() => handleSelect(item.id)}
+        className="
+          border-b border-[var(--color-border)]
+          hover:bg-[var(--color-surface-hover)]
+          cursor-pointer
+          transition-colors duration-150
+        "
+      >
+        <td className="p-3 text-[var(--color-text)]">
+          {item.name}
+        </td>
+        <td className="p-3 text-right text-[var(--color-text-muted)]">
+          {item.value}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+// With alternating rows
+<table>
+  <tbody>
+    {items.map((item, idx) => (
+      <tr
+        key={item.id}
+        className={`
+          border-b border-[var(--color-border)]
+          ${idx % 2 === 0 ? 'bg-[var(--color-surface)]' : 'bg-[var(--color-surface-hover)]'}
+        `}
+      >
+        {/* cells */}
+      </tr>
+    ))}
+  </tbody>
+</table>
+```
+
+## Example: Modal Header
+
+```tsx
+<div
+  className="
+  flex items-center justify-between gap-4
+  border-b border-[var(--color-border)]
+  p-6
+"
+>
+  <h2
+    id="modal-title"
+    className="
+    text-xl font-bold text-[var(--color-text)]
+  "
+  >
+    Modal Title
+  </h2>
+  <button
+    onClick={onClose}
+    className="
+      p-1 rounded
+      text-[var(--color-text-muted)]
+      hover:bg-[var(--color-surface-hover)]
+      focus:outline-2 focus:outline-[var(--color-primary)]
+    "
+    aria-label="Close modal"
+  >
+    ✕
+  </button>
+</div>
+```
+
+## Example: Loading Skeleton
+
+```tsx
+// Skeleton loader (shimmer effect)
+<div className="
+  h-6 rounded
+  bg-gradient-to-r from-[var(--color-surface-hover)]
+  via-[var(--color-surface)] to-[var(--color-surface-hover)]
+  animate-pulse
+" />
+
+// Multiple skeleton rows
+<div className="space-y-3">
+  {[...Array(5)].map((_, idx) => (
+    <div key={idx} className="space-y-2">
+      <div className="h-4 bg-[var(--color-surface-hover)] rounded animate-pulse" />
+      <div className="h-3 bg-[var(--color-surface-hover)] rounded w-4/5 animate-pulse" />
+    </div>
+  ))}
+</div>
+```
+
+## Dark Mode Testing
+
+All recipes automatically work in dark mode via CSS variables:
+
+```tsx
+// Light mode: white background, black text
+// Dark mode: dark background, light text
+// No code changes needed!
+
+<div className="bg-[var(--color-surface)] text-[var(--color-text)]">
+  {/* Works in both light and dark mode */}
+</div>
+```
+
+To test:
+
+1. Chrome DevTools → Rendering → `prefers-color-scheme: dark`
+2. Or use this button to toggle:
+
+```tsx
+function DarkModeToggle() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.style.colorScheme = "dark";
+    } else {
+      document.documentElement.style.colorScheme = "light";
+    }
+  }, [isDark]);
+
+  return <button onClick={() => setIsDark(!isDark)}>{isDark ? "☀️ Light" : "🌙 Dark"}</button>;
+}
+```
+
+## Copy-Paste Tips
+
+1. **Find the pattern** (e.g., "button primary")
+2. **Copy the whole className string** (everything inside `className=""`)
+3. **Paste into your component**
+4. **Modify text/content as needed**
+5. **Test in light and dark mode**
+
+## When to Create a Component vs. Use a Recipe
+
+**Use recipe if:**
+
+- It's a one-off use
+- You need it in multiple features
+- It's simple enough
+
+**Create a component if:**
+
+- You use it in 3+ places
+- It has internal state logic
+- It needs callbacks/events
+
+**Example: After using recipe 3 times, extract to component**
+
+```tsx
+// Create shared/ui/StatusBadge.tsx
+export function StatusBadge({ status, onDismiss }) {
+  // Use the recipe pattern inside
+}
+
+// Then use everywhere:
+<StatusBadge status="success" onDismiss={onDismiss} />;
+```
+
+---
+
+**Related Skills**:
+
+- [Design Tokens](../skills/design-tokens/) - Token reference
+- [A11y Audit](../skills/a11y-audit/) - Accessibility patterns
