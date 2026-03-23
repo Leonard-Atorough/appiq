@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import {userEvent} from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { Dialog } from "./Dialog";
 
@@ -20,5 +20,15 @@ describe("Dialog", () => {
 
     await user.click(screen.getByRole("button", { name: /close/i }));
     expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+
+  it("renders children content", () => {
+    render(
+      <Dialog open={true} onOpenChange={() => {}} title="My Dialog" description="a description">
+        <div>content</div>
+      </Dialog>,
+    );
+
+    expect(screen.getByText("content")).toBeTruthy();
   });
 });

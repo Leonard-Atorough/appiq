@@ -11,7 +11,9 @@ import React from "react";
  *
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, full, className, disabled, ...props }, ref) => {
+  ({ variant, size, full, className, disabled, onClick, ...props }, ref) => {
+    const onCLickDisabled = (e: React.MouseEvent) => e.preventDefault(); // Prevents any action when the button is disabled
+
     return (
       <button
         ref={ref}
@@ -24,6 +26,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         disabled={disabled}
+        onClick={disabled ? onCLickDisabled : onClick}
+        aria-disabled={disabled || undefined} // Adds aria-disabled for accessibility when the button is disabled
         {...props}
       />
     );

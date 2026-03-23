@@ -1,5 +1,6 @@
 import { afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
+import "@testing-library/jest-dom";
 
 // Automatically unmount and cleanup DOM after the test is finished.
 afterEach(() => {

@@ -6,14 +6,14 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-primary)] text-[var(--color-primary-foreground)] hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)] focus-visible:ring-[var(--color-primary)]",
+          "bg-(--color-primary) text-(--color-primary-foreground) hover:bg-(--color-primary-hover) active:bg-(--color-primary-active) focus-visible:ring-(--color-primary)",
         secondary:
-          "bg-[var(--color-secondary)] text-[var(--color-secondary-foreground)] hover:bg-[var(--color-secondary-hover)] active:bg-[var(--color-secondary-active)] focus-visible:ring-[var(--color-secondary)]",
+          "bg-(--color-secondary) text-(--color-secondary-foreground) hover:bg-(--color-secondary-hover) active:bg-(--color-secondary-active) focus-visible:ring-(--color-secondary)",
         outline:
-          "border border-[var(--color-border)] text-[var(--color-text)] bg-transparent hover:bg-muted active:bg-[var(--gray-200)] focus-visible:ring-[var(--color-border)]",
+          "border border-(--color-border) text-(--color-text) bg-transparent hover:bg-muted active:bg-(--gray-200) focus-visible:ring-(--color-border)",
         ghost:
-          "bg-transparent text-[var(--color-text)] hover:bg-muted active:bg-[var(--gray-200)] focus-visible:ring-[var(--color-text)]",
-        link: "bg-transparent text-[var(--color-primary)] hover:underline active:text-[var(--color-primary-active)] focus-visible:ring-[var(--color-primary)]",
+          "bg-transparent text-(--color-text) hover:bg-muted active:bg-(--gray-200) focus-visible:ring-(--color-text)",
+        link: "bg-transparent text-(--color-primary) hover:underline active:text-(--color-primary-active) focus-visible:ring-(--color-primary)",
       },
       size: {
         sm: "px-sm py-xs text-sm rounded-md",
