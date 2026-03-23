@@ -30,6 +30,8 @@
 
   /* ===== SECONDARY ===== */
   --color-secondary:            var(--purple-300);
+  --color-secondary-hover:      var(--purple-200);
+  --color-secondary-active:     var(--purple-100);
   --color-secondary-light:      var(--purple-700);
   --color-secondary-foreground: hsl(210 20% 98%);
 

@@ -6,7 +6,7 @@ export type ApplicationRow = {
   company: string;
   position: string;
   status: ApplicationStatus | null;
-  appliedDate: string; // ISO date string
+  dateApplied: string; // ISO date string
   salaryMin: number;
   salaryMax: number;
   location: ApplicationLocationType | null;

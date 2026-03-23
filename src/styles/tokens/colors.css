@@ -78,6 +78,8 @@
 
   /* ===== SEMANTIC: SECONDARY ===== */
   --color-secondary:            var(--purple-500);
+  --color-secondary-hover:      var(--purple-600);
+  --color-secondary-active:     var(--purple-700);
   --color-secondary-light:      var(--purple-50);
   --color-secondary-foreground: hsl(210 18% 12%);
 
