@@ -27,3 +27,5 @@ export class jobiqDbClient extends Dexie {
     });
   }
 }
+
+export type JobiqDbClient = InstanceType<typeof jobiqDbClient>;
