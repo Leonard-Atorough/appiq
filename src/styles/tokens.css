@@ -1,7 +1,0 @@
-/*
- * DEPRECATED — this file is kept only as a compatibility redirect.
- * Tokens have been split into src/styles/tokens/ for clarity.
- *
- * Please import src/styles/tokens/index.css directly instead.
- */
-@import "./tokens/index.css";
