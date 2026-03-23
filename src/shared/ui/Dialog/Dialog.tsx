@@ -53,6 +53,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           <div
             className="fixed inset-0 bg-black/50"
             aria-hidden="true"
+            data-testid="dialog-overlay"
             onClick={() => onOpenChange?.(false)}
           />
         )}
