@@ -17,7 +17,7 @@ export function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <div className="p-4">
+    <div className="p-4 text-center">
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <div
         id="button-showcase"

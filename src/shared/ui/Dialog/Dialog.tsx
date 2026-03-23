@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId } from "react";
+import { forwardRef, useEffect, useId, useRef } from "react";
 import { cn } from "@shared/lib/cn";
 import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
@@ -38,12 +38,30 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     useEffect(() => {
       if (open && focusRef?.current) {
         focusRef.current.focus();
+      } else if (closeButtonRef.current) {
+        closeButtonRef.current.focus();
       }
     }, [open, focusRef]);
+
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Escape" && open) {
+          onOpenChange?.(false);
+        }
+      };
+      if (open) {
+        document.addEventListener("keydown", handleKeyDown);
+      }
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [open, onOpenChange]);
 
     const dialogId = useId();
     const titleId = `${dialogId}-title`;
     const descId = `${dialogId}-desc`;
+
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     if (!open) return null;
 
@@ -85,6 +103,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
           <div className="px-md py-sm border-t border-(--color-border) text-right">
             <button
+              ref={closeButtonRef}
               type="button"
               className="px-md py-sm rounded-md bg-(--color-secondary) text-(--color-secondary-foreground)"
               onClick={() => onOpenChange?.(false)}
