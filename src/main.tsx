@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")!).render(
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <div
         id="button-showcase"
-        className="flex mt-4 flex-wrap gap-4"
+        className="mt-4 inline-block space-x-2 space-y-2 bg-gray-100 p-4 rounded-lg"
       >
         <Button variant="primary">Primary</Button>
         <Button variant="secondary">Secondary</Button>
