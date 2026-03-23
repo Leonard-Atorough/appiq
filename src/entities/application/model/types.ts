@@ -5,7 +5,7 @@ export interface JobApplication {
   company: string;
   position: string;
   status: ApplicationStatus;
-  appliedDate: string; // ISO date string
+  dateApplied: string; // ISO date string
   salaryMin?: number;
   salaryMax?: number;
   location?: ApplicationLocationType;
