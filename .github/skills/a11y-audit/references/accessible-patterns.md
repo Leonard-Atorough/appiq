@@ -17,9 +17,9 @@ export function Button({
   ...props
 }: ButtonProps) {
   const variantClasses = {
-    primary: 'bg-[var(--color-primary)] text-white',
-    secondary: 'bg-[var(--color-surface-hover)] text-[var(--color-text)]',
-    danger: 'bg-[var(--color-error)] text-white',
+    primary: 'bg-(--color-primary) text-white',
+    secondary: 'bg-(--color-surface-hover) text-(--color-text)',
+    danger: 'bg-(--color-error) text-white',
   };
 
   return (

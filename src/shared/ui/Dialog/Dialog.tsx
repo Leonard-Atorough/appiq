@@ -69,7 +69,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-4")}>
         {modal && (
           <div
-            className="fixed inset-0 bg-black/50"
+            className="fixed inset-0 bg-(--color-text)/0.5"
             aria-hidden="true"
             data-testid="dialog-overlay"
             onClick={() => onOpenChange?.(false)}
@@ -80,6 +80,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           ref={ref}
           role="dialog"
           aria-modal={modal}
+          tabIndex={-1}
           aria-labelledby={title ? titleId : undefined}
           aria-describedby={description ? descId : undefined}
           className={cn(dialogVariants({ size }), className)}
@@ -94,7 +95,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           )}
 
           {description && (
-            <div className="px-md py-xs text-sm text-muted" id={descId}>
+            <div className="px-md py-xs text-sm text-(--color-text-muted)" id={descId}>
               {description}
             </div>
           )}

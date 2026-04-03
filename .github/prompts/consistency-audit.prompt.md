@@ -58,7 +58,7 @@ OVERALL SCORE: 73% ⚠️ Needs Review
   → Should use var(--color-border)
 
 ⚠ Line 28: Margin '15px' (magic number)
-  → Should use Tailwind my-[var(--spacing-md)] (1rem)
+  → Should use Tailwind my-(--spacing-md) (1rem)
 
 ⚠ Line 67: Missing focus state on interactive element
   → Buttons need focus:outline or focus-ring class
@@ -73,7 +73,7 @@ OVERALL SCORE: 73% ⚠️ Needs Review
    
 2. Replace magic spacing
    Current:   margin: '15px'
-   Recommended: className="my-[var(--spacing-md)]"
+   Recommended: className="my-(--spacing-md)"
 
 ───────────────────────────────────────────────────
 📱 DARK MODE VERIFICATION
@@ -95,7 +95,7 @@ Line 15 - Color Fix:
 
 Line 28 - Spacing Fix:
   Before: <div style={{ margin: '15px' }}>
-  After:  <div className="my-[var(--spacing-md)]">
+  After:  <div className="my-(--spacing-md)">
 
 ───────────────────────────────────────────────────
 ✔️ NEXT STEPS
@@ -137,7 +137,7 @@ Estimated time: 5 minutes
 <div style={{ color: 'var(--color-text)' }}>Text</div>
 
 // ✅ Using Tailwind
-<div className="text-[var(--color-text)]">Text</div>
+<div className="text-(--color-text)">Text</div>
 ```
 
 ### Spacing
@@ -146,7 +146,7 @@ Estimated time: 5 minutes
 <div style={{ padding: '12px', margin: '8px' }}>Content</div>
 
 // ✅ Design tokens
-<div className="p-[var(--spacing-md)] m-[var(--spacing-sm)]">Content</div>
+<div className="p-(--spacing-md) m-(--spacing-sm)">Content</div>
 ```
 
 ### Accessibility
@@ -155,9 +155,9 @@ Estimated time: 5 minutes
 <button className="bg-blue-600">Click</button>
 
 // ✅ Focus visible
-<button className="bg-[var(--color-primary)]
+<button className="bg-(--color-primary)
   focus:outline-2 focus:outline-offset-2
-  focus:outline-[var(--color-primary)]">
+  focus:outline-(--color-primary)">
   Click
 </button>
 ```
@@ -177,7 +177,7 @@ Estimated time: 5 minutes
 | Issue | Pattern | Fix |
 |-------|---------|-----|
 | Color not consistent | `#fff`, `white`, `rgb(255,255,255)` | Use `var(--color-surface)` |
-| Spacing varies | `margin: 10px`, `padding: 1em`, `gap: 16px` | Use `mx-[var(--spacing-md)]` |
+| Spacing varies | `margin: 10px`, `padding: 1em`, `gap: 16px` | Use `mx-(--spacing-md)` |
 | No dark mode | Color blindly using light-only values | Use semantic tokens |
 | Contrast too low | Text on background < 4.5:1 | Increase contrast ratio |
 | Missing focus | Interactive elements unfocusable | Add `focus:outline-2` |

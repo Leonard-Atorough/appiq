@@ -64,28 +64,28 @@ export function ApplicationCard({
   variant = 'full',
 }: ApplicationCardProps) {
   const statusColors = {
-    applied: 'bg-[var(--color-info)]',
-    interview: 'bg-[var(--color-primary)]',
-    offer: 'bg-[var(--color-success)]',
-    rejected: 'bg-[var(--color-error)]',
-    archived: 'bg-[var(--color-text-muted)]',
+    applied: 'bg-(--color-info)',
+    interview: 'bg-(--color-primary)',
+    offer: 'bg-(--color-success)',
+    rejected: 'bg-(--color-error)',
+    archived: 'bg-(--color-text-muted)',
   };
 
   return (
     <article
       className={`
-        rounded-lg border border-[var(--color-border)]
-        bg-[var(--color-surface)] p-4
+        rounded-lg border border-(--color-border)
+        bg-(--color-surface) p-4
         hover:shadow-md transition-shadow
         ${variant === 'compact' ? 'py-3' : 'py-6'}
       `}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-[var(--color-text)]">
+          <h3 className="text-lg font-semibold text-(--color-text)">
             {application.title}
           </h3>
-          <p className="text-[var(--color-text-muted)]">
+          <p className="text-(--color-text-muted)">
             {application.company}
           </p>
         </div>
@@ -103,8 +103,8 @@ export function ApplicationCard({
       </div>
 
       {variant === 'full' && application.notes && (
-        <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
-          <p className="text-sm text-[var(--color-text)]">
+        <div className="mt-4 pt-4 border-t border-(--color-border)">
+          <p className="text-sm text-(--color-text)">
             {application.notes}
           </p>
         </div>
@@ -114,9 +114,9 @@ export function ApplicationCard({
         <button
           onClick={() => onUpdate(application)}
           className="mt-4 px-3 py-2 text-sm font-semibold rounded
-            bg-[var(--color-primary)] text-white
+            bg-(--color-primary) text-white
             hover:opacity-90 focus:outline-2 focus:outline-offset-2
-            focus:outline-[var(--color-primary)]"
+            focus:outline-(--color-primary)"
         >
           Edit
         </button>

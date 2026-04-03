@@ -48,14 +48,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div className={cn("relative", wrapperClassName)}>
-        {startAdornment && <span className="absolute left-2 top-2">{startAdornment}</span>}
+        {startAdornment && <span className="absolute left-(--spacing-sm) top-(--spacing-sm)">{startAdornment}</span>}
         <textarea
           ref={autoGrow ? textareaRef : ref}
           className={cn(
             textareaVariants({ size, variant, full }),
             resize !== undefined && `resize-${resize}`,
-            startAdornment && "pl-8",
-            endAdornment && "pr-8",
+            startAdornment && "pl-(--spacing-lg)",
+            endAdornment && "pr-(--spacing-lg)",
             className,
           )}
           rows={rows}
@@ -66,9 +66,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-describedby={props["aria-describedby"]}
           {...props}
         />
-        {endAdornment && <span className="absolute right-2 top-2">{endAdornment}</span>}
+        {endAdornment && <span className="absolute right-(--spacing-sm) top-(--spacing-sm)">{endAdornment}</span>}
         {showCharacterCount && (
-          <span className="absolute right-2 bottom-2 text-xs text-muted-foreground">
+          <span className="absolute right-(--spacing-sm) bottom-(--spacing-sm) text-xs text-(--color-text-muted)">
             {value.length}
             {props.maxLength ? ` / ${props.maxLength}` : ""}
           </span>

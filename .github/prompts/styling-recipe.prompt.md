@@ -34,9 +34,9 @@ Options: href, disabled, size
 // Default button
 <button className="
   px-4 py-2 rounded font-semibold
-  bg-[var(--color-primary)] text-white
+  bg-(--color-primary) text-white
   hover:opacity-90 active:opacity-75
-  focus:outline-2 focus:outline-offset-2 focus:outline-[var(--color-primary)]
+  focus:outline-2 focus:outline-offset-2 focus:outline-(--color-primary)
   disabled:opacity-50 disabled:cursor-not-allowed
   transition-opacity duration-200
 ">
@@ -46,9 +46,9 @@ Options: href, disabled, size
 // As link (href)
 <a href="/applications" className="
   inline-block px-4 py-2 rounded font-semibold
-  bg-[var(--color-primary)] text-white
+  bg-(--color-primary) text-white
   hover:opacity-90 active:opacity-75
-  focus:outline-2 focus:outline-offset-2 focus:outline-[var(--color-primary)]
+  focus:outline-2 focus:outline-offset-2 focus:outline-(--color-primary)
   transition-opacity duration-200
 ">
   View Applications
@@ -57,7 +57,7 @@ Options: href, disabled, size
 // Large button
 <button className="
   px-6 py-3 rounded font-semibold text-lg
-  bg-[var(--color-primary)] text-white
+  bg-(--color-primary) text-white
   ...
 ">
   Large button
@@ -66,7 +66,7 @@ Options: href, disabled, size
 // Loading state
 <button className="
   px-4 py-2 rounded font-semibold
-  bg-[var(--color-primary)] text-white opacity-75
+  bg-(--color-primary) text-white opacity-75
   cursor-wait flex items-center gap-2
 "
   disabled>
@@ -80,24 +80,24 @@ Options: href, disabled, size
 ```tsx
 // Basic card
 <div className="
-  rounded-lg border border-[var(--color-border)]
-  bg-[var(--color-surface)]
+  rounded-lg border border-(--color-border)
+  bg-(--color-surface)
   p-6
 ">
-  <h2 className="text-lg font-bold text-[var(--color-text)]">
+  <h2 className="text-lg font-bold text-(--color-text)">
     Card title
   </h2>
-  <p className="text-sm text-[var(--color-text-muted)]">
+  <p className="text-sm text-(--color-text-muted)">
     Card content
   </p>
 </div>
 
 // Hoverable card (clickable)
 <div className="
-  rounded-lg border border-[var(--color-border)]
-  bg-[var(--color-surface)]
+  rounded-lg border border-(--color-border) 
+  bg-(--color-surface)
   p-6
-  hover:shadow-md hover:border-[var(--color-primary)]
+  hover:shadow-md hover:border-(--color-primary)
   transition-all duration-200
   cursor-pointer
 ">
@@ -106,17 +106,17 @@ Options: href, disabled, size
 
 // Card with divider
 <div className="
-  rounded-lg border border-[var(--color-border)]
-  bg-[var(--color-surface)]
+  rounded-lg border border-(--color-border)
+  bg-(--color-surface)
   overflow-hidden
 ">
-  <div className="p-6 border-b border-[var(--color-border)]">
+  <div className="p-6 border-b border-(--color-border)">
     Header
   </div>
   <div className="p-6">
     Body
   </div>
-  <div className="p-6 border-t border-[var(--color-border)]">
+  <div className="p-6 border-t border-(--color-border)">
     Footer
   </div>
 </div>
@@ -128,10 +128,10 @@ Options: href, disabled, size
 // Text input with label & error
 <div className="flex flex-col gap-2">
   <label htmlFor="title" className="
-    text-sm font-semibold text-[var(--color-text)]
+    text-sm font-semibold text-(--color-text)
   ">
     Title
-    <span className="text-[var(--color-error)]">*</span>
+    <span className="text-(--color-error)">*</span>
   </label>
 
   <input
@@ -141,17 +141,17 @@ Options: href, disabled, size
     aria-invalid="false"
     className="
       px-3 py-2 rounded-md
-      border-2 border-[var(--color-border)]
-      bg-[var(--color-surface)]
-      text-[var(--color-text)]
-      placeholder-[var(--color-text-muted)]
-      focus:outline-none focus:border-[var(--color-primary)]
+      border-2 border-(--color-border)
+      bg-(--color-surface)
+      text-(--color-text)
+      placeholder-(--color-text-muted)
+      focus:outline-none focus:border-(--color-primary)
       disabled:opacity-50 disabled:cursor-not-allowed
       transition-colors duration-200
     "
   />
 
-  <span className="text-xs text-[var(--color-text-muted)]">
+  <span className="text-xs text-(--color-text-muted)" id="title-help">
     Helper text
   </span>
 </div>
@@ -164,14 +164,14 @@ Options: href, disabled, size
     aria-describedby="title-error"
     className="
       px-3 py-2 rounded-md
-      border-2 border-[var(--color-error)]
+      border-2 border-(--color-error)
       ...
-      focus:border-[var(--color-error)]
+      focus:border-(--color-error)
     "
   />
   <span
     id="title-error"
-    className="text-sm text-[var(--color-error)]"
+    className="text-sm text-(--color-error)"
     role="alert"
   >
     Title is required
@@ -187,12 +187,12 @@ Options: href, disabled, size
   px-3 py-1 rounded-full text-sm font-semibold
   ${
     status === 'success'
-      ? 'bg-[var(--color-success)]/10 text-[var(--color-success)]'
+      ? 'bg-(--color-success)/10 text-(--color-success)'
       : status === 'warning'
-        ? 'bg-[var(--color-warning)]/10 text-[var(--color-warning)]'
+        ? 'bg-(--color-warning)/10 text-(--color-warning)'
         : status === 'error'
-          ? 'bg-[var(--color-error)]/10 text-[var(--color-error)]'
-          : 'bg-[var(--color-info)]/10 text-[var(--color-info)]'
+          ? 'bg-(--color-error)/10 text-(--color-error)'
+          : 'bg-(--color-info)/10 text-(--color-info)'
   }
 `}>
   {status}
@@ -201,12 +201,12 @@ Options: href, disabled, size
 // Dismissible chip
 <div className="
   inline-flex items-center gap-2 px-3 py-1 rounded-full
-  bg-[var(--color-primary)]/10 text-[var(--color-primary)]
+  bg-(--color-primary)/10 text-(--color-primary)
 ">
   <span className="text-sm font-semibold">{label}</span>
   <button
     onClick={onDismiss}
-    className="focus:outline-none hover:text-[var(--color-primary)]"
+    className="focus:outline-none hover:text-(--color-primary)"
     aria-label={`Remove ${label}`}
   >
     ✕
@@ -225,16 +225,16 @@ Options: href, disabled, size
         key={item.id}
         onClick={() => handleSelect(item.id)}
         className="
-          border-b border-[var(--color-border)]
-          hover:bg-[var(--color-surface-hover)]
+          border-b border-(--color-border)
+          hover:bg-(--color-surface-hover)
           cursor-pointer
           transition-colors duration-150
         "
       >
-        <td className="p-3 text-[var(--color-text)]">
+        <td className="p-3 text-(--color-text)">
           {item.name}
         </td>
-        <td className="p-3 text-right text-[var(--color-text-muted)]">
+        <td className="p-3 text-right text-(--color-text-muted)">
           {item.value}
         </td>
       </tr>
@@ -249,8 +249,8 @@ Options: href, disabled, size
       <tr
         key={item.id}
         className={`
-          border-b border-[var(--color-border)]
-          ${idx % 2 === 0 ? 'bg-[var(--color-surface)]' : 'bg-[var(--color-surface-hover)]'}
+          border-b border-(--color-border)
+          ${idx % 2 === 0 ? 'bg-(--color-surface)' : 'bg-(--color-surface-hover)'}
         `}
       >
         {/* cells */}
@@ -266,14 +266,14 @@ Options: href, disabled, size
 <div
   className="
   flex items-center justify-between gap-4
-  border-b border-[var(--color-border)]
+  border-b border-(--color-border)
   p-6
 "
 >
   <h2
     id="modal-title"
     className="
-    text-xl font-bold text-[var(--color-text)]
+    text-xl font-bold text-(--color-text)
   "
   >
     Modal Title
@@ -282,9 +282,9 @@ Options: href, disabled, size
     onClick={onClose}
     className="
       p-1 rounded
-      text-[var(--color-text-muted)]
-      hover:bg-[var(--color-surface-hover)]
-      focus:outline-2 focus:outline-[var(--color-primary)]
+      text-(--color-text-muted)
+      hover:bg-(--color-surface-hover)
+      focus:outline-2 focus:outline-(--color-primary)
     "
     aria-label="Close modal"
   >
@@ -299,8 +299,8 @@ Options: href, disabled, size
 // Skeleton loader (shimmer effect)
 <div className="
   h-6 rounded
-  bg-gradient-to-r from-[var(--color-surface-hover)]
-  via-[var(--color-surface)] to-[var(--color-surface-hover)]
+  bg-gradient-to-r from-(--color-surface-hover)
+  via-(--color-surface) to-(--color-surface-hover)
   animate-pulse
 " />
 
@@ -308,8 +308,8 @@ Options: href, disabled, size
 <div className="space-y-3">
   {[...Array(5)].map((_, idx) => (
     <div key={idx} className="space-y-2">
-      <div className="h-4 bg-[var(--color-surface-hover)] rounded animate-pulse" />
-      <div className="h-3 bg-[var(--color-surface-hover)] rounded w-4/5 animate-pulse" />
+      <div className="h-4 bg-(--color-surface-hover) rounded animate-pulse" />
+      <div className="h-3 bg-(--color-surface-hover) rounded w-4/5 animate-pulse" />
     </div>
   ))}
 </div>
@@ -324,7 +324,7 @@ All recipes automatically work in dark mode via CSS variables:
 // Dark mode: dark background, light text
 // No code changes needed!
 
-<div className="bg-[var(--color-surface)] text-[var(--color-text)]">
+<div className="bg-(--color-surface) text-(--color-text)">
   {/* Works in both light and dark mode */}
 </div>
 ```

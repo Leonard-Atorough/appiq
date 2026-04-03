@@ -146,7 +146,7 @@ All semantic colors, spacing, and typography live in `src/styles/tokens.css`:
 ### Using Tailwind
 
 - Use Tailwind utilities for layouts, responsive design, and spacing
-- Reference design tokens via CSS variable access: `text-[var(--color-text)]`
+- Reference design tokens via CSS variable access: `text-(--color-text)`
 - Semantic token classes for common patterns (e.g., `bg-surface`, `text-muted`)
 - Keep component-specific styles minimal; compose Tailwind utilities
 

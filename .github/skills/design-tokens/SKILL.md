@@ -110,13 +110,13 @@ All token files are imported via `src/styles/tokens/index.css`:
 ### Method 1: Tailwind Utilities
 
 ```tsx
-<button className="bg-[var(--color-primary)] text-white px-4 py-2">Click me</button>
+<button className="bg-(--color-primary) text-white px-4 py-2">Click me</button>
 ```
 
 ### Method 2: CSS Classes (if pre-defined)
 
 ```tsx
-<div className="text-primary bg-surface rounded-md p-md">Content</div>
+<div className="text-(--color-text) bg-(--color-surface) rounded-md p-(--spacing-md)">Content</div>
 ```
 
 ### Method 3: Inline CSS (exception)

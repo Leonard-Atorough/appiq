@@ -119,5 +119,5 @@ Before adding a new color token, ask:
 
 Most color needs are covered by existing tokens + Tailwind opacity modifiers:
 
-- `bg-[var(--color-primary)]/50` = primary at 50% opacity
-- `text-[var(--color-text)]/75` = text at 75% opacity
+- `bg-(--color-primary)/50` = primary at 50% opacity
+- `text-(--color-text)/75` = text at 75% opacity

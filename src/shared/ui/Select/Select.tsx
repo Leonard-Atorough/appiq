@@ -19,11 +19,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     if (!startAdornment && !endAdornment) {
       return (
-        <select
-          ref={ref}
-          className={cn(selectVariants({ state, size }), className)}
-          {...props}
-        >
+        <select ref={ref} className={cn(selectVariants({ state, size }), className)} {...props}>
           {children}
         </select>
       );
@@ -32,7 +28,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className={cn("flex items-center relative", wrapperClassName)}>
         {startAdornment && (
-          <div className="pointer-events-none absolute left-3 inline-flex items-center text-primary">
+          <div className="pointer-events-none absolute left-(--spacing-sm) inline-flex items-center text-(--color-primary)">
             {startAdornment}
           </div>
         )}
@@ -40,8 +36,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           className={cn(
             selectVariants({ state, size }),
-            startAdornment ? "pl-10" : "",
-            endAdornment ? "pr-10" : "",
+            startAdornment ? "pl-(--spacing-lg)" : "",
+            endAdornment ? "pr-(--spacing-lg)" : "",
             className,
           )}
           {...props}
@@ -49,7 +45,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {children}
         </select>
         {endAdornment && (
-          <div className="pointer-events-none absolute right-3 inline-flex items-center text-primary">
+          <div className="pointer-events-none absolute right-(--spacing-sm) inline-flex items-center text-(--color-primary)">
             {endAdornment}
           </div>
         )}
