@@ -31,6 +31,7 @@ Generate a new presentational component ready for use in AppIQ features.
 ## Example
 
 **Input:**
+
 ```
 Component: ApplicationCard
 Props:
@@ -44,6 +45,7 @@ Styling: Status colors (success/warning/error), Tailwind cards
 **Output:**
 
 ### ApplicationCard.tsx
+
 ```typescript
 import React from 'react';
 import { Application } from '@/entities/application/model/types';
@@ -74,15 +76,15 @@ export function ApplicationCard({
   return (
     <article
       className={`
-        rounded-lg border border-(--color-border)
-        bg-(--color-surface) p-4
+        rounded-(--radius-lg) border border-(--color-border)
+        bg-(--color-surface) p-(--spacing-md)
         hover:shadow-md transition-shadow
-        ${variant === 'compact' ? 'py-3' : 'py-6'}
+        ${variant === 'compact' ? 'py-(--spacing-sm)' : 'py-(--spacing-lg)'}
       `}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-(--spacing-md)">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-(--color-text)">
+          <h3 className="text-(--font-size-lg) font-(--font-weight-semibold) text-(--color-text)">
             {application.title}
           </h3>
           <p className="text-(--color-text-muted)">
@@ -92,7 +94,7 @@ export function ApplicationCard({
 
         <span
           className={`
-            px-2 py-1 rounded text-sm font-semibold text-white
+            px-(--spacing-sm) py-(--spacing-xs) rounded-(--radius-md) text-(--font-size-sm) font-(--font-weight-semibold) text-white
             ${statusColors[application.status]}
           `}
           role="status"
@@ -103,8 +105,8 @@ export function ApplicationCard({
       </div>
 
       {variant === 'full' && application.notes && (
-        <div className="mt-4 pt-4 border-t border-(--color-border)">
-          <p className="text-sm text-(--color-text)">
+        <div className="mt-(--spacing-md) pt-(--spacing-md) border-t border-(--color-border)">
+          <p className="text-(--font-size-sm) text-(--color-text)">
             {application.notes}
           </p>
         </div>
@@ -113,7 +115,7 @@ export function ApplicationCard({
       {onUpdate && (
         <button
           onClick={() => onUpdate(application)}
-          className="mt-4 px-3 py-2 text-sm font-semibold rounded
+          className="mt-(--spacing-md) px-(--spacing-md) py-(--spacing-sm) text-(--font-size-sm) font-(--font-weight-semibold) rounded-(--radius-lg)
             bg-(--color-primary) text-white
             hover:opacity-90 focus:outline-2 focus:outline-offset-2
             focus:outline-(--color-primary)"
@@ -127,6 +129,7 @@ export function ApplicationCard({
 ```
 
 ### ApplicationCard.test.tsx
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -158,7 +161,7 @@ describe('ApplicationCard', () => {
   it('calls onUpdate when edit button clicked', async () => {
     const onUpdate = vi.fn();
     render(<ApplicationCard application={mockApp} onUpdate={onUpdate} />);
-    
+
     await userEvent.click(screen.getByText('Edit'));
     expect(onUpdate).toHaveBeenCalledWith(mockApp);
   });
@@ -167,7 +170,7 @@ describe('ApplicationCard', () => {
     const { container } = render(
       <ApplicationCard application={mockApp} variant="compact" />
     );
-    expect(container.querySelector('article')).toHaveClass('py-3');
+    expect(container.querySelector('article')).toHaveClass('py-(--spacing-sm)');
   });
 });
 ```

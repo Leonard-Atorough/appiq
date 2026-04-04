@@ -7,7 +7,7 @@ export const buttonVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "shadow-sm hover:shadow-md active:shadow-lg",
-    "rounded-xl",
+    "rounded-(--radius-2xl)",
     "active:scale-[0.97]",
   ].join(" "),
   {
@@ -33,14 +33,14 @@ export const buttonVariants = cva(
           "text-(--color-text)",
           "bg-transparent",
           "hover:bg-(--color-muted-bg)",
-          "active:bg-(--gray-100)",
+          "active:bg-(--color-border-muted)",
           "focus-visible:ring-(--color-border)",
         ].join(" "),
         ghost: [
           "bg-transparent",
           "text-(--color-text)",
           "hover:bg-(--color-muted-bg)",
-          "active:bg-(--gray-100)",
+          "active:bg-(--color-border-muted)",
           "focus-visible:ring-(--color-text)",
         ].join(" "),
         link: [
@@ -53,9 +53,9 @@ export const buttonVariants = cva(
         ].join(" "),
       },
       size: {
-        sm: "px-sm py-xs text-sm rounded-md",
-        md: "px-md py-sm text-base rounded-lg",
-        lg: "px-lg py-md text-lg rounded-xl",
+        sm: "px-(--spacing-sm) py-(--spacing-xs) text-(--font-size-sm) rounded-(--radius-md)",
+        md: "px-(--spacing-md) py-(--spacing-sm) text-(--font-size-base) rounded-(--radius-lg)",
+        lg: "px-(--spacing-lg) py-(--spacing-md) text-(--font-size-md) rounded-(--radius-xl)",
       },
       full: {
         true: "w-full",

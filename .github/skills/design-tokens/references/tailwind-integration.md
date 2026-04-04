@@ -31,12 +31,32 @@ export default {
 You can use tokens in Tailwind utility classes by referencing the CSS variable:
 
 ```tsx
-// ✅ Using token in Tailwind
-<div className="bg-(--color-surface) text-(--color-text) border border-(--color-border)">
-  <button className="bg-(--color-primary) text-white hover:bg-(--color-primary-dark)">
+// ✅ Using color and spacing tokens
+<div className="bg-(--color-surface) text-(--color-text) border border-(--color-border) px-(--spacing-md) py-(--spacing-sm)">
+  <button className="bg-(--color-primary) text-white hover:bg-(--color-primary-hover)">
     Click me
   </button>
 </div>
+
+// ✅ Using typography tokens
+<h2 className="text-(--font-size-lg) font-(--font-weight-semibold) leading-(--line-height-normal)">
+  Section Heading
+</h2>
+
+// ✅ Using radius tokens
+<div className="rounded-(--radius-lg) border border-(--color-border) p-(--spacing-md)">
+  Card with rounded corners
+</div>
+
+// ✅ Combining all semantic tokens
+<article className="bg-(--color-surface) border border-(--color-border) rounded-(--radius-lg) p-(--spacing-lg)">
+  <h3 className="text-(--font-size-md) font-(--font-weight-semibold) text-(--color-text) mb-(--spacing-md)">
+    Article Title
+  </h3>
+  <p className="text-(--font-size-base) text-(--color-text-secondary) leading-(--line-height-normal)">
+    Article content goes here.
+  </p>
+</article>
 ```
 
 This approach keeps your styling consistent and leverages the benefits of design tokens while still using Tailwind's utility-first classes.

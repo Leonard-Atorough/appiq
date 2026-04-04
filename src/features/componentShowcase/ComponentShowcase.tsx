@@ -4,17 +4,143 @@ import { Input } from "@shared/ui/Input";
 import { Textarea } from "@shared/ui/Textarea";
 import { Select } from "@shared/ui/Select";
 import { Dialog } from "@shared/ui/Dialog";
+import { DataTable } from "@shared/ui/DataTable";
+import type { ColumnDef } from "@tanstack/react-table";
+import type { JobApplication } from "@entities/application/model/types";
 
 export const ComponentShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
+  const [inputSmall, setInputSmall] = useState("");
+  const [inputMedium, setInputMedium] = useState("");
+  const [inputLarge, setInputLarge] = useState("");
+  const [inputDefault, setInputDefault] = useState("");
+  const [inputError, setInputError] = useState("");
+  const [textareaPrimary, setTextareaPrimary] = useState("");
+  const [textareaSecondary, setTextareaSecondary] = useState("");
+  const [textareaOutline, setTextareaOutline] = useState("");
+  const [textareaGhost, setTextareaGhost] = useState("");
+  const [textareaAutoGrow, setTextareaAutoGrow] = useState("");
+  const [textareaCharCount, setTextareaCharCount] = useState("");
+  const [textareaSmall, setTextareaSmall] = useState("");
+  const [textareaMedium, setTextareaMedium] = useState("");
+  const [textareaLarge, setTextareaLarge] = useState("");
   const [selectedValue, setSelectedValue] = useState("option1");
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem("showcase-dark-mode");
     if (saved !== null) return JSON.parse(saved);
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
+
+  const sampleApplications: JobApplication[] = [
+    {
+      id: "1",
+      company: "Acme Corp",
+      position: "Senior Frontend Engineer",
+      status: "interviewing",
+      dateApplied: "2025-03-15",
+      salaryMin: 120000,
+      salaryMax: 150000,
+      location: "remote",
+      jobType: "full-time",
+    },
+    {
+      id: "2",
+      company: "TechStart Inc",
+      position: "React Developer",
+      status: "applied",
+      dateApplied: "2025-03-10",
+      salaryMin: 100000,
+      salaryMax: 130000,
+      location: "hybrid",
+      jobType: "full-time",
+    },
+    {
+      id: "3",
+      company: "Design Labs",
+      position: "Full Stack Engineer",
+      status: "rejected",
+      dateApplied: "2025-02-28",
+      salaryMin: 110000,
+      salaryMax: 140000,
+      location: "on-site",
+      jobType: "full-time",
+    },
+    {
+      id: "4",
+      company: "StartupXYZ",
+      position: "JavaScript Engineer",
+      status: "offer",
+      dateApplied: "2025-03-05",
+      salaryMin: 95000,
+      salaryMax: 125000,
+      location: "remote",
+      jobType: "full-time",
+    },
+    {
+      id: "5",
+      company: "Web Innovations",
+      position: "UI Developer",
+      status: "applied",
+      dateApplied: "2025-03-20",
+      salaryMin: 90000,
+      salaryMax: 115000,
+      location: "remote",
+      jobType: "part-time",
+    },
+  ];
+
+  const columns: ColumnDef<JobApplication>[] = [
+    {
+      id: "company",
+      header: "Company",
+      cell: (info) => info.getValue(),
+      accessorKey: "company",
+    },
+    {
+      id: "position",
+      header: "Position",
+      cell: (info) => info.getValue(),
+      accessorKey: "position",
+    },
+    {
+      id: "status",
+      header: "Status",
+      cell: (info) => {
+        const status = info.getValue() as string;
+        const statusColors: Record<string, string> = {
+          applied: "text-(--color-info)",
+          interviewing: "text-(--color-warning)",
+          offer: "text-(--color-success)",
+          rejected: "text-(--color-error)",
+        };
+        return <span className={statusColors[status] || ""}>{status}</span>;
+      },
+      accessorKey: "status",
+    },
+    {
+      id: "dateApplied",
+      header: "Date Applied",
+      cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
+      accessorKey: "dateApplied",
+    },
+    {
+      id: "salary",
+      header: "Salary Range",
+      cell: (info) => {
+        const row = info.row.original;
+        if (row.salaryMin && row.salaryMax) {
+          return `$${(row.salaryMin / 1000).toFixed(0)}k - $${(row.salaryMax / 1000).toFixed(0)}k`;
+        }
+        return "-";
+      },
+    },
+    {
+      id: "location",
+      header: "Location",
+      cell: (info) => info.getValue() || "-",
+      accessorKey: "location",
+    },
+  ];
 
   useEffect(() => {
     const root = document.documentElement;
@@ -178,8 +304,8 @@ export const ComponentShowcase = () => {
             <Input
               size="sm"
               placeholder="Small input"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputSmall}
+              onChange={(e) => setInputSmall(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -187,8 +313,8 @@ export const ComponentShowcase = () => {
             <Input
               size="md"
               placeholder="Medium input"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputMedium}
+              onChange={(e) => setInputMedium(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -196,8 +322,8 @@ export const ComponentShowcase = () => {
             <Input
               size="lg"
               placeholder="Large input"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputLarge}
+              onChange={(e) => setInputLarge(e.target.value)}
             />
           </ComponentItem>
         </ComponentGrid>
@@ -209,8 +335,8 @@ export const ComponentShowcase = () => {
             <Input
               state="default"
               placeholder="Default state"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputDefault}
+              onChange={(e) => setInputDefault(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -218,8 +344,8 @@ export const ComponentShowcase = () => {
             <Input
               state="error"
               placeholder="Error state"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              value={inputError}
+              onChange={(e) => setInputError(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -238,8 +364,8 @@ export const ComponentShowcase = () => {
             <Textarea
               variant="primary"
               placeholder="Primary textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaPrimary}
+              onChange={(e) => setTextareaPrimary(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -247,8 +373,8 @@ export const ComponentShowcase = () => {
             <Textarea
               variant="secondary"
               placeholder="Secondary textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaSecondary}
+              onChange={(e) => setTextareaSecondary(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -256,8 +382,8 @@ export const ComponentShowcase = () => {
             <Textarea
               variant="outline"
               placeholder="Outline textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaOutline}
+              onChange={(e) => setTextareaOutline(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -265,8 +391,8 @@ export const ComponentShowcase = () => {
             <Textarea
               variant="ghost"
               placeholder="Ghost textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaGhost}
+              onChange={(e) => setTextareaGhost(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -275,8 +401,8 @@ export const ComponentShowcase = () => {
               variant="primary"
               placeholder="This textarea will grow as you type..."
               autoGrow
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaAutoGrow}
+              onChange={(e) => setTextareaAutoGrow(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -285,8 +411,8 @@ export const ComponentShowcase = () => {
               variant="primary"
               placeholder="Type something..."
               showCharacterCount
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaCharCount}
+              onChange={(e) => setTextareaCharCount(e.target.value)}
             />
           </ComponentItem>
         </ComponentGrid>
@@ -298,8 +424,8 @@ export const ComponentShowcase = () => {
             <Textarea
               size="sm"
               placeholder="Small textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaSmall}
+              onChange={(e) => setTextareaSmall(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -307,8 +433,8 @@ export const ComponentShowcase = () => {
             <Textarea
               size="md"
               placeholder="Medium textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaMedium}
+              onChange={(e) => setTextareaMedium(e.target.value)}
             />
           </ComponentItem>
           <ComponentItem>
@@ -316,8 +442,8 @@ export const ComponentShowcase = () => {
             <Textarea
               size="lg"
               placeholder="Large textarea"
-              value={textareaValue}
-              onChange={(e) => setTextareaValue(e.target.value)}
+              value={textareaLarge}
+              onChange={(e) => setTextareaLarge(e.target.value)}
             />
           </ComponentItem>
         </ComponentGrid>
@@ -435,6 +561,35 @@ export const ComponentShowcase = () => {
               <Textarea placeholder="Example textarea field" />
             </div>
           </Dialog>
+        </div>
+
+        {/* DataTable Component */}
+        <SectionTitle title="DataTable" />
+
+        <SubsectionTitle title="Job Applications" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 overflow-x-auto">
+          <DataTable
+            data={sampleApplications}
+            columns={columns}
+            size="md"
+            variant="default"
+            rowStyle={{ hoverable: true }}
+            sortable
+            stickyHeader={false}
+          />
+        </div>
+
+        <SubsectionTitle title="Compact Variant" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 overflow-x-auto">
+          <DataTable
+            data={sampleApplications}
+            columns={columns}
+            size="sm"
+            variant="compact"
+            rowStyle={{ hoverable: true }}
+            sortable
+            stickyHeader={false}
+          />
         </div>
 
         {/* Footer */}

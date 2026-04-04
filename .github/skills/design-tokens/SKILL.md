@@ -13,18 +13,13 @@ AppIQ's semantic design system powered by CSS variables + Tailwind. One source o
 
 - **"What color should I use?"** → Look up semantic color tokens
 - **"How much padding?"** → Check spacing scale
+- **"What font size for this?"** → Reference typography tokens
+- **"What's the right corner radius?"** → Use radius tokens
 - **"Does this meet dark mode?"** → Review dark mode overrides
 - **Brand consistency check** → Ensure all components use tokens, not magic numbers
 - **Onboarding designers** → Show Figma/design mapping to code tokens
 
 ## Token Categories
-
-### Radii
-
-[Border radius scale](./references/radii-tokens.md):
-
-- `--radius-sm` (4px), `--radius-md` (6px), `--radius-lg` (8px), `--radius-xl` (12px), `--radius-2xl` (16px), `--radius-full` (9999px)
-- Use `rounded-sm`, `rounded-md`, etc. in Tailwind or `var(--radius-*)` in CSS
 
 ### Colors
 
@@ -36,34 +31,42 @@ AppIQ's semantic design system powered by CSS variables + Tailwind. One source o
 - Visual swatches (usage in browser)
 - Accessibility notes (contrast ratios)
 
-### Spacing
-
-[Spacing scale](./references/spacing-tokens.md):
-
-- Consistent scale: `xs` (0.25rem), `sm` (0.5rem), `md` (1rem), `lg` (1.5rem), `xl` (2rem), `2xl` (3rem)
-- Used in padding, margins, gaps
-- Mobile-first responsive values if needed
-
 ### Typography
 
 [Typography scale](./references/typography-tokens.md):
 
-- `--font-size-sm`, `--font-size-base`, `--font-size-lg`, `--font-size-xl`
-- `--font-weight-normal`, `--font-weight-semibold`, `--font-weight-bold`
-- `--line-height-tight`, `--line-height-normal`, `--line-height-relaxed`
+- **Font sizes**: `--font-size-xs`, `--font-size-sm`, `--font-size-base`, `--font-size-md`, `--font-size-lg`, `--font-size-xl`, `--font-size-2xl`, `--font-size-3xl`, `--font-size-4xl`
+- **Font weights**: `--font-weight-normal`, `--font-weight-medium`, `--font-weight-semibold`, `--font-weight-bold`
+- **Line heights**: `--line-height-tight`, `--line-height-snug`, `--line-height-normal`, `--line-height-relaxed`, `--line-height-loose`
+- **Letter spacing**: `--tracking-tight`, `--tracking-normal`, `--tracking-wide`
+
+### Spacing
+
+[Spacing scale](./references/spacing-tokens.md):
+
+- Consistent scale: `xs` (0.25rem), `sm` (0.5rem), `md` (1rem), `lg` (1.5rem), `xl` (2rem), `2xl` (3rem), `3xl` (4rem), `4xl` (6rem), `5xl` (8rem)
+- Used in padding, margins, gaps
+- Always prefer token values over hardcoded pixels
+
+### Radii
+
+[Border radius scale](./references/radii-tokens.md):
+
+- `--radius-sm` (0.25rem), `--radius-md` (0.375rem), `--radius-lg` (0.5rem), `--radius-xl` (0.75rem), `--radius-2xl` (1rem), `--radius-full` (9999px)
+- Use `rounded-(--radius-*)` in Tailwind or `var(--radius-*)` in CSS
 
 ## CSS Variables in tokens/
 
 Location: `src/styles/tokens/` (split by category)
 
-| File | Contents |
-|------|----------|
-| `colors.css` | Primitive ramps (green, purple, gray) + semantic color tokens |
-| `spacing.css` | Named spacing scale xs–5xl |
-| `typography.css` | Font families, sizes, weights, line heights, tracking |
-| `radii.css` | Border radius scale sm–full |
-| `themes.css` | Dark mode overrides under `.dark` |
-| `index.css` | Single import entrypoint |
+| File             | Contents                                                      |
+| ---------------- | ------------------------------------------------------------- |
+| `colors.css`     | Primitive ramps (green, purple, gray) + semantic color tokens |
+| `spacing.css`    | Named spacing scale xs–5xl                                    |
+| `typography.css` | Font families, sizes, weights, line heights, tracking         |
+| `radii.css`      | Border radius scale sm–full                                   |
+| `themes.css`     | Dark mode overrides under `.dark`                             |
+| `index.css`      | Single import entrypoint                                      |
 
 All token files are imported via `src/styles/tokens/index.css`:
 
@@ -74,11 +77,11 @@ All token files are imported via `src/styles/tokens/index.css`:
   --color-primary: hsl(119 43% 52%);
   --color-success: hsl(119 43% 45%);
   --color-warning: hsl(45 93% 56%);
-  --color-error:   hsl(0 84% 60%);
-  --color-text:    hsl(210 12% 18%);
+  --color-error: hsl(0 84% 60%);
+  --color-text: hsl(210 12% 18%);
   --color-text-muted: hsl(210 10% 52%);
   --color-surface: hsl(210 20% 100%);
-  --color-border:  hsl(210 16% 90%);
+  --color-border: hsl(210 16% 90%);
 
   /* Spacing */
   --spacing-sm: 0.5rem;
@@ -88,44 +91,106 @@ All token files are imported via `src/styles/tokens/index.css`:
   /* Typography */
   --font-sans: system-ui, "Segoe UI", sans-serif;
   --font-size-base: 1rem;
-  --font-size-md:   1.125rem;
+  --font-size-md: 1.125rem;
 
   /* Radii */
-  --radius-sm:   0.25rem;
-  --radius-md:   0.375rem;
-  --radius-lg:   0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
   --radius-full: 9999px;
 }
 
 /* src/styles/tokens/themes.css */
 .dark {
-  --color-text:    hsl(210 20% 96%);
+  --color-text: hsl(210 20% 96%);
   --color-surface: hsl(210 15% 12%);
-  --color-border:  hsl(210 10% 32%);
+  --color-border: hsl(210 10% 32%);
 }
 ```
 
 ## Using Tokens in Components
 
-### Method 1: Tailwind Utilities
+### ❌ DON'T: Use Hardcoded Sizes or Magic Numbers
 
 ```tsx
-<button className="bg-(--color-primary) text-white px-4 py-2">Click me</button>
+// Hardcoded sizes – hard to maintain and breaks design consistency
+<button className="bg-green-500 text-white px-4 py-2 text-sm rounded-lg">
+  Click me
+</button>
+
+// Magic colors – inconsistent across dark mode
+<div style={{ color: '#333333', backgroundColor: '#f0f0f0', padding: '12px' }}>
+  Content
+</div>
 ```
 
-### Method 2: CSS Classes (if pre-defined)
+### ✅ DO: Use Tailwind Utilities with Design Tokens
 
 ```tsx
-<div className="text-(--color-text) bg-(--color-surface) rounded-md p-(--spacing-md)">Content</div>
+// Colors, spacing, typography, and radius all from design tokens
+<button className="bg-(--color-primary) text-(--color-primary-foreground) px-(--spacing-md) py-(--spacing-sm) text-(--font-size-sm) rounded-(--radius-lg) font-(--font-weight-semibold)">
+  Click me
+</button>
+
+// Complete semantic styling
+<div className="bg-(--color-surface) text-(--color-text) p-(--spacing-md) rounded-(--radius-lg) border border-(--color-border)">
+  <h3 className="text-(--font-size-lg) font-(--font-weight-semibold) mb-(--spacing-md)">
+    Heading
+  </h3>
+  <p className="text-(--font-size-base) text-(--color-text-secondary) leading-(--line-height-normal)">
+    Body text with proper typography tokens.
+  </p>
+</div>
 ```
 
-### Method 3: Inline CSS (exception)
+### ✅ DO: Use CSS Variables for Inline Styles
 
 ```tsx
-<div style={{ color: "var(--color-text)" }}>Text</div>
+// When Tailwind isn't ideal, reference tokens directly
+<div
+  style={{
+    color: "var(--color-text)",
+    backgroundColor: "var(--color-surface)",
+    padding: "var(--spacing-md)",
+    fontSize: "var(--font-size-base)",
+    borderRadius: "var(--radius-lg)",
+  }}
+>
+  Content with semantic tokens
+</div>
 ```
 
-Prefer Method 1 (Tailwind) for consistency.
+### ✅ DO: Use Tokens in CVA (Class Variance Authority)
+
+```tsx
+// Component variant definitions should use tokens
+import { cva } from "class-variance-authority";
+
+export const buttonVariants = cva(
+  [
+    "inline-flex items-center justify-center",
+    "font-(--font-weight-semibold)",
+    "rounded-(--radius-lg)",
+    "transition-colors duration-200",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        primary:
+          "bg-(--color-primary) text-(--color-primary-foreground) hover:bg-(--color-primary-hover)",
+        outline: "border border-(--color-border) text-(--color-text) hover:bg-(--color-muted-bg)",
+      },
+      size: {
+        sm: "px-(--spacing-sm) py-(--spacing-xs) text-(--font-size-sm)",
+        md: "px-(--spacing-md) py-(--spacing-sm) text-(--font-size-base)",
+        lg: "px-(--spacing-lg) py-(--spacing-md) text-(--font-size-md)",
+      },
+    },
+  },
+);
+```
+
+Prefer Tailwind utilities (Method 1) for consistency.
 
 ## Dark Mode Strategy
 
@@ -133,11 +198,11 @@ Dark mode is controlled by Tailwind's **`darkMode: 'class'`** strategy. Add or r
 
 ```js
 // Toggle dark mode
-document.documentElement.classList.toggle('dark');
+document.documentElement.classList.toggle("dark");
 
 // Restore persisted preference on load
-if (localStorage.getItem('theme') === 'dark') {
-  document.documentElement.classList.add('dark');
+if (localStorage.getItem("theme") === "dark") {
+  document.documentElement.classList.add("dark");
 }
 ```
 

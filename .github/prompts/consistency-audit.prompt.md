@@ -43,7 +43,7 @@ OVERALL SCORE: 73% ⚠️ Needs Review
 
 ✓ Line 12: Uses var(--color-primary) for button background
 ✓ Line 18: Uses var(--color-text-muted) for secondary text
-✓ Line 24: Tailwind px-4 py-2 for consistent spacing
+✓ Line 24: Tailwind px-(--spacing-md) py-(--spacing-sm) for consistent spacing with tokens
 ✓ Line 31: focus:outline-2 for keyboard accessibility
 ✓ Line 45: className for utility composition (not style attr)
 ✓ Line 52: Uses semantic <article> element

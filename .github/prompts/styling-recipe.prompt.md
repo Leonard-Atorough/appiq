@@ -33,7 +33,7 @@ Options: href, disabled, size
 ```tsx
 // Default button
 <button className="
-  px-4 py-2 rounded font-semibold
+  px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-lg) font-(--font-weight-semibold)
   bg-(--color-primary) text-white
   hover:opacity-90 active:opacity-75
   focus:outline-2 focus:outline-offset-2 focus:outline-(--color-primary)
@@ -45,7 +45,7 @@ Options: href, disabled, size
 
 // As link (href)
 <a href="/applications" className="
-  inline-block px-4 py-2 rounded font-semibold
+  inline-block px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-lg) font-(--font-weight-semibold)
   bg-(--color-primary) text-white
   hover:opacity-90 active:opacity-75
   focus:outline-2 focus:outline-offset-2 focus:outline-(--color-primary)
@@ -56,7 +56,7 @@ Options: href, disabled, size
 
 // Large button
 <button className="
-  px-6 py-3 rounded font-semibold text-lg
+  px-(--spacing-lg) py-(--spacing-md) rounded-(--radius-lg) font-(--font-weight-semibold) text-(--font-size-lg)
   bg-(--color-primary) text-white
   ...
 ">
@@ -65,9 +65,9 @@ Options: href, disabled, size
 
 // Loading state
 <button className="
-  px-4 py-2 rounded font-semibold
+  px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-lg) font-(--font-weight-semibold)
   bg-(--color-primary) text-white opacity-75
-  cursor-wait flex items-center gap-2
+  cursor-wait flex items-center gap-(--spacing-sm)
 "
   disabled>
   <span className="animate-spin">⏳</span>
@@ -80,23 +80,23 @@ Options: href, disabled, size
 ```tsx
 // Basic card
 <div className="
-  rounded-lg border border-(--color-border)
+  rounded-(--radius-lg) border border-(--color-border)
   bg-(--color-surface)
-  p-6
+  p-(--spacing-lg)
 ">
-  <h2 className="text-lg font-bold text-(--color-text)">
+  <h2 className="text-(--font-size-lg) font-(--font-weight-bold) text-(--color-text)">
     Card title
   </h2>
-  <p className="text-sm text-(--color-text-muted)">
+  <p className="text-(--font-size-sm) text-(--color-text-muted)">
     Card content
   </p>
 </div>
 
 // Hoverable card (clickable)
 <div className="
-  rounded-lg border border-(--color-border) 
+  rounded-(--radius-lg) border border-(--color-border)
   bg-(--color-surface)
-  p-6
+  p-(--spacing-lg)
   hover:shadow-md hover:border-(--color-primary)
   transition-all duration-200
   cursor-pointer
@@ -106,17 +106,17 @@ Options: href, disabled, size
 
 // Card with divider
 <div className="
-  rounded-lg border border-(--color-border)
+  rounded-(--radius-lg) border border-(--color-border)
   bg-(--color-surface)
   overflow-hidden
 ">
-  <div className="p-6 border-b border-(--color-border)">
+  <div className="p-(--spacing-lg) border-b border-(--color-border)">
     Header
   </div>
-  <div className="p-6">
+  <div className="p-(--spacing-lg)">
     Body
   </div>
-  <div className="p-6 border-t border-(--color-border)">
+  <div className="p-(--spacing-lg) border-t border-(--color-border)">
     Footer
   </div>
 </div>
@@ -126,9 +126,9 @@ Options: href, disabled, size
 
 ```tsx
 // Text input with label & error
-<div className="flex flex-col gap-2">
+<div className="flex flex-col gap-(--spacing-sm)">
   <label htmlFor="title" className="
-    text-sm font-semibold text-(--color-text)
+    text-(--font-size-sm) font-(--font-weight-semibold) text-(--color-text)
   ">
     Title
     <span className="text-(--color-error)">*</span>
@@ -140,10 +140,10 @@ Options: href, disabled, size
     placeholder="Enter title"
     aria-invalid="false"
     className="
-      px-3 py-2 rounded-md
+      px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-md)
       border-2 border-(--color-border)
       bg-(--color-surface)
-      text-(--color-text)
+      text-(--font-size-base) text-(--color-text)
       placeholder-(--color-text-muted)
       focus:outline-none focus:border-(--color-primary)
       disabled:opacity-50 disabled:cursor-not-allowed
@@ -151,19 +151,19 @@ Options: href, disabled, size
     "
   />
 
-  <span className="text-xs text-(--color-text-muted)" id="title-help">
+  <span className="text-(--font-size-xs) text-(--color-text-muted)" id="title-help">
     Helper text
   </span>
 </div>
 
 // With error
-<div className="flex flex-col gap-2">
+<div className="flex flex-col gap-(--spacing-sm)">
   {/* label ... */}
   <input
     aria-invalid="true"
     aria-describedby="title-error"
     className="
-      px-3 py-2 rounded-md
+      px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-md)
       border-2 border-(--color-error)
       ...
       focus:border-(--color-error)
@@ -171,7 +171,7 @@ Options: href, disabled, size
   />
   <span
     id="title-error"
-    className="text-sm text-(--color-error)"
+    className="text-(--font-size-sm) text-(--color-error)"
     role="alert"
   >
     Title is required
@@ -184,7 +184,7 @@ Options: href, disabled, size
 ```tsx
 // Color-coded status
 <span className={`
-  px-3 py-1 rounded-full text-sm font-semibold
+  px-(--spacing-md) py-(--spacing-xs) rounded-(--radius-full) text-(--font-size-sm) font-(--font-weight-semibold)
   ${
     status === 'success'
       ? 'bg-(--color-success)/10 text-(--color-success)'
@@ -200,10 +200,10 @@ Options: href, disabled, size
 
 // Dismissible chip
 <div className="
-  inline-flex items-center gap-2 px-3 py-1 rounded-full
+  inline-flex items-center gap-(--spacing-sm) px-(--spacing-md) py-(--spacing-xs) rounded-(--radius-full)
   bg-(--color-primary)/10 text-(--color-primary)
 ">
-  <span className="text-sm font-semibold">{label}</span>
+  <span className="text-(--font-size-sm) font-(--font-weight-semibold)">{label}</span>
   <button
     onClick={onDismiss}
     className="focus:outline-none hover:text-(--color-primary)"
