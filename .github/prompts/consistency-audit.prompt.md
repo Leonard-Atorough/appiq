@@ -1,32 +1,42 @@
 ---
-description: "Scan component code for design consistency issues. Check for hard-coded colors, magic numbers, non-semantic spacing, and design token usage."
+description: "Scan component code for design consistency issues. Check for hard-coded colors, magic numbers, non-semantic spacing, design token usage, and modern design principle alignment."
 argument-hint: "File path (e.g., src/features/applications/ui/ApplicationCard.tsx)"
 ---
 
 # Design Consistency Audit
 
-Analyze a component file for design consistency violations and improvement opportunities.
+Analyze a component file for design consistency violations and improvement opportunities aligned with AppIQ's Modern Design Principles (ADR 0005).
 
 ## What This Checks
 
 ### ✅ Compliance
+
 - [ ] Uses semantic color tokens (not `#ffffff`, `rgb(...)`)
 - [ ] Uses spacing tokens (not `margin: 10px`)
 - [ ] Uses design tokens for font sizes
 - [ ] All colors accessible (sufficient contrast)
 - [ ] Dark mode support (tokens automatically switch)
+- [ ] **Layered depth** — shadows on interactive elements (`shadow-sm`, `hover:shadow-md`)
+- [ ] **Micro-interactions** — smooth transitions (`transition-all duration-200`)
+- [ ] **Focus states** — visible and accessible focus indicators
 
 ### ⚠️ Warnings
+
 - Hard-coded colors detected
 - Magic numbers in spacing/sizing
 - Missing semantic meaning in class names
 - Focus states missing
 - Accessibility attributes missing
+- **Missing shadows** on interactive components (breaks depth principle)
+- **No transitions** on hover/focus states (breaks micro-interaction principle)
+- **Static interactions** that should have visual feedback
 
 ### 🔧 Suggestions
+
 - "Use `var(--color-primary)` instead of `#0099ff`"
-- "Replace `px-[10px]` with `px-md` (from tokens)"
-- "Add `var(--spacing-md)` for consistency"
+- "Replace `px-[10px]` with `px-(--spacing-md)` (from tokens)"
+- "Add `shadow-sm hover:shadow-md` for depth on buttons"
+- "Add `transition-all duration-200` for smooth micro-interactions"
 - "Test with dark mode enabled"
 
 ## Example Report
@@ -48,6 +58,7 @@ OVERALL SCORE: 73% ⚠️ Needs Review
 ✓ Line 45: className for utility composition (not style attr)
 ✓ Line 52: Uses semantic <article> element
 ✓ Line 57: aria-label for status badge
+✓ Line 65: shadow-sm hover:shadow-md for depth on interactive element (modern principle)
 ✓ Line 62: Dark mode support via tokens (automatic)
 
 ───────────────────────────────────────────────────
@@ -70,7 +81,7 @@ OVERALL SCORE: 73% ⚠️ Needs Review
 1. Replace inline #cccccc with design token
    Current:   borderColor: '#cccccc'
    Recommended: borderColor: 'var(--color-border)'
-   
+
 2. Replace magic spacing
    Current:   margin: '15px'
    Recommended: className="my-(--spacing-md)"
@@ -113,11 +124,13 @@ Estimated time: 5 minutes
 ## How to Run
 
 **In Chat:**
+
 ```
 /consistency-audit src/features/applications/ui/ApplicationCard.tsx
 ```
 
 **What It Returns:**
+
 1. **Compliance score** (0-100%)
 2. **Compliant patterns** (what's good)
 3. **Warnings** (issues to fix)
@@ -129,6 +142,7 @@ Estimated time: 5 minutes
 ## Key Checks
 
 ### Colors
+
 ```tsx
 // ❌ Hard-coded
 <div style={{ color: '#333333' }}>Text</div>
@@ -141,6 +155,7 @@ Estimated time: 5 minutes
 ```
 
 ### Spacing
+
 ```tsx
 // ❌ Magic numbers
 <div style={{ padding: '12px', margin: '8px' }}>Content</div>
@@ -150,11 +165,12 @@ Estimated time: 5 minutes
 ```
 
 ### Accessibility
+
 ```tsx
 // ❌ No focus state
 <button className="bg-blue-600">Click</button>
 
-// ✅ Focus visible
+// ✅ Focus visible + accessible
 <button className="bg-(--color-primary)
   focus:outline-2 focus:outline-offset-2
   focus:outline-(--color-primary)">
@@ -162,7 +178,40 @@ Estimated time: 5 minutes
 </button>
 ```
 
+### Modern Design: Depth & Elevation
+
+```tsx
+// ❌ Flat buttons (no depth)
+<button className="bg-(--color-primary) text-white px-(--spacing-md) py-(--spacing-sm)">
+  Click
+</button>
+
+// ✅ Layered with shadows
+<button className="bg-(--color-primary) text-white px-(--spacing-md) py-(--spacing-sm)
+  shadow-sm hover:shadow-md
+  transition-all duration-200">
+  Click
+</button>
+```
+
+### Modern Design: Micro-interactions
+
+```tsx
+// ❌ Static hover (instant color change)
+<button className="bg-(--color-primary) hover:bg-(--color-primary-hover)">
+  Click
+</button>
+
+// ✅ Smooth transitions
+<button className="bg-(--color-primary) hover:bg-(--color-primary-hover)
+  transition-all duration-200
+  active:scale-[0.98]">
+  Click
+</button>
+```
+
 ### Dark Mode
+
 ```tsx
 // ❌ Light-only value
 <div style={{ backgroundColor: '#ffffff' }}>
@@ -174,23 +223,29 @@ Estimated time: 5 minutes
 
 ## Common Issues & Fixes
 
-| Issue | Pattern | Fix |
-|-------|---------|-----|
-| Color not consistent | `#fff`, `white`, `rgb(255,255,255)` | Use `var(--color-surface)` |
-| Spacing varies | `margin: 10px`, `padding: 1em`, `gap: 16px` | Use `mx-(--spacing-md)` |
-| No dark mode | Color blindly using light-only values | Use semantic tokens |
-| Contrast too low | Text on background < 4.5:1 | Increase contrast ratio |
-| Missing focus | Interactive elements unfocusable | Add `focus:outline-2` |
+| Issue                | Pattern                                     | Fix                        |
+| -------------------- | ------------------------------------------- | -------------------------- |
+| Color not consistent | `#fff`, `white`, `rgb(255,255,255)`         | Use `var(--color-surface)` |
+| Spacing varies       | `margin: 10px`, `padding: 1em`, `gap: 16px` | Use `mx-(--spacing-md)`    |
+| No dark mode         | Color blindly using light-only values       | Use semantic tokens        |
+| Contrast too low     | Text on background < 4.5:1                  | Increase contrast ratio    |
+| Missing focus        | Interactive elements unfocusable            | Add `focus:outline-2`      |
+| Flat design          | No shadows on interactive elements          | Add `shadow-sm hover:shadow-md` |
+| No visual feedback   | Buttons have no hover/active states         | Add `transition-all duration-200` with hover/active styles |
+| Instant changes      | Color/shadow changes instantly              | Add `transition-all duration-200` for smooth micro-interactions |
+| Missing depth        | All elements same visual hierarchy          | Use shadows and styling to create elevation |
 
 ## Integration
 
 Run audit regularly:
-- **Before PR**: `npm run lint` + consistency audit
-- **After styling changes**: Verify new code uses tokens
-- **Onboarding**: Show examples of compliant components
+
+- **Before PR**: `npm run lint` + consistency audit for token + design principle compliance
+- **After styling changes**: Verify new code uses tokens and applies modern design principles
+- **Onboarding**: Show examples of compliant components that follow [ADR 0005: Modern Design Principles](../../docs/adrs/0005-modern-design-principles.md)
 
 ---
 
-**Related Skills**:
-- [Design Tokens Skill](../skills/design-tokens/) - Token reference
+**Related Skills & Docs**:
+- [Design Tokens Skill](../skills/design-tokens/) - Token reference and modern principle guidelines
 - [A11y Audit Skill](../skills/a11y-audit/) - Accessibility review
+- [ADR 0005: Modern Design Principles](../../docs/adrs/0005-modern-design-principles.md) - Complete design philosophy

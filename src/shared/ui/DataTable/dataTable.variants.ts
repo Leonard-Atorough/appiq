@@ -9,7 +9,7 @@ export const dataTableHeadVariants = cva(
     "px-(--spacing-md) font-semibold text-(--color-text)",
     "bg-(--color-muted-bg) border-b border-(--color-border)",
     "text-left text-(--font-size-sm) uppercase tracking-(--tracking-wide)",
-    "transition-colors duration-150",
+    "transition-colors duration-200",
   ].join(" "),
   {
     variants: {

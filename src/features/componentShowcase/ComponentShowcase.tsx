@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Badge } from "@shared/ui/Badge";
 import { Button } from "@shared/ui/Button";
 import { Input } from "@shared/ui/Input";
 import { Textarea } from "@shared/ui/Textarea";
@@ -590,6 +591,73 @@ export const ComponentShowcase = () => {
             sortable
             stickyHeader={false}
           />
+        </div>
+
+        {/* Badge Component */}
+        <SectionTitle title="Badge" />
+
+        <SubsectionTitle title="Variants" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+          <Badge variant="default">Default</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="error">Error</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="info">Info</Badge>
+        </div>
+
+        <SubsectionTitle title="Sizes" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4 items-center">
+          <Badge size="sm" variant="info">
+            Small
+          </Badge>
+          <Badge size="md" variant="info">
+            Medium
+          </Badge>
+          <Badge size="lg" variant="info">
+            Large
+          </Badge>
+        </div>
+
+        <SubsectionTitle title="Outline Variant" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+          <Badge outline variant="default">
+            Default Outline
+          </Badge>
+          <Badge outline variant="success">
+            Success Outline
+          </Badge>
+          <Badge outline variant="error">
+            Error Outline
+          </Badge>
+          <Badge outline variant="warning">
+            Warning Outline
+          </Badge>
+          <Badge outline variant="info">
+            Info Outline
+          </Badge>
+        </div>
+
+        <SubsectionTitle title="With Dismiss" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+          <Badge variant="success" dismissable onDismiss={() => console.log("Dismissed")}>
+            Dismissible Badge
+          </Badge>
+          <Badge variant="error" dismissable onDismiss={() => console.log("Dismissed")}>
+            Error Dismissible
+          </Badge>
+          <Badge variant="info" size="sm" dismissable onDismiss={() => console.log("Dismissed")}>
+            Small Dismiss
+          </Badge>
+        </div>
+
+        <SubsectionTitle title="Rounded Variants" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+          <Badge rounded={true} variant="success">
+            Pill Shape
+          </Badge>
+          <Badge rounded={false} variant="success">
+            Rectangular
+          </Badge>
         </div>
 
         {/* Footer */}

@@ -7,7 +7,19 @@ user-invocable: true
 
 # Design Tokens Reference
 
-AppIQ's semantic design system powered by CSS variables + Tailwind. One source of truth for colors, spacing, and typography.
+AppIQ's semantic design system powered by CSS variables + Tailwind. One source of truth for colors, spacing, and typography aligned with our **Modern Design Principles** (see [ADR 0005](../../docs/adrs/0005-modern-design-principles.md)).
+
+## Modern Design Principles
+
+Every component should apply these principles via tokens and utilities:
+
+1. **Layered Depth & Elevation** — Use `shadow-sm`, `shadow-md`, and `hover:shadow-*` for interactive hierarchy
+2. **Smooth Transitions & Micro-interactions** — Apply `transition-all duration-200` for smooth color/shadow/transform changes
+3. **Refined Spacing & Sizing** — Consistent spacing tokens for clean, breathable layouts
+4. **Color System** — Semantic color tokens with semantic foreground colors for dark mode
+5. **Typography** — Clear hierarchy using font size and weight tokens
+6. **Minimalism & Clarity** — Remove clutter; use whitespace and content for guidance
+7. **Accessibility** — Color contrast, focus states, and keyboard navigation
 
 ## When to Use
 
@@ -16,6 +28,7 @@ AppIQ's semantic design system powered by CSS variables + Tailwind. One source o
 - **"What font size for this?"** → Reference typography tokens
 - **"What's the right corner radius?"** → Use radius tokens
 - **"Does this meet dark mode?"** → Review dark mode overrides
+- **"How do I add interactivity?"** → Use shadows + transitions + hover states
 - **Brand consistency check** → Ensure all components use tokens, not magic numbers
 - **Onboarding designers** → Show Figma/design mapping to code tokens
 
