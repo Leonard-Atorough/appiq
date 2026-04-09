@@ -11,6 +11,7 @@ import type { JobApplication } from "@entities/application/model/types";
 
 export const ComponentShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
   const [inputSmall, setInputSmall] = useState("");
   const [inputMedium, setInputMedium] = useState("");
   const [inputLarge, setInputLarge] = useState("");
@@ -561,6 +562,25 @@ export const ComponentShowcase = () => {
               <Input placeholder="Example input field" />
               <Textarea placeholder="Example textarea field" />
             </div>
+          </Dialog>
+        </div>
+
+        <SubsectionTitle title="Popover Example" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6">
+          <Button variant="outline" onClick={() => setPopoverOpen(true)}>
+            Open Popover
+          </Button>
+          <Dialog
+            open={popoverOpen}
+            onOpenChange={setPopoverOpen}
+            title="Sample Popover"
+            description="This is a non-modal popover example. Click outside to close."
+            size="sm"
+            modal={false}
+          >
+            <p className="text-(--color-text)">
+              This is a popover. It doesn't block interaction with the rest of the page.
+            </p>
           </Dialog>
         </div>
 
