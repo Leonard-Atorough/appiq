@@ -202,8 +202,11 @@ describe("Badge", () => {
       </Badge>,
     );
     const badge = screen.getByRole("button");
-    expect(badge.className).toContain("outline");
-    expect(badge.className).toContain("lg");
-    expect(badge.className).toContain("rounded");
+    // Check that outline, outline+ success variant, size lg, and rounded are applied
+    expect(badge.className).toContain("bg-transparent");
+    expect(badge.className).toContain("border");
+    expect(badge.className).toContain("px-(--spacing-md)");
+    expect(badge.className).toContain("py-(--spacing-sm)");
+    expect(badge.className).toContain("rounded-(--radius-full)");
   });
 });

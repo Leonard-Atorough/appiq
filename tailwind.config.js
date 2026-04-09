@@ -28,11 +28,15 @@ export default {
           600: "var(--purple-600)",
           700: "var(--purple-700)",
         },
-        /* Semantic color shortcuts */
+        /* Semantic feedback colors */
         success: "var(--color-success)",
+        "success-light": "var(--color-success-light)",
         warning: "var(--color-warning)",
+        "warning-light": "var(--color-warning-light)",
         error: "var(--color-error)",
+        "error-light": "var(--color-error-light)",
         info: "var(--color-info)",
+        "info-light": "var(--color-info-light)",
       },
       backgroundColor: {
         base: "var(--color-bg)",
@@ -66,12 +70,46 @@ export default {
       },
       /* Border radius tokens */
       borderRadius: {
+        none: "var(--radius-none)",
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         lg: "var(--radius-lg)",
         xl: "var(--radius-xl)",
         "2xl": "var(--radius-2xl)",
         full: "var(--radius-full)",
+      },
+      /* Font size tokens */
+      fontSize: {
+        xs: "var(--font-size-xs)",
+        sm: "var(--font-size-sm)",
+        base: "var(--font-size-base)",
+        md: "var(--font-size-md)",
+        lg: "var(--font-size-lg)",
+        xl: "var(--font-size-xl)",
+        "2xl": "var(--font-size-2xl)",
+        "3xl": "var(--font-size-3xl)",
+        "4xl": "var(--font-size-4xl)",
+      },
+      /* Font weight tokens */
+      fontWeight: {
+        normal: "var(--font-weight-normal)",
+        medium: "var(--font-weight-medium)",
+        semibold: "var(--font-weight-semibold)",
+        bold: "var(--font-weight-bold)",
+      },
+      /* Line height tokens */
+      lineHeight: {
+        tight: "var(--line-height-tight)",
+        snug: "var(--line-height-snug)",
+        normal: "var(--line-height-normal)",
+        relaxed: "var(--line-height-relaxed)",
+        loose: "var(--line-height-loose)",
+      },
+      /* Letter spacing tokens */
+      letterSpacing: {
+        tight: "var(--tracking-tight)",
+        normal: "var(--tracking-normal)",
+        wide: "var(--tracking-wide)",
       },
       /* Font families */
       fontFamily: {

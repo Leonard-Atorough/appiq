@@ -9,7 +9,7 @@ export const dataTableHeadVariants = cva(
     "px-(--spacing-md) font-semibold text-(--color-text)",
     "bg-(--color-muted-bg) border-b border-(--color-border)",
     "text-left text-(--font-size-sm) uppercase tracking-(--tracking-wide)",
-    "transition-colors duration-200",
+    "transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
   ].join(" "),
   {
     variants: {
@@ -27,7 +27,7 @@ export const dataTableHeadVariants = cva(
         true: "sticky top-0 z-10",
       },
       sortable: {
-        true: "cursor-pointer hover:bg-(--color-border-muted) select-none",
+        true: "cursor-pointer hover:bg-(--color-border-muted) hover:shadow-sm select-none transition-shadow duration-200",
       },
     },
     defaultVariants: {
@@ -56,7 +56,7 @@ export const dataTableRowVariants = cva(
         true: "[&:nth-child(even)]:bg-(--color-muted-bg)",
       },
       hoverable: {
-        true: "hover:bg-(--color-border-muted) cursor-pointer",
+        true: "hover:bg-(--color-border-muted) hover:shadow-sm cursor-pointer transition-shadow duration-200",
       },
       selected: {
         true: "bg-(--color-primary-light) hover:bg-(--color-primary-light)",

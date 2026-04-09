@@ -28,7 +28,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className={cn("flex items-center relative", wrapperClassName)}>
         {startAdornment && (
-          <div className="pointer-events-none absolute left-(--spacing-sm) inline-flex items-center text-(--color-primary)">
+          <div className="pointer-events-none absolute left-(--spacing-sm) inline-flex items-center text-(--color-text-muted)">
             {startAdornment}
           </div>
         )}
@@ -45,7 +45,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           {children}
         </select>
         {endAdornment && (
-          <div className="pointer-events-none absolute right-(--spacing-sm) inline-flex items-center text-(--color-primary)">
+          <div className="pointer-events-none absolute right-(--spacing-sm) inline-flex items-center text-(--color-text-muted)">
             {endAdornment}
           </div>
         )}
