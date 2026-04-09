@@ -6,12 +6,17 @@ import { Textarea } from "@shared/ui/Textarea";
 import { Select } from "@shared/ui/Select";
 import { Dialog } from "@shared/ui/Dialog";
 import { DataTable } from "@shared/ui/DataTable";
+import { Toast } from "@shared/ui/Toast";
+import type { ToastProps } from "@shared/ui/Toast";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
 export const ComponentShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  type QueuedToast = Omit<ToastProps, "onDismiss"> & { toastKey: number };
+  const [toasts, setToasts] = useState<QueuedToast[]>([]);
+  const [toastCounter, setToastCounter] = useState(0);
   const [inputSmall, setInputSmall] = useState("");
   const [inputMedium, setInputMedium] = useState("");
   const [inputLarge, setInputLarge] = useState("");
@@ -153,6 +158,16 @@ export const ComponentShowcase = () => {
     }
     localStorage.setItem("showcase-dark-mode", JSON.stringify(isDarkMode));
   }, [isDarkMode]);
+
+  const addToast = (props: Omit<ToastProps, "onDismiss">) => {
+    const key = toastCounter + 1;
+    setToastCounter(key);
+    setToasts((prev) => [...prev, { ...props, toastKey: key }]);
+  };
+
+  const dismissToast = (key: number) => {
+    setToasts((prev) => prev.filter((t) => t.toastKey !== key));
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -680,10 +695,145 @@ export const ComponentShowcase = () => {
           </Badge>
         </div>
 
+        {/* ============================================================ */}
+        {/* Toast */}
+        {/* ============================================================ */}
+        <SectionTitle title="Toast" />
+
+        <SubsectionTitle title="Variants" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Default</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({ title: "Default toast", description: "This is a default notification." })
+              }
+            >
+              Show Default
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Success</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "success",
+                  title: "Saved successfully",
+                  description: "Your changes have been saved.",
+                })
+              }
+            >
+              Show Success
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Error</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "error",
+                  title: "Something went wrong",
+                  description: "Please try again later.",
+                })
+              }
+            >
+              Show Error
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Warning</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "warning",
+                  title: "Heads up",
+                  description: "This action cannot be undone.",
+                })
+              }
+            >
+              Show Warning
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Info</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "info",
+                  title: "New update available",
+                  description: "Refresh the page to get the latest version.",
+                })
+              }
+            >
+              Show Info
+            </Button>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="With Action" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Action Button</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "info",
+                  title: "Application archived",
+                  description: "The application has been moved to your archive.",
+                  action: { label: "Undo", onClick: () => alert("Undone!") },
+                })
+              }
+            >
+              Show With Action
+            </Button>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="No Auto-Dismiss" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Persistent (duration=0)</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "warning",
+                  title: "Action required",
+                  description: "This toast will stay until you dismiss it.",
+                  duration: 0,
+                })
+              }
+            >
+              Show Persistent
+            </Button>
+          </ComponentItem>
+        </ComponentGrid>
+
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-(--color-border) text-(--color-text-secondary) text-center">
           <p>All components are fully responsive and support theming through design tokens.</p>
         </div>
+      </div>
+
+      {/* Toast Stack */}
+      <div className="fixed bottom-md right-md z-50 flex flex-col gap-sm w-80">
+        {toasts.map((t) => (
+          <Toast
+            key={t.toastKey}
+            variant={t.variant}
+            title={t.title}
+            description={t.description}
+            action={t.action}
+            duration={t.duration}
+            onDismiss={() => dismissToast(t.toastKey)}
+          />
+        ))}
       </div>
     </div>
   );
