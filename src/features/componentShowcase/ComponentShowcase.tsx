@@ -659,13 +659,13 @@ export const ComponentShowcase = () => {
 
         <SubsectionTitle title="With Dismiss" />
         <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
-          <Badge variant="success" dismissable onDismiss={() => console.log("Dismissed")}>
+          <Badge variant="success" dismissable onDismiss={() => alert("Dismissed")}>
             Dismissible Badge
           </Badge>
-          <Badge variant="error" dismissable onDismiss={() => console.log("Dismissed")}>
+          <Badge variant="error" dismissable onDismiss={() => alert("Dismissed")}>
             Error Dismissible
           </Badge>
-          <Badge variant="info" size="sm" dismissable onDismiss={() => console.log("Dismissed")}>
+          <Badge variant="info" size="sm" dismissable onDismiss={() => alert("Dismissed")}>
             Small Dismiss
           </Badge>
         </div>
