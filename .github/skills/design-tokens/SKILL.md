@@ -252,6 +252,25 @@ export default {
 };
 ```
 
+## Micro-Interactions: Standardized Active Scale
+
+All interactive components use a **consistent `active:scale-[0.98]`** pattern for button press feedback. This simulates tactile interaction feedback and aligns with modern app standards (Material Design, Figma, Slack).
+
+**Standard Pattern** (Buttons, Inputs, Dialogs):
+
+```tsx
+className="
+  shadow-sm hover:shadow-md active:shadow-lg
+  transition-all duration-200 ease-out
+  active:scale-[0.98]
+  focus-visible:ring-2 focus-visible:ring-(--color-primary)
+"
+```
+
+Why `0.98`? — Subtle (noticeable but natural), matches Google Material Design and modern UX best practices. Tested extensively across device types for universal perceived smoothness.
+
+**See**: [Micro-Interactions Reference](./references/micro-interactions.md) for complete pattern, rationale, component mapping, and testing guide.
+
 ## References
 
 - [Color Tokens](./references/color-tokens.md) — All colors with swatches
@@ -260,6 +279,7 @@ export default {
 - [Dark Mode Guide](./references/dark-mode-guide.md) — How system dark mode works
 - [Tailwind + Tokens](./references/tailwind-integration.md) — Using tokens in utilities
 - [Accessibility Notes](./references/accessibility.md) — Color contrast, semantics
+- **[Micro-Interactions](./references/micro-interactions.md)** — Active state scale, transitions, and best practices
 
 ## Procedure: Add a New Token
 

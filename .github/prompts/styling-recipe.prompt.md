@@ -228,7 +228,7 @@ Options: href, disabled, size
           border-b border-(--color-border)
           hover:bg-(--color-surface-hover)
           cursor-pointer
-          transition-colors duration-150
+          transition-colors duration-200
         "
       >
         <td className="p-3 text-(--color-text)">
