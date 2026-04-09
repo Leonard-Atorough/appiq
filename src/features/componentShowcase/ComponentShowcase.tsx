@@ -32,6 +32,9 @@ export const ComponentShowcase = () => {
   const [textareaMedium, setTextareaMedium] = useState("");
   const [textareaLarge, setTextareaLarge] = useState("");
   const [selectedValue, setSelectedValue] = useState("option1");
+  const [dismissedBadges, setDismissedBadges] = useState<Set<string>>(new Set());
+  const dismissBadge = (id: string) => setDismissedBadges((prev) => new Set([...prev, id]));
+  const resetAllBadges = () => setDismissedBadges(new Set());
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem("showcase-dark-mode");
     if (saved !== null) return JSON.parse(saved);
@@ -632,7 +635,7 @@ export const ComponentShowcase = () => {
         <SectionTitle title="Badge" />
 
         <SubsectionTitle title="Variants" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge variant="default">Default</Badge>
           <Badge variant="success">Success</Badge>
           <Badge variant="error">Error</Badge>
@@ -641,7 +644,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Sizes" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4 items-center">
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge size="sm" variant="info">
             Small
           </Badge>
@@ -653,45 +656,105 @@ export const ComponentShowcase = () => {
           </Badge>
         </div>
 
-        <SubsectionTitle title="Outline Variant" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
+        <SubsectionTitle title="Outline" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge outline variant="default">
-            Default Outline
+            Default
           </Badge>
           <Badge outline variant="success">
-            Success Outline
+            Success
           </Badge>
           <Badge outline variant="error">
-            Error Outline
+            Error
           </Badge>
           <Badge outline variant="warning">
-            Warning Outline
+            Warning
           </Badge>
           <Badge outline variant="info">
-            Info Outline
+            Info
           </Badge>
         </div>
 
-        <SubsectionTitle title="With Dismiss" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
-          <Badge variant="success" dismissable onDismiss={() => alert("Dismissed")}>
-            Dismissible Badge
-          </Badge>
-          <Badge variant="error" dismissable onDismiss={() => alert("Dismissed")}>
-            Error Dismissible
-          </Badge>
-          <Badge variant="info" size="sm" dismissable onDismiss={() => alert("Dismissed")}>
-            Small Dismiss
-          </Badge>
-        </div>
-
-        <SubsectionTitle title="Rounded Variants" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-4">
-          <Badge rounded={true} variant="success">
-            Pill Shape
+        <SubsectionTitle title="Pill vs Rectangular" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+          <Badge rounded variant="success">
+            Pill
           </Badge>
           <Badge rounded={false} variant="success">
             Rectangular
+          </Badge>
+          <Badge outline rounded variant="info">
+            Outline Pill
+          </Badge>
+          <Badge outline rounded={false} variant="info">
+            Outline Rect
+          </Badge>
+        </div>
+
+        <SubsectionTitle title="With Icon" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+          <Badge variant="success" icon={<span aria-hidden="true">✓</span>}>
+            Verified
+          </Badge>
+          <Badge variant="error" icon={<span aria-hidden="true">✕</span>}>
+            Failed
+          </Badge>
+          <Badge variant="warning" icon={<span aria-hidden="true">⚠</span>}>
+            Review
+          </Badge>
+          <Badge variant="info" icon={<span aria-hidden="true">ℹ</span>}>
+            Note
+          </Badge>
+        </div>
+
+        <SubsectionTitle title="Dismissable" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+          {!dismissedBadges.has("d-success") && (
+            <Badge variant="success" dismissable onDismiss={() => dismissBadge("d-success")}>
+              Saved
+            </Badge>
+          )}
+          {!dismissedBadges.has("d-error") && (
+            <Badge variant="error" dismissable onDismiss={() => dismissBadge("d-error")}>
+              Error
+            </Badge>
+          )}
+          {!dismissedBadges.has("d-warning") && (
+            <Badge variant="warning" dismissable onDismiss={() => dismissBadge("d-warning")}>
+              Warning
+            </Badge>
+          )}
+          {!dismissedBadges.has("d-info") && (
+            <Badge variant="info" size="sm" dismissable onDismiss={() => dismissBadge("d-info")}>
+              Info (small)
+            </Badge>
+          )}
+          <Button variant="ghost" size="sm" onClick={resetAllBadges}>
+            Reset
+          </Button>
+        </div>
+
+        <SubsectionTitle title="With Actions" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+          <Badge variant="warning" actions={[{ label: "Undo", onClick: () => alert("Undone!") }]}>
+            Archived
+          </Badge>
+          <Badge
+            variant="info"
+            actions={[
+              { label: "View", onClick: () => alert("View clicked") },
+              { label: "Dismiss", onClick: () => alert("Dismiss clicked") },
+            ]}
+          >
+            2 new messages
+          </Badge>
+          <Badge
+            variant="success"
+            dismissable
+            onDismiss={() => alert("Dismissed")}
+            actions={[{ label: "Details", onClick: () => alert("Details") }]}
+          >
+            Offer received
           </Badge>
         </div>
 
@@ -811,6 +874,59 @@ export const ComponentShowcase = () => {
               }
             >
               Show Persistent
+            </Button>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Timer Bar" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>3 seconds</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "info",
+                  title: "Quick notification",
+                  description: "Dismisses in 3 seconds.",
+                  duration: 3000,
+                })
+              }
+            >
+              3s Timer
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>10 seconds</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "success",
+                  title: "Changes saved",
+                  description: "Auto-dismisses in 10 seconds.",
+                  duration: 10000,
+                })
+              }
+            >
+              10s Timer
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>With action + timer</Label>
+            <Button
+              variant="outline"
+              onClick={() =>
+                addToast({
+                  variant: "warning",
+                  title: "Deleting in 8s",
+                  description: "This will be permanent.",
+                  duration: 8000,
+                  action: { label: "Cancel", onClick: () => alert("Cancelled!") },
+                })
+              }
+            >
+              8s + Cancel
             </Button>
           </ComponentItem>
         </ComponentGrid>
