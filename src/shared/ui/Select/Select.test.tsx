@@ -25,42 +25,23 @@ describe("Select", () => {
     expect(select.classList).toContain("py-2");
   });
 
-  it("renders a chevron dropdown icon by default", () => {
-    const { container } = render(
-      <Select data-testid="select">
-        <option value="1">One</option>
-      </Select>,
-    );
-    const svg = container.querySelector("svg");
-    expect(svg).toBeInTheDocument();
-    expect(svg).toHaveAttribute("aria-hidden", "true");
-  });
-
-  it("renders start adornment and always adds right padding for the icon", () => {
+  it("renders start and end adornments", () => {
     render(
-      <Select data-testid="select" startAdornment={<span data-testid="start">S</span>}>
+      <Select
+        data-testid="select"
+        startAdornment={<span data-testid="start">S</span>}
+        endAdornment={<span data-testid="end">E</span>}
+      >
         <option value="1">One</option>
       </Select>,
     );
-    expect(screen.getByTestId("start")).toBeInTheDocument();
+    const startAdornment = screen.getByTestId("start");
+    const endAdornment = screen.getByTestId("end");
+    expect(startAdornment).toBeInTheDocument();
+    expect(endAdornment).toBeInTheDocument();
+
     const select = screen.getByTestId("select");
     expect(select.classList).toContain("pl-(--spacing-lg)");
-    expect(select.classList).toContain("pr-8");
-  });
-
-  it("renders end adornment in place of the default chevron", () => {
-    render(
-      <Select data-testid="select" endAdornment={<span data-testid="end">E</span>}>
-        <option value="1">One</option>
-      </Select>,
-    );
-    expect(screen.getByTestId("end")).toBeInTheDocument();
-    const { container } = render(
-      <Select data-testid="select2">
-        <option value="1">One</option>
-      </Select>,
-    );
-    // default chevron is an svg
-    expect(container.querySelector("svg")).toBeInTheDocument();
+    expect(select.classList).toContain("pr-(--spacing-lg)");
   });
 });
