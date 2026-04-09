@@ -23,9 +23,9 @@ export const badgeVariants = cva(
         false: "",
       },
       size: {
-        sm: "px-xs py-xs text-xs",
+        sm: "px-sm py-xs text-xs",
         md: "px-sm py-xs text-sm",
-        lg: "px-md py-sm text-base",
+        lg: "px-md py-xs text-base",
       },
       rounded: {
         true: "rounded-full",
