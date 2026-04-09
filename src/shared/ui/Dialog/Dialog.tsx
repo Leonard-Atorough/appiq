@@ -67,7 +67,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     if (!open) return null;
 
     return (
-      <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-(--spacing-md)")}>
+      <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-md")}>
         {modal && (
           <div
             className={cn("fixed inset-0 bg-(--color-text)/0.5", modalOverlayClassName ?? "")}
@@ -88,39 +88,32 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           {...props}
         >
           {title && (
-            <div className="px-(--spacing-md) py-(--spacing-sm) border-b border-(--color-border)">
-              <h2 id={titleId} className="text-(--font-size-lg) font-(--font-weight-semibold)">
+            <div className="px-md py-sm border-b border-base">
+              <h2 id={titleId} className="text-lg font-semibold">
                 {title}
               </h2>
             </div>
           )}
 
           {description && (
-            <div
-              className="px-(--spacing-md) py-(--spacing-xs) text-(--font-size-sm) text-(--color-text-muted)"
-              id={descId}
-            >
+            <div className="px-md py-xs text-sm text-muted" id={descId}>
               {description}
             </div>
           )}
 
-          <div className="p-(--spacing-md)">{children}</div>
+          <div className="p-md">{children}</div>
 
-          <div className="px-(--spacing-md) py-(--spacing-sm) border-t border-(--color-border) text-right">
+          <div className="px-md py-sm border-t border-base text-right">
             <button
               ref={closeButtonRef}
               type="button"
-              className="px-(--spacing-md) py-(--spacing-sm) rounded-(--radius-md) bg-(--color-secondary) text-(--color-secondary-foreground) shadow-sm hover:shadow-md active:shadow-lg transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-secondary) active:scale-[0.98]"
+              className="px-md py-sm rounded-md bg-(--color-secondary) text-(--color-secondary-foreground) shadow-sm hover:shadow-md active:shadow-lg transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-secondary) active:scale-[0.98]"
               onClick={() => onOpenChange?.(false)}
             >
               Close
             </button>
           </div>
-          {buttonRow && (
-            <div className="px-(--spacing-md) py-(--spacing-sm) border-t border-(--color-border)">
-              {buttonRow}
-            </div>
-          )}
+          {buttonRow && <div className="px-md py-sm border-t border-base">{buttonRow}</div>}
         </section>
       </div>
     );

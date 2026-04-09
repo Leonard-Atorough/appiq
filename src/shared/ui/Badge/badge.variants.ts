@@ -7,29 +7,29 @@ export const badgeVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
     "active:scale-[0.98]",
     "disabled:opacity-50 disabled:cursor-not-allowed",
-    "rounded-(--radius-full)",
+    "rounded-full",
   ].join(" "),
   {
     variants: {
       variant: {
-        default: "bg-(--color-muted-bg) text-white shadow-sm hover:shadow-md hover:brightness-110",
-        success: "bg-(--color-success) text-white shadow-sm hover:shadow-md hover:brightness-110",
-        error: "bg-(--color-error) text-white shadow-sm hover:shadow-md hover:brightness-110",
-        warning: "bg-(--color-warning) text-white shadow-sm hover:shadow-md hover:brightness-110",
-        info: "bg-(--color-info) text-white shadow-sm hover:shadow-md hover:brightness-110",
+        default: "bg-muted shadow-sm hover:shadow-md hover:brightness-110",
+        success: "bg-success shadow-sm hover:shadow-md hover:brightness-110",
+        error: "bg-error shadow-sm hover:shadow-md hover:brightness-110",
+        warning: "bg-warning shadow-sm hover:shadow-md hover:brightness-110",
+        info: "bg-info shadow-sm hover:shadow-md hover:brightness-110",
       },
       outline: {
         true: "bg-transparent border hover:bg-opacity-5",
         false: "",
       },
       size: {
-        sm: "px-(--spacing-xs) py-(--spacing-2xs) text-(--font-size-xs)",
-        md: "px-(--spacing-sm) py-(--spacing-xs) text-(--font-size-sm)",
-        lg: "px-(--spacing-md) py-(--spacing-sm) text-(--font-size-base)",
+        sm: "px-xs py-xs text-xs",
+        md: "px-sm py-xs text-sm",
+        lg: "px-md py-sm text-base",
       },
       rounded: {
-        true: "rounded-(--radius-full)",
-        false: "rounded-(--radius-md)",
+        true: "rounded-full",
+        false: "rounded-md",
       },
     },
     compoundVariants: [
@@ -37,31 +37,31 @@ export const badgeVariants = cva(
         outline: true,
         variant: "default",
         className:
-          "border-(--color-border) text-(--color-text) hover:border-opacity-100 hover:bg-(--color-muted-bg) hover:bg-opacity-5",
+          "border-base text-(--color-text) hover:border-opacity-100 hover:bg-muted hover:bg-opacity-5",
       },
       {
         outline: true,
         variant: "success",
         className:
-          "border-(--color-success) text-(--color-success) hover:bg-(--color-success) hover:bg-opacity-5",
+          "border-success text-success hover:bg-success hover:bg-opacity-5",
       },
       {
         outline: true,
         variant: "error",
         className:
-          "border-(--color-error) text-(--color-error) hover:bg-(--color-error) hover:bg-opacity-5",
+          "border-error text-error hover:bg-error hover:bg-opacity-5",
       },
       {
         outline: true,
         variant: "warning",
         className:
-          "border-(--color-warning) text-(--color-warning) hover:bg-(--color-warning) hover:bg-opacity-5",
+          "border-warning text-warning hover:bg-warning hover:bg-opacity-5",
       },
       {
         outline: true,
         variant: "info",
         className:
-          "border-(--color-info) text-(--color-info) hover:bg-(--color-info) hover:bg-opacity-5",
+          "border-info text-info hover:bg-info hover:bg-opacity-5",
       },
     ],
     defaultVariants: {

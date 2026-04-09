@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const dialogVariants = cva(
   [
-    "relative bg-(--color-surface) text-(--color-text)",
+    "relative bg-surface text-(--color-text)",
     "rounded-lg",
     "shadow-lg hover:shadow-xl focus:shadow-2xl",
     "transition-shadow transition-transform duration-200 ease-out",

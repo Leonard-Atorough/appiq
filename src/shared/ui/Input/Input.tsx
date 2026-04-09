@@ -31,7 +31,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn("flex items-center", wrapperClassName)}>
         {startAdornment && (
-          <div className="pointer-events-none absolute left-(--spacing-sm) inline-flex items-center text-(--color-primary)">
+          <div className="pointer-events-none absolute left-sm inline-flex items-center text-(--color-primary)">
             {startAdornment}
           </div>
         )}
@@ -40,14 +40,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           className={cn(
             inputVariants({ state, size }),
-            startAdornment ? "pl-(--spacing-lg)" : "",
-            endAdornment ? "pr-(--spacing-lg)" : "",
+            startAdornment ? "pl-lg" : "",
+            endAdornment ? "pr-lg" : "",
             className,
           )}
           {...props}
         />
         {endAdornment && (
-          <div className="pointer-events-none absolute right-(--spacing-sm) inline-flex items-center text-(--color-primary)">
+          <div className="pointer-events-none absolute right-sm inline-flex items-center text-(--color-primary)">
             {endAdornment}
           </div>
         )}

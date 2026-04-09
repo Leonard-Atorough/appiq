@@ -10,7 +10,7 @@ export const Badge = React.forwardRef<HTMLButtonElement, BadgeProps>(
       <button
         ref={ref}
         type="button"
-        className={cn(badgeVariants({ variant, outline, size, rounded }), "gap-(--spacing-xs)")}
+        className={cn(badgeVariants({ variant, outline, size, rounded }), "gap-xs")}
         disabled={dismissable ? false : undefined}
         {...props}
       >
@@ -30,7 +30,7 @@ export const Badge = React.forwardRef<HTMLButtonElement, BadgeProps>(
                 onDismiss?.();
               }
             }}
-            className="ml-(--spacing-xs) flex items-center justify-center hover:opacity-70 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-(--color-primary)"
+            className="ml-xs flex items-center justify-center hover:opacity-70 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-(--color-primary)"
             aria-label="Dismiss badge"
           >
             ✕

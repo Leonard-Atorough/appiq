@@ -44,18 +44,18 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       }
     }, [value, autoGrow]);
 
-    const rows = autoGrow ? minRows : props.rows ?? minRows;
+    const rows = autoGrow ? minRows : (props.rows ?? minRows);
 
     return (
       <div className={cn("relative", wrapperClassName)}>
-        {startAdornment && <span className="absolute left-(--spacing-sm) top-(--spacing-sm)">{startAdornment}</span>}
+        {startAdornment && <span className="absolute left-sm top-sm">{startAdornment}</span>}
         <textarea
           ref={autoGrow ? textareaRef : ref}
           className={cn(
             textareaVariants({ size, variant, full }),
             resize !== undefined && `resize-${resize}`,
-            startAdornment && "pl-(--spacing-lg)",
-            endAdornment && "pr-(--spacing-lg)",
+            startAdornment && "pl-lg",
+            endAdornment && "pr-lg",
             className,
           )}
           rows={rows}
@@ -66,9 +66,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-describedby={props["aria-describedby"]}
           {...props}
         />
-        {endAdornment && <span className="absolute right-(--spacing-sm) top-(--spacing-sm)">{endAdornment}</span>}
+        {endAdornment && <span className="absolute right-sm top-sm">{endAdornment}</span>}
         {showCharacterCount && (
-          <span className="absolute right-(--spacing-sm) bottom-(--spacing-sm) text-xs text-(--color-text-muted)">
+          <span className="absolute right-sm bottom-sm text-xs text-muted">
             {value.length}
             {props.maxLength ? ` / ${props.maxLength}` : ""}
           </span>

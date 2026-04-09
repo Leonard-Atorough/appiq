@@ -6,22 +6,22 @@ import { cva } from "class-variance-authority";
  */
 export const dataTableHeadVariants = cva(
   [
-    "px-(--spacing-md) font-semibold text-(--color-text)",
-    "bg-(--color-muted-bg) border-b border-(--color-border)",
-    "text-left text-(--font-size-sm) uppercase tracking-(--tracking-wide)",
+    "px-md font-semibold text-(--color-text)",
+    "bg-muted border-b border-base",
+    "text-left text-sm uppercase tracking-wide",
     "transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
   ].join(" "),
   {
     variants: {
       size: {
-        sm: "py-(--spacing-xs) text-(--font-size-xs)",
-        md: "py-(--spacing-sm) text-(--font-size-sm)",
-        lg: "py-(--spacing-md) text-(--font-size-base)",
+        sm: "py-xs text-xs",
+        md: "py-sm text-sm",
+        lg: "py-md text-base",
       },
       variant: {
-        default: "bg-(--color-muted-bg)",
-        compact: "bg-(--color-muted-bg) py-(--spacing-xs)",
-        minimal: "bg-transparent border-b-2 border-(--color-border)",
+        default: "bg-muted",
+        compact: "bg-muted py-xs",
+        minimal: "bg-transparent border-b-2 border-base",
       },
       sticky: {
         true: "sticky top-0 z-10",
@@ -44,16 +44,16 @@ export const dataTableHeadVariants = cva(
  * Striping, hover states, selection states, and focus indicators
  */
 export const dataTableRowVariants = cva(
-  ["border-b border-(--color-border)", "transition-colors duration-200"].join(" "),
+  ["border-b border-base", "transition-colors duration-200"].join(" "),
   {
     variants: {
       variant: {
-        default: "bg-(--color-surface)",
-        compact: "bg-(--color-surface)",
+        default: "bg-surface",
+        compact: "bg-surface",
         minimal: "bg-transparent",
       },
       striped: {
-        true: "[&:nth-child(even)]:bg-(--color-muted-bg)",
+        true: "[&:nth-child(even)]:bg-muted",
       },
       hoverable: {
         true: "hover:bg-(--color-border-muted) hover:shadow-sm cursor-pointer transition-shadow duration-200",
@@ -81,24 +81,24 @@ export const dataTableRowVariants = cva(
  */
 export const dataTableCellVariants = cva(
   [
-    "px-(--spacing-md) text-(--color-text) whitespace-nowrap overflow-hidden text-ellipsis",
+    "px-md text-(--color-text) whitespace-nowrap overflow-hidden text-ellipsis",
     "transition-colors duration-200",
     "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
   ].join(" "),
   {
     variants: {
       size: {
-        sm: "py-(--spacing-xs) text-(--font-size-xs)",
-        md: "py-(--spacing-sm) text-(--font-size-sm)",
-        lg: "py-(--spacing-md) text-(--font-size-base)",
+        sm: "py-xs text-xs",
+        md: "py-sm text-sm",
+        lg: "py-md text-base",
       },
       variant: {
         default: "bg-inherit",
-        compact: "bg-inherit py-(--spacing-xs)",
-        minimal: "bg-inherit border-b border-(--color-border-muted)",
+        compact: "bg-inherit py-xs",
+        minimal: "bg-inherit border-b border-muted",
       },
       muted: {
-        true: "text-(--color-text-muted)",
+        true: "text-muted",
       },
     },
     defaultVariants: {
@@ -116,8 +116,8 @@ export const dataTableCellVariants = cva(
 export const dataTableVariants = cva(
   [
     "w-full border-collapse text-left",
-    "bg-(--color-surface)",
-    "rounded-(--radius-lg) overflow-hidden border border-(--color-border)",
+    "bg-surface",
+    "rounded-lg overflow-hidden border border-base",
   ].join(" "),
   {
     variants: {
