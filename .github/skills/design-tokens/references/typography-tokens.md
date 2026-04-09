@@ -51,16 +51,14 @@ Letter spacing:
 // Hard to maintain and doesn't respect design tokens
 ```
 
-### ✅ DO: Use Typography Tokens in Tailwind
+### ✅ DO: Use Typography Tokens via Tailwind Extended Classes
 
 ```tsx
-// Using design tokens
-<div className="text-(--font-size-md) font-(--font-weight-semibold) leading-(--line-height-normal)">
-  Heading
-</div>
+// Use Tailwind extended class names mapped in tailwind.config.js
+<div className="text-md font-semibold leading-normal">Heading</div>
 ```
 
-### ✅ DO: Use Typography Tokens in CSS
+### ✅ DO: Use CSS Vars Only in Inline Styles (when Tailwind isn't applicable)
 
 ```tsx
 <div
@@ -77,8 +75,8 @@ Letter spacing:
 ### ✅ DO: Combine with Color Tokens
 
 ```tsx
-// Complete semantic styling
-<p className="text-(--font-size-base) font-(--font-weight-normal) leading-(--line-height-normal) text-(--color-text)">
+// Complete semantic styling using Tailwind extended classes
+<p className="text-sm font-normal leading-normal text-secondary">
   Body paragraph with consistent typography and colors.
 </p>
 ```

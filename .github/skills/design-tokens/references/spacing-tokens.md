@@ -31,16 +31,7 @@ We will use a consistent spacing scale based on a 4px grid, with semantic tokens
 ```tsx
 // Bad
 <div className="p-4 m-2">Content</div>
-// Good
-<div className="p-(--spacing-md) m-(--spacing-sm)">Content</div>
-```
-
-### ✅ DO: Use Tokens in CSS Classes
-
-```tsx
-// Bad
-<div className="p-4 m-2">Content</div>
-// Good
+// Good — use Tailwind extended class names from tailwind.config.js
 <div className="p-md m-sm">Content</div>
 ```
 

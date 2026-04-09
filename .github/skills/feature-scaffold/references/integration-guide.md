@@ -104,23 +104,15 @@ Scaffold test framework (if not done):
 
 ## 7. Design System Integration
 
-Check styling against `src/styles/tokens.css`:
-
-**src/styles/tokens.css** should define:
-
-```css
-:root {
-  --color-primary: hsl(200 100% 50%);
-  --color-text: hsl(0 0% 20%);
-  --spacing-md: 1rem;
-}
-```
-
-Use tokens in feature components:
+Check styling against `tailwind.config.js` for available extended class names. All tokens are mapped — use the named Tailwind utilities:
 
 ```typescript
-<div className="p-(--spacing-md) text-(--color-text)">
-  {/* ... */}
+// ✅ Use Tailwind extended class names from tailwind.config.js
+<div className="p-md">
+  {/* ❌ bg-(--color-surface) → ✅ bg-surface */}
+  {/* ❌ px-(--spacing-md)    → ✅ px-md     */}
+  {/* ❌ text-(--font-size-sm) → ✅ text-sm   */}
+  {/* ❌ border-(--color-border) → ✅ border-base */}
 </div>
 ```
 
