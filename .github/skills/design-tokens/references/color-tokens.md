@@ -84,25 +84,23 @@ In dark mode, colors are shifted to maintain contrast while reducing eye strain:
 ## Usage in Components
 
 ```tsx
-// Using Tailwind with CSS variables
-<div className="bg-(--color-surface) text-(--color-text) border border-(--color-border)">
-  <button className="bg-(--color-primary) text-white hover:bg-(--color-primary-dark)">
-    Click me
-  </button>
+// Using Tailwind extended class names from tailwind.config.js
+<div className="bg-surface border border-base">
+  <button className="bg-primary-500 text-white hover:bg-(--color-primary-hover)">Click me</button>
 </div>
 ```
 
 ```tsx
-// Status badge example
+// Status badge example — use Tailwind extended classes
 function StatusBadge({ status }: { status: "success" | "warning" | "error" }) {
-  const colorMap = {
-    success: "var(--color-success)",
-    warning: "var(--color-warning)",
-    error: "var(--color-error)",
+  const classMap = {
+    success: "bg-success-light text-success",
+    warning: "bg-warning-light text-warning",
+    error: "bg-error-light text-error",
   };
 
   return (
-    <span className="px-2 py-1 rounded" style={{ backgroundColor: colorMap[status] }}>
+    <span className={`px-sm py-xs rounded-full text-sm font-semibold ${classMap[status]}`}>
       {status}
     </span>
   );

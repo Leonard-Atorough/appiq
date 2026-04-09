@@ -45,7 +45,7 @@ export default {
       },
       textColor: {
         base: "var(--color-text)",
-        secondary: "var(--color-text-secondary)",
+        secondary: "var(--color-text-secondary)", 
         muted: "var(--color-text-muted)",
         light: "var(--color-text-light)",
       },

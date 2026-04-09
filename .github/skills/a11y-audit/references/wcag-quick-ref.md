@@ -49,12 +49,12 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         tabIndex={-1}
         className={`
           fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-          bg-(--color-surface) rounded-lg shadow-lg
+          bg-surface rounded-lg shadow-lg
           p-6 max-w-md w-full
           focus:outline-2 focus:outline-(--color-primary)
         `}
       >
-        <h2 id="modal-title" className="text-xl font-bold text-(--color-text)">
+        <h2 id="modal-title" className="text-xl font-bold">
           {title}
         </h2>
         {children}
@@ -113,15 +113,15 @@ interface Application {
 
 function ApplicationCard({ application }: { application: Application }) {
   const statusColors = {
-    pending: "bg-(--color-warning)",
-    interview: "bg-(--color-primary)",
-    offer: "bg-(--color-success)",
-    rejected: "bg-(--color-error)",
+    pending: "bg-warning",
+    interview: "bg-primary-500",
+    offer: "bg-success",
+    rejected: "bg-error",
   };
 
   return (
-    <div className="p-4 border rounded-lg bg-(--color-surface)">
-      <h3 className="text-lg font-semibold text-(--color-text)">
+    <div className="p-4 border border-base rounded-lg bg-surface">
+      <h3 className="text-lg font-semibold">
         {application.title} at {application.company}
       </h3>
       <span
@@ -152,7 +152,7 @@ export function Input({ label, error, id, required, ...props }: InputProps) {
     <div className="flex flex-col gap-1">
       <label htmlFor={inputId} className="text-sm font-semibold text-(--color-text)">
         {label}
-        {required && <span className="text-(--color-error)">*</span>}
+        {required && <span className="text-error">*</span>}
       </label>
 
       <input
@@ -160,7 +160,7 @@ export function Input({ label, error, id, required, ...props }: InputProps) {
         className={`
           px-3 py-2 rounded border-2
           focus:outline-none focus:border-(--color-primary)
-          ${error ? "border-(--color-error)" : "border-(--color-border)"}
+          ${error ? "border-error" : "border-base"}
         `}
         required={required}
         aria-invalid={!!error}

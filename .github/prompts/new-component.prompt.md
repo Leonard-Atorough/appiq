@@ -66,35 +66,35 @@ export function ApplicationCard({
   variant = 'full',
 }: ApplicationCardProps) {
   const statusColors = {
-    applied: 'bg-(--color-info)',
-    interview: 'bg-(--color-primary)',
-    offer: 'bg-(--color-success)',
-    rejected: 'bg-(--color-error)',
-    archived: 'bg-(--color-text-muted)',
+    applied:  'bg-info',
+    interview: 'bg-primary-500',
+    offer:     'bg-success',
+    rejected:  'bg-error',
+    archived:  'bg-muted',
   };
 
   return (
     <article
       className={`
-        rounded-(--radius-lg) border border-(--color-border)
-        bg-(--color-surface) p-(--spacing-md)
+        rounded-lg border border-base
+        bg-surface p-md
         hover:shadow-md transition-shadow
-        ${variant === 'compact' ? 'py-(--spacing-sm)' : 'py-(--spacing-lg)'}
+        ${variant === 'compact' ? 'py-sm' : 'py-lg'}
       `}
     >
-      <div className="flex items-start justify-between gap-(--spacing-md)">
+      <div className="flex items-start justify-between gap-md">
         <div className="flex-1">
-          <h3 className="text-(--font-size-lg) font-(--font-weight-semibold) text-(--color-text)">
+          <h3 className="text-lg font-semibold">
             {application.title}
           </h3>
-          <p className="text-(--color-text-muted)">
+          <p className="text-muted">
             {application.company}
           </p>
         </div>
 
         <span
           className={`
-            px-(--spacing-sm) py-(--spacing-xs) rounded-(--radius-md) text-(--font-size-sm) font-(--font-weight-semibold) text-white
+            px-sm py-xs rounded-md text-sm font-semibold text-white
             ${statusColors[application.status]}
           `}
           role="status"
@@ -105,8 +105,8 @@ export function ApplicationCard({
       </div>
 
       {variant === 'full' && application.notes && (
-        <div className="mt-(--spacing-md) pt-(--spacing-md) border-t border-(--color-border)">
-          <p className="text-(--font-size-sm) text-(--color-text)">
+        <div className="mt-md pt-md border-t border-base">
+          <p className="text-sm">
             {application.notes}
           </p>
         </div>
@@ -115,9 +115,9 @@ export function ApplicationCard({
       {onUpdate && (
         <button
           onClick={() => onUpdate(application)}
-          className="mt-(--spacing-md) px-(--spacing-md) py-(--spacing-sm) text-(--font-size-sm) font-(--font-weight-semibold) rounded-(--radius-lg)
-            bg-(--color-primary) text-white
-            hover:opacity-90 focus:outline-2 focus:outline-offset-2
+          className="mt-md px-md py-sm text-sm font-semibold rounded-lg
+            bg-primary-500 text-white
+            hover:bg-(--color-primary-hover) focus:outline-2 focus:outline-offset-2
             focus:outline-(--color-primary)"
         >
           Edit
@@ -170,7 +170,7 @@ describe('ApplicationCard', () => {
     const { container } = render(
       <ApplicationCard application={mockApp} variant="compact" />
     );
-    expect(container.querySelector('article')).toHaveClass('py-(--spacing-sm)');
+    expect(container.querySelector('article')).toHaveClass('py-sm');
   });
 });
 ```

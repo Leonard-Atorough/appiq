@@ -124,31 +124,28 @@ export function useApplicationsModel() {
 
 ### Design Tokens
 
-All semantic colors, spacing, and typography live in `src/styles/tokens.css`:
+All semantic colors, spacing, and typography are mapped to named Tailwind utilities in `tailwind.config.js`. The tokens live as CSS variables in `src/styles/tokens/`, but you should access them through Tailwind class names, not CSS variable syntax directly.
 
-```css
-:root {
-  --color-primary: hsl(200 100% 50%);
-  --color-success: hsl(120 100% 40%);
-  --color-text: hsl(0 0% 20%);
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: hsl(0 0% 95%);
-  }
-}
+```js
+// tailwind.config.js maps tokens to class names:
+// bg-surface → var(--color-surface)
+// text-secondary → var(--color-text-secondary)
+// border-base → var(--color-border)
+// p-md, gap-sm, mx-lg → spacing tokens
+// rounded-lg → var(--radius-lg)
+// text-sm, font-semibold, leading-normal → typography tokens
 ```
 
 ### Using Tailwind
 
-- Use Tailwind utilities for layouts, responsive design, and spacing
-- Reference design tokens via CSS variable access: `text-(--color-text)`
-- Semantic token classes for common patterns (e.g., `bg-surface`, `text-muted`)
-- Keep component-specific styles minimal; compose Tailwind utilities
+- **Prefer Tailwind extended class names** from `tailwind.config.js` over CSS variable access syntax
+- Use `bg-surface`, `bg-base`, `bg-muted` for backgrounds; `text-secondary`, `text-muted` for text colors
+- Use `border-base`, `border-muted` for borders
+- Use `bg-success`, `bg-error`, `bg-warning`, `bg-info` for semantic feedback colors
+- Use `p-md`, `px-sm`, `gap-lg` etc. for spacing (all token sizes: `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `4xl` `5xl`)
+- Use `rounded-sm` through `rounded-full` for border radius
+- Use `text-sm`, `text-lg`, `font-semibold`, `leading-normal` etc. for typography
+- Only use CSS variable access syntax (e.g. `bg-(--color-primary-hover)`) for **unmapped tokens**: hover/active states, foreground colors, `--color-surface-hover`
 
 ### Accessibility & Dark Mode
 
@@ -241,10 +238,10 @@ describe('ApplicationCard', () => {
 
 ### Style a component
 
-1. Check `src/styles/tokens.css` for available tokens
-2. Use Tailwind utilities for layout and spacing
-3. Reference tokens as CSS variables if needed custom values
-4. Test light and dark mode
+1. Check `tailwind.config.js` for available extended class names
+2. Use Tailwind extended classes for all mapped tokens: `bg-surface`, `border-base`, `p-md`, `text-sm`, `font-semibold`, `rounded-lg`, etc.
+3. Use CSS variable access syntax ONLY for unmapped tokens: hover states, foreground colors, `--color-surface-hover`
+4. Test light and dark mode (tokens switch automatically)
 
 ### Set up testing for a feature
 

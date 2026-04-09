@@ -66,7 +66,7 @@ Every component should apply these principles via tokens and utilities:
 [Border radius scale](./references/radii-tokens.md):
 
 - `--radius-sm` (0.25rem), `--radius-md` (0.375rem), `--radius-lg` (0.5rem), `--radius-xl` (0.75rem), `--radius-2xl` (1rem), `--radius-full` (9999px)
-- Use `rounded-(--radius-*)` in Tailwind or `var(--radius-*)` in CSS
+- Use `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-full` (all mapped in `tailwind.config.js`)
 
 ## CSS Variables in tokens/
 
@@ -137,66 +137,106 @@ All token files are imported via `src/styles/tokens/index.css`:
 </div>
 ```
 
-### ✅ DO: Use Tailwind Utilities with Design Tokens
+### ✅ DO: Use Tailwind Extended Config Class Names
+
+All tokens are mapped in `tailwind.config.js`. Use the named Tailwind utilities — not CSS variable access syntax.
 
 ```tsx
-// Colors, spacing, typography, and radius all from design tokens
-<button className="bg-(--color-primary) text-(--color-primary-foreground) px-(--spacing-md) py-(--spacing-sm) text-(--font-size-sm) rounded-(--radius-lg) font-(--font-weight-semibold)">
+// Colors, spacing, typography, and radius via Tailwind extended config
+<button className="bg-primary-500 text-white px-md py-sm text-sm rounded-lg font-semibold">
   Click me
 </button>
 
 // Complete semantic styling
-<div className="bg-(--color-surface) text-(--color-text) p-(--spacing-md) rounded-(--radius-lg) border border-(--color-border)">
-  <h3 className="text-(--font-size-lg) font-(--font-weight-semibold) mb-(--spacing-md)">
+<div className="bg-surface p-md rounded-lg border border-base">
+  <h3 className="text-lg font-semibold mb-md">
     Heading
   </h3>
-  <p className="text-(--font-size-base) text-(--color-text-secondary) leading-(--line-height-normal)">
+  <p className="text-sm text-secondary leading-normal">
     Body text with proper typography tokens.
   </p>
 </div>
 ```
 
-### ✅ DO: Use CSS Variables for Inline Styles
+**Token → Tailwind class quick reference** (from `tailwind.config.js`):
+
+| Token                    | Tailwind class                                        |
+| ------------------------ | ----------------------------------------------------- |
+| `--color-bg`             | `bg-base`                                             |
+| `--color-surface`        | `bg-surface`                                          |
+| `--color-muted-bg`       | `bg-muted`                                            |
+| `--color-text`           | `text-base` \*                                        |
+| `--color-text-secondary` | `text-secondary`                                      |
+| `--color-text-muted`     | `text-muted`                                          |
+| `--color-text-light`     | `text-light`                                          |
+| `--color-border`         | `border-base`                                         |
+| `--color-border-muted`   | `border-muted`                                        |
+| `--color-success`        | `bg-success` / `text-success`                         |
+| `--color-error`          | `bg-error` / `text-error`                             |
+| `--color-warning`        | `bg-warning` / `text-warning`                         |
+| `--color-info`           | `bg-info` / `text-info`                               |
+| `--spacing-{xs…5xl}`     | `p-md`, `px-sm`, `gap-lg`, `m-xl`…                    |
+| `--radius-{sm…full}`     | `rounded-sm`, `rounded-lg`, `rounded-full`…           |
+| `--font-size-{xs…4xl}`   | `text-xs`, `text-sm`, `text-lg`…                      |
+| `--font-weight-{…}`      | `font-normal`, `font-semibold`, `font-bold`…          |
+| `--line-height-{…}`      | `leading-tight`, `leading-normal`, `leading-relaxed`… |
+
+\* `text-base` sets **both** `color: var(--color-text)` and `font-size: var(--font-size-base)`. Use `text-(--color-text)` when you only want the color with a different size.
+
+### ✅ DO: Use CSS Variables Only for Unmapped Tokens
+
+Some tokens have no Tailwind class mapping (hover/active states, foreground pairs, surface-hover). Use CSS var syntax only for these:
 
 ```tsx
-// When Tailwind isn't ideal, reference tokens directly
+// Unmapped tokens — CSS var syntax is correct here
+<button
+  className="bg-primary-500 hover:bg-(--color-primary-hover) active:bg-(--color-primary-active)"
+>
+  Click me
+</button>
+
+// Inline styles: use CSS vars when Tailwind utilities aren't applicable
 <div
   style={{
-    color: "var(--color-text)",
-    backgroundColor: "var(--color-surface)",
-    padding: "var(--spacing-md)",
-    fontSize: "var(--font-size-base)",
-    borderRadius: "var(--radius-lg)",
+    borderColor: "var(--color-border)",   // prefer border-base in className
+    backgroundColor: "var(--color-surface-hover)",  // no Tailwind mapping
   }}
 >
-  Content with semantic tokens
+  Content
 </div>
 ```
+
+**Unmapped tokens (CSS var syntax required)**:
+
+- `--color-primary` / `--color-primary-hover` / `--color-primary-active` / `--color-primary-foreground`
+- `--color-secondary` / `--color-secondary-hover` / `--color-secondary-foreground`
+- `--color-surface-hover`
 
 ### ✅ DO: Use Tokens in CVA (Class Variance Authority)
 
 ```tsx
-// Component variant definitions should use tokens
+// Use Tailwind extended class names from tailwind.config.js, not CSS var syntax
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
   [
     "inline-flex items-center justify-center",
-    "font-(--font-weight-semibold)",
-    "rounded-(--radius-lg)",
+    "font-semibold",
+    "rounded-lg",
     "transition-colors duration-200",
   ].join(" "),
   {
     variants: {
       variant: {
         primary:
-          "bg-(--color-primary) text-(--color-primary-foreground) hover:bg-(--color-primary-hover)",
-        outline: "border border-(--color-border) text-(--color-text) hover:bg-(--color-muted-bg)",
+          // bg-primary-500 is the Tailwind mapped ramp class; hover uses unmapped token
+          "bg-primary-500 text-white hover:bg-(--color-primary-hover)",
+        outline: "border border-base text-(--color-text) hover:bg-muted",
       },
       size: {
-        sm: "px-(--spacing-sm) py-(--spacing-xs) text-(--font-size-sm)",
-        md: "px-(--spacing-md) py-(--spacing-sm) text-(--font-size-base)",
-        lg: "px-(--spacing-lg) py-(--spacing-md) text-(--font-size-md)",
+        sm: "px-sm py-xs text-sm",
+        md: "px-md py-sm text-base",
+        lg: "px-lg py-md text-md",
       },
     },
   },
@@ -231,26 +271,27 @@ Testing in browser DevTools:
 
 ## Tailwind Integration
 
-Tailwind config (`tailwind.config.js`) reads CSS variables:
+The `tailwind.config.js` extends Tailwind's theme to map all design tokens to named utility classes. **Always prefer these class names over CSS variable access syntax.**
 
 ```javascript
+// tailwind.config.js (simplified)
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors: {
-      primary: "var(--color-primary)",
-      success: "var(--color-success)",
-      // ...
-    },
-    spacing: {
-      xs: "var(--spacing-xs)",
-      sm: "var(--spacing-sm)",
-      md: "var(--spacing-md)",
-      // ...
+    extend: {
+      backgroundColor: { base: "var(--color-bg)", surface: "var(--color-surface)", muted: "var(--color-muted-bg)" },
+      textColor:       { base: "var(--color-text)", secondary: "var(--color-text-secondary)", muted: "var(--color-text-muted)", light: "var(--color-text-light)" },
+      borderColor:     { base: "var(--color-border)", muted: "var(--color-border-muted)" },
+      colors:          { success: "var(--color-success)", error: "var(--color-error)", warning: "var(--color-warning)", info: "var(--color-info)" },
+      spacing:         { xs: "var(--spacing-xs)", sm: "var(--spacing-sm)", md: "var(--spacing-md)", lg: "var(--spacing-lg)", ... },
+      borderRadius:    { sm: "var(--radius-sm)", md: "var(--radius-md)", lg: "var(--radius-lg)", ... },
+      fontSize:        { xs: "var(--font-size-xs)", sm: "var(--font-size-sm)", base: "var(--font-size-base)", lg: "var(--font-size-lg)", ... },
+      fontWeight:      { normal: "var(--font-weight-normal)", semibold: "var(--font-weight-semibold)", bold: "var(--font-weight-bold)" },
     },
   },
 };
 ```
+
+See [Tailwind Integration Reference](./references/tailwind-integration.md) for the complete class mapping table.
 
 ## Micro-Interactions: Standardized Active Scale
 

@@ -5,21 +5,16 @@ Copy-paste examples of accessible React components for AppIQ.
 ## Button
 
 ```tsx
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger';
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "danger";
   children: React.ReactNode;
 }
 
-export function Button({
-  variant = 'primary',
-  children,
-  ...props
-}: ButtonProps) {
+export function Button({ variant = "primary", children, ...props }: ButtonProps) {
   const variantClasses = {
-    primary: 'bg-(--color-primary) text-white',
-    secondary: 'bg-(--color-surface-hover) text-(--color-text)',
-    danger: 'bg-(--color-error) text-white',
+    primary: "bg-(--color-primary) text-white",
+    secondary: "bg-(--color-surface-hover) text-(--color-text)",
+    danger: "bg-(--color-error) text-white",
   };
 
   return (
@@ -39,6 +34,7 @@ export function Button({
 ```
 
 **A11y Features**:
+
 - ✅ Semantic `<button>` element
 - ✅ Clear focus ring with offset
 - ✅ Works with disabled state
@@ -50,29 +46,18 @@ export function Button({
 ## Form Input with Label
 
 ```tsx
-interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
   hint?: string;
 }
 
-export function Input({
-  label,
-  error,
-  hint,
-  id,
-  required,
-  ...props
-}: InputProps) {
+export function Input({ label, error, hint, id, required, ...props }: InputProps) {
   const inputId = id || `input-${Math.random()}`;
 
   return (
     <div className="flex flex-col gap-1">
-      <label
-        htmlFor={inputId}
-        className="text-sm font-semibold text-(--color-text)"
-      >
+      <label htmlFor={inputId} className="text-sm font-semibold text-(--color-text)">
         {label}
         {required && <span className="text-(--color-error)">*</span>}
       </label>
@@ -82,11 +67,7 @@ export function Input({
         className={`
           px-3 py-2 rounded border-2
           focus:outline-none focus:border-(--color-primary)
-          ${
-            error
-              ? 'border-(--color-error)'
-              : 'border-(--color-border)'
-          }
+          ${error ? "border-error" : "border-base"}
         `}
         required={required}
         aria-invalid={!!error}
@@ -95,20 +76,13 @@ export function Input({
       />
 
       {hint && (
-        <span
-          id={`${inputId}-hint`}
-          className="text-xs text-(--color-text-muted)"
-        >
+        <span id={`${inputId}-hint`} className="text-xs text-(--color-text-muted)">
           {hint}
         </span>
       )}
 
       {error && (
-        <span
-          id={`${inputId}-error`}
-          className="text-sm text-(--color-error)"
-          role="alert"
-        >
+        <span id={`${inputId}-error`} className="text-sm text-(--color-error)" role="alert">
           {error}
         </span>
       )}
@@ -118,6 +92,7 @@ export function Input({
 ```
 
 **A11y Features**:
+
 - ✅ Explicit `<label>` with `htmlFor`
 - ✅ `aria-invalid` for error state
 - ✅ `aria-describedby` links field to error/hint
@@ -130,7 +105,7 @@ export function Input({
 ## Accessible Modal/Dialog
 
 ```tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -149,13 +124,13 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     dialogRef.current?.focus();
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -163,11 +138,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   return (
     <>
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50"
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      <div className="fixed inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
 
       {/* Modal */}
       <div
@@ -178,7 +149,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         tabIndex={-1}
         className={`
           fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-          bg-(--color-surface) rounded-lg shadow-lg
+          bg-surface rounded-lg shadow-lg
           p-6 max-w-md w-full
           focus:outline-2 focus:outline-(--color-primary)
         `}
@@ -189,10 +160,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 
         {children}
 
-        <button
-          onClick={onClose}
-          className="mt-4 px-4 py-2 bg-(--color-primary) text-white rounded"
-        >
+        <button onClick={onClose} className="mt-4 px-4 py-2 bg-primary-500 text-white rounded">
           Close (Esc)
         </button>
       </div>
@@ -202,6 +170,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
 ```
 
 **A11y Features**:
+
 - ✅ `role="dialog"` + `aria-modal="true"`
 - ✅ `aria-labelledby` connects title
 - ✅ Focus trapped in modal (automatically with tabIndex={-1})
@@ -220,7 +189,7 @@ export function SkipLink() {
       href="#main-content"
       className={`
         absolute top-0 left-0 z-50
-        px-3 py-2 bg-(--color-primary) text-white
+        px-3 py-2 bg-primary-500 text-white
         focus:relative translate-x-0 focus:translate-x-0
         transition-transform
       `}
@@ -235,10 +204,11 @@ export function SkipLink() {
   <SkipLink />
   <nav>{/* navigation */}</nav>
   <main id="main-content">{/* content */}</main>
-</body>
+</body>;
 ```
 
 **A11y Features**:
+
 - ✅ Allows keyboard users to skip repetitive nav
 - ✅ Only visible on focus
 - ✅ Positioned at very top for quick access
@@ -254,24 +224,14 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   error?: string;
 }
 
-export function Select({
-  label,
-  options,
-  error,
-  id,
-  required,
-  ...props
-}: SelectProps) {
+export function Select({ label, options, error, id, required, ...props }: SelectProps) {
   const selectId = id || `select-${Math.random()}`;
 
   return (
     <div className="flex flex-col gap-1">
-      <label
-        htmlFor={selectId}
-        className="text-sm font-semibold text-(--color-text)"
-      >
+      <label htmlFor={selectId} className="text-sm font-semibold">
         {label}
-        {required && <span className="text-(--color-error)">*</span>}
+        {required && <span className="text-error">*</span>}
       </label>
 
       <select
@@ -279,11 +239,7 @@ export function Select({
         className={`
           px-3 py-2 rounded border-2
           focus:outline-none focus:border-(--color-primary)
-          ${
-            error
-              ? 'border-(--color-error)'
-              : 'border-(--color-border)'
-          }
+          ${error ? "border-error" : "border-base"}
         `}
         required={required}
         aria-invalid={!!error}
@@ -299,7 +255,7 @@ export function Select({
       </select>
 
       {error && (
-        <span id={`${selectId}-error`} className="text-sm text-(--color-error)" role="alert">
+        <span id={`${selectId}-error`} className="text-sm text-error" role="alert">
           {error}
         </span>
       )}
@@ -309,6 +265,7 @@ export function Select({
 ```
 
 **A11y Features**:
+
 - ✅ Native `<select>` (not custom)
 - ✅ Explicit `<label>`
 - ✅ `aria-invalid` + `aria-describedby`
@@ -332,13 +289,10 @@ export function Checkbox({ label, id, ...props }: CheckboxProps) {
       <input
         type="checkbox"
         id={checkboxId}
-        className="w-4 h-4 border-2 border-(--color-border) rounded"
+        className="w-4 h-4 border-2 border-base rounded"
         {...props}
       />
-      <label
-        htmlFor={checkboxId}
-        className="text-sm text-(--color-text) cursor-pointer"
-      >
+      <label htmlFor={checkboxId} className="text-sm cursor-pointer">
         {label}
       </label>
     </div>
@@ -347,6 +301,7 @@ export function Checkbox({ label, id, ...props }: CheckboxProps) {
 ```
 
 **A11y Features**:
+
 - ✅ Native `<input type="checkbox">`
 - ✅ Linked to label
 - ✅ Larger touch target (44px min)
