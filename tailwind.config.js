@@ -40,12 +40,13 @@ export default {
       },
       backgroundColor: {
         base: "var(--color-bg)",
+        secondary: "var(--color-secondary-bg)",
         surface: "var(--color-surface)",
         muted: "var(--color-muted-bg)",
       },
       textColor: {
         base: "var(--color-text)",
-        secondary: "var(--color-text-secondary)", 
+        secondary: "var(--color-text-secondary)",
         muted: "var(--color-text-muted)",
         light: "var(--color-text-light)",
       },
@@ -116,6 +117,17 @@ export default {
         sans: ["var(--font-sans)"],
         heading: ["var(--font-heading)"],
         mono: ["var(--font-mono)"],
+      },
+      /* Custom animations */
+      animation: {
+        /* Toast timer drain bar — duration set via --timer-duration CSS var on the element */
+        "timer-drain": "timer-drain var(--timer-duration, 5000ms) linear forwards",
+      },
+      keyframes: {
+        "timer-drain": {
+          from: { transform: "scaleX(1)" },
+          to: { transform: "scaleX(0)" },
+        },
       },
     },
   },

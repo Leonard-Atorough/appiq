@@ -4,6 +4,29 @@ import { cn } from "@/shared/lib/cn";
 import { toastVariants } from "./toast.variants";
 import { Button } from "../Button";
 
+/** Maps each variant to its accent color for the timer drain bar */
+const timerBarClass: Record<string, string> = {
+  default: "bg-(--color-border)",
+  success: "bg-success",
+  error: "bg-error",
+  warning: "bg-warning",
+  info: "bg-info",
+};
+
+const defaultIcons: Record<string, React.ReactNode> = {
+  default: "🔔",
+  success: "✅",
+  error: "❌",
+  warning: "⚠️",
+  info: "ℹ️",
+}; // Simple emoji icons for demonstration; replace with actual icons as needed
+
+/**
+ * Toast component for displaying transient notifications.
+ * Supports different variants, auto-dismissal, and optional action buttons.
+ * Designed with accessibility in mind, using ARIA roles and live regions.
+ * The timer drain bar visually indicates the remaining time before auto-dismissal, with colors matching the toast variant.
+ */
 export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ title, description, action, variant, duration = 5000, onDismiss, icon, ...props }, ref) => {
     React.useEffect(() => {
@@ -15,21 +38,14 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       }
     }, [duration, onDismiss]);
 
-    const defaultIcons: Record<string, React.ReactNode> = {
-      default: "🔔",
-      success: "✅",
-        error: "❌",
-        warning: "⚠️",
-        info: "ℹ️",
-    }; // To be replace with actual icons from your icon library
-
     const iconToShow = icon ?? defaultIcons[variant || "default"];
+    const showTimerBar = duration > 0;
 
     return (
       <div
         ref={ref}
         role="status"
-        aria-live="polite"
+        aria-live={variant === "error" ? "assertive" : "polite"}
         className={cn(toastVariants({ variant }), props.className)}
         {...props}
       >
@@ -57,6 +73,16 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
               ✕
             </Button>
           </div>
+        )}
+        {showTimerBar && (
+          <span
+            className={cn(
+              "absolute bottom-0 left-0 h-[3px] w-full origin-right animate-timer-drain",
+              timerBarClass[variant ?? "default"],
+            )}
+            style={{ "--timer-duration": `${duration}ms` } as React.CSSProperties}
+            aria-hidden="true"
+          />
         )}
       </div>
     );
