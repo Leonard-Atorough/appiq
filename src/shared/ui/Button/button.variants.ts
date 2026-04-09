@@ -8,7 +8,7 @@ export const buttonVariants = cva(
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "shadow-sm hover:shadow-md active:shadow-lg",
     "rounded-(--radius-2xl)",
-    "active:scale-[0.97]",
+    "active:scale-[0.98]",
   ].join(" "),
   {
     variants: {

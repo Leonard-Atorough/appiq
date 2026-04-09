@@ -2,10 +2,10 @@ import { cva } from "class-variance-authority";
 
 export const inputVariants = cva(
   [
-    "flex items-center rounded-md",
+    "flex items-center rounded-(--radius-md)",
     "border border-(--color-border) bg-(--color-surface)",
-    "px-3 py-2 text-sm",
-    "transition-colors transition-shadow duration-150 ease-out",
+    "px-(--spacing-md) py-(--spacing-sm) text-(--font-size-sm)",
+    "transition-colors transition-shadow duration-200 ease-out",
     "focus-within:ring-2 focus-within:ring-(--color-primary) focus-within:ring-offset-1",
     "shadow-sm focus-within:shadow-md active:shadow-lg",
     "active:scale-[0.98]",
@@ -14,14 +14,14 @@ export const inputVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-8 px-2",
-        md: "h-10 px-3",
-        lg: "h-12 px-4 text-base",
+        sm: "h-8 px-(--spacing-sm)",
+        md: "h-10 px-(--spacing-md)",
+        lg: "h-12 px-(--spacing-lg) text-base",
       },
       state: {
         default: "focus-within:ring-(--color-primary) hover:border-(--color-primary)",
         error:
-          "border-(--color-error) focus-within:ring-(--color-error) shadow-[0_0_0_1px_var(--color-error)]",
+          "border-(--color-error) focus-within:ring-(--color-error) focus-within:ring-offset-1",
       },
     },
     defaultVariants: {

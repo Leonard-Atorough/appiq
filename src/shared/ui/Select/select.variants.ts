@@ -5,7 +5,7 @@ export const selectVariants = cva(
     "flex items-center rounded-md",
     "border border-(--color-border) bg-(--color-surface)",
     "px-3 py-2 text-sm",
-    "transition-colors transition-shadow duration-150 ease-out",
+    "transition-colors transition-shadow duration-200 ease-out",
     "focus:ring-2 focus:ring-(--color-primary) focus:ring-offset-1",
     "shadow-sm focus:shadow-md active:shadow-lg",
     "active:scale-[0.98]",

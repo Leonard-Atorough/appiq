@@ -13,8 +13,8 @@ describe("Input", () => {
     render(<Input state="error" size="lg" placeholder="Enter text" />);
     const input = screen.getByPlaceholderText("Enter text");
     expect(input.classList).toContain("border-(--color-error)");
-    expect(input.classList).toContain("px-4");
-    expect(input.classList).toContain("py-2");
+    expect(input.classList).toContain("px-(--spacing-md)");
+    expect(input.classList).toContain("py-(--spacing-sm)");
   });
 
   it("renders start and end adornments", () => {
@@ -31,7 +31,7 @@ describe("Input", () => {
     expect(endAdornment).toBeInTheDocument();
 
     const input = screen.getByPlaceholderText("Enter text");
-    expect(input.classList).toContain("pl-10");
-    expect(input.classList).toContain("pr-10");
+    expect(input.classList).toContain("pl-(--spacing-lg)");
+    expect(input.classList).toContain("pr-(--spacing-lg)");
   });
 });

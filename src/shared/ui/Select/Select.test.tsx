@@ -41,7 +41,7 @@ describe("Select", () => {
     expect(endAdornment).toBeInTheDocument();
 
     const select = screen.getByTestId("select");
-    expect(select.classList).toContain("pl-10");
-    expect(select.classList).toContain("pr-10");
+    expect(select.classList).toContain("pl-(--spacing-lg)");
+    expect(select.classList).toContain("pr-(--spacing-lg)");
   });
 });
