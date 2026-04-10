@@ -22,6 +22,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       children,
       focusRef = null,
       buttonRow,
+      showClose,
       ...props
     },
     ref,
@@ -63,6 +64,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const descId = `${dialogId}-desc`;
 
     const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const shouldShowClose = showClose ?? !buttonRow;
 
     if (!open) return null;
 
@@ -103,16 +105,18 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
           <div className="p-md">{children}</div>
 
-          <div className="px-md py-sm border-t border-base text-right">
-            <button
-              ref={closeButtonRef}
-              type="button"
-              className="px-md py-sm rounded-md bg-(--color-secondary) text-(--color-secondary-foreground) shadow-sm hover:shadow-md active:shadow-lg transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-secondary) active:scale-[0.98]"
-              onClick={() => onOpenChange?.(false)}
-            >
-              Close
-            </button>
-          </div>
+          {shouldShowClose && (
+            <div className="px-md py-sm border-t border-base text-right">
+              <button
+                ref={closeButtonRef}
+                type="button"
+                className="px-md py-sm rounded-md bg-(--color-secondary) text-(--color-secondary-foreground) shadow-sm hover:shadow-md active:shadow-lg transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-secondary) active:scale-[0.98]"
+                onClick={() => onOpenChange?.(false)}
+              >
+                Close
+              </button>
+            </div>
+          )}
           {buttonRow && <div className="px-md py-sm border-t border-base">{buttonRow}</div>}
         </div>
       </div>

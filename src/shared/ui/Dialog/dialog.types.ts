@@ -10,4 +10,5 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: "sm" | "md" | "lg";
   focusRef?: React.RefObject<HTMLElement | null>; // element to focus when dialog opens
   buttonRow?: React.ReactNode; // custom button row, to display underneath the content
+  showClose?: boolean; // show built-in close button; defaults to true when no buttonRow
 }
