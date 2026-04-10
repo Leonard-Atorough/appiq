@@ -70,7 +70,7 @@ function DataTableHeader<TData extends Record<string, any>>({
                     ? (e) => {
                         if (e.key === "Enter" || e.key === " ") {
                           e.preventDefault();
-                          header.column.getToggleSortingHandler?.();
+                          header.column.getToggleSortingHandler()?.(e);
                         }
                       }
                     : undefined
@@ -202,6 +202,7 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
               key={row.id}
               row={row}
               props={{ size, variant, striped: rowStyle.striped, hoverable: rowStyle.hoverable }}
+              rowClassName={rowClassName}
             />
           ))}
         </tbody>

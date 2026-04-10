@@ -77,7 +77,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           />
         )}
 
-        <section
+        <div
           ref={ref}
           role="dialog"
           aria-modal={modal}
@@ -114,7 +114,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
             </button>
           </div>
           {buttonRow && <div className="px-md py-sm border-t border-base">{buttonRow}</div>}
-        </section>
+        </div>
       </div>
     );
   },

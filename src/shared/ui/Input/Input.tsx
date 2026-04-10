@@ -29,7 +29,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div className={cn("flex items-center", wrapperClassName)}>
+      <div className={cn("flex relative items-center", wrapperClassName)}>
         {startAdornment && (
           <div className="pointer-events-none absolute left-sm inline-flex items-center text-(--color-primary)">
             {startAdornment}
