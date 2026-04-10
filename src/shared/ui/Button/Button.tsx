@@ -28,8 +28,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         disabled={disabled}
-        onClick={disabled ? onClickDisabled : onClick}
-        aria-disabled={disabled || undefined} // Adds aria-disabled for accessibility when the button is disabled
+        onClick={disabled || loading ? onClickDisabled : onClick}
+        aria-disabled={disabled || loading || undefined} // Adds aria-disabled for accessibility when the button is disabled or loading
         {...props}
       >
         {/* Keep children in DOM during loading so layout/scroll anchors are preserved */}

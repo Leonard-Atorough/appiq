@@ -17,22 +17,30 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       endAdornment,
       wrapperClassName,
       className,
+      value: valueProp,
+      onChange: onChangeProp,
       ...props
     },
     ref,
   ) => {
-    // Always treat value as string for length
     const getStringValue = (val: unknown) => {
       if (typeof val === "string") return val;
       if (Array.isArray(val)) return val.join("");
       if (typeof val === "number") return String(val);
       return "";
     };
-    const initialValue = getStringValue(props.value ?? props.defaultValue ?? "");
-    const [value, setValue] = React.useState<string>(initialValue);
+
+    const isControlled = valueProp !== undefined;
+    const [internalValue, setInternalValue] = React.useState<string>(
+      getStringValue(props.defaultValue ?? ""),
+    );
+
+    // Source of truth for features (auto-grow, character count)
+    const trackingValue = isControlled ? getStringValue(valueProp) : internalValue;
+
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setValue(e.target.value);
-      props.onChange?.(e);
+      if (!isControlled) setInternalValue(e.target.value);
+      onChangeProp?.(e);
     };
 
     // Auto-grow logic
@@ -42,7 +50,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         textareaRef.current.style.height = "auto";
         textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
       }
-    }, [value, autoGrow]);
+    }, [trackingValue, autoGrow]);
 
     const rows = autoGrow ? minRows : (props.rows ?? minRows);
 
@@ -59,17 +67,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             className,
           )}
           rows={rows}
-          maxLength={props.maxLength}
-          value={value}
+          value={isControlled ? valueProp : internalValue}
           onChange={handleChange}
-          aria-label={props["aria-label"]}
-          aria-describedby={props["aria-describedby"]}
           {...props}
         />
         {endAdornment && <span className="absolute right-sm top-sm">{endAdornment}</span>}
         {showCharacterCount && (
           <span className="absolute right-sm bottom-sm text-xs text-muted" aria-live="polite">
-            {value.length}
+            {trackingValue.length}
             {props.maxLength ? ` / ${props.maxLength}` : ""}
           </span>
         )}
