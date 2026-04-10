@@ -11,17 +11,19 @@ import React from "react";
  *
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, full, className, disabled, onClick, ...props }, ref) => {
+  ({ variant, size, full, loading, className, disabled, onClick, ...props }, ref) => {
     const onClickDisabled = (e: React.MouseEvent) => e.preventDefault(); // Prevents any action when the button is disabled
 
     return (
       <button
         ref={ref}
+        type="button" // Default to "button" to prevent accidental form submissions
         className={cn(
           buttonVariants({
             variant,
             size,
             full,
+            loading,
           }),
           className,
         )}
@@ -29,7 +31,16 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={disabled ? onClickDisabled : onClick}
         aria-disabled={disabled || undefined} // Adds aria-disabled for accessibility when the button is disabled
         {...props}
-      />
+      >
+        {/* Keep children in DOM during loading so layout/scroll anchors are preserved */}
+        <span className={loading ? "invisible" : undefined}>{props.children}</span>
+        {loading && (
+          <span
+            aria-hidden="true"
+            className="absolute animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"
+          />
+        )}
+      </button>
     );
   },
 );

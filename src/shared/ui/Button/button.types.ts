@@ -6,4 +6,5 @@ export interface ButtonProps
   variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
   size?: "sm" | "md" | "lg";
   full?: boolean;
+  loading?: boolean;
 }

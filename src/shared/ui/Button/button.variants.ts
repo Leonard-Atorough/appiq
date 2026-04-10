@@ -7,7 +7,6 @@ export const buttonVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "shadow-sm hover:shadow-md active:shadow-lg",
-    "rounded-2xl",
     "active:scale-[0.98]",
   ].join(" "),
   {
@@ -59,6 +58,9 @@ export const buttonVariants = cva(
       },
       full: {
         true: "w-full",
+      },
+      loading: {
+        true: "cursor-wait opacity-75",
       },
     },
     defaultVariants: {
