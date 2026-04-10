@@ -5,7 +5,6 @@ export const textareaVariants = cva(
     "block w-full font-medium transition-colors duration-200 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "disabled:opacity-50 disabled:cursor-not-allowed",
-    "rounded-lg",
     "min-h-[2.5rem]",
   ].join(" "),
   {
@@ -14,7 +13,7 @@ export const textareaVariants = cva(
         primary:
           "bg-base border border-base text-(--color-text) focus-visible:ring-(--color-primary)",
         secondary:
-          "bg-(--color-secondary) border border-(--color-secondary-border) text-(--color-secondary-foreground) focus-visible:ring-(--color-secondary)",
+          "bg-(--color-secondary) border border-base text-(--color-secondary-foreground) focus-visible:ring-(--color-secondary)",
         outline:
           "bg-transparent border border-base text-(--color-text) focus-visible:ring-(--color-border)",
         ghost:

@@ -7,6 +7,7 @@ export interface SelectProps
     VariantProps<typeof selectVariants> {
   state?: "default" | "error";
   size?: "sm" | "md" | "lg";
+  label?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   wrapperClassName?: string;

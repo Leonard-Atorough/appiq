@@ -13,6 +13,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       autoGrow,
       minRows = 2,
       showCharacterCount,
+      label,
       startAdornment,
       endAdornment,
       wrapperClassName,
@@ -54,7 +55,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const rows = autoGrow ? minRows : (props.rows ?? minRows);
 
-    return (
+    const textareaEl = (
       <div className={cn("relative", wrapperClassName)}>
         {startAdornment && <span className="absolute left-sm top-sm">{startAdornment}</span>}
         <textarea
@@ -80,6 +81,17 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
       </div>
     );
+
+    if (label) {
+      return (
+        <label className="flex flex-col gap-xs">
+          <span className="text-sm font-medium text-secondary">{label}</span>
+          {textareaEl}
+        </label>
+      );
+    }
+
+    return textareaEl;
   },
 );
 

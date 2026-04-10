@@ -11,6 +11,38 @@ import type { ToastProps } from "@shared/ui/Toast";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
+const SectionTitle = ({ title }: { title: string }) => (
+  <h2 className="text-2xl font-bold mt-8 mb-4 text-(--color-text)">{title}</h2>
+);
+
+const SubsectionTitle = ({ title }: { title: string }) => (
+  <h3 className="text-lg font-semibold mt-6 mb-3 text-(--color-text-secondary)">{title}</h3>
+);
+
+const ComponentGrid = ({ children }: { children: React.ReactNode }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 p-6 bg-(--color-muted-bg) rounded-lg">
+    {children}
+  </div>
+);
+
+const ComponentItem = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`flex flex-col gap-3 p-4 bg-(--color-surface) border border-(--color-border) rounded-lg ${className}`}
+  >
+    {children}
+  </div>
+);
+
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <span className="text-sm font-medium text-(--color-text-secondary)">{children}</span>
+);
+
 export const ComponentShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -32,6 +64,19 @@ export const ComponentShowcase = () => {
   const [textareaMedium, setTextareaMedium] = useState("");
   const [textareaLarge, setTextareaLarge] = useState("");
   const [selectedValue, setSelectedValue] = useState("option1");
+  const [loadingButtons, setLoadingButtons] = useState<Set<string>>(new Set());
+  const simulateLoading = (id: string, ms = 2000) => {
+    setLoadingButtons((prev) => new Set([...prev, id]));
+    setTimeout(
+      () =>
+        setLoadingButtons((prev) => {
+          const n = new Set(prev);
+          n.delete(id);
+          return n;
+        }),
+      ms,
+    );
+  };
   const [dismissedBadges, setDismissedBadges] = useState<Set<string>>(new Set());
   const dismissBadge = (id: string) => setDismissedBadges((prev) => new Set([...prev, id]));
   const resetAllBadges = () => setDismissedBadges(new Set());
@@ -176,38 +221,6 @@ export const ComponentShowcase = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const SectionTitle = ({ title }: { title: string }) => (
-    <h2 className="text-2xl font-bold mt-8 mb-4 text-(--color-text)">{title}</h2>
-  );
-
-  const SubsectionTitle = ({ title }: { title: string }) => (
-    <h3 className="text-lg font-semibold mt-6 mb-3 text-(--color-text-secondary)">{title}</h3>
-  );
-
-  const ComponentGrid = ({ children }: { children: React.ReactNode }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 p-6 bg-(--color-muted-bg) rounded-lg">
-      {children}
-    </div>
-  );
-
-  const ComponentItem = ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => (
-    <div
-      className={`flex flex-col gap-3 p-4 bg-(--color-surface) border border-(--color-border) rounded-lg ${className}`}
-    >
-      {children}
-    </div>
-  );
-
-  const Label = ({ children }: { children: React.ReactNode }) => (
-    <span className="text-sm font-medium text-(--color-text-secondary)">{children}</span>
-  );
-
   return (
     <div className="min-h-screen bg-(--color-bg) p-8">
       <div className="max-w-7xl mx-auto">
@@ -314,6 +327,80 @@ export const ComponentShowcase = () => {
           </ComponentItem>
         </ComponentGrid>
 
+        <SubsectionTitle title="Loading State" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Primary (click to trigger)</Label>
+            <Button
+              variant="primary"
+              loading={loadingButtons.has("load-primary")}
+              onClick={() => simulateLoading("load-primary")}
+            >
+              Save Changes
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Secondary</Label>
+            <Button
+              variant="secondary"
+              loading={loadingButtons.has("load-secondary")}
+              onClick={() => simulateLoading("load-secondary")}
+            >
+              Sync Data
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Outline</Label>
+            <Button
+              variant="outline"
+              loading={loadingButtons.has("load-outline")}
+              onClick={() => simulateLoading("load-outline")}
+            >
+              Export
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Ghost</Label>
+            <Button
+              variant="ghost"
+              loading={loadingButtons.has("load-ghost")}
+              onClick={() => simulateLoading("load-ghost")}
+            >
+              Refresh
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Small</Label>
+            <Button
+              size="sm"
+              loading={loadingButtons.has("load-sm")}
+              onClick={() => simulateLoading("load-sm")}
+            >
+              Submit
+            </Button>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Large</Label>
+            <Button
+              size="lg"
+              loading={loadingButtons.has("load-lg")}
+              onClick={() => simulateLoading("load-lg", 3000)}
+            >
+              Processing
+            </Button>
+          </ComponentItem>
+          <ComponentItem className="col-span-full">
+            <Label>Full Width</Label>
+            <Button
+              full
+              loading={loadingButtons.has("load-full")}
+              onClick={() => simulateLoading("load-full", 2500)}
+            >
+              Submitting Application
+            </Button>
+          </ComponentItem>
+        </ComponentGrid>
+
         {/* Input Component */}
         <SectionTitle title="Input" />
 
@@ -371,6 +458,22 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Disabled</Label>
             <Input disabled placeholder="Disabled input" />
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="With Label" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Default</Label>
+            <Input label="Email address" placeholder="you@example.com" />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Error state</Label>
+            <Input label="Username" state="error" placeholder="Enter username" />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Disabled</Label>
+            <Input label="Read-only field" disabled placeholder="Cannot edit" />
           </ComponentItem>
         </ComponentGrid>
 
@@ -468,6 +571,27 @@ export const ComponentShowcase = () => {
           </ComponentItem>
         </ComponentGrid>
 
+        <SubsectionTitle title="With Label" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Primary</Label>
+            <Textarea label="Cover letter" placeholder="Tell us about yourself..." />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>With character count</Label>
+            <Textarea
+              label="Notes"
+              placeholder="Add any notes..."
+              showCharacterCount
+              maxLength={200}
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Auto-grow</Label>
+            <Textarea label="Description" placeholder="Grows as you type..." autoGrow />
+          </ComponentItem>
+        </ComponentGrid>
+
         {/* Select Component */}
         <SectionTitle title="Select" />
 
@@ -543,6 +667,33 @@ export const ComponentShowcase = () => {
               <option value="option1">Option 1</option>
               <option value="option2">Option 2</option>
               <option value="option3">Option 3</option>
+            </Select>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="With Label" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Default</Label>
+            <Select label="Job type">
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="contract">Contract</option>
+            </Select>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Error state</Label>
+            <Select label="Status" state="error">
+              <option value="">Select status...</option>
+              <option value="applied">Applied</option>
+              <option value="interviewing">Interviewing</option>
+            </Select>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Disabled</Label>
+            <Select label="Location" disabled>
+              <option value="remote">Remote</option>
+              <option value="hybrid">Hybrid</option>
             </Select>
           </ComponentItem>
         </ComponentGrid>

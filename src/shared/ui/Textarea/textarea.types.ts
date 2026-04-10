@@ -14,6 +14,7 @@ export interface TextareaProps extends Omit<
 
   showCharacterCount?: boolean;
 
+  label?: string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 
