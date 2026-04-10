@@ -68,7 +68,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
         {endAdornment && <span className="absolute right-sm top-sm">{endAdornment}</span>}
         {showCharacterCount && (
-          <span className="absolute right-sm bottom-sm text-xs text-muted">
+          <span className="absolute right-sm bottom-sm text-xs text-muted" aria-live="polite">
             {value.length}
             {props.maxLength ? ` / ${props.maxLength}` : ""}
           </span>
