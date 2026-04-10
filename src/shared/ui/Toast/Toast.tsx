@@ -3,6 +3,14 @@ import type { ToastProps } from "./toast.types";
 import { cn } from "@/shared/lib/cn";
 import { toastVariants } from "./toast.variants";
 import { Button } from "../Button";
+import {
+  BellIcon,
+  CheckCircleIcon,
+  XCircleIcon,
+  AlertTriangleIcon,
+  InfoIcon,
+  XIcon,
+} from "./toast.icons";
 
 /** Maps each variant to its accent color for the timer drain bar */
 const timerBarClass: Record<string, string> = {
@@ -14,12 +22,12 @@ const timerBarClass: Record<string, string> = {
 };
 
 const defaultIcons: Record<string, React.ReactNode> = {
-  default: "🔔",
-  success: "✅",
-  error: "❌",
-  warning: "⚠️",
-  info: "ℹ️",
-}; // Simple emoji icons for demonstration; replace with actual icons as needed
+  default: <BellIcon />,
+  success: <CheckCircleIcon />,
+  error: <XCircleIcon />,
+  warning: <AlertTriangleIcon />,
+  info: <InfoIcon />,
+};
 
 /**
  * Toast component for displaying transient notifications.
@@ -70,7 +78,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
               aria-label="Dismiss notification"
               className="ml-sm"
             >
-              ✕
+              <XIcon />
             </Button>
           </div>
         )}
