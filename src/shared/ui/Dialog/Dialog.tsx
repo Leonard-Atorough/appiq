@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId, useRef } from "react";
+import { forwardRef, useCallback, useEffect, useId, useRef } from "react";
 import { cn } from "@shared/lib/cn";
 import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
@@ -66,6 +66,55 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const shouldShowClose = showClose ?? !buttonRow;
 
+    // Internal ref for the dialog panel, merged with the forwarded ref
+    const internalRef = useRef<HTMLDivElement>(null);
+    const mergedRef = useCallback(
+      (node: HTMLDivElement | null) => {
+        internalRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+      },
+      [ref],
+    );
+
+    // Focus trap: keep Tab/Shift+Tab inside the dialog panel
+    useEffect(() => {
+      if (!open) return;
+      const panel = internalRef.current;
+      if (!panel) return;
+
+      const FOCUSABLE = [
+        "a[href]",
+        "button:not([disabled])",
+        "input:not([disabled])",
+        "select:not([disabled])",
+        "textarea:not([disabled])",
+        '[tabindex]:not([tabindex="-1"])',
+      ].join(", ");
+
+      const handleTab = (e: KeyboardEvent) => {
+        if (e.key !== "Tab") return;
+        const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE));
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+
+      document.addEventListener("keydown", handleTab);
+      return () => document.removeEventListener("keydown", handleTab);
+    }, [open]);
+
     if (!open) return null;
 
     return (
@@ -80,7 +129,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         )}
 
         <div
-          ref={ref}
+          ref={mergedRef}
           role="dialog"
           aria-modal={modal}
           tabIndex={-1}
