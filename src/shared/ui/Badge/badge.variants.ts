@@ -19,7 +19,7 @@ export const badgeVariants = cva(
         info: "bg-info shadow-sm hover:shadow-md hover:brightness-110",
       },
       outline: {
-        true: "bg-transparent border hover:bg-opacity-5",
+        true: "bg-transparent border",
         false: "",
       },
       size: {
@@ -36,32 +36,27 @@ export const badgeVariants = cva(
       {
         outline: true,
         variant: "default",
-        className:
-          "border-base text-(--color-text) hover:border-opacity-100 hover:bg-muted hover:bg-opacity-5",
+        className: "border-base text-(--color-text) hover:bg-muted/5",
       },
       {
         outline: true,
         variant: "success",
-        className:
-          "border-success text-success hover:bg-success hover:bg-opacity-5",
+        className: "border-success text-success hover:bg-success/5",
       },
       {
         outline: true,
         variant: "error",
-        className:
-          "border-error text-error hover:bg-error hover:bg-opacity-5",
+        className: "border-error text-error hover:bg-error/5",
       },
       {
         outline: true,
         variant: "warning",
-        className:
-          "border-warning text-warning hover:bg-warning hover:bg-opacity-5",
+        className: "border-warning text-warning hover:bg-warning/5",
       },
       {
         outline: true,
         variant: "info",
-        className:
-          "border-info text-info hover:bg-info hover:bg-opacity-5",
+        className: "border-info text-info hover:bg-info/5",
       },
     ],
     defaultVariants: {
