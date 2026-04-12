@@ -10,6 +10,7 @@ import { Toast } from "@shared/ui/Toast";
 import type { ToastProps } from "@shared/ui/Toast";
 import { Dropdown } from "@shared/ui/Dropdown";
 import { EmptyState } from "@shared/ui/EmptyState";
+import { Popover } from "@shared/ui/Popover";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
@@ -44,6 +45,36 @@ const ComponentItem = ({
 const Label = ({ children }: { children: React.ReactNode }) => (
   <span className="text-sm font-medium text-(--color-text-secondary)">{children}</span>
 );
+
+function ControlledPopoverExample() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="flex items-center gap-md">
+      <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
+        Open externally
+      </Button>
+      <Popover
+        open={open}
+        onOpenChange={setOpen}
+        trigger={
+          <Button variant="ghost" size="sm">
+            Trigger (controlled)
+          </Button>
+        }
+      >
+        <div className="flex flex-col gap-sm">
+          <p className="text-sm text-(--color-text)">Controlled by parent state.</p>
+          <Button variant="outline" size="sm" onClick={() => setOpen(false)}>
+            Close
+          </Button>
+        </div>
+      </Popover>
+      <span className="text-sm text-secondary">
+        Panel is: <strong>{open ? "open" : "closed"}</strong>
+      </span>
+    </div>
+  );
+}
 
 export const ComponentShowcase = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -1334,6 +1365,309 @@ export const ComponentShowcase = () => {
               description="Track your job search from application to offer. Add your first application to get started."
               action={{ label: "Add Application", onClick: () => alert("Add") }}
             />
+          </ComponentItem>
+        </ComponentGrid>
+
+        {/* Popover Component */}
+        <SectionTitle title="Popover" />
+
+        <SubsectionTitle title="Default (click)" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Bottom start (default)</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Open popover
+                </Button>
+              }
+              side="bottom"
+              align="start"
+            >
+              <p className="text-sm text-(--color-text)">
+                This is a simple popover with freeform content.
+              </p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>With action</Label>
+            <Popover
+              trigger={
+                <Button variant="primary" size="sm">
+                  Show options
+                </Button>
+              }
+              side="bottom"
+              align="start"
+            >
+              <div className="flex flex-col gap-sm">
+                <p className="text-sm font-semibold text-(--color-text)">Quick actions</p>
+                <Button variant="ghost" size="sm" full>
+                  Edit application
+                </Button>
+                <Button variant="ghost" size="sm" full>
+                  Archive
+                </Button>
+                <Button variant="ghost" size="sm" full>
+                  Delete
+                </Button>
+              </div>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Rich content</Label>
+            <Popover
+              trigger={
+                <Button variant="secondary" size="sm">
+                  Job details
+                </Button>
+              }
+              side="bottom"
+              align="start"
+              size="lg"
+            >
+              <div className="flex flex-col gap-sm">
+                <p className="text-sm font-semibold text-(--color-text)">
+                  Senior Frontend Engineer
+                </p>
+                <p className="text-sm text-secondary">Acme Corp · Remote · $120k–$150k</p>
+                <div className="flex gap-xs pt-xs">
+                  <span className="text-xs px-sm py-xs bg-muted rounded-full text-secondary">
+                    React
+                  </span>
+                  <span className="text-xs px-sm py-xs bg-muted rounded-full text-secondary">
+                    TypeScript
+                  </span>
+                  <span className="text-xs px-sm py-xs bg-muted rounded-full text-secondary">
+                    Node.js
+                  </span>
+                </div>
+              </div>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Sizes" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Small</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  sm
+                </Button>
+              }
+              size="sm"
+            >
+              <p className="text-sm text-(--color-text)">Small panel</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Medium (default)</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  md
+                </Button>
+              }
+              size="md"
+            >
+              <p className="text-sm text-(--color-text)">Medium panel</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Large</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  lg
+                </Button>
+              }
+              size="lg"
+            >
+              <p className="text-sm text-(--color-text)">Large panel with more breathing room</p>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Placement — side" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>bottom (default)</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Bottom
+                </Button>
+              }
+              side="bottom"
+            >
+              <p className="text-sm text-(--color-text)">Opens below</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>top</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Top
+                </Button>
+              }
+              side="top"
+            >
+              <p className="text-sm text-(--color-text)">Opens above</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>right</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Right
+                </Button>
+              }
+              side="right"
+            >
+              <p className="text-sm text-(--color-text)">Opens to the right</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>left</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Left
+                </Button>
+              }
+              side="left"
+            >
+              <p className="text-sm text-(--color-text)">Opens to the left</p>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Placement — align" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>start (default)</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Start
+                </Button>
+              }
+              align="start"
+            >
+              <p className="text-sm text-(--color-text)">Aligned to start</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>center</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  Center
+                </Button>
+              }
+              align="center"
+            >
+              <p className="text-sm text-(--color-text)">Aligned to center</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>end</Label>
+            <Popover
+              trigger={
+                <Button variant="outline" size="sm">
+                  End
+                </Button>
+              }
+              align="end"
+            >
+              <p className="text-sm text-(--color-text)">Aligned to end</p>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Interaction modes" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>click (default)</Label>
+            <Popover
+              openOn="click"
+              trigger={
+                <Button variant="outline" size="sm">
+                  Click me
+                </Button>
+              }
+            >
+              <p className="text-sm text-(--color-text)">Opened by click</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>hover</Label>
+            <Popover
+              openOn="hover"
+              trigger={
+                <Button variant="outline" size="sm">
+                  Hover me
+                </Button>
+              }
+            >
+              <p className="text-sm text-(--color-text)">Opened by hover</p>
+            </Popover>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>focus</Label>
+            <Popover
+              openOn="focus"
+              trigger={
+                <Button variant="outline" size="sm">
+                  Focus me
+                </Button>
+              }
+            >
+              <p className="text-sm text-(--color-text)">Opened by focus (Tab to this button)</p>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Modal mode" />
+        <ComponentGrid>
+          <ComponentItem className="col-span-full">
+            <Label>modal=true — backdrop + focus trap</Label>
+            <Popover
+              modal
+              trigger={
+                <Button variant="primary" size="sm">
+                  Open modal popover
+                </Button>
+              }
+              size="md"
+            >
+              <div className="flex flex-col gap-md">
+                <p className="text-sm font-semibold text-(--color-text)">Confirm action</p>
+                <p className="text-sm text-secondary">
+                  This popover traps focus and blocks background interaction.
+                </p>
+                <div className="flex gap-sm justify-end">
+                  <Button variant="outline" size="sm">
+                    Cancel
+                  </Button>
+                  <Button variant="primary" size="sm">
+                    Confirm
+                  </Button>
+                </div>
+              </div>
+            </Popover>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Controlled state" />
+        <ComponentGrid>
+          <ComponentItem className="col-span-full">
+            <Label>Controlled open/close from parent</Label>
+            <ControlledPopoverExample />
           </ComponentItem>
         </ComponentGrid>
 

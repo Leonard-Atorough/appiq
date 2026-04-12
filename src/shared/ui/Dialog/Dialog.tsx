@@ -63,7 +63,9 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     const titleId = `${dialogId}-title`;
     const descId = `${dialogId}-desc`;
 
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null); // Ref for the close button to return focus when the dialog opens
+    const returnFocusRef = useRef<HTMLElement | null>(null); // Ref to store the element that triggered the dialog, to return focus on close
+
     const shouldShowClose = showClose ?? !buttonRow;
 
     // Internal ref for the dialog panel, merged with the forwarded ref
@@ -76,6 +78,15 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       },
       [ref],
     );
+
+    useEffect(() => {
+      if (open) {
+        returnFocusRef.current = document.activeElement as HTMLElement;
+      } else {
+        returnFocusRef.current?.focus();
+        returnFocusRef.current = null;
+      }
+    }, [open]);
 
     // Focus trap: keep Tab/Shift+Tab inside the dialog panel
     useEffect(() => {

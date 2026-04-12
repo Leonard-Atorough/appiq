@@ -5,4 +5,11 @@ export { Dialog, type DialogProps } from "./Dialog";
 export { Dropdown, type DropdownProps, type DropdownItem } from "./Dropdown";
 export { Input, type InputProps } from "./Input";
 export { DataTable, type DataTableProps } from "./DataTable";
+export {
+  Popover,
+  type PopoverProps,
+  type PopoverOpenOn,
+  type PopoverSide,
+  type PopoverAlign,
+} from "./Popover";
 export { Toast, type ToastProps } from "./Toast";
