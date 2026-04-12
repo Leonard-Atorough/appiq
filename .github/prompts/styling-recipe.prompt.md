@@ -147,7 +147,7 @@ Options: href, disabled, size
       placeholder:text-muted
       focus:outline-none focus:border-(--color-primary)
       disabled:opacity-50 disabled:cursor-not-allowed
-      transition-colors duration-200
+      transition-all duration-200
     "
   />
 
@@ -228,7 +228,7 @@ Options: href, disabled, size
           border-b border-base
           hover:bg-(--color-surface-hover)
           cursor-pointer
-          transition-colors duration-200
+          transition-all duration-200
         "
       >
         <td className="p-md">

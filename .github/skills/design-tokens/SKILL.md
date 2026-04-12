@@ -223,7 +223,7 @@ export const buttonVariants = cva(
     "inline-flex items-center justify-center",
     "font-semibold",
     "rounded-lg",
-    "transition-colors duration-200",
+    "transition-all duration-200",
   ].join(" "),
   {
     variants: {

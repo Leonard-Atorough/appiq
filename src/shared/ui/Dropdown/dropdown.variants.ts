@@ -13,7 +13,7 @@ export const dropdownItemVariants = cva(
   [
     "flex w-full items-center gap-sm",
     "px-sm py-xs text-sm rounded-md",
-    "transition-colors duration-100",
+    "transition-all duration-100",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary)",
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "cursor-pointer",

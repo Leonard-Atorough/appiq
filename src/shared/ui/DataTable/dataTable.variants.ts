@@ -9,7 +9,7 @@ export const dataTableHeadVariants = cva(
     "px-md font-semibold text-(--color-text)",
     "bg-muted border-b border-base",
     "text-left text-sm uppercase tracking-wide",
-    "transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
+    "transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
   ].join(" "),
   {
     variants: {
@@ -44,7 +44,7 @@ export const dataTableHeadVariants = cva(
  * Striping, hover states, selection states, and focus indicators
  */
 export const dataTableRowVariants = cva(
-  ["border-b border-base", "transition-colors duration-200"].join(" "),
+  ["border-b border-base", "transition-all duration-200"].join(" "),
   {
     variants: {
       variant: {
@@ -82,7 +82,7 @@ export const dataTableRowVariants = cva(
 export const dataTableCellVariants = cva(
   [
     "px-md text-(--color-text) whitespace-nowrap overflow-hidden text-ellipsis",
-    "transition-colors duration-200",
+    "transition-all duration-200",
     "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
   ].join(" "),
   {

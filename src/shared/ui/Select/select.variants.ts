@@ -5,7 +5,7 @@ export const selectVariants = cva(
     "appearance-none flex items-center rounded-md",
     "border border-base bg-surface text-(--color-text)",
     "px-md py-sm text-sm",
-    "transition-colors transition-shadow duration-200 ease-out",
+    "transition-all transition-shadow duration-200 ease-out",
     "focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-1",
     "hover:shadow-md hover:border-(--color-primary)",
     "shadow-sm focus-visible:shadow-md active:shadow-lg",
