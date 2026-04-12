@@ -9,6 +9,7 @@ import { DataTable } from "@shared/ui/DataTable";
 import { Toast } from "@shared/ui/Toast";
 import type { ToastProps } from "@shared/ui/Toast";
 import { Dropdown } from "@shared/ui/Dropdown";
+import { EmptyState } from "@shared/ui/EmptyState";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
@@ -1272,6 +1273,69 @@ export const ComponentShowcase = () => {
             </div>
           </div>
         </div>
+
+        {/* EmptyState Component */}
+        <SectionTitle title="EmptyState" />
+
+        <SubsectionTitle title="Default (No Applications)" />
+        <ComponentGrid>
+          <ComponentItem className="col-span-full">
+            <Label>Default — with CTA</Label>
+            <EmptyState
+              action={{ label: "Add Application", onClick: () => alert("Add Application") }}
+            />
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Custom Content" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>No action</Label>
+            <EmptyState
+              title="No saved jobs"
+              description="Browse job boards and save positions you're interested in."
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Muted variant</Label>
+            <EmptyState
+              variant="muted"
+              title="No results found"
+              description="Try adjusting your search filters."
+            />
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Sizes" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Small</Label>
+            <EmptyState
+              size="sm"
+              title="No applications yet"
+              description="Add your first application."
+              action={{ label: "Add", onClick: () => alert("Add") }}
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Medium (default)</Label>
+            <EmptyState
+              size="md"
+              title="No applications yet"
+              description="Track your job search from application to offer."
+              action={{ label: "Add Application", onClick: () => alert("Add") }}
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Large</Label>
+            <EmptyState
+              size="lg"
+              title="No applications yet"
+              description="Track your job search from application to offer. Add your first application to get started."
+              action={{ label: "Add Application", onClick: () => alert("Add") }}
+            />
+          </ComponentItem>
+        </ComponentGrid>
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-(--color-border) text-(--color-text-secondary) text-center">
