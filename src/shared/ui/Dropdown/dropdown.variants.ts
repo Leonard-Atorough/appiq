@@ -1,0 +1,32 @@
+import { cva } from "class-variance-authority";
+
+export const dropdownMenuVariants = cva(
+  [
+    "absolute z-50 mt-xs min-w-[10rem]",
+    "bg-surface border border-base rounded-lg shadow-lg",
+    "py-xs",
+    "focus:outline-none",
+  ].join(" "),
+);
+
+export const dropdownItemVariants = cva(
+  [
+    "flex w-full items-center gap-sm",
+    "px-sm py-xs text-sm rounded-md",
+    "transition-colors duration-100",
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary)",
+    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "cursor-pointer",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        default: "text-(--color-text) hover:bg-muted",
+        danger: "text-error hover:bg-error-light",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);

@@ -8,6 +8,7 @@ import { Dialog } from "@shared/ui/Dialog";
 import { DataTable } from "@shared/ui/DataTable";
 import { Toast } from "@shared/ui/Toast";
 import type { ToastProps } from "@shared/ui/Toast";
+import { Dropdown } from "@shared/ui/Dropdown";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
@@ -1081,6 +1082,196 @@ export const ComponentShowcase = () => {
             </Button>
           </ComponentItem>
         </ComponentGrid>
+
+        {/* ============================================================ */}
+        {/* Dropdown */}
+        {/* ============================================================ */}
+        <SectionTitle title="Dropdown" />
+
+        <SubsectionTitle title="Trigger icons" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Kebab (default) — vertical ⋮</Label>
+            <div className="flex items-center gap-sm">
+              <span className="text-sm text-(--color-text-secondary)">trigger="kebab"</span>
+              <Dropdown
+                trigger="kebab"
+                triggerLabel="Kebab trigger"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Meatball — horizontal ···</Label>
+            <div className="flex items-center gap-sm">
+              <span className="text-sm text-(--color-text-secondary)">trigger="meatball"</span>
+              <Dropdown
+                trigger="meatball"
+                triggerLabel="Meatball trigger"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Bento 3×3 grid</Label>
+            <div className="flex items-center gap-sm">
+              <span className="text-sm text-(--color-text-secondary)">trigger="bento"</span>
+              <Dropdown
+                trigger="bento"
+                triggerLabel="Bento trigger"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Doner — tapered stack</Label>
+            <div className="flex items-center gap-sm">
+              <span className="text-sm text-(--color-text-secondary)">trigger="doner"</span>
+              <Dropdown
+                trigger="doner"
+                triggerLabel="Doner trigger"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Hamburger — equal lines</Label>
+            <div className="flex items-center gap-sm">
+              <span className="text-sm text-(--color-text-secondary)">trigger="hamburger"</span>
+              <Dropdown
+                trigger="hamburger"
+                triggerLabel="Hamburger trigger"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Custom React node trigger</Label>
+            <Dropdown
+              align="start"
+              triggerLabel="Custom trigger"
+              trigger={
+                <span className="text-sm px-sm py-xs border border-base rounded-md">Actions ▾</span>
+              }
+              items={[
+                { label: "Edit", onClick: () => alert("Edit") },
+                { label: "Archive", onClick: () => alert("Archive") },
+                { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+              ]}
+            />
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Item variants" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>With icons</Label>
+            <Dropdown
+              triggerLabel="Row actions with icons"
+              trigger="bento"
+              items={[
+                {
+                  label: "Edit",
+                  icon: <span aria-hidden="true">✏️</span>,
+                  onClick: () => alert("Edit"),
+                },
+                {
+                  label: "Share",
+                  icon: <span aria-hidden="true">🔗</span>,
+                  onClick: () => alert("Share"),
+                },
+                {
+                  label: "Archive",
+                  icon: <span aria-hidden="true">📦</span>,
+                  onClick: () => alert("Archive"),
+                },
+                {
+                  label: "Delete",
+                  icon: <span aria-hidden="true">🗑️</span>,
+                  onClick: () => alert("Delete"),
+                  variant: "danger",
+                },
+              ]}
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Disabled item</Label>
+            <Dropdown
+              triggerLabel="Row actions (disabled item)"
+              items={[
+                { label: "Edit", onClick: () => alert("Edit") },
+                { label: "Share", onClick: () => alert("Share"), disabled: true },
+                { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+              ]}
+            />
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Disabled trigger</Label>
+            <Dropdown
+              disabled
+              triggerLabel="Disabled dropdown"
+              items={[
+                { label: "Edit", onClick: () => {} },
+                { label: "Delete", onClick: () => {}, variant: "danger" },
+              ]}
+            />
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Alignment" />
+        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6">
+          <p className="text-sm text-(--color-text-secondary) mb-md">
+            Open each menu to see how the panel anchors to each side of its trigger.
+          </p>
+          <div className="flex items-start justify-between">
+            <div className="flex flex-col gap-xs items-start">
+              <span className="text-xs font-medium text-(--color-text-muted)">align="start"</span>
+              <Dropdown
+                align="start"
+                triggerLabel="Start aligned"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+            <div className="flex flex-col gap-xs items-end">
+              <span className="text-xs font-medium text-(--color-text-muted)">
+                align="end" (default)
+              </span>
+              <Dropdown
+                align="end"
+                triggerLabel="End aligned"
+                items={[
+                  { label: "Edit", onClick: () => alert("Edit") },
+                  { label: "Archive", onClick: () => alert("Archive") },
+                  { label: "Delete", onClick: () => alert("Delete"), variant: "danger" },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-(--color-border) text-(--color-text-secondary) text-center">
