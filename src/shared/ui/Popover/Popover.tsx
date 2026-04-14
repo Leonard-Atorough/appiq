@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import type React from "react";
 import { cn } from "@shared/lib/cn";
-import {
-  popoverVariants,
-  popoverOverlayVariants,
-  popoverTriggerVariants,
-} from "./popover.variants";
+import { popoverVariants, popoverOverlayVariants } from "./popover.variants";
 import type { PopoverProps, PopoverSide, PopoverAlign } from "./popover.types";
 
 const FOCUSABLE_SELECTORS = [
@@ -58,7 +53,6 @@ export function Popover({
   size,
   triggerClassName,
   contentClassName,
-  triggerProps,
   contentProps,
 }: PopoverProps) {
   const isControlled = controlledOpen !== undefined;
@@ -67,7 +61,6 @@ export function Popover({
 
   const panelId = useId();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
@@ -156,7 +149,7 @@ export function Popover({
     };
   }, [isOpen, modal]);
 
-  // Interaction props split by concern to avoid redundant handlers
+  // Wrapper handles hover open/close and focus-leave detection
   const wrapperInteractionProps: React.HTMLAttributes<HTMLDivElement> =
     openOn === "hover"
       ? { onMouseEnter: () => setOpen(true), onMouseLeave: () => setOpen(false) }
@@ -168,12 +161,15 @@ export function Popover({
           }
         : {};
 
-  const buttonInteractionProps: React.ButtonHTMLAttributes<HTMLButtonElement> =
-    openOn === "click"
-      ? { onClick: () => setOpen(!isOpen) }
-      : openOn === "focus"
-        ? { onFocus: () => setOpen(true) }
-        : {};
+  // Get trigger element and merge interaction/aria props
+  const triggerElement = trigger({
+    "aria-expanded": isOpen,
+    "aria-controls": isOpen ? panelId : undefined,
+    "aria-haspopup": modal ? "dialog" : true,
+    className: triggerClassName,
+    ...(openOn === "click" && { onClick: () => setOpen(!isOpen) }),
+    ...(openOn === "focus" && { onFocus: () => setOpen(true) }),
+  });
 
   // Panel: absolute when non-modal, fixed+centered when modal (avoids stacking context issues)
   const panelPositionClasses = modal
@@ -184,18 +180,7 @@ export function Popover({
 
   return (
     <div ref={wrapperRef} className="relative inline-block" {...wrapperInteractionProps}>
-      <button
-        ref={triggerRef}
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={isOpen ? panelId : undefined}
-        aria-haspopup={modal ? "dialog" : true}
-        className={cn(popoverTriggerVariants(), triggerClassName)}
-        {...buttonInteractionProps}
-        {...triggerProps}
-      >
-        {trigger}
-      </button>
+      {triggerElement}
 
       {isOpen && (
         <>

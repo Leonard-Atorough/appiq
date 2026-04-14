@@ -18,8 +18,8 @@ export interface PopoverProps extends VariantProps<typeof popoverVariants> {
   onOpenChange?: (open: boolean) => void;
 
   // --- Trigger ---
-  /** Element that activates the popover. Rendered as-is; interaction is wired by the component. */
-  trigger: React.ReactNode;
+  /** Render prop that receives trigger props. Spread them onto your interactive element. */
+  trigger: (props: PopoverTriggerProps) => React.ReactElement;
   /** Interaction that opens the popover. Defaults to "click". */
   openOn?: PopoverOpenOn;
 
@@ -43,12 +43,22 @@ export interface PopoverProps extends VariantProps<typeof popoverVariants> {
   children: React.ReactNode;
 
   // --- DOM escape hatches (targeted, not a root HTML spread) ---
-  /** Extra classes on the trigger wrapper. */
+  /** Extra class(es) merged onto the trigger element's className. */
   triggerClassName?: string;
   /** Extra classes on the panel. */
   contentClassName?: string;
-  /** Extra props on the trigger button (onClick is managed by the component). */
-  triggerProps?: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
   /** Extra props on the panel div. */
   contentProps?: Omit<React.HTMLAttributes<HTMLDivElement>, "id">;
+}
+
+export interface PopoverTriggerProps {
+  onClick?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
+  "aria-expanded"?: boolean;
+  "aria-controls"?: string;
+  "aria-haspopup"?: boolean | "dialog";
+  className?: string;
 }

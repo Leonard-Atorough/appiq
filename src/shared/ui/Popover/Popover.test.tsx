@@ -4,7 +4,7 @@ import { describe, it, expect, vi } from "vitest";
 import { Popover } from "./Popover";
 
 const defaultProps = {
-  trigger: <span>Open</span>,
+  trigger: (props: object) => <button {...props}>Open</button>,
   children: <p>Popover content</p>,
 };
 
@@ -212,7 +212,12 @@ describe("Popover", () => {
   it("matches snapshot when open", async () => {
     const user = userEvent.setup();
     const { container } = render(
-      <Popover trigger={<span>Open</span>} side="bottom" align="start" size="md">
+      <Popover
+        trigger={(props) => <button {...props}>Open</button>}
+        side="bottom"
+        align="start"
+        size="md"
+      >
         <p>Panel content</p>
       </Popover>,
     );

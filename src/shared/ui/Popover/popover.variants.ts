@@ -14,15 +14,6 @@ export const popoverVariants = cva(
         md: "p-md min-w-[14rem]",
         lg: "p-lg min-w-[20rem]",
       },
-      horizontalAlign: {
-        left: "origin-top-left left-0",
-        center: "origin-top absolute left-1/2 -translate-x-1/2",
-        right: "origin-top-right right-0",
-      },
-      verticalAlign: {
-        top: "origin-top-top",
-        bottom: "origin-bottom-bottom",
-      },
     },
     defaultVariants: {
       size: "md",

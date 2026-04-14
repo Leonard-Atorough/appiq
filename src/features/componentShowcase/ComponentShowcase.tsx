@@ -56,11 +56,11 @@ function ControlledPopoverExample() {
       <Popover
         open={open}
         onOpenChange={setOpen}
-        trigger={
-          <Button variant="ghost" size="sm">
+        trigger={(props) => (
+          <Button variant="ghost" size="sm" {...props}>
             Trigger (controlled)
           </Button>
-        }
+        )}
       >
         <div className="flex flex-col gap-sm">
           <p className="text-sm text-(--color-text)">Controlled by parent state.</p>
@@ -1376,11 +1376,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Bottom start (default)</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Open popover
                 </Button>
-              }
+              )}
               side="bottom"
               align="start"
             >
@@ -1392,11 +1392,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>With action</Label>
             <Popover
-              trigger={
-                <Button variant="primary" size="sm">
+              trigger={(props) => (
+                <Button variant="primary" size="sm" {...props}>
                   Show options
                 </Button>
-              }
+              )}
               side="bottom"
               align="start"
             >
@@ -1417,11 +1417,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Rich content</Label>
             <Popover
-              trigger={
-                <Button variant="secondary" size="sm">
+              trigger={(props) => (
+                <Button variant="secondary" size="sm" {...props}>
                   Job details
                 </Button>
-              }
+              )}
               side="bottom"
               align="start"
               size="lg"
@@ -1452,11 +1452,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Small</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   sm
                 </Button>
-              }
+              )}
               size="sm"
             >
               <p className="text-sm text-(--color-text)">Small panel</p>
@@ -1465,11 +1465,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Medium (default)</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   md
                 </Button>
-              }
+              )}
               size="md"
             >
               <p className="text-sm text-(--color-text)">Medium panel</p>
@@ -1478,11 +1478,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Large</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   lg
                 </Button>
-              }
+              )}
               size="lg"
             >
               <p className="text-sm text-(--color-text)">Large panel with more breathing room</p>
@@ -1495,11 +1495,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>bottom (default)</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Bottom
                 </Button>
-              }
+              )}
               side="bottom"
             >
               <p className="text-sm text-(--color-text)">Opens below</p>
@@ -1508,11 +1508,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>top</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Top
                 </Button>
-              }
+              )}
               side="top"
             >
               <p className="text-sm text-(--color-text)">Opens above</p>
@@ -1521,11 +1521,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>right</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Right
                 </Button>
-              }
+              )}
               side="right"
             >
               <p className="text-sm text-(--color-text)">Opens to the right</p>
@@ -1534,11 +1534,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>left</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Left
                 </Button>
-              }
+              )}
               side="left"
             >
               <p className="text-sm text-(--color-text)">Opens to the left</p>
@@ -1551,11 +1551,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>start (default)</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Start
                 </Button>
-              }
+              )}
               align="start"
             >
               <p className="text-sm text-(--color-text)">Aligned to start</p>
@@ -1564,11 +1564,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>center</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Center
                 </Button>
-              }
+              )}
               align="center"
             >
               <p className="text-sm text-(--color-text)">Aligned to center</p>
@@ -1577,11 +1577,11 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>end</Label>
             <Popover
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   End
                 </Button>
-              }
+              )}
               align="end"
             >
               <p className="text-sm text-(--color-text)">Aligned to end</p>
@@ -1595,11 +1595,11 @@ export const ComponentShowcase = () => {
             <Label>click (default)</Label>
             <Popover
               openOn="click"
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Click me
                 </Button>
-              }
+              )}
             >
               <p className="text-sm text-(--color-text)">Opened by click</p>
             </Popover>
@@ -1608,11 +1608,11 @@ export const ComponentShowcase = () => {
             <Label>hover</Label>
             <Popover
               openOn="hover"
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Hover me
                 </Button>
-              }
+              )}
             >
               <p className="text-sm text-(--color-text)">Opened by hover</p>
             </Popover>
@@ -1621,11 +1621,11 @@ export const ComponentShowcase = () => {
             <Label>focus</Label>
             <Popover
               openOn="focus"
-              trigger={
-                <Button variant="outline" size="sm">
+              trigger={(props) => (
+                <Button variant="outline" size="sm" {...props}>
                   Focus me
                 </Button>
-              }
+              )}
             >
               <p className="text-sm text-(--color-text)">Opened by focus (Tab to this button)</p>
             </Popover>
@@ -1638,11 +1638,11 @@ export const ComponentShowcase = () => {
             <Label>modal=true — backdrop + focus trap</Label>
             <Popover
               modal
-              trigger={
-                <Button variant="primary" size="sm">
+              trigger={(props) => (
+                <Button variant="primary" size="sm" {...props}>
                   Open modal popover
                 </Button>
-              }
+              )}
               size="md"
             >
               <div className="flex flex-col gap-md">
