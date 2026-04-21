@@ -54,7 +54,6 @@ function DataTableHeader<TData extends Record<string, any>>({
                   headerClassName,
                 )}
                 onClick={isSortable ? header.column.getToggleSortingHandler() : undefined}
-                role={isSortable ? "button" : undefined}
                 tabIndex={isSortable ? 0 : undefined}
                 aria-sort={
                   isSortable
@@ -117,7 +116,6 @@ function DataTableCell<TData extends Record<string, any>>({
     <td
       key={cell.id}
       className={cn(dataTableCellVariants({ size, variant }), cellClassName)}
-      role="gridcell"
       tabIndex={0}
     >
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -154,7 +152,6 @@ function DataTableRow<TData extends Record<string, any>>({
         }),
         rowClassName,
       )}
-      role="row"
       tabIndex={-1}
     >
       {row.getVisibleCells().map((cell) => (

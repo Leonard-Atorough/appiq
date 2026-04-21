@@ -46,6 +46,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     // Auto-grow logic
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+    const mergedRef = React.useCallback(
+      (node: HTMLTextAreaElement | null) => {
+        (textareaRef as React.RefObject<HTMLTextAreaElement | null>).current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.RefObject<HTMLTextAreaElement | null>).current = node;
+      },
+      [ref],
+    );
     React.useEffect(() => {
       if (autoGrow && textareaRef.current) {
         textareaRef.current.style.height = "auto";
@@ -59,7 +67,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className={cn("relative", wrapperClassName)}>
         {startAdornment && <span className="absolute left-sm top-sm">{startAdornment}</span>}
         <textarea
-          ref={autoGrow ? textareaRef : ref}
+          ref={mergedRef}
           className={cn(
             textareaVariants({ size, variant, full }),
             resize !== undefined && `resize-${resize}`,

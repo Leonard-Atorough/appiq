@@ -145,6 +145,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           aria-modal={modal}
           tabIndex={-1}
           aria-labelledby={title ? titleId : undefined}
+          aria-label={!title ? "Dialog" : undefined}
           aria-describedby={description ? descId : undefined}
           className={cn(dialogVariants({ size }), className)}
           {...props}

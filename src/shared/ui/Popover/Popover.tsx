@@ -196,6 +196,7 @@ export function Popover({
             id={panelId}
             role="dialog"
             aria-modal={modal || undefined}
+            aria-label={modal ? undefined : "Popover"}
             tabIndex={-1}
             style={panelStyle}
             className={cn(popoverVariants({ size }), panelPositionClasses, contentClassName)}

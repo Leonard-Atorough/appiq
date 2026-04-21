@@ -18,10 +18,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    const id = React.useId();
+
     const inputEl =
       !startAdornment && !endAdornment ? (
         <input
           ref={ref}
+          id={id}
           type={type}
           className={cn(inputVariants({ state, size }), className)}
           {...props}
