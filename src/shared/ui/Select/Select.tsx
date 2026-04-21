@@ -18,9 +18,17 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     },
     ref,
   ) => {
+    const generatedId = React.useId();
+    const resolvedId = props.id ?? generatedId;
+
     const selectEl =
       !startAdornment && !endAdornment ? (
-        <select ref={ref} className={cn(selectVariants({ state, size }), className)} {...props}>
+        <select
+          ref={ref}
+          id={resolvedId}
+          className={cn(selectVariants({ state, size }), className)}
+          {...props}
+        >
           {children}
         </select>
       ) : (
@@ -32,6 +40,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           )}
           <select
             ref={ref}
+            id={resolvedId}
             className={cn(
               selectVariants({ state, size }),
               startAdornment ? "pl-(--spacing-lg)" : "",
@@ -52,7 +61,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     if (label) {
       return (
-        <label className="flex flex-col gap-xs">
+        <label htmlFor={resolvedId} className="flex flex-col gap-xs">
           <span className="text-sm font-medium text-secondary">{label}</span>
           {selectEl}
         </label>

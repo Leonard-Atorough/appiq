@@ -44,6 +44,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       onChangeProp?.(e);
     };
 
+    const generatedId = React.useId();
+    const resolvedId = props.id ?? generatedId;
+
     // Auto-grow logic
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
     const mergedRef = React.useCallback(
@@ -68,6 +71,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {startAdornment && <span className="absolute left-sm top-sm">{startAdornment}</span>}
         <textarea
           ref={mergedRef}
+          id={resolvedId}
           className={cn(
             textareaVariants({ size, variant, full }),
             resize !== undefined && `resize-${resize}`,
@@ -92,7 +96,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     if (label) {
       return (
-        <label className="flex flex-col gap-xs">
+        <label htmlFor={resolvedId} className="flex flex-col gap-xs">
           <span className="text-sm font-medium text-secondary">{label}</span>
           {textareaEl}
         </label>

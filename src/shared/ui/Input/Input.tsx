@@ -18,13 +18,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    const id = React.useId();
+    const generatedId = React.useId();
+    const resolvedId = props.id ?? generatedId;
+
 
     const inputEl =
       !startAdornment && !endAdornment ? (
         <input
           ref={ref}
-          id={id}
+          id={resolvedId}
           type={type}
           className={cn(inputVariants({ state, size }), className)}
           {...props}
@@ -38,6 +40,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           <input
             ref={ref}
+            id={resolvedId}
             type={type}
             className={cn(
               inputVariants({ state, size }),
@@ -57,7 +60,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     if (label) {
       return (
-        <label className="flex flex-col gap-xs">
+        <label htmlFor={resolvedId} className="flex flex-col gap-xs">
           <span className="text-sm font-medium text-secondary">{label}</span>
           {inputEl}
         </label>
