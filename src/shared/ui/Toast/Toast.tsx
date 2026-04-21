@@ -3,14 +3,7 @@ import type { ToastProps } from "./toast.types";
 import { cn } from "@/shared/lib/cn";
 import { toastVariants } from "./toast.variants";
 import { Button } from "../Button";
-import {
-  BellIcon,
-  CheckCircleIcon,
-  XCircleIcon,
-  AlertTriangleIcon,
-  InfoIcon,
-  XIcon,
-} from "./toast.icons";
+import { Icon } from "../Icon";
 
 /** Maps each variant to its accent color for the timer drain bar */
 const timerBarClass: Record<string, string> = {
@@ -21,12 +14,13 @@ const timerBarClass: Record<string, string> = {
   info: "bg-info",
 };
 
+/** Maps each toast variant to its corresponding icon */
 const defaultIcons: Record<string, React.ReactNode> = {
-  default: <BellIcon />,
-  success: <CheckCircleIcon />,
-  error: <XCircleIcon />,
-  warning: <AlertTriangleIcon />,
-  info: <InfoIcon />,
+  default: <Icon name="bell" aria-hidden={true} />,
+  success: <Icon name="check-circle" variant="success" aria-hidden={true} />,
+  error: <Icon name="x-circle" variant="error" aria-hidden={true} />,
+  warning: <Icon name="alert-triangle" variant="warning" aria-hidden={true} />,
+  info: <Icon name="info" variant="info" aria-hidden={true} />,
 };
 
 /**
@@ -78,7 +72,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
               aria-label="Dismiss notification"
               className="ml-sm"
             >
-              <XIcon />
+              <Icon name="x" aria-hidden={true} />
             </Button>
           </div>
         )}

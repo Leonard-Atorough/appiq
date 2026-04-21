@@ -23,16 +23,3 @@ export const emptyStateVariants = cva(
     },
   },
 );
-
-export const emptyStateIconVariants = cva("", {
-  variants: {
-    size: {
-      sm: "w-xl h-xl",
-      md: "w-2xl h-2xl",
-      lg: "w-3xl h-3xl",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});

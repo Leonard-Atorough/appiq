@@ -10,6 +10,7 @@ import { Toast } from "@shared/ui/Toast";
 import type { ToastProps } from "@shared/ui/Toast";
 import { Dropdown } from "@shared/ui/Dropdown";
 import { EmptyState } from "@shared/ui/EmptyState";
+import { Icon } from "@shared/ui/Icon";
 import { Popover } from "@shared/ui/Popover";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
@@ -1365,6 +1366,173 @@ export const ComponentShowcase = () => {
               description="Track your job search from application to offer. Add your first application to get started."
               action={{ label: "Add Application", onClick: () => alert("Add") }}
             />
+          </ComponentItem>
+        </ComponentGrid>
+
+        {/* Icon Component */}
+        <SectionTitle title="Icon" />
+
+        <SubsectionTitle title="Sizes" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Extra Small (xs)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" size="xs" />
+              <Icon name="check-circle" size="xs" variant="success" />
+              <Icon name="x-circle" size="xs" variant="error" />
+              <Icon name="bell" size="xs" />
+              <Icon name="briefcase" size="xs" variant="warning" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Small (sm)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" size="sm" />
+              <Icon name="check-circle" size="sm" variant="success" />
+              <Icon name="x-circle" size="sm" variant="error" />
+              <Icon name="bell" size="sm" />
+              <Icon name="briefcase" size="sm" variant="warning" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Medium (md) — default</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" size="md" />
+              <Icon name="check-circle" size="md" variant="success" />
+              <Icon name="x-circle" size="md" variant="error" />
+              <Icon name="bell" size="md" />
+              <Icon name="briefcase" size="md" variant="warning" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Large (lg)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" size="lg" />
+              <Icon name="check-circle" size="lg" variant="success" />
+              <Icon name="x-circle" size="lg" variant="error" />
+              <Icon name="bell" size="lg" />
+              <Icon name="briefcase" size="lg" variant="warning" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Extra Large (xl)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" size="xl" />
+              <Icon name="check-circle" size="xl" variant="success" />
+              <Icon name="x-circle" size="xl" variant="error" />
+              <Icon name="bell" size="xl" />
+              <Icon name="briefcase" size="xl" variant="warning" />
+            </div>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Color Variants" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Default</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="briefcase" variant="default" />
+              <Icon name="bell" variant="default" />
+              <Icon name="hamburger" variant="default" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Muted</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="briefcase" variant="muted" />
+              <Icon name="bell" variant="muted" />
+              <Icon name="hamburger" variant="muted" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Success</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="check-circle" variant="success" />
+              <Icon name="briefcase" variant="success" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Error</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="x-circle" variant="error" />
+              <Icon name="x" variant="error" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Warning</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="alert-triangle" variant="warning" />
+              <Icon name="briefcase" variant="warning" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Info</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="info" variant="info" />
+              <Icon name="bell" variant="info" />
+            </div>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Navigation Icons" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Kebab Menu (⋮)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="kebab" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Meatball Menu (⋯)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="meatball" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Bento Menu (3×3 Grid)</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="bento" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Doner Menu</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="doner" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Hamburger Menu</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="hamburger" />
+            </div>
+          </ComponentItem>
+        </ComponentGrid>
+
+        <SubsectionTitle title="Status Icons" />
+        <ComponentGrid>
+          <ComponentItem>
+            <Label>Success Check</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="check-circle" variant="success" size="lg" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Error X</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="x-circle" variant="error" size="lg" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Warning Triangle</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="alert-triangle" variant="warning" size="lg" />
+            </div>
+          </ComponentItem>
+          <ComponentItem>
+            <Label>Info Circle</Label>
+            <div className="flex items-center gap-md">
+              <Icon name="info" variant="info" size="lg" />
+            </div>
           </ComponentItem>
         </ComponentGrid>
 

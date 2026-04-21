@@ -1,24 +1,9 @@
 import { cn } from "@shared/lib/cn";
-import { emptyStateVariants, emptyStateIconVariants } from "./emptyState.variants";
+import { emptyStateVariants } from "./emptyState.variants";
 import type { EmptyStateProps } from "./emptyState.types";
+import { Icon } from "../Icon";
 
-const DEFAULT_ICON = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.5}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <rect x="2" y="7" width="20" height="14" rx="2" />
-    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-    <line x1="12" y1="12" x2="12" y2="16" />
-    <line x1="10" y1="14" x2="14" y2="14" />
-  </svg>
-);
+const DEFAULT_ICON = <Icon name="briefcase" aria-hidden={true} />;
 
 export function EmptyState({
   title = "No applications yet",
@@ -37,8 +22,7 @@ export function EmptyState({
       aria-label={title}
       className={cn(emptyStateVariants({ variant, size }), className)}
     >
-      <span className={cn(emptyStateIconVariants({ size }), "text-muted")}>{resolvedIcon}</span>
-
+      {resolvedIcon}
       <div className="flex flex-col gap-xs w-full">
         <h3 className="text-base font-semibold text-(--color-text)">{title}</h3>
         <p className="text-sm text-secondary leading-normal">{description}</p>

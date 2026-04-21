@@ -2,20 +2,20 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cn } from "@shared/lib/cn";
 import { dropdownItemVariants, dropdownMenuVariants } from "./dropdown.variants";
 import type { DropdownProps } from "./dropdown.types";
-import { KebabIcon, MeatballIcon, BentoIcon, HamburgerIcon, DonerIcon } from "./dropdown.icons";
+import { Icon } from "../Icon";
 
 function getDropdownTrigger(trigger: DropdownProps["trigger"]) {
   switch (trigger) {
     case "kebab":
-      return <KebabIcon />;
+      return <Icon name="kebab" aria-hidden={true} />;
     case "meatball":
-      return <MeatballIcon />;
+      return <Icon name="meatball" aria-hidden={true} />;
     case "bento":
-      return <BentoIcon />;
+      return <Icon name="bento" aria-hidden={true} />;
     case "doner":
-      return <DonerIcon />;
+      return <Icon name="doner" aria-hidden={true} />;
     case "hamburger":
-      return <HamburgerIcon />;
+      return <Icon name="hamburger" aria-hidden={true} />;
     default:
       return trigger;
   }
