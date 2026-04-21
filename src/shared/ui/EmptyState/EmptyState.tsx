@@ -1,9 +1,7 @@
 import { cn } from "@shared/lib/cn";
 import { emptyStateVariants } from "./emptyState.variants";
 import type { EmptyStateProps } from "./emptyState.types";
-import { Icon } from "../Icon";
-
-const DEFAULT_ICON = <Icon name="briefcase" aria-hidden={true} />;
+import { Icon, type IconSize } from "../Icon";
 
 export function EmptyState({
   title = "No applications yet",
@@ -14,7 +12,14 @@ export function EmptyState({
   size,
   className,
 }: EmptyStateProps) {
-  const resolvedIcon = icon ?? DEFAULT_ICON;
+  const iconSizeMap: Record<NonNullable<EmptyStateProps["size"]>, IconSize> = {
+    sm: "md",
+    md: "lg",
+    lg: "xl",
+  }
+
+  const iconSize = iconSizeMap[size || "md"] satisfies IconSize;
+  const resolvedIcon = icon ?? <Icon name="briefcase" size={iconSize} aria-hidden={true} />;
 
   return (
     <div
@@ -24,7 +29,7 @@ export function EmptyState({
     >
       {resolvedIcon}
       <div className="flex flex-col gap-xs w-full">
-        <h3 className="text-base font-semibold text-(--color-text)">{title}</h3>
+        <h3 className="text-base font-semibold">{title}</h3>
         <p className="text-sm text-secondary leading-normal">{description}</p>
       </div>
 
@@ -35,7 +40,7 @@ export function EmptyState({
           className={cn(
             "mt-sm inline-flex items-center justify-center gap-xs",
             "rounded-md px-md py-sm text-sm font-medium",
-            "bg-gradient-to-br from-(--color-primary) to-(--color-primary-hover)",
+            "bg-linear-to-br from-(--color-primary) to-(--color-primary-hover)",
             "text-(--color-primary-foreground)",
             "shadow-sm hover:shadow-md transition-all duration-200",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
