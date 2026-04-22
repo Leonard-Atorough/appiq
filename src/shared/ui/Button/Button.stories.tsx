@@ -27,7 +27,7 @@ export const States: Story = { render: () => (
   <div className="flex flex-wrap gap-md items-center">
     <Button>Default</Button>
     <Button disabled>Disabled</Button>
-    <Button loading>Loading</Button>
+    <Button loading >Loading</Button>
   </div>
 )};
 

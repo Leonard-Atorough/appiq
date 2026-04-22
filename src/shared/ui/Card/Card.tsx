@@ -71,7 +71,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           </div>
         )}
         {/* Keep children in DOM during loading so layout anchors are preserved */}
-        <div className={loading ? "invisible" : undefined}>
+        <div className={loading ? "opacity-0" : undefined}>
           {header && (
             <div id={headerId} className="mb-sm text-lg font-semibold">
               {header}

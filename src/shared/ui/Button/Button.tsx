@@ -33,8 +33,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading || undefined}
         {...props}
       >
-        {/* Keep children in DOM during loading so layout/scroll anchors are preserved */}
-        <span className={loading ? "invisible" : undefined}>{props.children}</span>
+        <span className={loading ? "opacity-0" : undefined}>{props.children}</span>
         {loading && (
           <span
             aria-hidden="true"
