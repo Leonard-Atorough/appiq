@@ -44,7 +44,33 @@ export const States: Story = {
       <Select label="Error" state="error">
         {options}
       </Select>
+      <Select label="Success" state="success">
+        {options}
+      </Select>
       <Select label="Disabled" disabled>
+        {options}
+      </Select>
+    </div>
+  ),
+};
+
+export const WithMessages: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <Select label="Application Status" helperText="Choose the current stage of your application.">
+        {options}
+      </Select>
+      <Select
+        label="Application Status"
+        error="Please select a status to continue."
+        helperText="Choose the current stage of your application."
+      >
+        {options}
+      </Select>
+      <Select
+        label="Application Status"
+        success="Status saved!"
+      >
         {options}
       </Select>
     </div>

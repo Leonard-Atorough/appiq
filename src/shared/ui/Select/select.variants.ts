@@ -8,8 +8,7 @@ export const selectVariants = cva(
     "transition-all transition-shadow duration-200 ease-out",
     "focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-1",
     "hover:shadow-md hover:border-(--color-primary)",
-    "shadow-sm focus-visible:shadow-md active:shadow-lg",
-    "active:scale-[0.98]",
+    "shadow-sm focus-visible:shadow-md",
     "disabled:cursor-not-allowed disabled:opacity-50",
   ].join(" "),
   {
@@ -22,6 +21,7 @@ export const selectVariants = cva(
       state: {
         default: "focus-visible:ring-(--color-primary)",
         error: "border-2 border-error focus-visible:ring-(--color-error)",
+        success: "border-2 border-success focus-visible:ring-(--color-success)",
       },
     },
     defaultVariants: {

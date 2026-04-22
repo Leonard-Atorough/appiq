@@ -7,7 +7,6 @@ export const dialogVariants = cva(
     "shadow-lg hover:shadow-xl focus:shadow-2xl",
     "transition-shadow transition-transform duration-200 ease-out",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-2",
-    "active:scale-[0.98]",
   ].join(" "),
   {
     variants: {

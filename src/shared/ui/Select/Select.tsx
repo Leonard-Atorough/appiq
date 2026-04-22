@@ -2,6 +2,7 @@ import React from "react";
 import type { SelectProps } from "./select.types";
 import { cn } from "@/shared/lib/cn";
 import { selectVariants } from "./select.variants";
+import { Field } from "@/shared/ui/Field";
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
@@ -9,24 +10,43 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       className,
       wrapperClassName,
       label,
+      error,
+      helperText,
+      success,
       startAdornment,
       endAdornment,
       state = "default",
       size,
       children,
+      id: idProp,
+      "aria-describedby": externalDescribedBy,
       ...props
     },
     ref,
   ) => {
     const generatedId = React.useId();
-    const resolvedId = props.id ?? generatedId;
+    const resolvedId = idProp ?? generatedId;
+
+    const effectiveState = error ? "error" : success ? "success" : state;
+
+    const describedByIds =
+      [
+        helperText ? `${resolvedId}-helper` : null,
+        success && !error ? `${resolvedId}-success` : null,
+        error ? `${resolvedId}-error` : null,
+        externalDescribedBy,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     const selectEl =
       !startAdornment && !endAdornment ? (
         <select
           ref={ref}
           id={resolvedId}
-          className={cn(selectVariants({ state, size }), className)}
+          aria-invalid={!!error}
+          aria-describedby={describedByIds}
+          className={cn(selectVariants({ state: effectiveState, size }), className)}
           {...props}
         >
           {children}
@@ -41,8 +61,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <select
             ref={ref}
             id={resolvedId}
+            aria-invalid={!!error}
+            aria-describedby={describedByIds}
             className={cn(
-              selectVariants({ state, size }),
+              selectVariants({ state: effectiveState, size }),
               startAdornment ? "pl-(--spacing-lg)" : "",
               endAdornment ? "pr-(--spacing-lg)" : "",
               className,
@@ -59,12 +81,11 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         </div>
       );
 
-    if (label) {
+    if (label || error || helperText || success) {
       return (
-        <label htmlFor={resolvedId} className="flex flex-col gap-xs">
-          <span className="text-sm font-medium text-secondary">{label}</span>
+        <Field id={resolvedId} label={label} error={error} helperText={helperText} success={success}>
           {selectEl}
-        </label>
+        </Field>
       );
     }
 

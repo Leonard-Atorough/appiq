@@ -27,10 +27,16 @@ export const textareaVariants = cva(
       full: {
         true: "w-full",
       },
+      state: {
+        default: "",
+        error: "border-error focus-visible:ring-(--color-error)",
+        success: "border-success focus-visible:ring-(--color-success)",
+      },
     },
     defaultVariants: {
       variant: "primary",
       size: "md",
+      state: "default",
     },
   },
 );

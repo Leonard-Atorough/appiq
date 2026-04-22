@@ -56,3 +56,39 @@ export const CharacterCount: Story = {
 export const FullWidth: Story = {
   render: () => <Textarea label="Notes" placeholder="Full width textarea…" full />,
 };
+
+export const States: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <Textarea label="Default" placeholder="Default state…" />
+      <Textarea label="Error" placeholder="Invalid value…" state="error" />
+      <Textarea label="Success" placeholder="Looks good…" state="success" />
+      <Textarea label="Disabled" placeholder="Not editable…" disabled />
+    </div>
+  ),
+};
+
+export const WithMessages: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <Textarea
+        label="Cover letter"
+        placeholder="Write your cover letter…"
+        helperText="Aim for 3–5 paragraphs. Be specific about the role."
+      />
+      <Textarea
+        label="Cover letter"
+        placeholder="Write your cover letter…"
+        error="Cover letter must be at least 100 characters."
+        helperText="Aim for 3–5 paragraphs. Be specific about the role."
+        defaultValue="Too short"
+      />
+      <Textarea
+        label="Cover letter"
+        placeholder="Write your cover letter…"
+        success="Looks great! Your cover letter is ready."
+        defaultValue="This is a well-written cover letter with great detail."
+      />
+    </div>
+  ),
+};

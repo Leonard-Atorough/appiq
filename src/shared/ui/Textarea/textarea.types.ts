@@ -4,6 +4,7 @@ export interface TextareaProps extends Omit<
 > {
   size?: "sm" | "md" | "lg";
   variant?: "primary" | "secondary" | "outline" | "ghost";
+  state?: "default" | "error" | "success";
   full?: boolean;
 
   resize?: "none" | "both" | "horizontal" | "vertical";
@@ -14,7 +15,10 @@ export interface TextareaProps extends Omit<
 
   showCharacterCount?: boolean;
 
-  label?: string;
+  label?: React.ReactNode;
+  error?: React.ReactNode;
+  helperText?: React.ReactNode;
+  success?: React.ReactNode;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 

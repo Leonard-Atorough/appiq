@@ -19,7 +19,33 @@ export const States: Story = {
     <div className="flex flex-col gap-md">
       <Input label="Default" placeholder="Default state" state="default" />
       <Input label="Error" placeholder="Invalid value" state="error" />
+      <Input label="Success" placeholder="Looks good" state="success" />
       <Input label="Disabled" placeholder="Not editable" disabled />
+    </div>
+  ),
+};
+
+export const WithMessages: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <Input
+        label="Email"
+        placeholder="you@example.com"
+        helperText="We'll never share your email."
+      />
+      <Input
+        label="Email"
+        placeholder="you@example.com"
+        error="Please enter a valid email address."
+        helperText="We'll never share your email."
+        defaultValue="not-an-email"
+      />
+      <Input
+        label="Username"
+        placeholder="your-handle"
+        success="Username is available!"
+        defaultValue="johndoe"
+      />
     </div>
   ),
 };

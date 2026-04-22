@@ -7,8 +7,7 @@ export const inputVariants = cva(
     "px-md py-sm text-sm",
     "transition-all transition-shadow duration-200 ease-out",
     "focus-within:ring-2 focus-within:ring-(--color-primary) focus-within:ring-offset-1",
-    "shadow-sm focus-within:shadow-md active:shadow-lg",
-    "active:scale-[0.98]",
+    "shadow-sm focus-within:shadow-md",
     "disabled:cursor-not-allowed disabled:opacity-50",
   ].join(" "),
   {
@@ -21,6 +20,7 @@ export const inputVariants = cva(
       state: {
         default: "focus-within:ring-(--color-primary) hover:border-(--color-primary)",
         error: "border-error focus-within:ring-(--color-error) focus-within:ring-offset-1",
+        success: "border-success focus-within:ring-(--color-success) focus-within:ring-offset-1",
       },
     },
     defaultVariants: {

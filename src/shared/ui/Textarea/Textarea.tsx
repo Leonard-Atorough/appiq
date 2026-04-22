@@ -2,24 +2,31 @@ import React from "react";
 import { cn } from "@shared/lib/cn";
 import { textareaVariants } from "./textarea.variants";
 import type { TextareaProps } from "./textarea.types";
+import { Field } from "@/shared/ui/Field";
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       size = "md",
       variant = "primary",
+      state = "default",
       full,
       resize = "vertical",
       autoGrow,
       minRows = 2,
       showCharacterCount,
       label,
+      error,
+      helperText,
+      success,
       startAdornment,
       endAdornment,
       wrapperClassName,
       className,
       value: valueProp,
       onChange: onChangeProp,
+      id: idProp,
+      "aria-describedby": externalDescribedBy,
       ...props
     },
     ref,
@@ -45,7 +52,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     };
 
     const generatedId = React.useId();
-    const resolvedId = props.id ?? generatedId;
+    const resolvedId = idProp ?? generatedId;
 
     // Auto-grow logic
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
@@ -66,14 +73,28 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const rows = autoGrow ? minRows : (props.rows ?? minRows);
 
+    const effectiveState = error ? "error" : success ? "success" : state;
+
+    const describedByIds =
+      [
+        helperText ? `${resolvedId}-helper` : null,
+        success && !error ? `${resolvedId}-success` : null,
+        error ? `${resolvedId}-error` : null,
+        externalDescribedBy,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
+
     const textareaEl = (
       <div className={cn("relative", wrapperClassName)}>
         {startAdornment && <span className="absolute left-sm top-sm">{startAdornment}</span>}
         <textarea
           ref={mergedRef}
           id={resolvedId}
+          aria-invalid={!!error}
+          aria-describedby={describedByIds}
           className={cn(
-            textareaVariants({ size, variant, full }),
+            textareaVariants({ size, variant, full, state: effectiveState }),
             resize !== undefined && `resize-${resize}`,
             startAdornment && "pl-lg",
             endAdornment && "pr-lg",
@@ -94,12 +115,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       </div>
     );
 
-    if (label) {
+    if (label || error || helperText || success) {
       return (
-        <label htmlFor={resolvedId} className="flex flex-col gap-xs">
-          <span className="text-sm font-medium text-secondary">{label}</span>
+        <Field id={resolvedId} label={label} error={error} helperText={helperText} success={success}>
           {textareaEl}
-        </label>
+        </Field>
       );
     }
 

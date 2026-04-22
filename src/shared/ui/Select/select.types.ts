@@ -5,9 +5,12 @@ export interface SelectProps
   extends
     Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size">,
     VariantProps<typeof selectVariants> {
-  state?: "default" | "error";
+  state?: "default" | "error" | "success";
   size?: "sm" | "md" | "lg";
-  label?: string;
+  label?: React.ReactNode;
+  error?: React.ReactNode;
+  helperText?: React.ReactNode;
+  success?: React.ReactNode;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
   wrapperClassName?: string;
