@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Badge } from "@shared/ui/Badge";
 import { Button } from "@shared/ui/Button";
 import { Input } from "@shared/ui/Input";
@@ -16,15 +16,15 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@entities/application/model/types";
 
 const SectionTitle = ({ title }: { title: string }) => (
-  <h2 className="text-2xl font-bold mt-8 mb-4 text-(--color-text)">{title}</h2>
+  <h2 className="text-2xl font-bold mt-8 mb-4 text-base">{title}</h2>
 );
 
 const SubsectionTitle = ({ title }: { title: string }) => (
-  <h3 className="text-lg font-semibold mt-6 mb-3 text-(--color-text-secondary)">{title}</h3>
+  <h3 className="text-lg font-semibold mt-6 mb-3 text-secondary">{title}</h3>
 );
 
 const ComponentGrid = ({ children }: { children: React.ReactNode }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 p-6 bg-(--color-muted-bg) rounded-lg">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 p-6 bg-muted rounded-lg">
     {children}
   </div>
 );
@@ -36,15 +36,13 @@ const ComponentItem = ({
   children: React.ReactNode;
   className?: string;
 }) => (
-  <div
-    className={`flex flex-col gap-3 p-4 bg-(--color-surface) border border-(--color-border) rounded-lg ${className}`}
-  >
+  <div className={`flex flex-col gap-3 p-4 bg-surface border border-base rounded-lg ${className}`}>
     {children}
   </div>
 );
 
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <span className="text-sm font-medium text-(--color-text-secondary)">{children}</span>
+  <span className="text-sm font-medium text-secondary">{children}</span>
 );
 
 function ControlledPopoverExample() {
@@ -64,7 +62,7 @@ function ControlledPopoverExample() {
         )}
       >
         <div className="flex flex-col gap-sm">
-          <p className="text-sm text-(--color-text)">Controlled by parent state.</p>
+          <p className="text-sm text-base">Controlled by parent state.</p>
           <Button variant="outline" size="sm" onClick={() => setOpen(false)}>
             Close
           </Button>
@@ -114,11 +112,6 @@ export const ComponentShowcase = () => {
   const [dismissedBadges, setDismissedBadges] = useState<Set<string>>(new Set());
   const dismissBadge = (id: string) => setDismissedBadges((prev) => new Set([...prev, id]));
   const resetAllBadges = () => setDismissedBadges(new Set());
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("showcase-dark-mode");
-    if (saved !== null) return JSON.parse(saved);
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
 
   const sampleApplications: JobApplication[] = [
     {
@@ -197,10 +190,10 @@ export const ComponentShowcase = () => {
       cell: (info) => {
         const status = info.getValue() as string;
         const statusColors: Record<string, string> = {
-          applied: "text-(--color-info)",
-          interviewing: "text-(--color-warning)",
-          offer: "text-(--color-success)",
-          rejected: "text-(--color-error)",
+          applied: "text-info-text",
+          interviewing: "text-warning-text",
+          offer: "text-success-text",
+          rejected: "text-error-text",
         };
         return <span className={statusColors[status] || ""}>{status}</span>;
       },
@@ -231,16 +224,6 @@ export const ComponentShowcase = () => {
     },
   ];
 
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isDarkMode) {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    localStorage.setItem("showcase-dark-mode", JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
-
   const addToast = (props: Omit<ToastProps, "onDismiss">) => {
     const key = toastCounter + 1;
     setToastCounter(key);
@@ -251,29 +234,15 @@ export const ComponentShowcase = () => {
     setToasts((prev) => prev.filter((t) => t.toastKey !== key));
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
-    <div className="min-h-screen bg-(--color-bg) p-8">
+    <div className="min-h-screen bg-base p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-12 flex items-start justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-(--color-text) mb-2">Component Showcase</h1>
-            <p className="text-(--color-text-secondary) text-lg">
-              A visual reference for all available UI components and their variants
-            </p>
-          </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={toggleDarkMode}
-            title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkMode ? "🌙 Dark" : "☀️ Light"}
-          </Button>
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold text-base mb-2">Component Showcase</h1>
+          <p className="text-secondary text-lg">
+            A visual reference for all available UI components and their variants
+          </p>
         </div>
 
         {/* Button Component */}
@@ -736,7 +705,7 @@ export const ComponentShowcase = () => {
         <SectionTitle title="Dialog" />
 
         <SubsectionTitle title="Interactive Example" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6">
+        <div className="p-6 bg-muted rounded-lg mb-6">
           <Button variant="primary" onClick={() => setDialogOpen(true)}>
             Open Dialog
           </Button>
@@ -759,7 +728,7 @@ export const ComponentShowcase = () => {
             }
           >
             <div className="space-y-4">
-              <p className="text-(--color-text)">
+              <p className="text-base">
                 You can place any content here - forms, confirmations, or custom UI.
               </p>
               <Input placeholder="Example input field" />
@@ -769,7 +738,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Popover Example" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6">
+        <div className="p-6 bg-muted rounded-lg mb-6">
           <Button variant="outline" onClick={() => setPopoverOpen(true)}>
             Open Popover
           </Button>
@@ -781,7 +750,7 @@ export const ComponentShowcase = () => {
             size="sm"
             modal={false}
           >
-            <p className="text-(--color-text)">
+            <p className="text-base">
               This is a popover. It doesn't block interaction with the rest of the page.
             </p>
           </Dialog>
@@ -791,7 +760,7 @@ export const ComponentShowcase = () => {
         <SectionTitle title="DataTable" />
 
         <SubsectionTitle title="Job Applications" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 overflow-x-auto">
+        <div className="p-6 bg-muted rounded-lg mb-6 overflow-x-auto">
           <DataTable
             data={sampleApplications}
             columns={columns}
@@ -804,7 +773,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Compact Variant" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 overflow-x-auto">
+        <div className="p-6 bg-muted rounded-lg mb-6 overflow-x-auto">
           <DataTable
             data={sampleApplications}
             columns={columns}
@@ -820,7 +789,7 @@ export const ComponentShowcase = () => {
         <SectionTitle title="Badge" />
 
         <SubsectionTitle title="Variants" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge variant="default">Default</Badge>
           <Badge variant="success">Success</Badge>
           <Badge variant="error">Error</Badge>
@@ -829,7 +798,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Sizes" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge size="sm" variant="info">
             Small
           </Badge>
@@ -842,7 +811,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Outline" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge outline variant="default">
             Default
           </Badge>
@@ -861,7 +830,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Pill vs Rectangular" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge rounded variant="success">
             Pill
           </Badge>
@@ -877,7 +846,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="With Icon" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge variant="success" icon={<span aria-hidden="true">✓</span>}>
             Verified
           </Badge>
@@ -893,7 +862,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="Dismissable" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           {!dismissedBadges.has("d-success") && (
             <Badge variant="success" dismissable onDismiss={() => dismissBadge("d-success")}>
               Saved
@@ -920,7 +889,7 @@ export const ComponentShowcase = () => {
         </div>
 
         <SubsectionTitle title="With Actions" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6 flex flex-wrap gap-sm items-center">
+        <div className="p-6 bg-muted rounded-lg mb-6 flex flex-wrap gap-sm items-center">
           <Badge variant="warning" actions={[{ label: "Undo", onClick: () => alert("Undone!") }]}>
             Archived
           </Badge>
@@ -1126,7 +1095,7 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Kebab (default) — vertical ⋮</Label>
             <div className="flex items-center gap-sm">
-              <span className="text-sm text-(--color-text-secondary)">trigger="kebab"</span>
+              <span className="text-sm text-secondary">trigger="kebab"</span>
               <Dropdown
                 trigger="kebab"
                 triggerLabel="Kebab trigger"
@@ -1141,7 +1110,7 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Meatball — horizontal ···</Label>
             <div className="flex items-center gap-sm">
-              <span className="text-sm text-(--color-text-secondary)">trigger="meatball"</span>
+              <span className="text-sm text-secondary">trigger="meatball"</span>
               <Dropdown
                 trigger="meatball"
                 triggerLabel="Meatball trigger"
@@ -1156,7 +1125,7 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Bento 3×3 grid</Label>
             <div className="flex items-center gap-sm">
-              <span className="text-sm text-(--color-text-secondary)">trigger="bento"</span>
+              <span className="text-sm text-secondary">trigger="bento"</span>
               <Dropdown
                 trigger="bento"
                 triggerLabel="Bento trigger"
@@ -1171,7 +1140,7 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Doner — tapered stack</Label>
             <div className="flex items-center gap-sm">
-              <span className="text-sm text-(--color-text-secondary)">trigger="doner"</span>
+              <span className="text-sm text-secondary">trigger="doner"</span>
               <Dropdown
                 trigger="doner"
                 triggerLabel="Doner trigger"
@@ -1186,7 +1155,7 @@ export const ComponentShowcase = () => {
           <ComponentItem>
             <Label>Hamburger — equal lines</Label>
             <div className="flex items-center gap-sm">
-              <span className="text-sm text-(--color-text-secondary)">trigger="hamburger"</span>
+              <span className="text-sm text-secondary">trigger="hamburger"</span>
               <Dropdown
                 trigger="hamburger"
                 triggerLabel="Hamburger trigger"
@@ -1272,13 +1241,13 @@ export const ComponentShowcase = () => {
         </ComponentGrid>
 
         <SubsectionTitle title="Alignment" />
-        <div className="p-6 bg-(--color-muted-bg) rounded-lg mb-6">
-          <p className="text-sm text-(--color-text-secondary) mb-md">
+        <div className="p-6 bg-muted rounded-lg mb-6">
+          <p className="text-sm text-secondary mb-md">
             Open each menu to see how the panel anchors to each side of its trigger.
           </p>
           <div className="flex items-start justify-between">
             <div className="flex flex-col gap-xs items-start">
-              <span className="text-xs font-medium text-(--color-text-muted)">align="start"</span>
+              <span className="text-xs font-medium text-muted">align="start"</span>
               <Dropdown
                 align="start"
                 triggerLabel="Start aligned"
@@ -1290,9 +1259,7 @@ export const ComponentShowcase = () => {
               />
             </div>
             <div className="flex flex-col gap-xs items-end">
-              <span className="text-xs font-medium text-(--color-text-muted)">
-                align="end" (default)
-              </span>
+              <span className="text-xs font-medium text-muted">align="end" (default)</span>
               <Dropdown
                 align="end"
                 triggerLabel="End aligned"
@@ -1552,9 +1519,7 @@ export const ComponentShowcase = () => {
               side="bottom"
               align="start"
             >
-              <p className="text-sm text-(--color-text)">
-                This is a simple popover with freeform content.
-              </p>
+              <p className="text-sm text-base">This is a simple popover with freeform content.</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1569,7 +1534,7 @@ export const ComponentShowcase = () => {
               align="start"
             >
               <div className="flex flex-col gap-sm">
-                <p className="text-sm font-semibold text-(--color-text)">Quick actions</p>
+                <p className="text-sm font-semibold text-base">Quick actions</p>
                 <Button variant="ghost" size="sm" full>
                   Edit application
                 </Button>
@@ -1595,9 +1560,7 @@ export const ComponentShowcase = () => {
               size="lg"
             >
               <div className="flex flex-col gap-sm">
-                <p className="text-sm font-semibold text-(--color-text)">
-                  Senior Frontend Engineer
-                </p>
+                <p className="text-sm font-semibold text-base">Senior Frontend Engineer</p>
                 <p className="text-sm text-secondary">Acme Corp · Remote · $120k–$150k</p>
                 <div className="flex gap-xs pt-xs">
                   <span className="text-xs px-sm py-xs bg-muted rounded-full text-secondary">
@@ -1627,7 +1590,7 @@ export const ComponentShowcase = () => {
               )}
               size="sm"
             >
-              <p className="text-sm text-(--color-text)">Small panel</p>
+              <p className="text-sm text-base">Small panel</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1640,7 +1603,7 @@ export const ComponentShowcase = () => {
               )}
               size="md"
             >
-              <p className="text-sm text-(--color-text)">Medium panel</p>
+              <p className="text-sm text-base">Medium panel</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1653,7 +1616,7 @@ export const ComponentShowcase = () => {
               )}
               size="lg"
             >
-              <p className="text-sm text-(--color-text)">Large panel with more breathing room</p>
+              <p className="text-sm text-base">Large panel with more breathing room</p>
             </Popover>
           </ComponentItem>
         </ComponentGrid>
@@ -1670,7 +1633,7 @@ export const ComponentShowcase = () => {
               )}
               side="bottom"
             >
-              <p className="text-sm text-(--color-text)">Opens below</p>
+              <p className="text-sm text-base">Opens below</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1683,7 +1646,7 @@ export const ComponentShowcase = () => {
               )}
               side="top"
             >
-              <p className="text-sm text-(--color-text)">Opens above</p>
+              <p className="text-sm text-base">Opens above</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1696,7 +1659,7 @@ export const ComponentShowcase = () => {
               )}
               side="right"
             >
-              <p className="text-sm text-(--color-text)">Opens to the right</p>
+              <p className="text-sm text-base">Opens to the right</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1709,7 +1672,7 @@ export const ComponentShowcase = () => {
               )}
               side="left"
             >
-              <p className="text-sm text-(--color-text)">Opens to the left</p>
+              <p className="text-sm text-base">Opens to the left</p>
             </Popover>
           </ComponentItem>
         </ComponentGrid>
@@ -1726,7 +1689,7 @@ export const ComponentShowcase = () => {
               )}
               align="start"
             >
-              <p className="text-sm text-(--color-text)">Aligned to start</p>
+              <p className="text-sm text-base">Aligned to start</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1739,7 +1702,7 @@ export const ComponentShowcase = () => {
               )}
               align="center"
             >
-              <p className="text-sm text-(--color-text)">Aligned to center</p>
+              <p className="text-sm text-base">Aligned to center</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1752,7 +1715,7 @@ export const ComponentShowcase = () => {
               )}
               align="end"
             >
-              <p className="text-sm text-(--color-text)">Aligned to end</p>
+              <p className="text-sm text-base">Aligned to end</p>
             </Popover>
           </ComponentItem>
         </ComponentGrid>
@@ -1769,7 +1732,7 @@ export const ComponentShowcase = () => {
                 </Button>
               )}
             >
-              <p className="text-sm text-(--color-text)">Opened by click</p>
+              <p className="text-sm text-base">Opened by click</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1782,7 +1745,7 @@ export const ComponentShowcase = () => {
                 </Button>
               )}
             >
-              <p className="text-sm text-(--color-text)">Opened by hover</p>
+              <p className="text-sm text-base">Opened by hover</p>
             </Popover>
           </ComponentItem>
           <ComponentItem>
@@ -1795,7 +1758,7 @@ export const ComponentShowcase = () => {
                 </Button>
               )}
             >
-              <p className="text-sm text-(--color-text)">Opened by focus (Tab to this button)</p>
+              <p className="text-sm text-base">Opened by focus (Tab to this button)</p>
             </Popover>
           </ComponentItem>
         </ComponentGrid>
@@ -1814,7 +1777,7 @@ export const ComponentShowcase = () => {
               size="md"
             >
               <div className="flex flex-col gap-md">
-                <p className="text-sm font-semibold text-(--color-text)">Confirm action</p>
+                <p className="text-sm font-semibold text-base">Confirm action</p>
                 <p className="text-sm text-secondary">
                   This popover traps focus and blocks background interaction.
                 </p>
@@ -1840,7 +1803,7 @@ export const ComponentShowcase = () => {
         </ComponentGrid>
 
         {/* Footer */}
-        <div className="mt-12 pt-8 border-t border-(--color-border) text-(--color-text-secondary) text-center">
+        <div className="mt-12 pt-8 border-t border-base text-secondary text-center">
           <p>All components are fully responsive and support theming through design tokens.</p>
         </div>
       </div>

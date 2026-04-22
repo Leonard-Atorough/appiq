@@ -45,7 +45,7 @@ Props:
 
 ## Example Output (summary)
 
-- File tree: `IconButton/` with `IconButton.tsx`, `iconButton.types.ts`, `iconButton.variants.ts`, `index.ts`, `IconButton.test.tsx`
+- File tree: `IconButton/` with `IconButton.tsx`, `iconButton.types.ts`, `iconButton.variants.ts`, `index.ts`, `IconButton.test.tsx`, and `IconButton.stories.tsx`
 - Full contents for each file (TSX/TS/test)
 - Usage example
 - Accessibility notes

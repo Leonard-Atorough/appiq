@@ -45,8 +45,8 @@ export const buttonVariants = cva(
         link: [
           "bg-transparent",
           "shadow-none",
-          "text-(--color-primary)",
-          "hover:underline hover:text-(--color-primary-hover) hover:shadow-none",
+          "text-(--color-primary-text)",
+          "hover:underline hover:text-(--color-primary-text) hover:shadow-none",
           "active:text-(--color-primary-active) active:shadow-none",
           "focus-visible:ring-(--color-primary)",
         ].join(" "),

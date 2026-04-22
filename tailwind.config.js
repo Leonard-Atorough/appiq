@@ -49,6 +49,13 @@ export default {
         secondary: "var(--color-text-secondary)",
         muted: "var(--color-text-muted)",
         light: "var(--color-text-light)",
+        /* Accessible primary text — use for link/inline text on page backgrounds (≥4.5:1 contrast) */
+        "primary-text": "var(--color-primary-text)",
+        /* Accessible feedback text — use on light/white backgrounds (≥4.5:1 contrast) */
+        "success-text": "var(--color-success-text)",
+        "warning-text": "var(--color-warning-text)",
+        "error-text": "var(--color-error-text)",
+        "info-text": "var(--color-info-text)",
       },
       borderColor: {
         base: "var(--color-border)",

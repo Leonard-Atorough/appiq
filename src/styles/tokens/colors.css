@@ -74,7 +74,8 @@
   --color-primary-hover: var(--green-600);
   --color-primary-active: var(--green-700);
   --color-primary-light: var(--green-50);
-  --color-primary-foreground: hsl(210 18% 12%); /* dark text on green, light mode */
+  --color-primary-foreground: hsl(210 18% 12%);
+  --color-primary-text: var(--green-700);       /* link/inline text on page backgrounds */
 
   /* ===== SEMANTIC: SECONDARY ===== */
   --color-secondary: var(--purple-500);
@@ -86,8 +87,8 @@
   /* ===== SEMANTIC: TEXT ===== */
   --color-text: var(--gray-800);
   --color-text-secondary: var(--gray-600);
-  --color-text-muted: var(--gray-500);
-  --color-text-light: var(--gray-400);
+  --color-text-muted: var(--gray-600);
+  --color-text-light: var(--gray-500);   /* decorative/placeholder — not for body text */
 
   /* ===== SEMANTIC: BORDERS ===== */
   --color-border: var(--gray-200);
@@ -102,4 +103,16 @@
   --color-error-light: var(--error-light);
   --color-info: var(--info);
   --color-info-light: var(--info-light);
+
+  /* Accessible text on light surfaces — darker shades for outline badges/notices */
+  --color-success-text: hsl(119 50% 28%);
+  --color-warning-text: hsl(32  90% 30%);
+  --color-error-text:   hsl(0   70% 42%);
+  --color-info-text:    hsl(210 80% 38%);
+
+  /* Foreground on solid feedback backgrounds */
+  --color-success-foreground: hsl(119 50% 15%);
+  --color-warning-foreground: hsl(45  60% 15%);
+  --color-error-foreground:   hsl(0   60% 20%);
+  --color-info-foreground:    hsl(210 50% 15%);
 }

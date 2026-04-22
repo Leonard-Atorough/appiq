@@ -33,6 +33,28 @@ export const badgeVariants = cva(
       },
     },
     compoundVariants: [
+      /* Solid variant foregrounds */
+      {
+        outline: false,
+        variant: "success",
+        className: "text-(--color-success-foreground)",
+      },
+      {
+        outline: false,
+        variant: "warning",
+        className: "text-(--color-warning-foreground)",
+      },
+      {
+        outline: false,
+        variant: "error",
+        className: "text-(--color-error-foreground)",
+      },
+      {
+        outline: false,
+        variant: "info",
+        className: "text-(--color-info-foreground)",
+      },
+      /* Outline variant foregrounds */
       {
         outline: true,
         variant: "default",
@@ -41,22 +63,22 @@ export const badgeVariants = cva(
       {
         outline: true,
         variant: "success",
-        className: "border-success text-success hover:bg-success/5",
+        className: "border-success text-success-text hover:bg-success/5",
       },
       {
         outline: true,
         variant: "error",
-        className: "border-error text-error hover:bg-error/5",
+        className: "border-error text-error-text hover:bg-error/5",
       },
       {
         outline: true,
         variant: "warning",
-        className: "border-warning text-warning hover:bg-warning/5",
+        className: "border-warning text-warning-text hover:bg-warning/5",
       },
       {
         outline: true,
         variant: "info",
-        className: "border-info text-info hover:bg-info/5",
+        className: "border-info text-info-text hover:bg-info/5",
       },
     ],
     defaultVariants: {

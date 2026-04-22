@@ -16,7 +16,7 @@ export function EmptyState({
     sm: "md",
     md: "lg",
     lg: "xl",
-  }
+  };
 
   const iconSize = iconSizeMap[size || "md"] satisfies IconSize;
   const resolvedIcon = icon ?? <Icon name="briefcase" size={iconSize} aria-hidden={true} />;

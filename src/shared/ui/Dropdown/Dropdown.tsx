@@ -24,7 +24,7 @@ function getDropdownTrigger(trigger: DropdownProps["trigger"]) {
 export function Dropdown({
   items,
   trigger = "kebab",
-  align = "end",
+  align = "start",
   triggerLabel = "Open menu",
   disabled,
   className,
