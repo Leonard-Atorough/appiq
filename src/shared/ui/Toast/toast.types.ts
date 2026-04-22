@@ -2,13 +2,19 @@ import type { VariantProps } from "class-variance-authority";
 import type { toastVariants } from "./toast.variants";
 
 export interface ToastProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof toastVariants> {
+  /** Main notification message. */
   title: string;
+  /** Optional supporting detail shown below the title. */
   description?: string;
+  /** Inline CTA button rendered in the toast body. */
   action?: {
     label: string;
     onClick: () => void;
   };
-  duration?: number; // Duration in milliseconds before auto-dismissal (0 for no auto-dismissal)
+  /** Milliseconds before auto-dismiss. Set to `0` to disable auto-dismiss. */
+  duration?: number;
+  /** Overrides the default variant icon. */
   icon?: React.ReactNode;
-  onDismiss?: () => void; // Callback when the toast is dismissed (either by timeout or user action)
+  /** Fired when dismissed, either by timeout or user action. */
+  onDismiss?: () => void;
 }

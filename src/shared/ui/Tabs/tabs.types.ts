@@ -3,44 +3,28 @@ import type { VariantProps } from "class-variance-authority";
 import type { tabTriggerVariants } from "./tabs.variants";
 
 export interface TabItem {
+  /** Unique identifier used to track the active tab. */
   id: string;
+  /** Content rendered inside the tab trigger button. */
   label: React.ReactNode;
+  /** Panel content shown when this tab is active. */
   content?: React.ReactNode;
   disabled?: boolean;
 }
 
 export interface TabsProps extends VariantProps<typeof tabTriggerVariants> {
-  /**
-   * An array of tab items to be rendered. Each item should have a unique `id`, a `label` for the tab trigger, optional `content` to be displayed when the tab is active, and an optional `disabled` flag to indicate if the tab is interactive.
-   */
+  /** Tab definitions. Each item requires a unique `id` and a `label`. */
   tabs: TabItem[];
-  /**
-   * Controlled active tab id. If provided, the Tabs component will be controlled and will not manage its own state. The parent component is responsible for updating this value in response to user interactions.
-   */
+  /** Controlled active tab id. Pair with `onChange` to manage state externally. */
   activeTab?: string;
-
-  /**
-   * Default active tab id for uncontrolled mode. This sets the initial active tab when the component is first rendered. Ignored if `activeTab` prop is provided (controlled mode).
-   */
+  /** Initial active tab id for uncontrolled mode. Ignored when `activeTab` is provided. */
   defaultTab?: string;
-
-  /**
-   * Callback fired when the active tab changes. Receives the id of the newly active tab as an argument.
-   */
+  /** Fired when the active tab changes. Receives the new tab's `id`. */
   onChange?: (id: string) => void;
-
-  /**
-   * If true, tabs will stretch to fill the full width of their container, and each tab will have equal width. Otherwise, tabs will only take up as much space as needed by their content.
-   */
+  /** Stretches tabs to fill the container width with equal sizing. */
   fullWidth?: boolean;
-
-  /**
-   * The orientation of the tabs, which can be either "horizontal" (the default) or "vertical". This determines the layout of the tab triggers and panels.
-   */
+  /** Layout direction of the tab triggers. Defaults to `"horizontal"`. */
   orientation?: "horizontal" | "vertical";
-
-  /**
-   * Additional class name to apply to the root wrapper of the Tabs component, allowing for custom styling and overrides.
-   */
+  /** Extra classes on the root wrapper element. */
   className?: string;
 }
