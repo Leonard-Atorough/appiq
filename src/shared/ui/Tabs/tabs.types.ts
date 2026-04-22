@@ -35,7 +35,7 @@ export interface TabsProps extends VariantProps<typeof tabTriggerVariants> {
   fullWidth?: boolean;
 
   /**
-   * The orientation of the tabs, which can be either "horizontal" (the default) or "vertical". This determines the layout of the tab triggers and panels. In horizontal orientation, tabs are arranged in a row, while in vertical orientation, they are arranged in a column.
+   * The orientation of the tabs, which can be either "horizontal" (the default) or "vertical". This determines the layout of the tab triggers and panels.
    */
   orientation?: "horizontal" | "vertical";
 

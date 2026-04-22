@@ -16,6 +16,8 @@ export type IconName =
   | "info"
   // UI utility icons
   | "bell"
+  | "check"
+  | "minus"
   | "x"
   | "briefcase"
   | string; // Allow string for custom icons not in the registry

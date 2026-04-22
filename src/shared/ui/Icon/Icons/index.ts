@@ -15,6 +15,8 @@ import { InfoIcon } from "./status/InfoIcon";
 
 // UI icons
 import { BellIcon } from "./ui/BellIcon";
+import { CheckIcon } from "./ui/CheckIcon";
+import { MinusIcon } from "./ui/MinusIcon";
 import { XIcon } from "./ui/XIcon";
 import { BriefcaseIcon } from "./ui/BriefcaseIcon";
 
@@ -38,6 +40,8 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
 
   // UI
   bell: BellIcon,
+  check: CheckIcon,
+  minus: MinusIcon,
   x: XIcon,
   briefcase: BriefcaseIcon,
 };
