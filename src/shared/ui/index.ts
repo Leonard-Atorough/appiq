@@ -22,3 +22,4 @@ export {
   type PopoverAlign,
 } from "./Popover";
 export { Toast, type ToastProps } from "./Toast";
+export { Tabs, type TabsProps, type TabItem } from "./Tabs";
