@@ -14,7 +14,6 @@ export const Label: React.FC<LabelProps> = React.forwardRef<HTMLLabelElement, La
         {...props}
       >
         {children}
-        {required && <span className="text-error">*</span>}
       </label>
     );
   },
