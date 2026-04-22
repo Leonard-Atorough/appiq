@@ -34,7 +34,8 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         aria-labelledby={header ? headerId : undefined}
-        aria-disabled={disabled || undefined}
+        aria-disabled={disabled || loading || undefined}
+        aria-busy={loading || undefined}
         data-selected={selected || undefined}
         tabIndex={interactive !== false && !disabled ? 0 : undefined}
         className={cn(
@@ -47,7 +48,12 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         role={interactive !== false && onClick ? "button" : "group"}
         draggable={draggable ?? !disabled}
         onKeyDown={(e) => {
-          if (interactive !== false && !disabled && (e.key === "Enter" || e.key === " ")) {
+          if (
+            interactive !== false &&
+            !disabled &&
+            !loading &&
+            (e.key === "Enter" || e.key === " ")
+          ) {
             e.preventDefault();
             onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
           }
@@ -56,7 +62,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         onDragEnd={onDragEnd}
         onDragOver={onDragOver}
         onDrop={onDrop}
-        onClick={onClick}
+        onClick={loading ? undefined : onClick}
         {...props}
       >
         {thumbnail && (
@@ -64,7 +70,8 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             <img src={thumbnail} alt={thumbnailAlt ?? ""} className="w-full h-auto rounded-t-lg" />
           </div>
         )}
-        <div>
+        {/* Keep children in DOM during loading so layout anchors are preserved */}
+        <div className={loading ? "invisible" : undefined}>
           {header && (
             <div id={headerId} className="mb-sm text-lg font-semibold">
               {header}
@@ -73,6 +80,11 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           <div>{children}</div>
           {footer && <div className="mt-sm text-sm text-muted">{footer}</div>}
         </div>
+        {loading && (
+          <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
+            <span className="animate-spin h-6 w-6 border-2 border-current border-t-transparent rounded-full" />
+          </span>
+        )}
       </div>
     );
   },

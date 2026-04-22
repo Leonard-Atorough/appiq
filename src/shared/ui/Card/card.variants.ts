@@ -28,7 +28,7 @@ export const cardVariants = cva(
         false: "cursor-default",
       },
       status: {
-        none: "",
+        none: "border-l-4 border-l-(--color-base) bg-surface",
         success: "border-l-4 border-l-success bg-success-light",
         warning: "border-l-4 border-l-warning bg-warning-light",
         error: "border-l-4 border-l-error bg-error-light",
