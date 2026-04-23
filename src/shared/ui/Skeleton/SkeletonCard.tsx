@@ -46,7 +46,7 @@ export const SkeletonCard = React.forwardRef<HTMLDivElement, SkeletonCardProps>(
       <div
         ref={ref}
         className={cn(
-          "space-y-3 rounded-lg border border-(--color-border) bg-(--color-surface) p-4",
+          "space-y-3 rounded-lg border border-(--color-border) bg-(--color-surface) p-4 shadow-sm",
           className,
         )}
         {...props}

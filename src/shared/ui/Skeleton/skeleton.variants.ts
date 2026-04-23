@@ -5,6 +5,18 @@ import { cva } from "class-variance-authority";
  *
  * Does NOT include animate-shimmer — that's applied conditionally based on the animated prop.
  * Applies semantic gray token for background and rounded based on variant.
+ *
+ * Size variants use intentionally varied proportions for realistic placeholder content:
+ * - Heights (h-*) scale with semantic sizes (xs→xl) for visual hierarchy
+ * - Widths (w-*) are varied to simulate natural content proportions
+ *   E.g., md size = "h-6 w-24" creates a 16px×96px rectangle (6:1 ratio for typical text line)
+ *
+ * Width breakdown:
+ * - xs: 12 (48px) — tiny labels, badges
+ * - sm: 16 (64px) — small text snippets
+ * - md: 24 (96px) — normal text lines (recommended default)
+ * - lg: 32 (128px) — larger headings
+ * - xl: 40 (160px) — hero/prominent text
  */
 export const skeletonVariants = cva(
   "bg-(--color-skeleton)",
@@ -33,6 +45,8 @@ export const skeletonVariants = cva(
 
 /**
  * Text skeleton variants
+ *
+ * Heights scale with text size tokens for semantic sizing.
  */
 export const textSkeletonVariants = cva(
   "bg-(--color-skeleton) rounded-md",

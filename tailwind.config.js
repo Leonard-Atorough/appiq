@@ -43,6 +43,7 @@ export default {
         secondary: "var(--color-secondary-bg)",
         surface: "var(--color-surface)",
         muted: "var(--color-muted-bg)",
+        skeleton: "var(--color-skeleton)",
       },
       textColor: {
         base: "var(--color-text)",
