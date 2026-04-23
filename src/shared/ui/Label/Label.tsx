@@ -15,7 +15,7 @@ import type { LabelProps } from "./label.types";
  * @example
  * <Label htmlFor="email" required>Email address</Label>
  */
-export const Label: React.FC<LabelProps> = React.forwardRef<HTMLLabelElement, LabelProps>(
+export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ className, children, htmlFor, required, ...props }, ref) => {
     return (
       <label
