@@ -57,14 +57,14 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
           {description && <div className="text-sm text-muted">{description}</div>}
         </div>
         {action && (
-          <div className="ml-md flex-shrink-0">
+          <div className="ml-md shrink-0">
             <Button variant="outline" size="sm" onClick={action.onClick}>
               {action.label}
             </Button>
           </div>
         )}
         {onDismiss && (
-          <div className="ml-md flex-shrink-0">
+          <div className="ml-md shrink-0">
             <Button
               variant="ghost"
               size="sm"
@@ -79,7 +79,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
         {showTimerBar && (
           <span
             className={cn(
-              "absolute bottom-0 left-0 h-[3px] w-full origin-right animate-timer-drain",
+              "absolute bottom-0 left-0 h-0.75 w-full origin-right animate-timer-drain",
               timerBarClass[variant ?? "default"],
             )}
             style={{ "--timer-duration": `${duration}ms` } as React.CSSProperties}

@@ -27,4 +27,5 @@ export {
 } from "./Popover";
 export { Textarea, type TextareaProps } from "./Textarea";
 export { Toast, type ToastProps } from "./Toast";
+export { Tooltip, type TooltipProps, type TooltipColor } from "./Tooltip";
 export { Tabs, type TabsProps, type TabItem } from "./Tabs";
