@@ -25,6 +25,25 @@ export {
   type PopoverSide,
   type PopoverAlign,
 } from "./Popover";
+export {
+  Skeleton,
+  SkeletonAvatar,
+  SkeletonCard,
+  SkeletonField,
+  SkeletonIcon,
+  SkeletonImage,
+  SkeletonTableRow,
+  SkeletonText,
+  type BaseSkeletonProps,
+  type SkeletonProps,
+  type SkeletonTextProps,
+  type SkeletonAvatarProps,
+  type SkeletonImageProps,
+  type SkeletonIconProps,
+  type SkeletonCardProps,
+  type SkeletonTableRowProps,
+  type SkeletonFieldProps,
+} from "./Skeleton";
 export { Textarea, type TextareaProps } from "./Textarea";
 export { Toast, type ToastProps } from "./Toast";
 export { Tooltip, type TooltipProps, type TooltipColor } from "./Tooltip";

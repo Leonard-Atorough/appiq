@@ -46,6 +46,9 @@
   --color-border: var(--gray-700);
   --color-border-muted: var(--gray-800);
 
+  /* ===== SKELETON & PLACEHOLDERS ===== */
+  --color-skeleton: var(--gray-700);
+
   /* ===== FEEDBACK ===== */
   --color-success: var(--green-400);
   --color-success-light: var(--green-900);

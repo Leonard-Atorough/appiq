@@ -1,0 +1,18 @@
+/*
+ * Animation Tokens
+ *
+ * Reusable keyframe animations for common patterns across the design system.
+ * All animations respect the `prefers-reduced-motion` media query for accessibility.
+ *
+ * Usage:
+ *   - Pulse: Tailwind's built-in `animate-pulse` for skeleton placeholders
+ *   - Reduced motion: Automatically disabled via CSS media query for ALL animations
+ */
+
+/* Reduced motion: disable all animations (Tailwind's built-in + custom) */
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
+

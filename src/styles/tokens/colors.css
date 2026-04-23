@@ -94,6 +94,9 @@
   --color-border: var(--gray-200);
   --color-border-muted: var(--gray-100);
 
+  /* ===== SEMANTIC: SKELETON & PLACEHOLDERS ===== */
+  --color-skeleton: var(--gray-200);
+
   /* ===== SEMANTIC: FEEDBACK ===== */
   --color-success: var(--success);
   --color-success-light: var(--success-light);
