@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ApplicationsTableView from "./ApplicationsTableView";
-import ApplicationsKanbanView from "./ApplicationsKanbanView";
+import { ApplicationsTableView } from "./ApplicationsTableView";
+import { ApplicationsKanbanView } from "./ApplicationsKanbanView";
 
 export default function ApplicationsPage() {
   const [selectedView, setSelectedView] = useState<"table" | "kanban">("table");
