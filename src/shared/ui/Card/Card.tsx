@@ -3,6 +3,20 @@ import type { CardProps } from "./card.types";
 import { cn } from "@/shared/lib/cn";
 import { cardVariants } from "./card.variants";
 
+/**
+ * Card
+ *
+ * A surface container for grouped content with optional header, footer, and thumbnail.
+ * When `onClick` is provided the card adopts `role="button"` and activates on
+ * Enter/Space for full keyboard support; otherwise it renders as `role="group"`.
+ * The `loading` state masks content while preserving layout dimensions.
+ * Supports drag-and-drop lifecycle events and a `selected` ring indicator.
+ *
+ * @example
+ * <Card header="Software Engineer" onClick={() => openDetail(id)}>
+ *   <p>Acme Corp — Applied 3 days ago</p>
+ * </Card>
+ */
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
     {

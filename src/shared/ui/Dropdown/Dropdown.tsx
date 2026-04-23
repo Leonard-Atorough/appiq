@@ -5,6 +5,27 @@ import { dropdownItemVariants, dropdownMenuVariants } from "./dropdown.variants"
 import type { DropdownProps } from "./dropdown.types";
 import { Icon } from "../Icon";
 
+/**
+ * Dropdown
+ *
+ * A context menu rendered via a React portal so the panel is never clipped
+ * by `overflow: hidden` ancestors (e.g. inside table rows).
+ * Supports preset trigger icons (kebab, meatball, bento, doner, hamburger)
+ * or a custom trigger element. The menu position is calculated from the
+ * trigger's `getBoundingClientRect()` at open time.
+ *
+ * Keyboard: ArrowDown/Up move focus, Home/End jump to first/last item,
+ * Escape closes the menu and returns focus to the trigger.
+ *
+ * @example
+ * <Dropdown
+ *   trigger="kebab"
+ *   items={[
+ *     { label: "Edit", onClick: () => handleEdit(id) },
+ *     { label: "Delete", onClick: () => handleDelete(id), intent: "danger" },
+ *   ]}
+ * />
+ */
 function getDropdownTrigger(trigger: DropdownProps["trigger"]) {
   switch (trigger) {
     case "kebab":

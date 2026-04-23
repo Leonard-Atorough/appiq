@@ -4,12 +4,18 @@ import type { BadgeProps } from "./badge.types";
 import React from "react";
 
 /**
- * Badge component.
+ * Badge
  *
+ * A compact label for status, category, or metadata display.
+ * Automatically adapts its root element based on provided props:
  * - Static label: renders as `<span>`
- * - Clickable (onClick only): renders as `<button>`
+ * - Clickable (`onClick` only): renders as `<button>`
  * - Dismissable or with actions: renders as `<span>` container holding
  *   individual `<button>` elements — avoids invalid nested-button HTML.
+ *
+ * @example
+ * <Badge variant="success">Applied</Badge>
+ * <Badge variant="warning" dismissable onDismiss={() => remove(id)}>Pending</Badge>
  */
 export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
   (

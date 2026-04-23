@@ -4,11 +4,16 @@ import type { ButtonProps } from "./button.types";
 import React from "react";
 
 /**
- * A versatile Button component that supports multiple variants, sizes, and states.
- * It can be used for various actions in the application, such as submitting forms,
- * triggering events, or navigating to different pages. The component is designed
- * to be easily customizable through props and can be extended with additional styles or functionality as needed.
+ * Button
  *
+ * General-purpose interactive control supporting multiple variants, sizes, and states.
+ * Defaults to `type="button"` to prevent accidental form submission.
+ * Renders a visual loading spinner when `loading` is true while keeping the element
+ * accessible and non-interactive.
+ *
+ * @example
+ * <Button variant="primary" onClick={handleSave}>Save</Button>
+ * <Button variant="ghost" loading>Saving...</Button>
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, size, full, loading, className, disabled, onClick, ...props }, ref) => {

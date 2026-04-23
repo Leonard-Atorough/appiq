@@ -4,6 +4,18 @@ import { textareaVariants } from "./textarea.variants";
 import type { TextareaProps } from "./textarea.types";
 import { Field } from "@/shared/ui/Field";
 
+/**
+ * Textarea
+ *
+ * A multi-line text input with integrated `Field` wrapper for label,
+ * helper text, success, and error messaging. Supports auto-growing height
+ * (capped by `minRows`), configurable resize handles, and an optional
+ * character count display. Manages `aria-invalid` and `aria-describedby`
+ * automatically. All standard `<textarea>` attributes are forwarded.
+ *
+ * @example
+ * <Textarea label="Cover letter" autoGrow minRows={4} showCharacterCount />
+ */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
@@ -117,7 +129,13 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     if (label || error || helperText || success) {
       return (
-        <Field id={resolvedId} label={label} error={error} helperText={helperText} success={success}>
+        <Field
+          id={resolvedId}
+          label={label}
+          error={error}
+          helperText={helperText}
+          success={success}
+        >
           {textareaEl}
         </Field>
       );

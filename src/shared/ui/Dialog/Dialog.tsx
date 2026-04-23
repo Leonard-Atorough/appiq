@@ -4,9 +4,18 @@ import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
 
 /**
- * Accessible Dialog component supporting modal and non-modal modes.
- * - `open` and `onOpenChange` control visibility
- * - `modal` determines whether an overlay is rendered and `aria-modal` is set
+ * Dialog
+ *
+ * An accessible overlay dialog supporting modal and non-modal modes.
+ * - `open` and `onOpenChange` control visibility externally
+ * - `modal` renders a backdrop overlay and sets `aria-modal` on the panel
+ * - Focus is moved to `focusRef` (or the first focusable child) on open
+ * - Escape key calls `onOpenChange(false)` to close
+ *
+ * @example
+ * <Dialog open={isOpen} onOpenChange={setIsOpen} title="Confirm deletion">
+ *   <p>This action cannot be undone.</p>
+ * </Dialog>
  */
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
   (

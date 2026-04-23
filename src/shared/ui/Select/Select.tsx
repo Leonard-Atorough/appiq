@@ -4,6 +4,22 @@ import { cn } from "@/shared/lib/cn";
 import { selectVariants } from "./select.variants";
 import { Field } from "@/shared/ui/Field";
 
+/**
+ * Select
+ *
+ * A native `<select>` element with integrated `Field` wrapper for label,
+ * helper text, success, and error messaging. Mirrors the `Input` API for
+ * consistency. Auto-generates a stable `id` when none is provided.
+ * Supports start and end adornments and manages `aria-invalid` /
+ * `aria-describedby` automatically based on `error`, `success`, and
+ * `helperText` props.
+ *
+ * @example
+ * <Select label="Status" error={errors.status}>
+ *   <option value="applied">Applied</option>
+ *   <option value="interview">Interview</option>
+ * </Select>
+ */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
@@ -83,7 +99,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     if (label || error || helperText || success) {
       return (
-        <Field id={resolvedId} label={label} error={error} helperText={helperText} success={success}>
+        <Field
+          id={resolvedId}
+          label={label}
+          error={error}
+          helperText={helperText}
+          success={success}
+        >
           {selectEl}
         </Field>
       );

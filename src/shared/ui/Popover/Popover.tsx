@@ -37,6 +37,22 @@ function getSideOffsetStyle(side: PopoverSide, offset: number): React.CSSPropert
   }[side];
 }
 
+/**
+ * Popover
+ *
+ * A floating panel anchored to a trigger element via absolute CSS positioning.
+ * Unlike Dropdown, Popover is intended for rich content (forms, info panels)
+ * rather than command menus. Supports controlled and uncontrolled open state,
+ * click or hover triggers, and configurable side/alignment.
+ *
+ * In `modal` mode a transparent overlay captures outside clicks and traps focus.
+ * Escape closes the panel when `closeOnEscape` is true.
+ *
+ * @example
+ * <Popover trigger={<Button>Filters</Button>} side="bottom" align="end">
+ *   <FilterForm onSubmit={applyFilters} />
+ * </Popover>
+ */
 export function Popover({
   open: controlledOpen,
   defaultOpen = false,

@@ -3,6 +3,27 @@ import { cn } from "@/shared/lib/cn";
 import type { TabsProps } from "./tabs.types";
 import { tabListVariants, tabTriggerVariants } from "./tabs.variants";
 
+/**
+ * Tabs
+ *
+ * An accessible tabbed navigation following the ARIA tab pattern
+ * (`role="tablist"`, `role="tab"`, `role="tabpanel"`). Supports controlled
+ * and uncontrolled active state, horizontal and vertical orientation,
+ * and multiple visual variants.
+ *
+ * Keyboard navigation: Arrow keys cycle through enabled tabs;
+ * Home/End jump to first/last tab in the list.
+ * Each panel is linked to its trigger via `aria-controls` / `aria-labelledby`.
+ *
+ * @example
+ * <Tabs
+ *   tabs={[
+ *     { id: "active", label: "Active", content: <ActiveList /> },
+ *     { id: "archived", label: "Archived", content: <ArchivedList /> },
+ *   ]}
+ *   defaultTab="active"
+ * />
+ */
 export function Tabs({
   tabs,
   activeTab: controlledActive,

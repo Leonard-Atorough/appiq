@@ -24,10 +24,20 @@ const defaultIcons: Record<string, React.ReactNode> = {
 };
 
 /**
- * Toast component for displaying transient notifications.
- * Supports different variants, auto-dismissal, and optional action buttons.
- * Designed with accessibility in mind, using ARIA roles and live regions.
- * The timer drain bar visually indicates the remaining time before auto-dismissal, with colors matching the toast variant.
+ * Toast
+ *
+ * A transient notification panel with variant-specific icons and colours.
+ * Auto-dismisses after `duration` ms (default 5000) via a `setTimeout` in a
+ * `useEffect`. An animated drain bar provides a visual countdown.
+ * Uses `role="alert"` (assertive) for errors and `role="status"` (polite)
+ * for all other variants for correct screen reader prioritisation.
+ *
+ * @example
+ * <Toast
+ *   variant="success"
+ *   title="Application saved"
+ *   onDismiss={() => removeToast(id)}
+ * />
  */
 export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ title, description, action, variant, duration = 5000, onDismiss, icon, ...props }, ref) => {

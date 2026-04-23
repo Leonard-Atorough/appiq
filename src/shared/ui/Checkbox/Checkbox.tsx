@@ -8,6 +8,23 @@ import {
 } from "./checkbox.variants";
 import { Icon } from "../Icon";
 
+/**
+ * Checkbox
+ *
+ * An accessible checkbox supporting controlled/uncontrolled modes,
+ * indeterminate state, and optional label, description, and error message.
+ * The native `<input>` is visually hidden; a styled sibling `<span>` responds
+ * to `:checked` and `:focus-visible` via Tailwind `peer-*` modifiers.
+ * The `indeterminate` prop is set imperatively via `useEffect` since it is
+ * not a valid HTML attribute.
+ *
+ * @example
+ * <Checkbox
+ *   label="Accept terms"
+ *   checked={accepted}
+ *   onChange={(e) => setAccepted(e.target.checked)}
+ * />
+ */
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {

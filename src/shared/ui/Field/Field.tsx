@@ -4,6 +4,20 @@ import { Label } from "@/shared/ui/Label";
 import { fieldMessageVariants } from "./field.variants";
 import type { FieldProps } from "./field.types";
 
+/**
+ * Field
+ *
+ * A form field wrapper that composes a `Label` with helper, success, and
+ * error messages for any form control passed as `children`.
+ * Generates stable id-based references (`${id}-helper`, `${id}-success`,
+ * `${id}-error`) so inner controls can reference them via `aria-describedby`.
+ * The error message renders with `role="alert"` for immediate announcement.
+ *
+ * @example
+ * <Field id="email" label="Email address" error={errors.email} required>
+ *   <Input id="email" type="email" />
+ * </Field>
+ */
 export const Field: React.FC<FieldProps> = ({
   id,
   label,

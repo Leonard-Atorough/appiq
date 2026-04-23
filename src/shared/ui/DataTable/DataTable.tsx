@@ -161,6 +161,22 @@ function DataTableRow<TData extends Record<string, any>>({
   );
 }
 
+/**
+ * DataTable
+ *
+ * A full-featured data table built on TanStack Table (react-table v8).
+ * Supports column sorting, sticky header, keyboard row navigation,
+ * and per-row action columns (e.g. a Dropdown rendered via `cell` in ColumnDef).
+ * All row data is passed as `data`; column shape is defined with `ColumnDef[]`
+ * from `@tanstack/react-table`.
+ *
+ * @example
+ * const columns: ColumnDef<Job>[] = [
+ *   { accessorKey: "title", header: "Title" },
+ *   { id: "actions", cell: ({ row }) => <Dropdown items={getActions(row.original)} /> },
+ * ];
+ * <DataTable data={jobs} columns={columns} sortable />
+ */
 export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
   (
     {

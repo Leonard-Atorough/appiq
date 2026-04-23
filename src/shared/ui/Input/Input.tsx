@@ -4,6 +4,19 @@ import { cn } from "@/shared/lib/cn";
 import { inputVariants } from "./input.variants";
 import { Field } from "@/shared/ui/Field";
 
+/**
+ * Input
+ *
+ * An accessible text input with integrated `Field` wrapper for label,
+ * helper text, success, and error messaging. Auto-generates a stable `id`
+ * when none is provided. Supports start and end adornments (icons or text).
+ * Manages `aria-invalid` and `aria-describedby` automatically based on
+ * `error`, `success`, and `helperText` props.
+ *
+ * @example
+ * <Input label="Search" placeholder="Search jobs…" startAdornment={<Icon name="search" />} />
+ * <Input label="Email" type="email" error="Invalid address" />
+ */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {

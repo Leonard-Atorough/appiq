@@ -3,6 +3,20 @@ import { emptyStateVariants } from "./emptyState.variants";
 import type { EmptyStateProps } from "./emptyState.types";
 import { Icon, type IconSize } from "../Icon";
 
+/**
+ * EmptyState
+ *
+ * A placeholder displayed when a list or view has no content to show.
+ * Provides a contextual icon, title, description, and an optional call-to-action.
+ * Defaults to a briefcase icon sized proportionally to the `size` prop.
+ * Renders with `role="status"` and `aria-label` for screen reader announcement.
+ *
+ * @example
+ * <EmptyState
+ *   title="No applications yet"
+ *   action={<Button onClick={openForm}>Add Application</Button>}
+ * />
+ */
 export function EmptyState({
   title = "No applications yet",
   description = "Track your job search from application to offer. Add your first application to get started.",
