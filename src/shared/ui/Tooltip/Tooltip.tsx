@@ -21,6 +21,13 @@ import type { TooltipProps } from "./tooltip.types";
 import { tooltipVariants } from "./tooltip.variants";
 
 const SIDE_OFFSET = 8;
+const HIDDEN_STYLES: React.CSSProperties = {
+  position: "fixed",
+  visibility: "hidden",
+  top: 0,
+  left: 0,
+  pointerEvents: "none",
+};
 
 function getPositionStyles(
   side: NonNullable<TooltipProps["side"]>,
@@ -85,8 +92,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const HIDDEN_STYLES: React.CSSProperties = { position: "fixed", visibility: "hidden", top: 0, left: 0 };
   const [positionStyles, setPositionStyles] = useState<React.CSSProperties>(HIDDEN_STYLES);
+
+  // Tracks whether the pointer is over the portal panel — keeps tooltip open while user reads it
+  const panelHoveredRef = useRef(false);
 
   useLayoutEffect(() => {
     if (!isOpen) {
@@ -116,6 +125,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   }, []);
 
   const hide = useCallback(() => {
+    if (panelHoveredRef.current) return;
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = null;
     setIsOpen(false);
@@ -181,6 +191,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
             role="tooltip"
             style={positionStyles}
             className={cn(tooltipVariants({ size, bordered, color }), messageClassName)}
+            onMouseEnter={() => {
+              panelHoveredRef.current = true;
+            }}
+            onMouseLeave={() => {
+              panelHoveredRef.current = false;
+              hide();
+            }}
             {...props}
           >
             {message}
