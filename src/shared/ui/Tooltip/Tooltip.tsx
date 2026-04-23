@@ -46,12 +46,10 @@ function getPositionStyles(
         ? triggerRect.bottom - ch
         : triggerRect.top + triggerRect.height / 2 - ch / 2;
 
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const boundAlignH = Math.min(Math.max(alignH, SIDE_OFFSET), viewportWidth - cw - SIDE_OFFSET);
-    const boundAlignV = Math.min(Math.max(alignV, SIDE_OFFSET), viewportHeight - ch - SIDE_OFFSET);
-
-
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const boundAlignH = Math.min(Math.max(alignH, SIDE_OFFSET), viewportWidth - cw - SIDE_OFFSET);
+  const boundAlignV = Math.min(Math.max(alignV, SIDE_OFFSET), viewportHeight - ch - SIDE_OFFSET);
 
   switch (side) {
     case "bottom":
@@ -68,7 +66,7 @@ function getPositionStyles(
 export const Tooltip: React.FC<TooltipProps> = ({
   message,
   children,
-  side = "top",
+  side = "bottom",
   align = "center",
   delay = 300,
   disabled = false,
