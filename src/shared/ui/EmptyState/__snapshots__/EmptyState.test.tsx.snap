@@ -1,0 +1,68 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EmptyState > matches snapshot with all props 1`] = `
+<div
+  aria-label="No applications yet"
+  class="flex flex-col items-center justify-center text-center rounded-lg border border-dashed border-muted bg-surface gap-md p-2xl"
+  role="status"
+>
+  <span
+    aria-hidden="true"
+    class="flex items-center justify-center w-2xl h-2xl text-(--color-text)"
+  >
+    <svg
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        height="14"
+        rx="2"
+        width="20"
+        x="2"
+        y="7"
+      />
+      <path
+        d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="12"
+        y2="16"
+      />
+      <line
+        x1="10"
+        x2="14"
+        y1="14"
+        y2="14"
+      />
+    </svg>
+  </span>
+  <div
+    class="flex flex-col gap-xs w-full"
+  >
+    <h3
+      class="text-base font-semibold"
+    >
+      No applications yet
+    </h3>
+    <p
+      class="text-sm text-secondary leading-normal"
+    >
+      Start tracking your job search.
+    </p>
+  </div>
+  <button
+    class="mt-sm inline-flex items-center justify-center gap-xs rounded-md px-md py-sm text-sm font-medium bg-linear-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) active:scale-[0.98]"
+    type="button"
+  >
+    Add Application
+  </button>
+</div>
+`;

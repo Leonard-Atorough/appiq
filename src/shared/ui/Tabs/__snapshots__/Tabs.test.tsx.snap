@@ -1,0 +1,89 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tabs > matches snapshot 1`] = `
+<div>
+  <div
+    class="w-full"
+  >
+    <div
+      aria-orientation="horizontal"
+      class="flex flex-row border-b border-base"
+      role="tablist"
+    >
+      <button
+        aria-controls="_r_c_-panel-tab1"
+        aria-selected="true"
+        class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary) disabled:opacity-50 disabled:cursor-not-allowed border-transparent text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-(--color-primary)"
+        id="_r_c_-tab-tab1"
+        role="tab"
+        tabindex="0"
+        type="button"
+      >
+        Tab 1
+      </button>
+      <button
+        aria-controls="_r_c_-panel-tab2"
+        aria-selected="false"
+        class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary) disabled:opacity-50 disabled:cursor-not-allowed border-transparent text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-(--color-primary)"
+        id="_r_c_-tab-tab2"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tab 2
+      </button>
+      <button
+        aria-controls="_r_c_-panel-tab3"
+        aria-selected="false"
+        class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary) disabled:opacity-50 disabled:cursor-not-allowed border-transparent text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-(--color-primary)"
+        disabled=""
+        id="_r_c_-tab-tab3"
+        role="tab"
+        tabindex="-1"
+        type="button"
+      >
+        Tab 3
+      </button>
+    </div>
+    <div
+      class="mt-md"
+    >
+      <div
+        aria-labelledby="_r_c_-tab-tab1"
+        class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) rounded-sm"
+        id="_r_c_-panel-tab1"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div>
+          Content 1
+        </div>
+      </div>
+      <div
+        aria-labelledby="_r_c_-tab-tab2"
+        class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) rounded-sm"
+        hidden=""
+        id="_r_c_-panel-tab2"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div>
+          Content 2
+        </div>
+      </div>
+      <div
+        aria-labelledby="_r_c_-tab-tab3"
+        class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) rounded-sm"
+        hidden=""
+        id="_r_c_-panel-tab3"
+        role="tabpanel"
+        tabindex="0"
+      >
+        <div>
+          Content 3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
