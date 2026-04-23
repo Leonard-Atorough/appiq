@@ -2,11 +2,23 @@ import { cva } from "class-variance-authority";
 
 export const dropdownMenuVariants = cva(
   [
-    "absolute z-50 mt-xs min-w-[10rem]",
+    "z-50 min-w-[10rem]",
     "bg-surface border border-base rounded-lg shadow-lg",
     "py-xs",
     "focus:outline-none",
   ].join(" "),
+  {
+    variants: {
+      size: {
+        sm: "text-sm",
+        md: "text-base",
+        lg: "text-lg",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
 );
 
 export const dropdownItemVariants = cva(

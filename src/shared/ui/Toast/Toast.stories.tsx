@@ -110,7 +110,8 @@ export const LiveDemo: Story = {
           {toasts.map((t) => (
             <Toast
               key={t.key}
-              {...t}
+              // Spreading all props except `key`
+              {...((({ key, ...rest }) => rest)(t) as ToastProps) }
               duration={4000}
               onDismiss={() => setToasts((prev) => prev.filter((x) => x.key !== t.key))}
             />

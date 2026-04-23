@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@shared/lib/cn";
 import { dropdownItemVariants, dropdownMenuVariants } from "./dropdown.variants";
 import type { DropdownProps } from "./dropdown.types";
@@ -7,15 +8,15 @@ import { Icon } from "../Icon";
 function getDropdownTrigger(trigger: DropdownProps["trigger"]) {
   switch (trigger) {
     case "kebab":
-      return <Icon name="kebab" aria-hidden={true} />;
+      return <Icon name="kebab" size="sm" aria-hidden={true} />;
     case "meatball":
-      return <Icon name="meatball" aria-hidden={true} />;
+      return <Icon name="meatball" size="sm" aria-hidden={true} />;
     case "bento":
-      return <Icon name="bento" aria-hidden={true} />;
+      return <Icon name="bento" size="sm" aria-hidden={true} />;
     case "doner":
-      return <Icon name="doner" aria-hidden={true} />;
+      return <Icon name="doner" size="sm" aria-hidden={true} />;
     case "hamburger":
-      return <Icon name="hamburger" aria-hidden={true} />;
+      return <Icon name="hamburger" size="sm" aria-hidden={true} />;
     default:
       return trigger;
   }
@@ -30,6 +31,7 @@ export function Dropdown({
   className,
 }: DropdownProps) {
   const [open, setOpen] = useState(false);
+  const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
   const menuId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
@@ -84,6 +86,17 @@ export function Dropdown({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, close]);
 
+  // Calculate portal position when menu opens
+  useEffect(() => {
+    if (!open || !triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    setMenuStyle(
+      align === "end"
+        ? { position: "fixed", top: rect.bottom + 4, right: window.innerWidth - rect.right }
+        : { position: "fixed", top: rect.bottom + 4, left: rect.left },
+    );
+  }, [open, align]);
+
   // Move focus to first enabled item when menu opens
   useEffect(() => {
     if (!open) return;
@@ -114,45 +127,48 @@ export function Dropdown({
         {getDropdownTrigger(trigger)}
       </button>
 
-      {open && (
-        <ul
-          ref={menuRef}
-          id={menuId}
-          role="menu"
-          aria-label={triggerLabel}
-          data-testid="dropdown-menu"
-          className={cn(dropdownMenuVariants(), "top-full", align === "end" ? "right-0" : "left-0")}
-        >
-          {items.map((item, index) => (
-            <li key={index} role="none">
-              <button
-                type="button"
-                role="menuitem"
-                disabled={item.disabled}
-                aria-disabled={item.disabled}
-                tabIndex={-1}
-                className={cn(dropdownItemVariants({ variant: item.variant ?? "default" }))}
-                // Prevent blur-before-click so onClick fires reliably
-                onPointerDown={(e) => e.preventDefault()}
-                onClick={() => {
-                  if (!item.disabled) {
-                    item.onClick();
-                    close();
-                    triggerRef.current?.focus();
-                  }
-                }}
-              >
-                {item.icon && (
-                  <span className="inline-flex shrink-0" aria-hidden="true">
-                    {item.icon}
-                  </span>
-                )}
-                <span>{item.label}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {open &&
+        createPortal(
+          <ul
+            ref={menuRef}
+            id={menuId}
+            role="menu"
+            aria-label={triggerLabel}
+            data-testid="dropdown-menu"
+            style={menuStyle}
+            className={cn(dropdownMenuVariants())}
+          >
+            {items.map((item, index) => (
+              <li key={index} role="none">
+                <button
+                  type="button"
+                  role="menuitem"
+                  disabled={item.disabled}
+                  aria-disabled={item.disabled}
+                  tabIndex={-1}
+                  className={cn(dropdownItemVariants({ variant: item.variant ?? "default" }))}
+                  // Prevent blur-before-click so onClick fires reliably
+                  onPointerDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    if (!item.disabled) {
+                      item.onClick();
+                      close();
+                      triggerRef.current?.focus();
+                    }
+                  }}
+                >
+                  {item.icon && (
+                    <span className="inline-flex shrink-0" aria-hidden="true">
+                      {item.icon}
+                    </span>
+                  )}
+                  <span>{item.label}</span>
+                </button>
+              </li>
+            ))}
+          </ul>,
+          document.body,
+        )}
     </div>
   );
 }
