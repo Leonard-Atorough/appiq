@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export const labelVariants = cva("text-sm font-medium text-primary", {
+export const labelVariants = cva("font-medium text-base", {
   variants: {
     required: {
       true: "after:content-['*'] after:ml-0.5 after:text-error",

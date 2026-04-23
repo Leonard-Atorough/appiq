@@ -50,9 +50,8 @@ describe("Label", () => {
       <Label className="custom-class">Test Label</Label>,
     );
     const label = container.querySelector("label");
-    expect(label?.className).toContain("text-sm");
     expect(label?.className).toContain("font-medium");
-    expect(label?.className).toContain("text-primary");
+    expect(label?.className).toContain("text-base");
     expect(label?.className).toContain("custom-class");
   });
 
