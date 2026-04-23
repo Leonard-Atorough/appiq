@@ -9,6 +9,8 @@ export type IconName =
   | "bento"
   | "doner"
   | "hamburger"
+  | "chevron-left"
+  | "chevron-right"
   // Status indicator icons
   | "check-circle"
   | "x-circle"

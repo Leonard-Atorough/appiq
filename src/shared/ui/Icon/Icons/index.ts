@@ -6,6 +6,8 @@ import { MeatballIcon } from "./navigation/MeatballIcon";
 import { BentoIcon } from "./navigation/BentoIcon";
 import { DonerIcon } from "./navigation/DonerIcon";
 import { HamburgerIcon } from "./navigation/HamburgerIcon";
+import { ChevronLeftIcon } from "./navigation/ChevronLeftIcon";
+import { ChevronRightIcon } from "./navigation/ChevronRightIcon";
 
 // Status icons
 import { CheckCircleIcon } from "./status/CheckCircleIcon";
@@ -31,6 +33,8 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   bento: BentoIcon,
   doner: DonerIcon,
   hamburger: HamburgerIcon,
+  "chevron-left": ChevronLeftIcon,
+  "chevron-right": ChevronRightIcon,
 
   // Status
   "check-circle": CheckCircleIcon,
