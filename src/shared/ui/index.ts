@@ -45,6 +45,7 @@ export {
   type SkeletonTableRowProps,
   type SkeletonFieldProps,
 } from "./Skeleton";
+export { Sidebar, type SidebarProps } from "./Sidebar";
 export { Textarea, type TextareaProps } from "./Textarea";
 export { Toast, type ToastProps } from "./Toast";
 export { Tooltip, type TooltipProps, type TooltipColor } from "./Tooltip";
