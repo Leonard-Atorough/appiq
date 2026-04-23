@@ -14,7 +14,7 @@
  * </Tooltip>
  */
 
-import React, { useCallback, useEffect, useId, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@shared/lib/cn";
 import type { TooltipProps } from "./tooltip.types";
@@ -85,18 +85,22 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [positionStyles, setPositionStyles] = useState<React.CSSProperties>({});
+  const HIDDEN_STYLES: React.CSSProperties = { position: "fixed", visibility: "hidden", top: 0, left: 0 };
+  const [positionStyles, setPositionStyles] = useState<React.CSSProperties>(HIDDEN_STYLES);
 
-  useEffect(() => {
-    if (!isOpen || !wrapperRef.current || !contentRef.current) return;
-    setPositionStyles(
-      getPositionStyles(
-        side,
-        align,
-        wrapperRef.current.getBoundingClientRect(),
-        contentRef.current,
-      ),
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      setPositionStyles(HIDDEN_STYLES);
+      return;
+    }
+    if (!wrapperRef.current || !contentRef.current) return;
+    const computed = getPositionStyles(
+      side,
+      align,
+      wrapperRef.current.getBoundingClientRect(),
+      contentRef.current,
     );
+    setPositionStyles({ ...computed, visibility: "visible" });
   }, [isOpen, side, align]);
 
   // Clear the pending timer on unmount to prevent state updates on an unmounted component
