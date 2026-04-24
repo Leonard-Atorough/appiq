@@ -7,7 +7,7 @@ import { Icon } from "../Icon";
 
 /** Maps each variant to its accent color for the timer drain bar */
 const timerBarClass: Record<string, string> = {
-  default: "bg-(--color-border)",
+  default: "bg-muted",
   success: "bg-success",
   error: "bg-error",
   warning: "bg-warning",

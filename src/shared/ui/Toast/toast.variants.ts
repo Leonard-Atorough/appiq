@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 export const toastVariants = cva(
   [
     "relative flex items-center justify-between overflow-hidden rounded-md",
-    "bg-surface text-(--color-text)",
+    "bg-surface text-base",
     "shadow-lg hover:shadow-xl focus:shadow-2xl",
     "transition-shadow transition-transform duration-200 ease-out",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",

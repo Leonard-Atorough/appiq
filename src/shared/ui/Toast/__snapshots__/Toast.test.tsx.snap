@@ -1,0 +1,279 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Toast > Snapshot Tests > snapshot: default toast 1`] = `
+<div
+  aria-live="polite"
+  class="relative flex items-center justify-between overflow-hidden rounded-md bg-surface text-base shadow-lg hover:shadow-xl focus:shadow-2xl transition-transform duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 p-md border border-base"
+  role="status"
+>
+  <div
+    class="mr-md"
+  >
+    <span
+      aria-hidden="true"
+      class="flex items-center justify-center w-xl h-xl text-base"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"
+        />
+        <path
+          d="M10.3 21a1.94 1.94 0 0 0 3.4 0"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="flex-1"
+  >
+    <div
+      class="font-semibold"
+    >
+      Test Notification
+    </div>
+  </div>
+  <div
+    class="ml-md shrink-0"
+  >
+    <button
+      aria-label="Dismiss notification"
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-transparent text-(--color-text) hover:bg-muted active:bg-(--color-border-muted) focus-visible:ring-(--color-text) px-sm py-xs text-sm rounded-md ml-sm"
+      type="button"
+    >
+      <span>
+        <span
+          aria-hidden="true"
+          class="flex items-center justify-center w-xl h-xl text-base"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6 6 18"
+            />
+            <path
+              d="m6 6 12 12"
+            />
+          </svg>
+        </span>
+      </span>
+    </button>
+  </div>
+  <span
+    aria-hidden="true"
+    class="absolute bottom-0 left-0 h-0.75 w-full origin-right animate-timer-drain bg-muted"
+    style="--timer-duration: 5000ms;"
+  />
+</div>
+`;
+
+exports[`Toast > Snapshot Tests > snapshot: error toast 1`] = `
+<div
+  aria-live="assertive"
+  class="relative flex items-center justify-between overflow-hidden rounded-md text-base shadow-lg hover:shadow-xl focus:shadow-2xl transition-transform duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 p-md border border-error bg-error-light"
+  role="alert"
+>
+  <div
+    class="mr-md"
+  >
+    <span
+      aria-hidden="true"
+      class="flex items-center justify-center w-xl h-xl text-error"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+        <path
+          d="m15 9-6 6"
+        />
+        <path
+          d="m9 9 6 6"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="flex-1"
+  >
+    <div
+      class="font-semibold"
+    >
+      Error occurred
+    </div>
+    <div
+      class="text-sm text-muted"
+    >
+      Something went wrong
+    </div>
+  </div>
+  <div
+    class="ml-md shrink-0"
+  >
+    <button
+      aria-label="Dismiss notification"
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-transparent text-(--color-text) hover:bg-muted active:bg-(--color-border-muted) focus-visible:ring-(--color-text) px-sm py-xs text-sm rounded-md ml-sm"
+      type="button"
+    >
+      <span>
+        <span
+          aria-hidden="true"
+          class="flex items-center justify-center w-xl h-xl text-base"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6 6 18"
+            />
+            <path
+              d="m6 6 12 12"
+            />
+          </svg>
+        </span>
+      </span>
+    </button>
+  </div>
+  <span
+    aria-hidden="true"
+    class="absolute bottom-0 left-0 h-0.75 w-full origin-right animate-timer-drain bg-error"
+    style="--timer-duration: 5000ms;"
+  />
+</div>
+`;
+
+exports[`Toast > Snapshot Tests > snapshot: toast with all features 1`] = `
+<div
+  aria-live="polite"
+  class="relative flex items-center justify-between overflow-hidden rounded-md text-base shadow-lg hover:shadow-xl focus:shadow-2xl transition-transform duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 p-md border border-success bg-success-light"
+  role="status"
+>
+  <div
+    class="mr-md"
+  >
+    <span
+      aria-hidden="true"
+      class="flex items-center justify-center w-xl h-xl text-success"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+        />
+        <path
+          d="m9 12 2 2 4-4"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="flex-1"
+  >
+    <div
+      class="font-semibold"
+    >
+      Success!
+    </div>
+    <div
+      class="text-sm text-muted"
+    >
+      Operation completed
+    </div>
+  </div>
+  <div
+    class="ml-md shrink-0"
+  >
+    <button
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] border border-base text-(--color-text) bg-transparent hover:bg-muted active:bg-(--color-border-muted) focus-visible:ring-(--color-border) px-sm py-xs text-sm rounded-md"
+      type="button"
+    >
+      <span>
+        Undo
+      </span>
+    </button>
+  </div>
+  <div
+    class="ml-md shrink-0"
+  >
+    <button
+      aria-label="Dismiss notification"
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-transparent text-(--color-text) hover:bg-muted active:bg-(--color-border-muted) focus-visible:ring-(--color-text) px-sm py-xs text-sm rounded-md ml-sm"
+      type="button"
+    >
+      <span>
+        <span
+          aria-hidden="true"
+          class="flex items-center justify-center w-xl h-xl text-base"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6 6 18"
+            />
+            <path
+              d="m6 6 12 12"
+            />
+          </svg>
+        </span>
+      </span>
+    </button>
+  </div>
+  <span
+    aria-hidden="true"
+    class="absolute bottom-0 left-0 h-0.75 w-full origin-right animate-timer-drain bg-success"
+    style="--timer-duration: 5000ms;"
+  />
+</div>
+`;
