@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Navbar > Snapshots > matches snapshot with all slots 1`] = `
+<nav
+  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
+>
+  <div
+    class="flex items-center gap-md flex-shrink-0"
+  >
+    <button>
+      ☰
+    </button>
+    <div
+      class="shrink-0"
+    >
+      AppIQ
+    </div>
+    <div
+      class="flex-1"
+    >
+      <a
+        href="/"
+      >
+        Dashboard
+      </a>
+    </div>
+  </div>
+  <div
+    class="flex items-center gap-md flex-shrink-0 ml-auto"
+  >
+    <button>
+      Profile
+    </button>
+  </div>
+</nav>
+`;
+
+exports[`Navbar > Snapshots > matches snapshot with default props 1`] = `
+<nav
+  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
+>
+  <div
+    class="flex items-center gap-md flex-shrink-0"
+  />
+</nav>
+`;
+
+exports[`Navbar > Snapshots > matches snapshot with size and position variants 1`] = `
+<nav
+  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out sticky top-0 z-40 px-2xl py-lg"
+>
+  <div
+    class="flex items-center gap-md flex-shrink-0"
+  >
+    <div
+      class="shrink-0"
+    >
+      Test
+    </div>
+  </div>
+</nav>
+`;

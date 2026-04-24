@@ -37,7 +37,7 @@ export const Default: Story = {
         <button className="px-md py-sm text-sm border border-border rounded hover:bg-muted">
           Settings
         </button>
-        <button className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
+        <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
           JD
         </button>
       </div>
@@ -68,7 +68,7 @@ export const MobileView: Story = {
     ),
     menu: null, // Hidden on mobile
     menuEnd: (
-      <button className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">
+      <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
         JD
       </button>
     ),
@@ -145,7 +145,7 @@ export const FixedPositioned: Story = {
       <div className="pt-20">
         {Story()}
         <div className="p-lg">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted">
             The navbar is fixed at the top. Scroll to see it stay in place.
           </p>
           <div className="space-y-md mt-lg">

@@ -10,7 +10,7 @@ export const navbarVariants = cva(
   {
     variants: {
       position: {
-        static: "position-static",
+        static: "static",
         sticky: "sticky top-0 z-40",
         fixed: "fixed top-0 left-0 right-0 z-40",
       },
