@@ -1,0 +1,170 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > matches snapshot for default card 1`] = `
+<div
+  aria-labelledby="_r_i_"
+  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
+  draggable="true"
+  role="group"
+  tabindex="0"
+>
+  <div>
+    <div
+      class="mb-sm text-lg font-semibold"
+      id="_r_i_"
+    >
+      Software Engineer
+    </div>
+    <div>
+      Acme Corp — Remote
+    </div>
+    <div
+      class="mt-sm text-sm text-muted"
+    >
+      Applied via LinkedIn
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > matches snapshot for draggable card with dragId 1`] = `
+<div
+  class=""
+  draggable="true"
+>
+  <div
+    aria-labelledby="_r_o_"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
+    draggable="false"
+    role="group"
+    tabindex="0"
+  >
+    <div>
+      <div
+        class="mb-sm text-lg font-semibold"
+        id="_r_o_"
+      >
+        Draggable
+      </div>
+      <div>
+        Content
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > matches snapshot for loading state 1`] = `
+<div
+  aria-busy="true"
+  aria-disabled="true"
+  aria-labelledby="_r_n_"
+  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface cursor-wait opacity-75"
+  draggable="true"
+  role="group"
+  tabindex="0"
+>
+  <div
+    class="opacity-0"
+  >
+    <div
+      class="mb-sm text-lg font-semibold"
+      id="_r_n_"
+    >
+      Loading
+    </div>
+    <div>
+      Content
+    </div>
+  </div>
+  <span
+    aria-hidden="true"
+    class="absolute inset-0 flex items-center justify-center"
+  >
+    <span
+      class="animate-spin h-6 w-6 border-2 border-current border-t-transparent rounded-full"
+    />
+  </span>
+</div>
+`;
+
+exports[`Card > matches snapshot for status variants 1`] = `
+<div>
+  <div
+    aria-labelledby="_r_j_"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-success bg-success-light"
+    draggable="true"
+    role="group"
+    tabindex="0"
+  >
+    <div>
+      <div
+        class="mb-sm text-lg font-semibold"
+        id="_r_j_"
+      >
+        Offer
+      </div>
+      <div>
+        Success
+      </div>
+    </div>
+  </div>
+  <div
+    aria-labelledby="_r_k_"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-warning bg-warning-light"
+    draggable="true"
+    role="group"
+    tabindex="0"
+  >
+    <div>
+      <div
+        class="mb-sm text-lg font-semibold"
+        id="_r_k_"
+      >
+        Awaiting
+      </div>
+      <div>
+        Warning
+      </div>
+    </div>
+  </div>
+  <div
+    aria-labelledby="_r_l_"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-error bg-error-light"
+    draggable="true"
+    role="group"
+    tabindex="0"
+  >
+    <div>
+      <div
+        class="mb-sm text-lg font-semibold"
+        id="_r_l_"
+      >
+        Rejected
+      </div>
+      <div>
+        Error
+      </div>
+    </div>
+  </div>
+  <div
+    aria-labelledby="_r_m_"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-info bg-info-light"
+    draggable="true"
+    role="group"
+    tabindex="0"
+  >
+    <div>
+      <div
+        class="mb-sm text-lg font-semibold"
+        id="_r_m_"
+      >
+        Interview
+      </div>
+      <div>
+        Info
+      </div>
+    </div>
+  </div>
+</div>
+`;

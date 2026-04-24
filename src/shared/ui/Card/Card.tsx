@@ -2,6 +2,7 @@ import React from "react";
 import type { CardProps } from "./card.types";
 import { cn } from "@/shared/lib/cn";
 import { cardVariants } from "./card.variants";
+import { DragItem } from "../DragItem";
 
 /**
  * Card
@@ -29,6 +30,8 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       selected,
       disabled,
       draggable,
+      dragId,
+      dragType,
       size,
       variant,
       interactive,
@@ -43,8 +46,15 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     },
     ref,
   ): React.JSX.Element => {
+    if (import.meta.env.DEV && dragId && !dragType) {
+      console.warn(
+        "[Card] 'dragId' is set but 'dragType' is missing. Set 'dragType' to match your DropTarget's 'accept' prop.",
+      );
+    }
+
     const headerId = React.useId();
-    return (
+
+    const cardElement = (
       <div
         ref={ref}
         aria-labelledby={header ? headerId : undefined}
@@ -60,7 +70,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           className,
         )}
         role={interactive !== false && onClick ? "button" : "group"}
-        draggable={draggable ?? !disabled}
+        draggable={dragId ? false : (draggable ?? !disabled)}
         onKeyDown={(e) => {
           if (
             interactive !== false &&
@@ -72,11 +82,11 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
           }
         }}
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
+        onDragStart={dragId ? undefined : onDragStart}
+        onDragEnd={dragId ? undefined : onDragEnd}
         onDragOver={onDragOver}
         onDrop={onDrop}
-        onClick={loading ? undefined : onClick}
+        onClick={loading || disabled ? undefined : onClick}
         {...props}
       >
         {thumbnail && (
@@ -101,6 +111,16 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         )}
       </div>
     );
+
+    if (dragId) {
+      return (
+        <DragItem id={dragId} type={dragType} disabled={disabled}>
+          {cardElement}
+        </DragItem>
+      );
+    }
+
+    return cardElement;
   },
 );
 

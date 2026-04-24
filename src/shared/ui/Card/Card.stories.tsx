@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Card } from "./Card";
+import { DropTarget } from "../DropTarget";
+import { cn } from "@/shared/lib/cn";
+import { dropTargetVariants } from "../DropTarget/droptarget.variants";
 
 const meta: Meta<typeof Card> = { title: "Shared/Card", component: Card };
 export default meta;
@@ -70,3 +73,51 @@ export const WithThumbnail: Story = { render: () => (
     Acme Corp — San Francisco, CA
   </Card>
 )};
+
+export const Draggable: Story = { render: () => (
+  <div className="flex flex-col gap-md">
+    <p className="text-sm text-muted">Try dragging these cards</p>
+    <Card header="Software Engineer" dragId="app-1" dragType="application-card" footer="Applied via LinkedIn">
+      Acme Corp — Remote
+    </Card>
+    <Card header="Product Designer" dragId="app-2" dragType="application-card" footer="Applied via Company Site">
+      Initech — Hybrid
+    </Card>
+  </div>
+)};
+
+export const DragAndDrop: Story = { render: () => {
+  const [dropped, setDropped] = React.useState<string | null>(null);
+  return (
+    <div className="flex gap-lg">
+      <div className="flex flex-col gap-sm">
+        <p className="text-sm font-semibold">Drag these</p>
+        <Card header="Software Engineer" dragId="app-1" dragType="application-card">
+          Acme Corp
+        </Card>
+        <Card header="Product Designer" dragId="app-2" dragType="application-card">
+          Initech
+        </Card>
+      </div>
+      <DropTarget
+        droppableId="demo-zone"
+        accept="application-card"
+        onDrop={(id) => setDropped(id)}
+      >
+        {({ isDragOver, isDragAccepted }) => (
+          <div className={cn(
+            dropTargetVariants({ isActive: isDragOver && isDragAccepted }),
+            "min-h-32 min-w-48 flex items-center justify-center",
+          )}>
+            {dropped
+              ? <p className="text-sm text-secondary">Dropped: <strong>{dropped}</strong></p>
+              : <p className="text-sm text-muted">Drop here</p>
+            }
+          </div>
+        )}
+      </DropTarget>
+    </div>
+  );
+}};
+
+import React from "react";
