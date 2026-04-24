@@ -8,10 +8,8 @@ export interface EmptyStateProps extends VariantProps<typeof emptyStateVariants>
   description?: string;
   /** Illustrative icon displayed above the title. */
   icon?: React.ReactNode;
-  /** Primary CTA button. Provide `label` and `onClick`. */
-  action?: {
-    label: string;
-    onClick: () => void;
-  };
+  /** Primary CTA. Pass action node or use object with label + onClick for convenience. */
+  action?: React.ReactNode | { label: string; onClick: () => void };
+  /** Additional CSS classes to apply to the root element. */
   className?: string;
 }

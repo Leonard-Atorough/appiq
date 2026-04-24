@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { EmptyState } from "./EmptyState";
 import { Icon } from "@shared/ui/Icon";
+import { Button } from "@shared/ui/Button";
 
 const meta: Meta<typeof EmptyState> = { title: "Shared/EmptyState", component: EmptyState };
 export default meta;
@@ -11,17 +12,28 @@ export const Default: Story = {
     <EmptyState
       title="No applications yet"
       description="Start tracking your job search by adding your first application."
-      action={{ label: "Add Application", onClick: () => {} }}
+      action={{ label: "Add Application", onClick: () => alert("Opening form...") }}
     />
   ),
 };
 
-export const WithIcon: Story = {
+export const WithButtonComponent: Story = {
   render: () => (
     <EmptyState
-      icon={<Icon name="briefcase" size="xl" variant="muted" />}
       title="No results found"
       description="Try adjusting your filters or search term."
+      action={<Button onClick={() => alert("Resetting filters...")}>Reset Filters</Button>}
+    />
+  ),
+};
+
+export const WithCustomIcon: Story = {
+  render: () => (
+    <EmptyState
+      icon={<Icon name="briefcase" size="xl" />}
+      title="No applications yet"
+      description="Track your job applications and manage your search."
+      action={{ label: "Add Application", onClick: () => {} }}
     />
   ),
 };
@@ -47,4 +59,18 @@ export const Variants: Story = {
 
 export const TitleOnly: Story = {
   render: () => <EmptyState title="Nothing here" />,
+};
+
+export const CustomButtonVariant: Story = {
+  render: () => (
+    <EmptyState
+      title="No data available"
+      description="Create your first entry to get started."
+      action={
+        <Button variant="outline" onClick={() => alert("Opening dialog...")}>
+          Create Entry
+        </Button>
+      }
+    />
+  ),
 };

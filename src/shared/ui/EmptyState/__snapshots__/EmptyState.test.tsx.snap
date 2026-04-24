@@ -58,11 +58,17 @@ exports[`EmptyState > matches snapshot with all props 1`] = `
       Start tracking your job search.
     </p>
   </div>
-  <button
-    class="mt-sm inline-flex items-center justify-center gap-xs rounded-md px-md py-sm text-sm font-medium bg-linear-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) shadow-sm hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) active:scale-[0.98]"
-    type="button"
+  <div
+    class="mt-sm"
   >
-    Add Application
-  </button>
+    <button
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-gradient-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) hover:from-(--color-primary-hover) hover:to-(--color-primary) active:bg-(--color-primary-active) focus-visible:ring-(--color-primary) px-md py-sm text-base rounded-lg"
+      type="button"
+    >
+      <span>
+        Add Application
+      </span>
+    </button>
+  </div>
 </div>
 `;
