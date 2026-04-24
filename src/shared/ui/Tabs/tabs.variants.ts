@@ -34,7 +34,7 @@ export const tabTriggerVariants = cva(
   [
     "relative inline-flex items-center justify-center whitespace-nowrap font-medium",
     "transition-all duration-200 cursor-pointer select-none",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary)",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
     "disabled:opacity-50 disabled:cursor-not-allowed",
   ].join(" "),
   {
@@ -65,8 +65,8 @@ export const tabTriggerVariants = cva(
         true: "flex-1",
       },
       orientation: {
-        horizontal: "border-b-2 -mb-px aria-selected:border-(--color-primary)",
-        vertical: "border-r-2 -mr-px text-left w-full aria-selected:border-(--color-primary)",
+        horizontal: "border-b-2 -mb-px aria-selected:border-primary",
+        vertical: "border-r-2 -mr-px text-left w-full aria-selected:border-primary",
       },
     },
     compoundVariants: [

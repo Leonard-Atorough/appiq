@@ -137,7 +137,7 @@ export function Tabs({
               aria-labelledby={getTabId(tab.id)}
               tabIndex={0}
               hidden={tab.id !== activeId}
-              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) rounded-sm"
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
             >
               {tab.content}
             </div>
