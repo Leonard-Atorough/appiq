@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Textarea > Snapshot Tests > matches snapshot for default textarea 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_16_"
+  >
+    Test
+  </label>
+  <div
+    class="relative"
+  >
+    <textarea
+      aria-invalid="false"
+      aria-label="Test"
+      class="block w-full font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[2.5rem] bg-base border border-base focus-visible:ring-primary text-base px-md py-sm rounded-lg resize-vertical"
+      id="_r_16_"
+      placeholder="Enter text"
+      rows="2"
+    />
+  </div>
+</div>
+`;
+
+exports[`Textarea > Snapshot Tests > matches snapshot for error state 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_17_"
+  >
+    Test
+  </label>
+  <div
+    class="relative"
+  >
+    <textarea
+      aria-describedby="_r_17_-error"
+      aria-invalid="true"
+      aria-label="Test"
+      class="block w-full font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[2.5rem] bg-base border text-base px-md py-sm rounded-lg border-error focus-visible:ring-error resize-vertical"
+      id="_r_17_"
+      rows="2"
+    />
+  </div>
+  <p
+    class="text-sm mt-sm text-error-text font-medium"
+    id="_r_17_-error"
+    role="alert"
+  >
+    Invalid
+  </p>
+</div>
+`;
+
+exports[`Textarea > Snapshot Tests > matches snapshot with all features 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_18_"
+  >
+    Cover letter
+  </label>
+  <div
+    class="relative"
+  >
+    <textarea
+      aria-describedby="_r_18_-helper"
+      aria-invalid="false"
+      aria-label="Test"
+      class="block w-full font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[2.5rem] bg-base border border-base focus-visible:ring-primary text-base px-md py-sm rounded-lg resize-vertical"
+      id="_r_18_"
+      maxlength="500"
+      placeholder="Write here..."
+      rows="3"
+      style="height: 0px;"
+    />
+    <span
+      aria-live="polite"
+      class="absolute right-sm bottom-sm text-xs text-muted"
+    >
+      0
+       / 500
+    </span>
+  </div>
+  <p
+    class="text-sm mt-sm text-muted"
+    id="_r_18_-helper"
+  >
+    3-5 paragraphs
+  </p>
+</div>
+`;
