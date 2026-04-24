@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Label > matches snapshot with complex children 1`] = `
+<label
+  class="font-medium text-base"
+>
+  Description 
+  <span
+    class="text-xs text-muted"
+  >
+    (optional)
+  </span>
+</label>
+`;
+
+exports[`Label > matches snapshot with default props 1`] = `
+<label
+  class="font-medium text-base"
+>
+  Username
+</label>
+`;
+
+exports[`Label > matches snapshot with htmlFor and required 1`] = `
+<label
+  class="font-medium text-base after:content-['*'] after:ml-xs after:text-error"
+  for="email"
+>
+  Email Address
+</label>
+`;
+
+exports[`Label > matches snapshot with required asterisk 1`] = `
+<label
+  class="font-medium text-base after:content-['*'] after:ml-xs after:text-error"
+>
+  Email Address
+</label>
+`;

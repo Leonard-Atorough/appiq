@@ -55,13 +55,22 @@ describe("Label", () => {
     expect(label?.className).toContain("custom-class");
   });
 
+  it("applies required styling correctly", () => {
+    const { container } = render(
+      <Label required>Required</Label>,
+    );
+    const label = container.querySelector("label");
+    expect(label?.className).toContain("after:ml-xs");
+    expect(label?.className).toContain("after:text-error");
+  });
+
   it("forwards ref to the label element", () => {
     const ref = React.createRef<HTMLLabelElement>();
     render(<Label ref={ref}>Test Label</Label>);
     expect(ref.current).toBeInstanceOf(HTMLLabelElement);
   });
 
-  it("supports complex children", () => {
+  it("supports complex children with JSX", () => {
     render(
       <Label>
         Username <span className="text-error">*</span>
@@ -69,6 +78,18 @@ describe("Label", () => {
     );
     expect(screen.getByText("Username")).toBeInTheDocument();
     expect(screen.getByText("*")).toBeInTheDocument();
+  });
+
+  it("supports multiple text nodes as children", () => {
+    const { container } = render(
+      <Label>
+        First Part <strong>Bold</strong> Last Part
+      </Label>,
+    );
+    const label = container.querySelector("label");
+    expect(label).toHaveTextContent("First Part");
+    expect(label).toHaveTextContent("Bold");
+    expect(label).toHaveTextContent("Last Part");
   });
 
   it("passes through native label attributes", () => {
@@ -79,5 +100,39 @@ describe("Label", () => {
     );
     const label = container.querySelector('[data-testid="label"]');
     expect(label).toHaveAttribute("for", "test-input");
+  });
+
+  it("renders with only spaces as children", () => {
+    const { container } = render(<Label>{" "}</Label>);
+    const label = container.querySelector("label");
+    expect(label).toBeInTheDocument();
+  });
+
+  it("matches snapshot with default props", () => {
+    const { container } = render(<Label>Username</Label>);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("matches snapshot with required asterisk", () => {
+    const { container } = render(<Label required>Email Address</Label>);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("matches snapshot with htmlFor and required", () => {
+    const { container } = render(
+      <Label htmlFor="email" required>
+        Email Address
+      </Label>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("matches snapshot with complex children", () => {
+    const { container } = render(
+      <Label>
+        Description <span className="text-xs text-muted">(optional)</span>
+      </Label>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
