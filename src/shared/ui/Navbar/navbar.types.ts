@@ -6,9 +6,11 @@ export interface NavbarProps
     VariantProps<typeof navbarVariants> {
   /** Left-side content, typically branding or logo. Appears left of menu. */
   title?: React.ReactNode;
-  /** Start slot for navigation links. Consumer controls visibility (e.g., via media query). */
+  /** Start slot for navigation links. Consumer controls visibility (e.g., via media query).
+   *  Pair with menuIcon that has aria-expanded attribute. */
   menu?: React.ReactNode;
-  /** Menu toggle icon. Consumer controls when to render (mobile breakpoint, ResizeObserver, etc.). */
+  /** Menu toggle icon. Consumer controls when to render (mobile breakpoint, ResizeObserver, etc.).
+   *  Must be a button element with aria-label="Toggle navigation menu" and aria-expanded={boolean}. */
   menuIcon?: React.ReactNode;
   /** End slot for actions like profile menu, search, CTAs. Always visible. */
   menuEnd?: React.ReactNode;
