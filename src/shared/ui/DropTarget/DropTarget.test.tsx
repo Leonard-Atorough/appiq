@@ -158,18 +158,42 @@ describe("DropTarget", () => {
 
   // --- Accept validation ---
 
-  it("accepts array of types", () => {
+  it("shows 'over' (not accepted) when dragged type does not match accept", () => {
+    const { container } = renderDropTarget({ accept: "application-card" });
+    fireEvent.dragEnter(container.firstChild as Element, {
+      dataTransfer: makeDataTransfer("unknown-type"),
+    });
+    expect(screen.getByTestId("status").textContent).toBe("over");
+  });
+
+  it("does not call onDrop when dragged type does not match accept", () => {
+    const onDrop = vi.fn();
+    const { container } = renderDropTarget({ accept: "application-card", onDrop });
+    const zone = container.firstChild as Element;
+    const dt = makeDataTransfer("unknown-type");
+
+    fireEvent.dragEnter(zone, { dataTransfer: dt });
+    fireEvent.drop(zone, { dataTransfer: dt });
+
+    expect(onDrop).not.toHaveBeenCalled();
+  });
+
+  it("accepts array of types and uses correct getData key for non-first type", () => {
     const onDrop = vi.fn();
     const { container } = renderDropTarget({
       accept: ["application-card", "task-card"],
       onDrop,
     });
     const zone = container.firstChild as Element;
+    // Simulate a task-card drag (second type in the accept array)
     const dt = makeDataTransfer("task-card");
 
     fireEvent.dragEnter(zone, { dataTransfer: dt });
     fireEvent.drop(zone, { dataTransfer: dt });
 
+    // getData should have been called with "task-card" (the actual drag type),
+    // not "application-card" (accept[0])
+    expect(dt.getData).toHaveBeenCalledWith("task-card");
     expect(onDrop).toHaveBeenCalledWith("dragged-item-id");
   });
 

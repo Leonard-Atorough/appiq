@@ -11,4 +11,8 @@ export const dropTargetVariants = cva("relative rounded border-2 border-dashed t
       false: "",
     },
   },
+  defaultVariants: {
+    isActive: false,
+    disabled: false,
+  },
 });

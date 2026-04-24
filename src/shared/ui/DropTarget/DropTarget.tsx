@@ -72,9 +72,12 @@ export const DropTarget = ({
     setIsDragOver(false);
     setIsDragAccepted(false);
 
-    const draggedId = e.dataTransfer?.getData(
-      accept ? (Array.isArray(accept) ? accept[0] : accept) : "application-card",
-    );
+    // Use the actual type from the drag event (set by DragItem) rather than
+    // assuming accept[0], so array-accept works regardless of item order.
+    const draggedType =
+      e.dataTransfer?.types?.[0] ??
+      (Array.isArray(accept) ? accept[0] : (accept ?? "application-card"));
+    const draggedId = e.dataTransfer?.getData(draggedType);
     if (draggedId && !disabled && isDragAccepted) {
       onDrop(draggedId);
     }
