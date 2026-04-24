@@ -11,6 +11,8 @@ export type IconName =
   | "hamburger"
   | "chevron-left"
   | "chevron-right"
+  | "chevron-down"
+  | "chevron-up"
   // Status indicator icons
   | "check-circle"
   | "x-circle"
