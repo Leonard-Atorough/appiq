@@ -1,0 +1,180 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Select > matches snapshot with adornments 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_18_"
+  >
+    Status
+  </label>
+  <div
+    class="flex items-center relative"
+  >
+    <div
+      class="pointer-events-none absolute left-sm inline-flex items-center text-muted"
+    >
+      <span>
+        ★
+      </span>
+    </div>
+    <select
+      aria-invalid="false"
+      class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary pl-lg pr-lg"
+      id="_r_18_"
+    >
+      <option
+        value=""
+      >
+        Select an option
+      </option>
+      <option
+        value="opt1"
+      >
+        Option 1
+      </option>
+      <option
+        value="opt2"
+      >
+        Option 2
+      </option>
+      <option
+        value="opt3"
+      >
+        Option 3
+      </option>
+    </select>
+    <div
+      class="pointer-events-none absolute right-sm inline-flex items-center text-muted"
+    >
+      <span>
+        ▼
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Select > matches snapshot with default props 1`] = `
+<select
+  aria-invalid="false"
+  class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary"
+  id="_r_15_"
+>
+  <option
+    value=""
+  >
+    Select an option
+  </option>
+  <option
+    value="opt1"
+  >
+    Option 1
+  </option>
+  <option
+    value="opt2"
+  >
+    Option 2
+  </option>
+  <option
+    value="opt3"
+  >
+    Option 3
+  </option>
+</select>
+`;
+
+exports[`Select > matches snapshot with error state 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_17_"
+  >
+    Status
+  </label>
+  <select
+    aria-describedby="_r_17_-error"
+    aria-invalid="true"
+    class="appearance-none flex items-center rounded-md bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm border-2 border-error focus-visible:ring-error"
+    id="_r_17_"
+  >
+    <option
+      value=""
+    >
+      Select an option
+    </option>
+    <option
+      value="opt1"
+    >
+      Option 1
+    </option>
+    <option
+      value="opt2"
+    >
+      Option 2
+    </option>
+    <option
+      value="opt3"
+    >
+      Option 3
+    </option>
+  </select>
+  <p
+    class="text-sm mt-sm text-error-text font-medium"
+    id="_r_17_-error"
+    role="alert"
+  >
+    This field is required
+  </p>
+</div>
+`;
+
+exports[`Select > matches snapshot with label and helper text 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base"
+    for="_r_16_"
+  >
+    Status
+  </label>
+  <select
+    aria-describedby="_r_16_-helper"
+    aria-invalid="false"
+    class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary"
+    id="_r_16_"
+  >
+    <option
+      value=""
+    >
+      Select an option
+    </option>
+    <option
+      value="opt1"
+    >
+      Option 1
+    </option>
+    <option
+      value="opt2"
+    >
+      Option 2
+    </option>
+    <option
+      value="opt3"
+    >
+      Option 3
+    </option>
+  </select>
+  <p
+    class="text-sm mt-sm text-muted"
+    id="_r_16_-helper"
+  >
+    Choose your status
+  </p>
+</div>
+`;

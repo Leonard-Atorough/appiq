@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
 import { Select } from "./Select";
 
 const meta: Meta<typeof Select> = { title: "Shared/Select", component: Select };
@@ -67,12 +68,57 @@ export const WithMessages: Story = {
       >
         {options}
       </Select>
+      <Select label="Application Status" success="Status saved!">
+        {options}
+      </Select>
+    </div>
+  ),
+};
+
+export const WithAdornments: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <Select label="With Start Adornment" startAdornment={<span className="text-sm">📋</span>}>
+        {options}
+      </Select>
+      <Select label="With End Adornment" endAdornment={<span className="text-sm">▼</span>}>
+        {options}
+      </Select>
       <Select
-        label="Application Status"
-        success="Status saved!"
+        label="With Both Adornments"
+        startAdornment={<span className="text-sm">★</span>}
+        endAdornment={<span className="text-sm">▼</span>}
       >
         {options}
       </Select>
     </div>
+  ),
+};
+
+export const Controlled: Story = {
+  render: () => {
+    const [value, setValue] = useState("applied");
+    return (
+      <div className="flex flex-col gap-md">
+        <p className="text-sm text-muted">
+          Selected: <strong>{value || "none"}</strong>
+        </p>
+        <Select
+          label="Controlled Select"
+          value={value}
+          onChange={(e) => setValue(e.currentTarget.value)}
+        >
+          {options}
+        </Select>
+      </div>
+    );
+  },
+};
+
+export const Required: Story = {
+  render: () => (
+    <Select label="Required Field" helperText="This field is required to proceed." required>
+      {options}
+    </Select>
   ),
 };

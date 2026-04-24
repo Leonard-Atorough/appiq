@@ -3,13 +3,14 @@ import { cva } from "class-variance-authority";
 export const selectVariants = cva(
   [
     "appearance-none flex items-center rounded-md",
-    "border border-base bg-surface text-(--color-text)",
+    "border border-base bg-surface text-base",
     "px-md py-sm text-sm",
     "transition-all transition-shadow duration-200 ease-out",
-    "focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-1",
-    "hover:shadow-md hover:border-(--color-primary)",
+    "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
+    "hover:shadow-md hover:border-primary",
     "shadow-sm focus-visible:shadow-md",
     "disabled:cursor-not-allowed disabled:opacity-50",
+    "w-full",
   ].join(" "),
   {
     variants: {
@@ -19,9 +20,9 @@ export const selectVariants = cva(
         lg: "h-12 px-lg text-base",
       },
       state: {
-        default: "focus-visible:ring-(--color-primary)",
-        error: "border-2 border-error focus-visible:ring-(--color-error)",
-        success: "border-2 border-success focus-visible:ring-(--color-success)",
+        default: "focus-visible:ring-primary",
+        error: "border-2 border-error focus-visible:ring-error",
+        success: "border-2 border-success focus-visible:ring-success",
       },
     },
     defaultVariants: {
