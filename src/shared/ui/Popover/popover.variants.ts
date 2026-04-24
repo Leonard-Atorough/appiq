@@ -22,7 +22,7 @@ export const popoverVariants = cva(
 );
 
 export const popoverOverlayVariants = cva(
-  ["fixed inset-0 z-40", "bg-(--color-overlay)", "transition-opacity duration-200 ease-out"].join(
+  ["fixed inset-0 z-40", "bg-black/50", "transition-opacity duration-200 ease-out"].join(
     " ",
   ),
 );
@@ -31,7 +31,7 @@ export const popoverTriggerVariants = cva(
   [
     "inline-flex items-center justify-center",
     "cursor-pointer",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
     "transition-transform duration-200 ease-out",
     "active:scale-[0.98]",
   ].join(" "),

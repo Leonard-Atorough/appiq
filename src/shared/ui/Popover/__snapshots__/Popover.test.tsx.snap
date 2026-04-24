@@ -24,3 +24,84 @@ exports[`Popover > matches snapshot when open 1`] = `
   </div>
 </div>
 `;
+
+exports[`Popover > matches snapshot when open with default props 1`] = `
+<div
+  class="relative inline-block"
+>
+  <button
+    aria-controls="_r_18_"
+    aria-expanded="true"
+    aria-haspopup="true"
+  >
+    Open
+  </button>
+  <div
+    aria-label="Popover"
+    class="z-50 bg-surface border border-base rounded-lg shadow-md transition-all duration-200 ease-out focus:outline-none p-md min-w-[14rem] absolute top-full left-0"
+    id="_r_18_"
+    role="dialog"
+    style="margin-top: 8px;"
+    tabindex="-1"
+  >
+    <p>
+      Panel content
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Popover > matches snapshot with modal mode 1`] = `
+<div
+  class="relative inline-block"
+>
+  <button
+    aria-controls="_r_19_"
+    aria-expanded="true"
+    aria-haspopup="dialog"
+  >
+    Open Modal
+  </button>
+  <div
+    aria-hidden="true"
+    class="fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ease-out"
+  />
+  <div
+    aria-modal="true"
+    class="z-50 bg-surface border border-base rounded-lg shadow-md transition-all duration-200 ease-out focus:outline-none p-md min-w-[14rem] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    id="_r_19_"
+    role="dialog"
+    tabindex="-1"
+  >
+    <p>
+      Modal content
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Popover > matches snapshot with side positioning 1`] = `
+<div
+  class="relative inline-block"
+>
+  <button
+    aria-controls="_r_1a_"
+    aria-expanded="true"
+    aria-haspopup="true"
+  >
+    Open
+  </button>
+  <div
+    aria-label="Popover"
+    class="z-50 bg-surface border border-base rounded-lg shadow-md transition-all duration-200 ease-out focus:outline-none p-lg min-w-[20rem] absolute left-full top-1/2 -translate-y-1/2"
+    id="_r_1a_"
+    role="dialog"
+    style="margin-left: 8px;"
+    tabindex="-1"
+  >
+    <p>
+      Right-aligned content
+    </p>
+  </div>
+</div>
+`;
