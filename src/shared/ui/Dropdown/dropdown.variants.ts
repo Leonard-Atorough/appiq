@@ -26,14 +26,14 @@ export const dropdownItemVariants = cva(
     "flex w-full items-center gap-sm",
     "px-sm py-xs text-sm rounded-md",
     "transition-all duration-100",
-    "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-(--color-primary)",
+    "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
     "disabled:opacity-50 disabled:cursor-not-allowed",
     "cursor-pointer",
   ].join(" "),
   {
     variants: {
       variant: {
-        default: "text-(--color-text) hover:bg-muted",
+        default: "text-base hover:bg-muted",
         danger: "text-error hover:bg-error-light",
       },
     },

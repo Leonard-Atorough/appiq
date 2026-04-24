@@ -138,9 +138,9 @@ export function Dropdown({
         disabled={disabled}
         className={cn(
           "inline-flex items-center justify-center rounded-md p-xs",
-          "text-(--color-text-muted) transition-all duration-150",
-          "hover:bg-muted hover:text-(--color-text)",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-primary) focus-visible:ring-offset-1",
+          "text-muted transition-all duration-150",
+          "hover:bg-muted hover:text-base",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
           "disabled:opacity-50 disabled:cursor-not-allowed",
         )}
         onClick={() => setOpen((prev) => !prev)}
