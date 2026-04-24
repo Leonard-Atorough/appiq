@@ -71,7 +71,7 @@ export const WithDropTarget: Story = {
               <div
                 className={cn(
                   dropTargetVariants({ isActive: isDragOver && isDragAccepted }),
-                  "min-h-[6rem] min-w-[14rem] flex items-center justify-center rounded-lg p-md",
+                  "min-h-24 min-w-56 flex items-center justify-center rounded-lg p-md",
                 )}
               >
                 {droppedId ? (
