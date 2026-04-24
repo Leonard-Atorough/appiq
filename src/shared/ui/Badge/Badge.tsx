@@ -70,7 +70,7 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
           <button
             type="button"
             className="ml-xs flex items-center justify-center rounded-sm hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-(--color-primary)"
-            aria-label="Dismiss"
+            aria-label="Dismiss badge"
             onClick={(e) => {
               e.stopPropagation();
               onDismiss?.();

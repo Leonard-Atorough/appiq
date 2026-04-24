@@ -25,4 +25,5 @@ export interface BadgeProps
   rounded?: boolean;
   /** Inline action buttons inside the badge. Rendered as `<button>` elements inside a `<span>` container to avoid invalid nested-button HTML. */
   actions?: BadgeAction[];
+  
 }
