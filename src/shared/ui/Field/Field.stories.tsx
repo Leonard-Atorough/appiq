@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Field } from "./Field";
+import { Checkbox } from "@shared/ui/Checkbox";
 
 const meta: Meta<typeof Field> = { title: "Shared/Field", component: Field };
 export default meta;
@@ -78,6 +79,82 @@ export const Required: Story = {
         className="flex items-center rounded-md border border-base bg-surface px-md py-sm text-sm w-full"
       />
     </Field>
+  ),
+};
+
+/** Demonstrates proper aria-describedby usage: the input references all message IDs so screen readers announce them. */
+export const WithAriaDescribedBy: Story = {
+  render: () => (
+    <Field
+      id="password"
+      label="Password"
+      required
+      helperText="At least 12 characters, including uppercase and symbol."
+      error={undefined}
+    >
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter password"
+        aria-describedby="password-helper"
+        className="flex items-center rounded-md border border-base bg-surface px-md py-sm text-sm w-full"
+      />
+    </Field>
+  ),
+};
+
+/** Field with a custom control component (not a plain input). */
+export const WithCustomControl: Story = {
+  render: () => (
+    <Field id="agree" label="Agree to terms">
+      <Checkbox id="agree" description="I agree to the Terms of Service and Privacy Policy" />
+    </Field>
+  ),
+};
+
+/** All three message types visible simultaneously: required + helper + error. */
+export const CombinedStates: Story = {
+  render: () => (
+    <Field
+      id="bio"
+      label="Bio"
+      required
+      helperText="Share a bit about yourself"
+      error="Bio must be between 10-500 characters."
+    >
+      <textarea
+        id="bio"
+        rows={4}
+        defaultValue="Hi"
+        aria-invalid
+        aria-describedby="bio-helper bio-error"
+        className="block w-full rounded-md border-2 border-error bg-surface px-md py-sm text-sm resize-vertical"
+      />
+    </Field>
+  ),
+};
+
+/** Field with custom className for spacing/layout control. */
+export const WithCustomClassName: Story = {
+  render: () => (
+    <div className="space-y-lg">
+      <Field id="first" label="First Name" className="mb-sm" helperText="Your first name.">
+        <input
+          id="first"
+          type="text"
+          placeholder="Jane"
+          className="flex items-center rounded-md border border-base bg-surface px-md py-sm text-sm w-full"
+        />
+      </Field>
+      <Field id="last" label="Last Name" className="mb-sm" helperText="Your last name.">
+        <input
+          id="last"
+          type="text"
+          placeholder="Smith"
+          className="flex items-center rounded-md border border-base bg-surface px-md py-sm text-sm w-full"
+        />
+      </Field>
+    </div>
   ),
 };
 

@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Field > renders snapshot with all message types 1`] = `
+<div
+  class="flex flex-col gap-xs"
+>
+  <label
+    class="font-medium text-base after:content-['*'] after:ml-0.5 after:text-error"
+    for="email"
+  >
+    Email
+  </label>
+  <input
+    id="email"
+    type="email"
+  />
+  <p
+    class="text-sm mt-sm text-muted"
+    id="email-helper"
+  >
+    We'll never share it
+  </p>
+  <p
+    class="text-sm mt-sm text-error-text font-medium"
+    id="email-error"
+    role="alert"
+  >
+    Invalid format
+  </p>
+</div>
+`;
+
+exports[`Field > renders snapshot with custom className 1`] = `
+<div
+  class="flex flex-col gap-xs mb-lg"
+>
+  <label
+    class="font-medium text-base"
+    for="name"
+  >
+    Name
+  </label>
+  <input
+    id="name"
+  />
+  <p
+    class="text-sm mt-sm text-muted"
+    id="name-helper"
+  >
+    Your full name
+  </p>
+</div>
+`;

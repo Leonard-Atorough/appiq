@@ -50,6 +50,16 @@ describe("Field", () => {
     expect(helper).not.toHaveAttribute("role", "alert");
   });
 
+  it("renders helperText as ReactNode", () => {
+    render(
+      <Field id="email" helperText={<em>Custom helper</em>}>
+        <input id="email" />
+      </Field>,
+    );
+    const helper = screen.getByText("Custom helper").parentElement;
+    expect(helper).toHaveAttribute("id", "email-helper");
+  });
+
   it("renders success with correct id and no role=alert", () => {
     render(
       <Field id="email" success="Looks good!">
@@ -59,6 +69,16 @@ describe("Field", () => {
     const success = screen.getByText("Looks good!");
     expect(success).toHaveAttribute("id", "email-success");
     expect(success).not.toHaveAttribute("role", "alert");
+  });
+
+  it("renders success as ReactNode", () => {
+    render(
+      <Field id="email" success={<strong>Available</strong>}>
+        <input id="email" />
+      </Field>,
+    );
+    const success = screen.getByText("Available").parentElement;
+    expect(success).toHaveAttribute("id", "email-success");
   });
 
   it("renders error with role=alert and correct id", () => {
@@ -72,7 +92,7 @@ describe("Field", () => {
     expect(error).toHaveTextContent("This field is required");
   });
 
-  it("renders a ReactNode as error", () => {
+  it("renders error as ReactNode", () => {
     render(
       <Field id="email" error={<strong>Required</strong>}>
         <input id="email" />
@@ -109,5 +129,83 @@ describe("Field", () => {
     );
     const label = container.querySelector("label");
     expect(label?.className).toContain("after:content-['*']");
+  });
+
+  it("renders required with error and helper all visible", () => {
+    render(
+      <Field id="bio" label="Bio" required helperText="Minimum 20 characters" error="Too short">
+        <textarea id="bio" />
+      </Field>,
+    );
+    const label = screen.getByText("Bio").closest("label");
+    expect(label?.className).toContain("after:content-['*']");
+    expect(screen.getByText("Minimum 20 characters")).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+  });
+
+  it("applies custom className to wrapper", () => {
+    const { container } = render(
+      <Field id="name" label="Name" className="custom-wrapper-class">
+        <input id="name" />
+      </Field>,
+    );
+    expect(container.firstChild).toHaveClass("custom-wrapper-class");
+    expect(container.firstChild).toHaveClass("flex");
+    expect(container.firstChild).toHaveClass("flex-col");
+  });
+
+  it("has correct styling classes for messages", () => {
+    const { rerender } = render(
+      <Field id="email" helperText="Helper">
+        <input id="email" />
+      </Field>,
+    );
+    let message = screen.getByText("Helper");
+    expect(message).toHaveClass("text-sm");
+    expect(message).toHaveClass("text-muted");
+
+    rerender(
+      <Field id="email" success="Success">
+        <input id="email" />
+      </Field>,
+    );
+    message = screen.getByText("Success");
+    expect(message).toHaveClass("text-sm");
+    expect(message).toHaveClass("text-success-text");
+
+    rerender(
+      <Field id="email" error="Error">
+        <input id="email" />
+      </Field>,
+    );
+    message = screen.getByRole("alert");
+    expect(message).toHaveClass("text-sm");
+    expect(message).toHaveClass("text-error-text");
+    expect(message).toHaveClass("font-medium");
+  });
+
+  it("renders snapshot with all message types", () => {
+    const { container } = render(
+      <Field
+        id="email"
+        label="Email"
+        required
+        helperText="We'll never share it"
+        success="Valid email"
+        error="Invalid format"
+      >
+        <input id="email" type="email" />
+      </Field>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("renders snapshot with custom className", () => {
+    const { container } = render(
+      <Field id="name" label="Name" className="mb-lg" helperText="Your full name">
+        <input id="name" />
+      </Field>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
