@@ -22,19 +22,19 @@ export const Variants: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Text Skeleton</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Text Skeleton</h3>
         <SkeletonText />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Avatar Skeleton</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Avatar Skeleton</h3>
         <SkeletonAvatar />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Image Skeleton</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Image Skeleton</h3>
         <SkeletonImage aspectRatio="video" />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Icon Skeleton</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Icon Skeleton</h3>
         <SkeletonIcon />
       </div>
     </div>
@@ -45,7 +45,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Text Sizes</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Text Sizes</h3>
         <div className="space-y-2">
           <SkeletonText size="xs" width="60px" />
           <SkeletonText size="sm" width="100px" />
@@ -55,7 +55,7 @@ export const Sizes: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Avatar Sizes</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Avatar Sizes</h3>
         <div className="flex gap-4">
           <SkeletonAvatar size="xs" />
           <SkeletonAvatar size="sm" />
@@ -65,7 +65,7 @@ export const Sizes: Story = {
         </div>
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Icon Sizes</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Icon Sizes</h3>
         <div className="flex gap-4">
           <SkeletonIcon size="xs" />
           <SkeletonIcon size="sm" />
@@ -82,11 +82,11 @@ export const AvatarShapes: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Circle (default)</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Circle (default)</h3>
         <SkeletonAvatar shape="circle" size="lg" />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Square</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Square</h3>
         <SkeletonAvatar shape="square" size="lg" />
       </div>
     </div>
@@ -97,19 +97,19 @@ export const ImageAspectRatios: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Square (1:1)</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Square (1:1)</h3>
         <SkeletonImage aspectRatio="square" width="200px" />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Video (16:9)</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Video (16:9)</h3>
         <SkeletonImage aspectRatio="video" width="100%" />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Landscape (4:3)</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Landscape (4:3)</h3>
         <SkeletonImage aspectRatio="landscape" width="100%" />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">Portrait (3:2)</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Portrait (3:2)</h3>
         <SkeletonImage aspectRatio="portrait" width="200px" />
       </div>
     </div>
@@ -120,15 +120,11 @@ export const AnimationToggle: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Animated (default)
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Animated (default)</h3>
         <SkeletonText animated={true} />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Static (animated=false)
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Static (animated=false)</h3>
         <SkeletonText animated={false} />
       </div>
     </div>
@@ -139,27 +135,19 @@ export const ComposedCard: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Basic Card (3 lines)
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Basic Card (3 lines)</h3>
         <SkeletonCard />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Card with Header
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Card with Header</h3>
         <SkeletonCard withHeader />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Card with Header & Footer
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Card with Header & Footer</h3>
         <SkeletonCard withHeader withFooter />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Card with Many Lines
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Card with Many Lines</h3>
         <SkeletonCard lines={5} withHeader />
       </div>
     </div>
@@ -170,20 +158,16 @@ export const ComposedTableRow: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">4 Columns</h3>
+        <h3 className="mb-2 text-sm font-medium text-base">4 Columns</h3>
         <SkeletonTableRow columns={4} />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Variable Column Sizes
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Variable Column Sizes</h3>
         <SkeletonTableRow columns={["sm", "md", "lg", "md"]} />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Multiple Rows
-        </h3>
-        <div className="space-y-2 rounded-lg border border-(--color-border) p-4">
+        <h3 className="mb-2 text-sm font-medium text-base">Multiple Rows</h3>
+        <div className="space-y-2 rounded-lg border border-base p-4">
           <SkeletonTableRow columns={4} />
           <SkeletonTableRow columns={4} />
           <SkeletonTableRow columns={4} />
@@ -197,28 +181,20 @@ export const ComposedField: Story = {
   render: () => (
     <div className="space-y-4">
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Basic Field (label + input)
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Basic Field (label + input)</h3>
         <SkeletonField />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Field with Helper Text
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Field with Helper Text</h3>
         <SkeletonField withHelper />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Input Only
-        </h3>
+        <h3 className="mb-2 text-sm font-medium text-base">Input Only</h3>
         <SkeletonField withLabel={false} />
       </div>
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
-          Multiple Fields
-        </h3>
-        <div className="space-y-4 rounded-lg border border-(--color-border) bg-(--color-surface) p-4">
+        <h3 className="mb-2 text-sm font-medium text-base">Multiple Fields</h3>
+        <div className="space-y-4 rounded-lg border border-base bg-(--color-surface) p-4">
           <SkeletonField />
           <SkeletonField withHelper />
           <SkeletonField />
@@ -231,10 +207,10 @@ export const ComposedField: Story = {
 export const ReducedMotionDemo: Story = {
   render: () => (
     <div className="space-y-6">
-      <div className="rounded-lg border border-(--color-border) bg-(--color-muted-bg) p-4">
+      <div className="rounded-lg border border-base bg-(--color-muted-bg) p-4">
         <p className="mb-2 text-sm text-(--color-text-secondary)">
-          To see the reduced motion effect, enable "Prefers reduced motion" in your
-          browser's accessibility settings or set media query via DevTools.
+          To see the reduced motion effect, enable "Prefers reduced motion" in your browser's
+          accessibility settings or set media query via DevTools.
         </p>
         <p className="text-xs text-(--color-text-muted)">
           In browsers: Preferences → Accessibility → "Reduce motion"
@@ -242,10 +218,10 @@ export const ReducedMotionDemo: Story = {
       </div>
 
       <div>
-        <h3 className="mb-2 text-sm font-medium text-(--color-text)">
+        <h3 className="mb-2 text-sm font-medium text-base">
           Skeletons (respect prefers-reduced-motion)
         </h3>
-        <div className="space-y-3 rounded-lg border border-(--color-border) bg-(--color-surface) p-4">
+        <div className="space-y-3 rounded-lg border border-base bg-(--color-surface) p-4">
           <SkeletonText />
           <SkeletonText width="80%" />
           <div className="flex gap-2">
@@ -271,7 +247,7 @@ export const ConditionalRendering: Story = {
           {isLoading ? "Load Content" : "Show Skeleton"}
         </button>
 
-        <div className="rounded-lg border border-(--color-border) bg-(--color-surface) p-4">
+        <div className="rounded-lg border border-base bg-(--color-surface) p-4">
           {isLoading ? (
             <SkeletonCard withHeader lines={3} />
           ) : (
@@ -281,12 +257,10 @@ export const ConditionalRendering: Story = {
                 alt="Example"
                 className="w-full rounded-md"
               />
-              <h3 className="text-lg font-semibold text-(--color-text)">
-                Real Content Loaded
-              </h3>
+              <h3 className="text-lg font-semibold text-base">Real Content Loaded</h3>
               <p className="text-(--color-text-secondary)">
-                This replaces the skeleton when data is ready. Click the button
-                to toggle between loading and loaded states.
+                This replaces the skeleton when data is ready. Click the button to toggle between
+                loading and loaded states.
               </p>
               <p className="text-(--color-text-muted)">
                 Additional content visible here after loading completes.
