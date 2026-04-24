@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropTarget > matches snapshot in idle state 1`] = `
+<div
+  data-droppable-id="snap-zone"
+>
+  <div>
+    <span
+      data-testid="status"
+    >
+      idle
+    </span>
+    <span
+      data-testid="content"
+    >
+      Drop zone
+    </span>
+  </div>
+</div>
+`;
