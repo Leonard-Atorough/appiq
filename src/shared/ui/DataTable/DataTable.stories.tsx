@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 import { DataTable } from "./DataTable";
 import { Badge } from "@shared/ui/Badge";
 import { Dropdown } from "../Dropdown";
@@ -135,10 +136,127 @@ export const Striped: Story = {
   ),
 };
 
-export const Loading: Story = { render: () => <DataTable data={[]} columns={columns} loading /> };
-
 export const Empty: Story = {
   render: () => (
-    <DataTable data={[]} columns={columns} emptyMessage="No applications match your filters." />
+    <DataTable data={[]} columns={columns} />
   ),
 };
+
+export const Selectable: Story = {
+  render: () => (
+    <DataTable 
+      data={data} 
+      columns={columns} 
+      rowStyle={{ selectable: true, hoverable: true }} 
+    />
+  ),
+};
+
+export const ControlledSelection: Story = {
+  render: () => {
+    const [selectedIds, setSelectedIds] = useState<Record<string, boolean>>({});
+
+    const controlledColumns: ColumnDef<Application>[] = [
+      {
+        id: "checkbox",
+        header: ({ table }) => {
+          const allSelected = table.getIsAllRowsSelected();
+          const someSelected = table.getIsSomeRowsSelected();
+          return (
+            <Checkbox
+              checked={allSelected}
+              indeterminate={someSelected && !allSelected}
+              onChange={(checked) => {
+                const newSelection: Record<string, boolean> = {};
+                if (checked) {
+                  data.forEach((_, idx) => {
+                    newSelection[idx.toString()] = true;
+                  });
+                }
+                setSelectedIds(newSelection);
+              }}
+              aria-label="Select all applications"
+            />
+          );
+        },
+        cell: ({ row }) => (
+          <Checkbox
+            checked={selectedIds[row.id] ?? false}
+            onChange={(checked) => {
+              const newSelection = { ...selectedIds };
+              if (checked) {
+                newSelection[row.id] = true;
+              } else {
+                delete newSelection[row.id];
+              }
+              setSelectedIds(newSelection);
+            }}
+            aria-label={`Select application for ${row.original.position} at ${row.original.company}`}
+          />
+        ),
+      },
+      { accessorKey: "company", header: "Company" },
+      { accessorKey: "position", header: "Position" },
+      {
+        accessorKey: "status",
+        header: "Status",
+        cell: (info) => {
+          const s = info.getValue() as Application["status"];
+          return (
+            <Badge variant={statusVariant[s]} size="sm">
+              {s}
+            </Badge>
+          );
+        },
+      },
+      {
+        accessorKey: "dateApplied",
+        header: "Applied",
+        cell: (i) => new Date(i.getValue() as string).toLocaleDateString(),
+      },
+      { accessorKey: "location", header: "Location" },
+      {
+        id: "actions",
+        header: "Actions",
+        cell: ({ row }) => (
+          <Dropdown
+            triggerLabel="Row Actions"
+            items={[
+              {
+                label: "View Details",
+                onClick: () =>
+                  alert(`Viewing details for ${row.original.position} at ${row.original.company}`),
+              },
+              {
+                label: "Edit",
+                onClick: () =>
+                  alert(`Editing application for ${row.original.position} at ${row.original.company}`),
+              },
+              {
+                label: "Delete",
+                onClick: () =>
+                  alert(`Deleting application for ${row.original.position} at ${row.original.company}`),
+              },
+            ]}
+          />
+        ),
+      },
+    ];
+
+    return (
+      <div className="flex flex-col gap-lg">
+        <div className="text-sm text-secondary">
+          Selected: {Object.keys(selectedIds).length} row(s)
+        </div>
+        <DataTable
+          data={data}
+          columns={controlledColumns}
+          rowStyle={{ selectable: true, hoverable: true }}
+          selectedRowIds={selectedIds}
+          onSelectedRowIdsChange={setSelectedIds}
+        />
+      </div>
+    );
+  },
+};
+

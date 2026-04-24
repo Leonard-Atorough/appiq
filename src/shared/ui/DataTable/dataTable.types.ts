@@ -34,7 +34,7 @@ export interface DataTableKeyboardConfig {
 export interface DataTableProps<TData extends Record<string, any> = any> extends VariantProps<
   typeof dataTableVariants
 > {
-  /** Row data array. Each item maps to one row. */
+  /** Row data array. Each item maps to one row. Parent is responsible for loading/empty states. */
   data: TData[];
   /** TanStack Table column definitions. */
   columns: ColumnDef<TData, any>[];
@@ -56,14 +56,14 @@ export interface DataTableProps<TData extends Record<string, any> = any> extends
   cellClassName?: string;
   /** Extra classes applied to every `<th>`. */
   headerClassName?: string;
-  /** Fired when row selection changes. Requires `rowStyle.selectable`. */
+  /** Controlled row selection state. When provided, makes component controlled. Maps row ID to selection boolean. */
+  selectedRowIds?: Record<string, boolean>;
+  /** Fired when selection state should change (click, space key). Only called in controlled mode. */
+  onSelectedRowIdsChange?: (selectedIds: Record<string, boolean>) => void;
+  /** Fired when row selection changes. Requires `rowStyle.selectable`. Legacy callback; use `onSelectedRowIdsChange` for controlled mode. */
   onRowsSelected?: (rows: Row<TData>[]) => void;
   /** Fired with the focused row index during keyboard navigation. `null` when focus leaves the table. */
   onRowFocus?: (rowIndex: number | null) => void;
-  /** Shows a loading state (skeleton or spinner). */
-  loading?: boolean;
-  /** Content shown when `data` is empty. */
-  emptyMessage?: React.ReactNode;
 }
 
 /** Styled `<td>` subcomponent. */

@@ -6,10 +6,10 @@ import { cva } from "class-variance-authority";
  */
 export const dataTableHeadVariants = cva(
   [
-    "px-md font-semibold text-(--color-text)",
+    "px-md font-semibold text-secondary",
     "bg-muted border-b border-base",
     "text-left text-sm uppercase tracking-wide",
-    "transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
+    "transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
   ].join(" "),
   {
     variants: {
@@ -27,7 +27,7 @@ export const dataTableHeadVariants = cva(
         true: "sticky top-0 z-10",
       },
       sortable: {
-        true: "cursor-pointer hover:bg-(--color-border-muted) hover:shadow-sm select-none transition-shadow duration-200",
+        true: "cursor-pointer hover:bg-muted hover:shadow-sm select-none transition-shadow duration-200",
       },
     },
     defaultVariants: {
@@ -56,13 +56,13 @@ export const dataTableRowVariants = cva(
         true: "[&:nth-child(even)]:bg-muted",
       },
       hoverable: {
-        true: "hover:bg-(--color-border-muted) hover:shadow-sm cursor-pointer transition-shadow duration-200",
+        true: "hover:bg-muted hover:shadow-sm cursor-pointer transition-shadow duration-200",
       },
       selected: {
-        true: "bg-(--color-primary-light) hover:bg-(--color-primary-light)",
+        true: "bg-primary/10 hover:bg-primary/10 ring-2 ring-primary/50 ring-inset",
       },
       focused: {
-        true: "ring-inset ring-2 ring-(--color-primary)",
+        true: "ring-inset ring-2 ring-primary",
       },
     },
     defaultVariants: {
@@ -81,9 +81,9 @@ export const dataTableRowVariants = cva(
  */
 export const dataTableCellVariants = cva(
   [
-    "px-md text-(--color-text) whitespace-nowrap overflow-hidden text-ellipsis",
+    "px-md text-secondary whitespace-nowrap overflow-hidden text-ellipsis",
     "transition-all duration-200",
-    "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-(--color-primary)",
+    "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
   ].join(" "),
   {
     variants: {
