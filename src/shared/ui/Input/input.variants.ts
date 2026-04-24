@@ -9,6 +9,7 @@ export const inputVariants = cva(
     "focus-within:ring-2 focus-within:ring-(--color-primary) focus-within:ring-offset-1",
     "shadow-sm focus-within:shadow-md",
     "disabled:cursor-not-allowed disabled:opacity-50",
+    "w-full",
   ].join(" "),
   {
     variants: {

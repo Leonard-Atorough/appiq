@@ -78,7 +78,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-describedby={describedByIds}
             className={cn(
               inputVariants({ state: effectiveState, size }),
-              "w-full",
               startAdornment ? "pl-lg" : "",
               endAdornment ? "pr-lg" : "",
               className,
