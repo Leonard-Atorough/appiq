@@ -15,23 +15,19 @@ describe("Sidebar", () => {
     expect(screen.getByText("Navigation")).toBeTruthy();
   });
 
-  it("renders as a landmark region with navigation role", () => {
+  it("renders as a landmark region with complementary role (default)", () => {
     render(<Sidebar>Content</Sidebar>);
-    expect(screen.getByRole("navigation")).toBeTruthy();
+    expect(screen.getByRole("complementary")).toBeInTheDocument();
   });
 
   it("renders with custom aria-label", () => {
     render(<Sidebar ariaLabel="Main navigation">Content</Sidebar>);
-    const sidebar = screen.getByRole("navigation");
-    expect(sidebar.getAttribute("aria-label")).toBe("Main navigation");
+    const sidebar = screen.getByRole("complementary");
+    expect(sidebar).toHaveAttribute("aria-label", "Main navigation");
   });
 
   it("renders header when provided", () => {
-    render(
-      <Sidebar header={<div>Logo</div>}>
-        Content
-      </Sidebar>,
-    );
+    render(<Sidebar header={<div>Logo</div>}>Content</Sidebar>);
     expect(screen.getByText("Logo")).toBeTruthy();
   });
 
@@ -58,11 +54,7 @@ describe("Sidebar", () => {
   });
 
   it("respects defaultOpen=false for uncontrolled state", () => {
-    const { container } = render(
-      <Sidebar defaultOpen={false}>
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar defaultOpen={false}>Content</Sidebar>);
     const sidebar = container.querySelector("aside");
     expect(sidebar).toHaveStyle({ width: "4rem" }); // default collapsed width
   });
@@ -164,7 +156,12 @@ describe("Sidebar", () => {
     const user = userEvent.setup();
     const onOpenChange = vi.fn();
     render(
-      <Sidebar collapsible={true} open={true} onOpenChange={onOpenChange} header={<div>Header</div>}>
+      <Sidebar
+        collapsible={true}
+        open={true}
+        onOpenChange={onOpenChange}
+        header={<div>Header</div>}
+      >
         Content
       </Sidebar>,
     );
@@ -236,32 +233,20 @@ describe("Sidebar", () => {
   // --- Positioning ---
 
   it("applies static position by default", () => {
-    const { container } = render(
-      <Sidebar>
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar>Content</Sidebar>);
     const wrapper = container.querySelector("div");
     expect(wrapper).not.toHaveClass("sticky");
     expect(wrapper).not.toHaveClass("fixed");
   });
 
   it("applies sticky positioning when position='sticky'", () => {
-    const { container } = render(
-      <Sidebar position="sticky">
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar position="sticky">Content</Sidebar>);
     const wrapper = container.querySelector("div");
     expect(wrapper).toHaveClass("sticky");
   });
 
   it("applies fixed positioning when position='fixed'", () => {
-    const { container } = render(
-      <Sidebar position="fixed">
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar position="fixed">Content</Sidebar>);
     const wrapper = container.querySelector("div");
     expect(wrapper).toHaveClass("fixed");
   });
@@ -269,21 +254,13 @@ describe("Sidebar", () => {
   // --- Scrolling ---
 
   it("applies scrollable class by default", () => {
-    const { container } = render(
-      <Sidebar>
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar>Content</Sidebar>);
     const content = container.querySelector('[class*="overflow-y-auto"]');
     expect(content).toBeTruthy();
   });
 
   it("disables scrolling when scrollable=false", () => {
-    const { container } = render(
-      <Sidebar scrollable={false}>
-        Content
-      </Sidebar>,
-    );
+    const { container } = render(<Sidebar scrollable={false}>Content</Sidebar>);
     const content = container.querySelector('[class*="overflow-hidden"]');
     expect(content).toBeTruthy();
   });
@@ -325,9 +302,7 @@ describe("Sidebar", () => {
         Content
       </Sidebar>,
     );
-    expect(
-      screen.getByRole("button", { name: /open navigation menu/i }),
-    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: /open navigation menu/i })).toBeTruthy();
   });
 
   // --- Collapse Mode Integration ---
@@ -366,10 +341,9 @@ describe("Sidebar", () => {
 
   // --- Accessibility ---
 
-  it("uses navigation landmark role by default", () => {
-    render(<Sidebar>Content</Sidebar>);
-    const sidebar = screen.getByRole("navigation");
-    expect(sidebar).toBeTruthy();
+  it("uses navigation landmark role when asideRole='navigation'", () => {
+    render(<Sidebar asideRole="navigation">Content</Sidebar>);
+    expect(screen.getByRole("navigation")).toBeInTheDocument();
   });
 
   it("allows custom landmark role via asideRole prop", () => {
