@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useEffect, useId, useRef } from "react";
 import { cn } from "@shared/lib/cn";
 import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
+import { Button } from "@shared/ui/Button";
 
 /**
  * Dialog
@@ -141,7 +142,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       <div className={cn("fixed inset-0 z-50 flex items-center justify-center p-md")}>
         {modal && (
           <div
-            className={cn("fixed inset-0 bg-(--color-text)/0.5", modalOverlayClassName ?? "")}
+            className={cn("fixed inset-0 bg-black/50", modalOverlayClassName ?? "")}
             aria-hidden="true"
             data-testid="dialog-overlay"
             onClick={() => onOpenChange?.(false)}
@@ -177,14 +178,15 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
           {shouldShowClose && (
             <div className="px-md py-sm border-t border-base text-right">
-              <button
+              <Button
                 ref={closeButtonRef}
                 type="button"
-                className="px-md py-sm rounded-md bg-(--color-secondary) text-(--color-secondary-foreground) shadow-sm hover:shadow-md active:shadow-lg transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-secondary) active:scale-[0.98]"
+                variant="outline"
+                size="sm"
                 onClick={() => onOpenChange?.(false)}
               >
                 Close
-              </button>
+              </Button>
             </div>
           )}
           {buttonRow && <div className="px-md py-sm border-t border-base">{buttonRow}</div>}
