@@ -22,7 +22,7 @@ export function Icon({
   variant = "default",
   className,
   "aria-hidden": ariaHidden = true,
-  ...props
+  "aria-label": ariaLabel,
 }: IconProps) {
   const IconComponent = ICON_REGISTRY[name];
 
@@ -35,8 +35,10 @@ export function Icon({
     <span
       className={cn("flex items-center justify-center", iconVariants({ size, variant }), className)}
       aria-hidden={ariaHidden}
+      aria-label={ariaLabel}
+      role={ariaLabel ? "img" : undefined}
     >
-      <IconComponent className="w-full h-full" aria-hidden={ariaHidden} {...props} />
+      <IconComponent className="w-full h-full" />
     </span>
   );
 }

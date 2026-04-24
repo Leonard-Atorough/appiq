@@ -12,11 +12,17 @@ const allIcons = [
   "bento",
   "doner",
   "hamburger",
+  "chevron-left",
+  "chevron-right",
+  "chevron-up",
+  "chevron-down",
   "check-circle",
   "x-circle",
   "alert-triangle",
   "info",
   "bell",
+  "check",
+  "minus",
   "x",
   "briefcase",
 ];
@@ -68,6 +74,106 @@ export const Sizes: Story = {
           <span className="text-xs text-muted">{size}</span>
         </div>
       ))}
+    </div>
+  ),
+};
+
+/** Decorative icon (default): used in buttons, labels, decorative UI */
+export const Decorative: Story = {
+  render: () => (
+    <button className="flex items-center gap-sm px-md py-sm rounded-md bg-primary text-white">
+      <Icon name="check" />
+      <span>Confirm</span>
+    </button>
+  ),
+};
+
+/** Semantic icon (with aria-label): used when icon conveys meaning without text */
+export const Informational: Story = {
+  render: () => (
+    <div className="flex gap-md items-center">
+      <Icon
+        name="check-circle"
+        variant="success"
+        size="lg"
+        aria-hidden={false}
+        aria-label="Application submitted successfully"
+      />
+      <Icon
+        name="x-circle"
+        variant="error"
+        size="lg"
+        aria-hidden={false}
+        aria-label="Application rejected"
+      />
+      <Icon
+        name="alert-triangle"
+        variant="warning"
+        size="lg"
+        aria-hidden={false}
+        aria-label="Warning: review required"
+      />
+      <Icon
+        name="info"
+        variant="info"
+        size="lg"
+        aria-hidden={false}
+        aria-label="Additional information available"
+      />
+    </div>
+  ),
+};
+
+/** Size and variant combination grid */
+export const SizeVariantGrid: Story = {
+  render: () => (
+    <table className="border-collapse w-full text-center">
+      <thead>
+        <tr className="border-b border-base">
+          <th className="p-md text-sm font-semibold">Size \ Variant</th>
+          {variants.slice(0, 4).map((v) => (
+            <th key={v} className="p-md text-sm font-semibold">
+              {v}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {sizes.map((size) => (
+          <tr key={size} className="border-b border-base">
+            <td className="p-md text-sm font-semibold text-left">{size}</td>
+            {variants.slice(0, 4).map((variant) => (
+              <td key={`${size}-${variant}`} className="p-md">
+                <Icon name="check-circle" size={size} variant={variant} />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ),
+};
+
+/** Feedback states: common status indicator patterns */
+export const StatusIndicators: Story = {
+  render: () => (
+    <div className="flex flex-col gap-md">
+      <div className="flex items-center gap-md p-md rounded-md bg-success/10 border border-success">
+        <Icon name="check-circle" variant="success" size="lg" aria-hidden={false} aria-label="Success" />
+        <span className="text-sm">Application submitted successfully</span>
+      </div>
+      <div className="flex items-center gap-md p-md rounded-md bg-error/10 border border-error">
+        <Icon name="x-circle" variant="error" size="lg" aria-hidden={false} aria-label="Error" />
+        <span className="text-sm">Unable to process request</span>
+      </div>
+      <div className="flex items-center gap-md p-md rounded-md bg-warning/10 border border-warning">
+        <Icon name="alert-triangle" variant="warning" size="lg" aria-hidden={false} aria-label="Warning" />
+        <span className="text-sm">Please review before proceeding</span>
+      </div>
+      <div className="flex items-center gap-md p-md rounded-md bg-info/10 border border-info">
+        <Icon name="info" variant="info" size="lg" aria-hidden={false} aria-label="Information" />
+        <span className="text-sm">Learn more about this feature</span>
+      </div>
     </div>
   ),
 };

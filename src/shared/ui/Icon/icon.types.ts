@@ -44,7 +44,7 @@ export type IconVariant =
  */
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
 
-export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
+export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * The icon name or component to render
    */

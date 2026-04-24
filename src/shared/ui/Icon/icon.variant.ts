@@ -12,8 +12,8 @@ export const iconVariants = cva("", {
       xxxl: "w-5xl h-5xl",
     },
     variant: {
-      default: "text-(--color-text)",
-      muted: "text-(--color-text-muted)",
+      default: "text-base",
+      muted: "text-muted",
       primary: "text-primary",
       secondary: "text-secondary",
       success: "text-success",

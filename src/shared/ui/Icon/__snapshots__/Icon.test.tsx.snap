@@ -1,0 +1,82 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Icon Component > snapshots > matches snapshot for default icon 1`] = `
+<span
+  aria-hidden="true"
+  class="flex items-center justify-center w-xl h-xl text-base"
+>
+  <svg
+    aria-hidden="true"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+  >
+    <circle
+      cx="8"
+      cy="3"
+      r="1.5"
+    />
+    <circle
+      cx="8"
+      cy="8"
+      r="1.5"
+    />
+    <circle
+      cx="8"
+      cy="13"
+      r="1.5"
+    />
+  </svg>
+</span>
+`;
+
+exports[`Icon Component > snapshots > matches snapshot for sized and variant icon 1`] = `
+<span
+  aria-hidden="true"
+  class="flex items-center justify-center w-2xl h-2xl text-success"
+>
+  <svg
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+    />
+    <path
+      d="m9 12 2 2 4-4"
+    />
+  </svg>
+</span>
+`;
+
+exports[`Icon Component > snapshots > matches snapshot with custom className 1`] = `
+<span
+  aria-hidden="true"
+  class="flex items-center justify-center w-xl h-xl text-base custom-class"
+>
+  <svg
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"
+    />
+    <path
+      d="M10.3 21a1.94 1.94 0 0 0 3.4 0"
+    />
+  </svg>
+</span>
+`;
