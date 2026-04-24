@@ -116,7 +116,6 @@ describe("Navbar", () => {
     });
 
     it("documents that shift+tab support depends on browser/test environment", async () => {
-      const user = userEvent.setup();
       render(
         <Navbar
           menuIcon={<button aria-label="Toggle menu">☰</button>}
@@ -137,11 +136,11 @@ describe("Navbar", () => {
 
     it("allows focus to move out of navbar (no trap)", async () => {
       const user = userEvent.setup();
-      const { container } = render(
+      render(
         <div>
           <Navbar menuIcon={<button aria-label="Toggle">☰</button>} />
           <button>Outside Button</button>
-        </div>,
+        </div>
       );
 
       const outsideButton = screen.getByRole("button", { name: /outside/i });

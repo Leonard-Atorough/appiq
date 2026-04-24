@@ -68,9 +68,12 @@ describe("Checkbox", () => {
     expect(screen.getByRole("checkbox")).toBeChecked();
   });
 
-  it("renders without label as a bare input", () => {
+  it("renders without label as a bare control", () => {
     const { container } = render(<Checkbox />);
-    expect(container.firstChild?.nodeName).toBe("INPUT");
+    const wrapper = container.firstChild;
+    // Control is wrapped in a span to enable peer-* CSS to work
+    expect(wrapper?.nodeName).toBe("SPAN");
+    expect(screen.getByRole("checkbox")).toBeInTheDocument();
   });
 
   it("forwards ref to the input element", () => {
