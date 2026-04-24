@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DragItem > matches snapshot for default draggable item 1`] = `
+<div
+  class=""
+  draggable="true"
+>
+  <div>
+    Card content
+  </div>
+</div>
+`;
+
+exports[`DragItem > matches snapshot for disabled item 1`] = `
+<div
+  class="cursor-not-allowed"
+  draggable="false"
+>
+  <div>
+    Card content
+  </div>
+</div>
+`;

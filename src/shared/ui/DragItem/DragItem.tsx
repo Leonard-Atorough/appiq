@@ -15,12 +15,15 @@ import type { DragItemProps } from "./dragitem.types";
  * </DragItem>
  */
 export const DragItem = ({ id, type, children, disabled = false, className }: DragItemProps) => {
-  if (import.meta.env.DEV && !type) {
-    console.warn(
-      `[DragItem] Missing 'type' prop on item id="${id}". ` +
-        "Set 'type' to match your DropTarget's 'accept' prop so drops are validated correctly.",
-    );
-  }
+  React.useEffect(() => {
+    if (import.meta.env.DEV && !type) {
+      console.warn(
+        `[DragItem] Missing 'type' prop on item id="${id}". ` +
+          "Set 'type' to match your DropTarget's 'accept' prop so drops are validated correctly.",
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData(type ?? "application-card", id);
