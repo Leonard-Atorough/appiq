@@ -4,14 +4,20 @@ import type { navbarVariants } from "./navbar.variants";
 export interface NavbarProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
     VariantProps<typeof navbarVariants> {
-  /** Left-side content, typically branding or logo. Appears left of menu. */
-  title?: React.ReactNode;
-  /** Start slot for navigation links. Consumer controls visibility (e.g., via media query).
-   *  Pair with menuIcon that has aria-expanded attribute. */
-  menu?: React.ReactNode;
-  /** Menu toggle icon. Consumer controls when to render (mobile breakpoint, ResizeObserver, etc.).
-   *  Must be a button element with aria-label="Toggle navigation menu" and aria-expanded={boolean}. */
+  /** Menu toggle icon for mobile/collapsed states.
+   *  Must be a button with aria-label="Toggle navigation menu" and aria-expanded={boolean}. */
   menuIcon?: React.ReactNode;
-  /** End slot for actions like profile menu, search, CTAs. Always visible. */
+  /** Branding, logo, or page title. Rendered after menuIcon, shrinks to fit. */
+  title?: React.ReactNode;
+  /** Optional content area that takes up all remaining horizontal space.
+   *  Pair with `<NavMenu>` for navigation, or pass any content for non-nav headers.
+   *  Use menuPosition to control horizontal alignment of contents. */
+  menu?: React.ReactNode;
+  /** Controls horizontal alignment of menu contents within the available space.
+   *  - left (default): contents sit at the left edge after title
+   *  - center: contents are centered across the full available space
+   *  - right: contents sit at the right edge before menuEnd */
+  menuPosition?: "left" | "center" | "right";
+  /** End slot for actions like profile, search, or CTAs. Shrinks to fit content. */
   menuEnd?: React.ReactNode;
 }

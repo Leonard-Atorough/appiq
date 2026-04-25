@@ -1,62 +1,89 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Navbar > Snapshots > matches snapshot with all slots 1`] = `
-<nav
-  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
+<header
+  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
 >
   <div
-    class="flex items-center gap-md flex-shrink-0"
+    class="shrink-0 flex items-center"
   >
     <button>
       ☰
     </button>
-    <div
-      class="shrink-0"
-    >
-      AppIQ
-    </div>
-    <div
-      class="flex-1"
-    >
-      <a
-        href="/"
-      >
-        Dashboard
-      </a>
-    </div>
   </div>
   <div
-    class="flex items-center gap-md flex-shrink-0 ml-auto"
+    class="shrink-0 flex items-center"
+  >
+    AppIQ
+  </div>
+  <div
+    class="flex-1 flex items-center justify-start"
+  >
+    <a
+      href="/"
+    >
+      Dashboard
+    </a>
+  </div>
+  <div
+    class="shrink-0 flex items-center gap-md"
   >
     <button>
       Profile
     </button>
   </div>
-</nav>
+</header>
 `;
 
 exports[`Navbar > Snapshots > matches snapshot with default props 1`] = `
-<nav
-  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
+<header
+  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
+/>
+`;
+
+exports[`Navbar > Snapshots > matches snapshot with menuPosition='right' 1`] = `
+<header
+  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
 >
   <div
-    class="flex items-center gap-md flex-shrink-0"
-  />
-</nav>
+    class="shrink-0 flex items-center"
+  >
+    <button>
+      ☰
+    </button>
+  </div>
+  <div
+    class="shrink-0 flex items-center"
+  >
+    AppIQ
+  </div>
+  <div
+    class="flex-1 flex items-center justify-end"
+  >
+    <a
+      href="/"
+    >
+      Dashboard
+    </a>
+  </div>
+  <div
+    class="shrink-0 flex items-center gap-md"
+  >
+    <button>
+      Profile
+    </button>
+  </div>
+</header>
 `;
 
 exports[`Navbar > Snapshots > matches snapshot with size and position variants 1`] = `
-<nav
-  class="flex items-center justify-between gap-md border-b border-border bg-surface transition-all duration-200 ease-out sticky top-0 z-40 px-2xl py-lg"
+<header
+  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out sticky top-0 z-40 px-2xl py-lg"
 >
   <div
-    class="flex items-center gap-md flex-shrink-0"
+    class="shrink-0 flex items-center"
   >
-    <div
-      class="shrink-0"
-    >
-      Test
-    </div>
+    Test
   </div>
-</nav>
+</header>
 `;

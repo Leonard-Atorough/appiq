@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const navbarVariants = cva(
   [
-    "flex items-center justify-between gap-md",
+    "flex items-center gap-md",
     "border-b border-border",
     "bg-surface",
     "transition-all duration-200 ease-out",
@@ -27,8 +27,15 @@ export const navbarVariants = cva(
   },
 );
 
-export const navbarStartVariants = cva(["flex items-center gap-md", "flex-shrink-0"].join(" "));
-
-export const navbarEndVariants = cva(
-  ["flex items-center gap-md", "flex-shrink-0 ml-auto"].join(" "),
-);
+export const navbarMenuVariants = cva("flex-1 flex items-center", {
+  variants: {
+    menuPosition: {
+      left: "justify-start",
+      center: "justify-center",
+      right: "justify-end",
+    },
+  },
+  defaultVariants: {
+    menuPosition: "left",
+  },
+});

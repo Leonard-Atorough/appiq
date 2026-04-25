@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Navbar } from "./Navbar";
+import { NavMenu } from "./NavMenu";
+import { RouteProvider } from "@app/providers/RouteProvider";
 
 const meta: Meta<typeof Navbar> = {
   title: "Shared/Navbar",
@@ -159,4 +161,87 @@ export const FixedPositioned: Story = {
       </div>
     ),
   ],
+};
+
+/**
+ * Menu Position: Controls the horizontal alignment of the menu within the flex-1 space it occupies.
+ *
+ * - **left** (default): Links sit at the left edge, right after title.
+ * - **center**: Links are centered across the full available space.
+ * - **right**: Links sit at the right edge, just before menuEnd.
+ */
+export const MenuPositions: Story = {
+  render: () => (
+    <div className="space-y-0">
+      {(["left", "center", "right"] as const).map((pos) => (
+        <div key={pos}>
+          <div className="text-xs text-muted uppercase tracking-wider px-lg pt-lg pb-sm">
+            menuPosition="{pos}"
+          </div>
+          <Navbar
+            title="AppIQ"
+            menu={
+              <div className="flex gap-lg">
+                <a href="/" className="text-sm hover:text-primary">
+                  Dashboard
+                </a>
+                <a href="/applications" className="text-sm hover:text-primary">
+                  Applications
+                </a>
+                <a href="/jobs" className="text-sm hover:text-primary">
+                  Jobs
+                </a>
+              </div>
+            }
+            menuEnd={
+              <button className="px-md py-sm text-sm border border-border rounded hover:bg-muted">
+                Settings
+              </button>
+            }
+            menuIcon={
+              <button className="flex items-center justify-center w-8 h-8 hover:bg-muted rounded">
+                ☰
+              </button>
+            }
+            menuPosition={pos}
+            position="static"
+            size="md"
+          />
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+/**
+ * NavMenu with RouteContext integration.
+ * Active link highlights automatically based on `currentRoute`.
+ * Click links to see the active state update.
+ */
+export const WithNavMenu: Story = {
+  render: () => (
+    <RouteProvider>
+      <Navbar
+        title={<span className="font-semibold text-sm">AppIQ</span>}
+        menu={
+          <NavMenu
+            items={[
+              { id: "dashboard", href: "/", label: "Dashboard" },
+              { id: "applications", href: "/applications", label: "Applications" },
+              { id: "jobs", href: "/jobs", label: "Jobs" },
+              { id: "settings", href: "/settings", label: "Settings" },
+            ]}
+          />
+        }
+        menuEnd={
+          <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
+            JD
+          </button>
+        }
+        menuPosition="center"
+        position="static"
+        size="md"
+      />
+    </RouteProvider>
+  ),
 };

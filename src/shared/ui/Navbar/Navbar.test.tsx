@@ -7,8 +7,8 @@ import { Navbar } from "./Navbar";
 describe("Navbar", () => {
   it("renders with default props", () => {
     render(<Navbar />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toBeInTheDocument();
+    const header = screen.getByRole("banner");
+    expect(header).toBeInTheDocument();
   });
 
   it("renders title slot", () => {
@@ -66,50 +66,50 @@ describe("Navbar", () => {
 
   it("applies size variant sm", () => {
     render(<Navbar size="sm" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("px-md", "py-sm");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("px-md", "py-sm");
   });
 
   it("applies size variant md", () => {
     render(<Navbar size="md" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("px-lg", "py-md");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("px-lg", "py-md");
   });
 
   it("applies size variant lg", () => {
     render(<Navbar size="lg" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("px-2xl", "py-lg");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("px-2xl", "py-lg");
   });
 
   it("applies position variant static", () => {
     render(<Navbar position="static" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("static");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("static");
   });
 
   it("applies position variant sticky", () => {
     render(<Navbar position="sticky" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("sticky", "top-0", "z-40");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("sticky", "top-0", "z-40");
   });
 
   it("applies position variant fixed", () => {
     render(<Navbar position="fixed" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("fixed", "top-0", "left-0", "right-0", "z-40");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("fixed", "top-0", "left-0", "right-0", "z-40");
   });
 
   it("accepts custom className", () => {
     render(<Navbar className="custom-class" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("custom-class");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("custom-class");
   });
 
   it("merges custom className with variant classes", () => {
     render(<Navbar size="md" className="custom-class" />);
-    const nav = screen.getByRole("navigation");
-    expect(nav).toHaveClass("px-lg", "py-md", "custom-class");
+    const header = screen.getByRole("banner");
+    expect(header).toHaveClass("px-lg", "py-md", "custom-class");
   });
 
   it("accepts html attributes", () => {
@@ -117,20 +117,20 @@ describe("Navbar", () => {
     expect(screen.getByTestId("custom-navbar")).toBeInTheDocument();
   });
 
-  it("forwards ref to nav element", () => {
+  it("forwards ref to header element", () => {
     const ref = React.createRef<HTMLElement>();
     render(<Navbar ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLElement);
-    expect(ref.current?.tagName).toBe("NAV");
+    expect(ref.current?.tagName).toBe("HEADER");
   });
 
   it("renders with all layout classes", () => {
     const { container } = render(<Navbar title="Test" />);
-    const nav = container.querySelector("nav");
-    expect(nav).toHaveClass("flex", "items-center", "justify-between", "gap-md");
-    expect(nav).toHaveClass("border-b", "border-border");
-    expect(nav).toHaveClass("bg-surface");
-    expect(nav).toHaveClass("transition-all", "duration-200", "ease-out");
+    const header = container.querySelector("header");
+    expect(header).toHaveClass("flex", "items-center", "gap-md");
+    expect(header).toHaveClass("border-b", "border-border");
+    expect(header).toHaveClass("bg-surface");
+    expect(header).toHaveClass("transition-all", "duration-200", "ease-out");
   });
 
   describe("Keyboard Navigation & Accessibility", () => {
@@ -179,27 +179,25 @@ describe("Navbar", () => {
       expect(outsideButton).toHaveFocus();
     });
 
-    it("renders with proper semantic navigation role", () => {
+    it("renders as a banner landmark", () => {
       render(<Navbar title="App" />);
-      const nav = screen.getByRole("navigation");
-      expect(nav).toBeInTheDocument();
+      expect(screen.getByRole("banner")).toBeInTheDocument();
     });
 
-    it("supports aria-label for disambiguation when multiple navbars", () => {
+    it("can be used as a plain page header without navigation", () => {
+      render(<Navbar title={<h1>Dashboard</h1>} menuEnd={<button>Theme</button>} />);
+      expect(screen.getByRole("banner")).toBeInTheDocument();
+      expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+    });
+
+    it("supports aria-label for disambiguation when multiple headers exist", () => {
       render(
         <div>
-          <Navbar aria-label="Main navigation" title="App" />
-          <nav aria-label="Secondary navigation">
-            <a href="/help">Help</a>
-          </nav>
+          <Navbar aria-label="Site header" title="App" />
+          <header aria-label="Article header"><h2>Article</h2></header>
         </div>,
       );
-
-      const mainNav = screen.getByRole("navigation", { name: /main navigation/i });
-      const secondaryNav = screen.getByRole("navigation", { name: /secondary navigation/i });
-
-      expect(mainNav).toBeInTheDocument();
-      expect(secondaryNav).toBeInTheDocument();
+      expect(screen.getByRole("banner", { name: /site header/i })).toBeInTheDocument();
     });
 
     it("accepts aria-expanded for menu toggle pattern", () => {
@@ -221,6 +219,61 @@ describe("Navbar", () => {
 
       toggleButton = screen.getByRole("button", { name: /toggle menu/i });
       expect(toggleButton).toHaveAttribute("aria-expanded", "true");
+    });
+  });
+
+  describe("Menu Position", () => {
+    it("applies justify-start by default (menuPosition='left')", () => {
+      const { container } = render(
+        <Navbar menu={<a href="/">Home</a>} />,
+      );
+      const menuContainer = container.querySelector("div.flex-1");
+      expect(menuContainer).toHaveClass("justify-start");
+    });
+
+    it("applies justify-start when menuPosition='left'", () => {
+      const { container } = render(
+        <Navbar menu={<a href="/">Home</a>} menuPosition="left" />,
+      );
+      const menuContainer = container.querySelector("div.flex-1");
+      expect(menuContainer).toHaveClass("justify-start");
+    });
+
+    it("applies justify-center when menuPosition='center'", () => {
+      const { container } = render(
+        <Navbar menu={<a href="/">Home</a>} menuPosition="center" />,
+      );
+      const menuContainer = container.querySelector("div.flex-1");
+      expect(menuContainer).toHaveClass("justify-center");
+    });
+
+    it("applies justify-end when menuPosition='right'", () => {
+      const { container } = render(
+        <Navbar menu={<a href="/">Home</a>} menuPosition="right" />,
+      );
+      const menuContainer = container.querySelector("div.flex-1");
+      expect(menuContainer).toHaveClass("justify-end");
+    });
+
+    it("menu container always has flex-1 regardless of position", () => {
+      const positions = ["left", "center", "right"] as const;
+      positions.forEach((menuPosition) => {
+        const { container, unmount } = render(
+          <Navbar menu={<a href="/">Home</a>} menuPosition={menuPosition} />,
+        );
+        expect(container.querySelector("div.flex-1")).toBeInTheDocument();
+        unmount();
+      });
+    });
+
+    it("menu is a direct child of nav (not nested in start/end sub-container)", () => {
+      const { container } = render(
+        <Navbar title="Logo" menu={<a href="/">Dashboard</a>} menuPosition="center" />,
+      );
+      const nav = container.querySelector("nav");
+      const menuContainer = nav?.querySelector(":scope > div.flex-1");
+      expect(menuContainer).toBeInTheDocument();
+      expect(menuContainer?.textContent).toContain("Dashboard");
     });
   });
 
@@ -248,6 +301,19 @@ describe("Navbar", () => {
           title="Test"
           size="lg"
           position="sticky"
+        />,
+      );
+      expect(container.firstChild).toMatchSnapshot();
+    });
+
+    it("matches snapshot with menuPosition='right'", () => {
+      const { container } = render(
+        <Navbar
+          title="AppIQ"
+          menu={<a href="/">Dashboard</a>}
+          menuIcon={<button>☰</button>}
+          menuEnd={<button>Profile</button>}
+          menuPosition="right"
         />,
       );
       expect(container.firstChild).toMatchSnapshot();
