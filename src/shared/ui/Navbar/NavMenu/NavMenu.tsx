@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { cn } from "@shared/lib/cn";
-import { RouteContext } from "@app/providers/RouteProvider";
+import { RouteContext } from "@app/providers/contexts/RouteContext";
 import { navMenuLinkVariants } from "./navMenu.variants";
 import type { NavMenuProps } from "./navMenu.types";
 
@@ -26,7 +26,7 @@ import type { NavMenuProps } from "./navMenu.types";
  * />
  */
 export function NavMenu({ items, onNavigate, className, ...props }: NavMenuProps) {
-  const { currentRoute, navigate } = useContext(RouteContext);
+  const { currentRoute, navigate, handlePopState } = useContext(RouteContext);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -37,6 +37,20 @@ export function NavMenu({ items, onNavigate, className, ...props }: NavMenuProps
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, href: string) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick(e as unknown as React.MouseEvent<HTMLAnchorElement>, href);
+    }
+
+    // using handlePopState to keep currentRoute in sync with URL on browser navigation events (back/forward)
+     if (e.key === "Backspace") {
+      handlePopState?.();
+    }
+  };
+
+
+
   return (
     <nav aria-label="Main menu" className={cn("flex items-center gap-md", className)} {...props}>
       <ul role="list" className="flex items-center gap-md list-none p-0 m-0">
@@ -46,6 +60,7 @@ export function NavMenu({ items, onNavigate, className, ...props }: NavMenuProps
               href={item.href}
               aria-current={currentRoute === item.href ? "page" : undefined}
               onClick={(e) => handleClick(e, item.href)}
+              onKeyDown={(e) => handleKeyDown(e, item.href)}
               className={navMenuLinkVariants({ active: currentRoute === item.href })}
             >
               {item.icon}

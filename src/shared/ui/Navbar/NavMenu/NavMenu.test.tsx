@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { NavMenu } from "./NavMenu";
-import { RouteContext } from "@app/providers/RouteProvider";
+import { RouteContext } from "@app/providers/contexts/RouteContext";
 
 const items = [
   { id: "dashboard", href: "/", label: "Dashboard" },
@@ -16,9 +16,7 @@ function renderWithRoute(ui: React.ReactElement, currentRoute = "/") {
   return {
     navigate,
     ...render(
-      <RouteContext.Provider value={{ currentRoute, navigate }}>
-        {ui}
-      </RouteContext.Provider>,
+      <RouteContext.Provider value={{ currentRoute, navigate }}>{ui}</RouteContext.Provider>,
     ),
   };
 }
@@ -97,9 +95,7 @@ describe("NavMenu", () => {
   });
 
   it("accepts and applies a custom className", () => {
-    const { container } = renderWithRoute(
-      <NavMenu items={items} className="custom-nav-class" />,
-    );
+    const { container } = renderWithRoute(<NavMenu items={items} className="custom-nav-class" />);
     expect(container.querySelector("nav")).toHaveClass("custom-nav-class");
   });
 
