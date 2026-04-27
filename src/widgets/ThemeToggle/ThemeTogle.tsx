@@ -7,12 +7,12 @@ export function ThemeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="sm"
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
-      <Icon name={theme === "dark" ? "sun" : "moon"} />
+      <Icon size="md" name={theme === "dark" ? "sun" : "moon"} />
     </Button>
   );
 }

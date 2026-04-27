@@ -6,6 +6,7 @@ export function AppHeader({ menuEnd, className }: AppHeaderProps) {
   return (
     <Navbar
       position="sticky"
+      size="sm"
       title={<span className="font-semibold text-lg tracking-tight">AppIQ</span>}
       menu={<div />}
       menuEnd={
