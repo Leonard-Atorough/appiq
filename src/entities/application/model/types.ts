@@ -13,7 +13,7 @@ export interface JobApplication {
   notes?: string;
 }
 
-export type ApplicationStatus = "applied" | "interviewing" | "offer" | "rejected";
+export type ApplicationStatus = "saved" | "applied" | "interviewing" | "offer" | "rejected";
 
 export type ApplicationJobType = "full-time" | "part-time" | "contract" | "internship";
 

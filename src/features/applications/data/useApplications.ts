@@ -1,15 +1,67 @@
+import { useCallback, useEffect, useState } from "react";
+import { liveQuery } from "dexie";
 import { JobApplicationRepositoryImpl } from "@/shared/storage/repositories/jobApplication.repository";
-import { useAsync } from "../../../shared/lib/hooks/useAsync";
+import { mapRowToJobApplication } from "@/shared/lib";
 import { db } from "@/shared/storage/indexeddb/dexieClient";
+import type { ApplicationStatus, JobApplication } from "@/entities";
 
 export function useApplications() {
-    const {loading, status, error, data, execute} = useAsync(
-        async () => {
-            const repo = new JobApplicationRepositoryImpl(db);
-            return await repo.listApplications();
-        },
-        { autoExecute: true },
-    );
+  const [applications, setApplications] = useState<JobApplication[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-    return {applications: data ?? [], loading, error, status, refresh: execute};
+  useEffect(() => {
+    // liveQuery uses Dexie's DBCore middleware to track which index ranges
+    // are read during the query. Any write that touches those ranges — from
+    // any hook instance or component — will re-run this subscriber automatically.
+    const subscription = liveQuery(() => db.applications.toArray()).subscribe({
+      next: (rows) => {
+        setApplications(rows.map(mapRowToJobApplication));
+        setLoading(false);
+        setError(null);
+      },
+      error: (err) => {
+        setError(err instanceof Error ? err : new Error("Failed to load applications"));
+        setLoading(false);
+      },
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const moveApplication = useCallback(async (id: string, newStatus: ApplicationStatus) => {
+    const repo = new JobApplicationRepositoryImpl(db);
+    await repo.updateApplication(id, { status: newStatus });
+    // liveQuery picks up the change automatically — no manual re-fetch needed
+  }, []);
+
+  const deleteApplication = useCallback(async (id: string) => {
+    const repo = new JobApplicationRepositoryImpl(db);
+    await repo.deleteApplication(id);
+  }, []);
+
+  const createApplication = useCallback(async (application: Omit<JobApplication, "id">) => {
+    const repo = new JobApplicationRepositoryImpl(db);
+    await repo.createApplication(application);
+  }, []);
+
+  const updateApplication = useCallback(async (id: string, updates: Partial<Omit<JobApplication, "id">>) => {
+    const repo = new JobApplicationRepositoryImpl(db);
+    await repo.updateApplication(id, updates);
+  }, []);
+
+  return {
+    applications,
+    loading,
+    error,
+    moveApplication,
+    deleteApplication,
+    createApplication,
+    updateApplication,
+  };
+}
+
+export function useApplicationActions() {
+  const { moveApplication, deleteApplication, createApplication, updateApplication } = useApplications();
+  return { moveApplication, deleteApplication, createApplication, updateApplication };
 }

@@ -2,7 +2,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@/entities";
 import { Badge } from "@/shared/ui";
 
-const statusVariant: Record<JobApplication["status"], "info" | "warning" | "success" | "error"> = {
+const statusVariant: Record<JobApplication["status"], "default" | "info" | "warning" | "success" | "error"> = {
+  saved: "default",
   applied: "info",
   interviewing: "warning",
   offer: "success",
@@ -40,6 +41,12 @@ export const applicationColumns: ColumnDef<JobApplication>[] = [
     id: "location",
     header: "Location",
     accessorKey: "location",
+    cell: (info) => (info.getValue() as string | undefined) ?? "-",
+  },
+  {
+    id: "jobType",
+    header: "Job Type",
+    accessorKey: "jobType",
     cell: (info) => (info.getValue() as string | undefined) ?? "-",
   },
   {

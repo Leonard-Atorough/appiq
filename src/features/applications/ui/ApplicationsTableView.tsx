@@ -1,8 +1,15 @@
 import { useApplications } from "../data/useApplications";
 import { applicationColumns } from "../model/columns";
-import { DataTable } from "@/shared/ui";
+import { DataTable, Dropdown } from "@/shared/ui";
 import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
+import type { Row } from "@tanstack/react-table";
+
+interface ApplicationsTableViewProps {
+  onAddApplication: () => void;
+  onEditApplication: (id: string) => void;
+  onDeleteApplication: (id: string) => void;
+}
 
 /**
  * Applications Table View
@@ -10,8 +17,39 @@ import { EmptyState } from "@/shared/ui";
  * Displays all job applications in a sortable, filterable table.
  * Fetches data from the useApplications hook and renders with TanStack Table.
  */
-export function ApplicationsTableView() {
+export function ApplicationsTableView({
+  onAddApplication,
+  onEditApplication,
+  onDeleteApplication,
+}: ApplicationsTableViewProps) {
+  //NOTE: we'll needto pass onEditApplication down into the columns definitions. We can spread the columns and add an "actions" column at the end that uses it to render edit buttons for each row.
   const { applications, loading, error } = useApplications();
+
+  const combinedColumns = [
+    ...applicationColumns,
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }: { row: Row<(typeof applications)[number]> }) => {
+        const application = row.original;
+        return (
+          <Dropdown
+            triggerLabel="Row Actions"
+            items={[
+              {
+                label: "Edit",
+                onClick: () => onEditApplication(application.id),
+              },
+              {
+                label: "Delete",
+                onClick: () => onDeleteApplication(application.id),
+              },
+            ]}
+          />
+        );
+      },
+    },
+  ];
 
   if (loading) {
     return (
@@ -41,22 +79,12 @@ export function ApplicationsTableView() {
         action={{
           label: "Add Application",
           onClick: () => {
-            /* TODO: open add form */
+            onAddApplication();
           },
         }}
       />
     );
   }
 
-  return <DataTable data={applications} columns={applicationColumns} sortable stickyHeader />;
+  return <DataTable data={applications} columns={combinedColumns} sortable stickyHeader />;
 }
-//Droptarget component:
-// props:
-// - onDrop: (applicationId: string, newStatus: string) => void
-// - onDragOver: (e: React.DragEvent) => void
-// - onDragLeave: (e: React.DragEvent) => void
-// - isActive: boolean (for styling when an item is being dragged over)
-// - applicationId: string (id of the application being dragged, for styling the source column)
-// 
-// - status: string
-// - children: React.ReactNode
