@@ -14,6 +14,7 @@ export {
   type IconName,
   type IconVariant,
   type IconSize,
+  type IconColor,
   ICON_REGISTRY,
 } from "./Icon";
 export { Input, type InputProps } from "./Input";
