@@ -50,6 +50,7 @@ export default {
         secondary: "var(--color-text-secondary)",
         muted: "var(--color-text-muted)",
         light: "var(--color-text-light)",
+        dark: "var(--color-text-dark)",
         /* Accessible primary text — use for link/inline text on page backgrounds (≥4.5:1 contrast) */
         "primary-text": "var(--color-primary-text)",
         /* Accessible feedback text — use on light/white backgrounds (≥4.5:1 contrast) */

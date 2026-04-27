@@ -89,6 +89,7 @@
   --color-text-secondary: var(--gray-600);
   --color-text-muted: var(--gray-600);
   --color-text-light: var(--gray-500);   /* decorative/placeholder — not for body text */
+  --color-text-dark: var(--gray-900);   
 
   /* ===== SEMANTIC: BORDERS ===== */
   --color-border: var(--gray-200);
