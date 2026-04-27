@@ -1,13 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { RouteProvider } from "./app/providers/RouteProvider";
+import { AppHeader, AppNav, AppShell } from "./widgets";
+import { ApplicationsPage } from "./features/applications";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Welcome to AppIQ</h1>
-      <p className="text-lg text-muted">
-        This is a placeholder home page. Use the navigation links to explore the app.
-      </p>
-    </div>
+    <RouteProvider>
+      <AppShell header={<AppHeader />} nav={<AppNav />}>
+        <ApplicationsPage />
+      </AppShell>
+    </RouteProvider>
   </StrictMode>,
 );

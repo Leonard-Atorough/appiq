@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ApplicationsTableView } from "./ApplicationsTableView";
 import { ApplicationsKanbanView } from "./ApplicationsKanbanView";
+import { Tabs } from "@/shared/ui";
 
 export default function ApplicationsPage() {
   const [selectedView, setSelectedView] = useState<"table" | "kanban">("table");
@@ -8,10 +9,15 @@ export default function ApplicationsPage() {
   return (
     <div>
       <div className="mb-4">
-        <button onClick={() => setSelectedView("table")} className="mr-2">
-          Table View
-        </button>
-        <button onClick={() => setSelectedView("kanban")}>Kanban View</button>
+        <Tabs
+          tabs={[
+            { label: "Table View", id: "table" },
+            { label: "Kanban View", id: "kanban" },
+          ]}
+          activeTab={selectedView}
+          onChange={(value) => setSelectedView(value as "table" | "kanban")}
+          variant="pill"
+        />
       </div>
       {selectedView === "table" ? <ApplicationsTableView /> : <ApplicationsKanbanView />}
     </div>

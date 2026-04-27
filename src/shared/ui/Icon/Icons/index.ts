@@ -23,6 +23,8 @@ import { CheckIcon } from "./ui/CheckIcon";
 import { MinusIcon } from "./ui/MinusIcon";
 import { XIcon } from "./ui/XIcon";
 import { BriefcaseIcon } from "./ui/BriefcaseIcon";
+import { SunIcon } from "./ui/SunIcon";
+import { MoonIcon } from "./ui/MoonIcon";
 
 /**
  * Icon registry mapping icon names to their React components
@@ -52,6 +54,8 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   minus: MinusIcon,
   x: XIcon,
   briefcase: BriefcaseIcon,
+  sun: SunIcon,
+  moon: MoonIcon,
 };
 
 // Export individual icons for direct imports if needed
