@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-export const dropTargetVariants = cva("relative rounded border-2 border-dashed transition-colors", {
+export const dropTargetVariants = cva("relative rounded border-2 border-dashed transition-colors h-full", {
   variants: {
     isActive: {
       true: "border-primary bg-primary/10",

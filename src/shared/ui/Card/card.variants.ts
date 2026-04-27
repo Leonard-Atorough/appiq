@@ -10,6 +10,7 @@ export const cardVariants = cva(
     "relative bg-surface border border-base rounded-lg shadow-sm",
     "transition-all duration-200",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
+    "hover:cursor-pointer hover:shadow-md active:scale-[0.98]",
   ].join(" "),
   {
     variants: {

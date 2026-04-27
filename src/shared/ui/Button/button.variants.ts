@@ -53,7 +53,7 @@ export const buttonVariants = cva(
       },
       size: {
         sm: "px-sm py-xs text-sm rounded-md",
-        md: "px-md py-sm text-base rounded-lg",
+        md: "px-md py-sm text-md rounded-lg",
         lg: "px-lg py-md text-md rounded-xl",
       },
       full: {

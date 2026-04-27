@@ -101,7 +101,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
               {header}
             </div>
           )}
-          <div>{children}</div>
+          <div className="min-h-2xl bg-outline rounded-sm">{children}</div>
           {footer && <div className="mt-sm text-sm text-muted">{footer}</div>}
         </div>
         {loading && (

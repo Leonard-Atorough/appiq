@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import type { DropTargetProps } from "./droptarget.types";
+import { cn } from "@/shared/lib/cn";
 
 /**
  * DropTarget
@@ -87,7 +88,7 @@ export const DropTarget = ({
 
   return (
     <div
-      className={className}
+      className={cn("relative rounded h-full", className)}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}

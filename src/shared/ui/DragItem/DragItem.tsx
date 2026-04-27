@@ -28,6 +28,16 @@ export const DragItem = ({ id, type, children, disabled = false, className }: Dr
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData(type ?? "application-card", id);
     e.dataTransfer.effectAllowed = "move";
+
+    const el = e.currentTarget;
+    const clone = el.cloneNode(true) as HTMLElement;
+    clone.style.position = "absolute";
+    clone.style.top = "-9999px";
+    clone.style.left = "-9999px";
+    clone.style.width = `${el.offsetWidth}px`;
+    document.body.appendChild(clone);
+    e.dataTransfer.setDragImage(clone, e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+    setTimeout(() => document.body.removeChild(clone), 0);
   };
 
   const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
