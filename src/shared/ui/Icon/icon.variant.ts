@@ -21,6 +21,11 @@ export const iconVariants = cva("", {
       warning: "text-warning",
       info: "text-info",
     },
+    color: {
+      default: "",
+      light: "text-light",
+      dark: "text-dark",
+    },
   },
-  defaultVariants: { size: "md", variant: "default" },
+  defaultVariants: { size: "md", variant: "default", color: "default" },
 });

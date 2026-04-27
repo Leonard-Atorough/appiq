@@ -20,6 +20,7 @@ export function Icon({
   name,
   size = "md",
   variant = "default",
+  color = "default",
   className,
   "aria-hidden": ariaHidden = true,
   "aria-label": ariaLabel,
@@ -33,7 +34,7 @@ export function Icon({
 
   return (
     <span
-      className={cn("flex items-center justify-center", iconVariants({ size, variant }), className)}
+      className={cn("flex items-center justify-center", iconVariants({ size, variant, color }), className)}
       aria-hidden={ariaHidden}
       aria-label={ariaLabel}
       role={ariaLabel ? "img" : undefined}

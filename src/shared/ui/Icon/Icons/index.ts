@@ -26,6 +26,12 @@ import { BriefcaseIcon } from "./ui/BriefcaseIcon";
 import { SunIcon } from "./ui/SunIcon";
 import { MoonIcon } from "./ui/MoonIcon";
 
+// Action icons
+import { PlusIcon } from "./actions/PlusIcon";
+import { DownloadIcon } from "./actions/DownloadIcon";
+import { DeleteIcon } from "./actions/DeleteIcon";
+import { EditIcon } from "./actions/EditIcon";
+
 /**
  * Icon registry mapping icon names to their React components
  * When adding new icons, add them to this registry and the IconName type
@@ -56,9 +62,16 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   briefcase: BriefcaseIcon,
   sun: SunIcon,
   moon: MoonIcon,
+
+  // Actions
+  plus: PlusIcon,
+  download: DownloadIcon,
+  delete: DeleteIcon,
+  edit: EditIcon,
 };
 
 // Export individual icons for direct imports if needed
 export * from "./navigation";
 export * from "./status";
 export * from "./ui";
+export * from "./actions";
