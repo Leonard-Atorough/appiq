@@ -7,23 +7,24 @@ exports[`Icon Component > snapshots > matches snapshot for default icon 1`] = `
 >
   <svg
     aria-hidden="true"
+    class="w-full h-full"
     fill="currentColor"
-    viewBox="0 0 16 16"
+    viewBox="0 0 24 24"
   >
     <circle
-      cx="8"
-      cy="3"
-      r="1.5"
+      cx="12"
+      cy="5"
+      r="2.25"
     />
     <circle
-      cx="8"
-      cy="8"
-      r="1.5"
+      cx="12"
+      cy="12"
+      r="2.25"
     />
     <circle
-      cx="8"
-      cy="13"
-      r="1.5"
+      cx="12"
+      cy="19"
+      r="2.25"
     />
   </svg>
 </span>
@@ -36,6 +37,7 @@ exports[`Icon Component > snapshots > matches snapshot for sized and variant ico
 >
   <svg
     aria-hidden="true"
+    class="w-full h-full"
     fill="none"
     stroke="currentColor"
     stroke-linecap="round"
@@ -63,6 +65,7 @@ exports[`Icon Component > snapshots > matches snapshot with custom className 1`]
 >
   <svg
     aria-hidden="true"
+    class="w-full h-full"
     fill="none"
     stroke="currentColor"
     stroke-linecap="round"

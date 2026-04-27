@@ -1,8 +1,10 @@
+import React from "react";
+
 /**
  * Info Icon - an 'i' inside a circle
  * Used to indicate informational messages
  */
-export function InfoIcon() {
+export function InfoIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +15,7 @@ export function InfoIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      {...props}
     >
       <circle cx="12" cy="12" r="10" />
       <path d="M12 16v-4" />

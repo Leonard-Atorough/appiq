@@ -1,8 +1,10 @@
+import React from "react";
+
 /**
  * Sun Icon - a bright sun
  * Used for light mode or daytime theme toggle UI elements
  */
-export function SunIcon() {
+export function SunIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +15,7 @@ export function SunIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      {...props}
     >
       <circle cx="12" cy="12" r="5" />
       <line x1="12" y1="1" x2="12" y2="3" />

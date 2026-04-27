@@ -1,27 +1,15 @@
+import React from "react";
+
 /**
  * Hamburger Icon is a stack of three horizontal lines
  * Often used to represent a menu or navigation drawer
  */
-
-export function HamburgerIcon() {
-  const lineHeight = 2.5;
-  const spacing = 2.5;
-  const stackCount = 3;
-  const totalHeight = lineHeight * stackCount + spacing * (stackCount - 1);
-  const startY = (16 - totalHeight) / 2;
-
+export function HamburgerIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-      {Array.from({ length: stackCount }).map((_, index) => (
-        <rect
-          key={index}
-          x="3"
-          y={startY + index * (lineHeight + spacing)}
-          width="12"
-          height={lineHeight}
-          rx={lineHeight / 2}
-        />
-      ))}
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <rect x="3" y="4.5" width="18" height="3" rx="1.5" />
+      <rect x="3" y="10.5" width="18" height="3" rx="1.5" />
+      <rect x="3" y="16.5" width="18" height="3" rx="1.5" />
     </svg>
   );
 }

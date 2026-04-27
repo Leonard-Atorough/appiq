@@ -8,7 +8,7 @@ export function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
+      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -17,7 +17,7 @@ export function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
       aria-hidden="true"
       {...props}
     >
-      <path d="M5 12l6-4-6-4" />
+      <path d="M9 18l6-6-6-6" />
     </svg>
   );
 }

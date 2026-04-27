@@ -1,18 +1,21 @@
+import React from "react";
+
 /**
  * Briefcase Icon - a briefcase or suitcase
  * Used to represent job applications or work
  */
-export function BriefcaseIcon() {
+export function BriefcaseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      {...props}
     >
       <rect x="2" y="7" width="20" height="14" rx="2" />
       <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />

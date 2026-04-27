@@ -1,8 +1,10 @@
+import React from "react";
+
 /**
  * Check Circle Icon - a checkmark inside a circle
  * Used to indicate success or completion status
  */
-export function CheckCircleIcon() {
+export function CheckCircleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +15,7 @@ export function CheckCircleIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      {...props}
     >
       <circle cx="12" cy="12" r="10" />
       <path d="m9 12 2 2 4-4" />
