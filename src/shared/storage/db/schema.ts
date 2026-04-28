@@ -17,13 +17,28 @@ export type ApplicationRow = {
   version: number;
 };
 
+export type ApplicationEventRow = {
+  id: string;
+  applicationId: string;
+  type: string;
+  title: string;
+  description: string;
+  date: string; // ISO
+  createdAt: string; // ISO
+};
+
 export class jobiqDbClient extends Dexie {
   applications!: EntityTable<ApplicationRow, "id">;
+  applicationEvents!: EntityTable<ApplicationEventRow, "id">;
 
   constructor() {
     super("jobiqDbClient");
     this.version(1).stores({
       applications: "id, company, status, appliedDate, [status+appliedDate]",
+    });
+    this.version(2).stores({
+      applications: "id, company, status, appliedDate, [status+appliedDate]",
+      applicationEvents: "id, applicationId, date",
     });
   }
 }
