@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { Sidebar } from "@shared/ui";
-import { RouteContext } from "@app/providers/contexts/RouteContext";
 import { AppNavItem } from "./AppNavItem";
 import type { AppNavProps, NavItem } from "./appNav.types";
 
@@ -11,7 +11,8 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 
 export function AppNav({ items = DEFAULT_NAV_ITEMS, className }: AppNavProps) {
   const [isOpen, setIsOpen] = useState(true);
-  const { currentRoute, navigate } = useContext(RouteContext);
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <Sidebar
@@ -28,9 +29,9 @@ export function AppNav({ items = DEFAULT_NAV_ITEMS, className }: AppNavProps) {
           <AppNavItem
             key={item.path}
             item={item}
-            isActive={currentRoute.startsWith(item.path)}
+            isActive={pathname.startsWith(item.path)}
             isSidebarOpen={isOpen}
-            onClick={() => navigate(item.path)}
+            onClick={() => void navigate({ to: item.path })}
           />
         ))}
       </nav>
