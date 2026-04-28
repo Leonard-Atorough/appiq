@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { ApplicationsTableView } from "./ApplicationsTableView";
-import { ApplicationsKanbanView } from "./ApplicationsKanbanView";
-import { AddApplicationForm } from "./AddApplicationForm";
+import { useNavigate } from "@tanstack/react-router";
+import { ApplicationsTableView } from "../list/ApplicationsTableView";
+import { ApplicationsKanbanView } from "../list/ApplicationsKanbanView";
+import { AddApplicationForm } from "../forms/AddApplicationForm";
 import { Tabs } from "@/shared/ui";
-import { useApplications } from "../data/useApplications";
+import { useApplications } from "../../data/useApplications";
 import type { JobApplication } from "@/entities";
 
 export default function ApplicationsPage() {
+  const navigate = useNavigate();
   const [selectedView, setSelectedView] = useState<"table" | "kanban">("table");
   const [editApplicationId, setEditApplicationId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,6 +23,10 @@ export default function ApplicationsPage() {
   const handleUpdateApplication = async (data: Partial<Omit<JobApplication, "id">>) => {
     if (!editApplicationId) return;
     await updateApplication(editApplicationId, data);
+  };
+
+  const handleNavigateToApplication = (id: string) => {
+    void navigate({ to: "/applications/$id", params: { id } });
   };
 
   return (
@@ -44,6 +50,7 @@ export default function ApplicationsPage() {
             setModalOpen(true);
           }}
           onDeleteApplication={deleteApplication}
+          onNavigateToApplication={handleNavigateToApplication}
         />
       ) : (
         <ApplicationsKanbanView
@@ -52,6 +59,7 @@ export default function ApplicationsPage() {
             setEditApplicationId(id);
             setModalOpen(true);
           }}
+          onNavigateToApplication={handleNavigateToApplication}
         />
       )}
       <AddApplicationForm

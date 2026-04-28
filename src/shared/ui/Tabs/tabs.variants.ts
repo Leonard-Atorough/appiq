@@ -43,6 +43,7 @@ export const tabTriggerVariants = cva(
         underline: [
           // horizontal: bottom border indicator; vertical: right border indicator
           "border-transparent",
+          "hover:border-base hover:text-base",
           "text-secondary hover:text-base",
           "aria-selected:text-base",
         ].join(" "),

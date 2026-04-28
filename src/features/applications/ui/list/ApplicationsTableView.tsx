@@ -1,6 +1,6 @@
-import { useApplications } from "../data/useApplications";
-import { applicationColumns } from "../model/columns";
-import { DataTable, Dropdown } from "@/shared/ui";
+import { useApplications } from "../../data/useApplications";
+import { applicationColumns } from "../../model/columns";
+import { DataTable, Dropdown, Icon } from "@/shared/ui";
 import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
 import type { Row } from "@tanstack/react-table";
@@ -9,6 +9,7 @@ interface ApplicationsTableViewProps {
   onAddApplication: () => void;
   onEditApplication: (id: string) => void;
   onDeleteApplication: (id: string) => void;
+  onNavigateToApplication: (id: string) => void;
 }
 
 /**
@@ -21,6 +22,7 @@ export function ApplicationsTableView({
   onAddApplication,
   onEditApplication,
   onDeleteApplication,
+  onNavigateToApplication,
 }: ApplicationsTableViewProps) {
   //NOTE: we'll needto pass onEditApplication down into the columns definitions. We can spread the columns and add an "actions" column at the end that uses it to render edit buttons for each row.
   const { applications, loading, error } = useApplications();
@@ -37,11 +39,19 @@ export function ApplicationsTableView({
             triggerLabel="Row Actions"
             items={[
               {
+                label: "View Details",
+                icon: <Icon name="chevron-right" size="sm" />,
+                onClick: () => onNavigateToApplication(application.id),
+              },
+              {
                 label: "Edit",
+                icon: <Icon name="edit" size="sm" />,
                 onClick: () => onEditApplication(application.id),
               },
               {
                 label: "Delete",
+                icon: <Icon name="delete" size="sm" />,
+                variant: "danger" as const,
                 onClick: () => onDeleteApplication(application.id),
               },
             ]}

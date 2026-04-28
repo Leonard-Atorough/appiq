@@ -113,6 +113,7 @@ export function AddApplicationForm({
   return (
     <Dialog
       size="lg"
+      modal
       open={open}
       onOpenChange={onOpenChange}
       title={data ? "Edit Application" : "Add Application"}

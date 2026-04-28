@@ -1,5 +1,5 @@
-import { useApplications } from "../data/useApplications";
-import { ApplicationCard } from "./ApplicationCard";
+import { useApplications } from "../../data/useApplications";
+import { ApplicationCard } from "../items/ApplicationCard";
 import { Badge, Button, DropTarget, Icon, Skeleton } from "@/shared/ui";
 import { cn } from "@/shared/lib/cn";
 import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";
@@ -20,11 +20,13 @@ const COLUMNS: {
 interface ApplicationsKanbanViewProps {
   onAddApplication: () => void;
   onEditApplication: (id: string) => void;
+  onNavigateToApplication: (id: string) => void;
 }
 
 export function ApplicationsKanbanView({
   onAddApplication,
   onEditApplication,
+  onNavigateToApplication,
 }: ApplicationsKanbanViewProps) {
   const { applications, loading, error, moveApplication, deleteApplication } = useApplications();
 
@@ -106,6 +108,7 @@ export function ApplicationsKanbanView({
                           application={app}
                           onDelete={(id) => void deleteApplication(id)}
                           onEdit={(app) => onEditApplication(app.id)}
+                          onNavigate={onNavigateToApplication}
                         />
                       ))
                     )}
