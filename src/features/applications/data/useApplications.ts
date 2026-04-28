@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { liveQuery } from "dexie";
 import { JobApplicationRepositoryImpl } from "@/shared/storage/repositories/jobApplication.repository";
+import { ApplicationEventRepositoryImpl } from "@/shared/storage/repositories/applicationEvent.repository";
 import { mapRowToJobApplication } from "@/shared/lib";
 import { db } from "@/shared/storage/indexeddb/dexieClient";
 import type { ApplicationStatus, JobApplication } from "@/entities";
@@ -31,8 +32,14 @@ export function useApplications() {
 
   const moveApplication = useCallback(async (id: string, newStatus: ApplicationStatus) => {
     const repo = new JobApplicationRepositoryImpl(db);
+    const eventRepo = new ApplicationEventRepositoryImpl(db);
     await repo.updateApplication(id, { status: newStatus });
-    // liveQuery picks up the change automatically — no manual re-fetch needed
+    await eventRepo.createEvent({
+      applicationId: id,
+      type: "status_change",
+      title: `Status changed to ${newStatus}`,
+      date: new Date().toISOString(),
+    });
   }, []);
 
   const deleteApplication = useCallback(async (id: string) => {
