@@ -9,6 +9,7 @@ export type IconName =
   | "bento"
   | "doner"
   | "hamburger"
+  | "home"
   | "chevron-left"
   | "chevron-right"
   | "chevron-down"

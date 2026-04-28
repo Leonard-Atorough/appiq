@@ -6,6 +6,7 @@ import { MeatballIcon } from "./navigation/MeatballIcon";
 import { BentoIcon } from "./navigation/BentoIcon";
 import { DonerIcon } from "./navigation/DonerIcon";
 import { HamburgerIcon } from "./navigation/HamburgerIcon";
+import { HomeIcon } from "./navigation/HomeIcon";
 import { ChevronLeftIcon } from "./navigation/ChevronLeftIcon";
 import { ChevronRightIcon } from "./navigation/ChevronRightIcon";
 import { ChevronDownIcon } from "./navigation/ChevronDownIcon";
@@ -42,6 +43,7 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   meatball: MeatballIcon,
   bento: BentoIcon,
   doner: DonerIcon,
+  home: HomeIcon,
   hamburger: HamburgerIcon,
   "chevron-left": ChevronLeftIcon,
   "chevron-right": ChevronRightIcon,
