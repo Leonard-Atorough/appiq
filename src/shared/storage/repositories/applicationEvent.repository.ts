@@ -1,5 +1,10 @@
-import type { ApplicationEvent, ApplicationEventType } from "@entities";
-import type { ApplicationEventRow, JobiqDbClient } from "../db/schema";
+import type { ApplicationEvent } from "@entities";
+import type { JobiqDbClient } from "../db/schema";
+import {
+  mapRowToApplicationEvent,
+  mapApplicationEventToRow,
+  mapUpdatedApplicationEventToRow,
+} from "@/shared/lib";
 
 export class ApplicationEventRepositoryImpl {
   private db: JobiqDbClient;
@@ -13,47 +18,34 @@ export class ApplicationEventRepositoryImpl {
       .where("applicationId")
       .equals(applicationId)
       .toArray();
-    return rows.map(mapRowToEvent);
+    return rows.map(mapRowToApplicationEvent);
   }
 
-  async createEvent(
-    event: Omit<ApplicationEvent, "id" | "createdAt">,
-  ): Promise<ApplicationEvent> {
+  async createEvent(event: Omit<ApplicationEvent, "id" | "createdAt">): Promise<ApplicationEvent> {
     const now = new Date().toISOString();
     const newEvent: ApplicationEvent = {
       id: crypto.randomUUID(),
       createdAt: now,
       ...event,
     };
-    await this.db.applicationEvents.add(mapEventToRow(newEvent));
+    await this.db.applicationEvents.add(mapApplicationEventToRow(newEvent));
     return newEvent;
+  }
+
+  async updateEvent(
+    id: string,
+    updatedFields: Partial<Omit<ApplicationEvent, "id" | "applicationId" | "createdAt">>,
+  ): Promise<ApplicationEvent | null> {
+    const existingRow = await this.db.applicationEvents.get(id);
+    if (!existingRow) {
+      return null;
+    }
+    const updatedRow = mapUpdatedApplicationEventToRow(existingRow, updatedFields);
+    await this.db.applicationEvents.put(updatedRow);
+    return mapRowToApplicationEvent(updatedRow);
   }
 
   async deleteEvent(id: string): Promise<void> {
     await this.db.applicationEvents.delete(id);
   }
-}
-
-function mapRowToEvent(row: ApplicationEventRow): ApplicationEvent {
-  return {
-    id: row.id,
-    applicationId: row.applicationId,
-    type: row.type as ApplicationEventType,
-    title: row.title,
-    description: row.description || undefined,
-    date: row.date,
-    createdAt: row.createdAt,
-  };
-}
-
-function mapEventToRow(event: ApplicationEvent): ApplicationEventRow {
-  return {
-    id: event.id,
-    applicationId: event.applicationId,
-    type: event.type,
-    title: event.title,
-    description: event.description ?? "",
-    date: event.date,
-    createdAt: event.createdAt,
-  };
 }
