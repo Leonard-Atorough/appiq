@@ -29,7 +29,7 @@ export function AppNav({ items = DEFAULT_NAV_ITEMS, className }: AppNavProps) {
           <AppNavItem
             key={item.path}
             item={item}
-            isActive={pathname.startsWith(item.path)}
+            isActive={pathname === item.path}
             isSidebarOpen={isOpen}
             onClick={() => void navigate({ to: item.path })}
           />
