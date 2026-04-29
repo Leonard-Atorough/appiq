@@ -100,6 +100,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           error={error}
           helperText={helperText}
           success={success}
+          {...props}
         >
           {inputEl}
         </Field>
