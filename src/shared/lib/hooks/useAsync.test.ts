@@ -1,5 +1,5 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { useAsync } from "./useAsync";
 
 describe("useAsync", () => {
@@ -371,8 +371,8 @@ describe("useAsync", () => {
         expect(result.current.status).toBe("success");
       });
 
-      expect(result.current.data?.id).toBe(1);
-      expect(result.current.data?.name).toBe("John");
+      expect((result.current.data as { id: number; name: string }).id).toBe(1);
+      expect((result.current.data as { id: number; name: string }).name).toBe("John");
     });
 
     it("should work with no arguments function", async () => {
@@ -408,9 +408,9 @@ describe("useAsync", () => {
       const asyncFn = vi.fn().mockResolvedValue("returned value");
       const { result } = renderHook(() => useAsync(asyncFn, { autoExecute: false }));
 
-      let returnedValue: string | undefined;
+      let returnedValue: unknown;
       act(() => {
-        result.current.execute().then((val) => {
+        result.current.execute().then((val: unknown) => {
           returnedValue = val;
         });
       });
