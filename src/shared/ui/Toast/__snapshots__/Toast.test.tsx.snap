@@ -15,6 +15,7 @@ exports[`Toast > Snapshot Tests > snapshot: default toast 1`] = `
     >
       <svg
         aria-hidden="true"
+        class="w-full h-full"
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
@@ -56,11 +57,12 @@ exports[`Toast > Snapshot Tests > snapshot: default toast 1`] = `
         >
           <svg
             aria-hidden="true"
+            class="w-full h-full"
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2.5"
+            stroke-width="2"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -98,6 +100,7 @@ exports[`Toast > Snapshot Tests > snapshot: error toast 1`] = `
     >
       <svg
         aria-hidden="true"
+        class="w-full h-full"
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
@@ -149,11 +152,12 @@ exports[`Toast > Snapshot Tests > snapshot: error toast 1`] = `
         >
           <svg
             aria-hidden="true"
+            class="w-full h-full"
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2.5"
+            stroke-width="2"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -191,6 +195,7 @@ exports[`Toast > Snapshot Tests > snapshot: toast with all features 1`] = `
     >
       <svg
         aria-hidden="true"
+        class="w-full h-full"
         fill="none"
         stroke="currentColor"
         stroke-linecap="round"
@@ -251,11 +256,12 @@ exports[`Toast > Snapshot Tests > snapshot: toast with all features 1`] = `
         >
           <svg
             aria-hidden="true"
+            class="w-full h-full"
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2.5"
+            stroke-width="2"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >

@@ -5,7 +5,7 @@ exports[`Field > renders snapshot with all message types 1`] = `
   class="flex flex-col gap-xs"
 >
   <label
-    class="font-medium text-base after:content-['*'] after:ml-0.5 after:text-error"
+    class="font-medium text-base after:content-['*'] after:ml-xs after:text-error"
     for="email"
   >
     Email

@@ -21,7 +21,7 @@ exports[`Tooltip > Snapshot Tests > snapshot: styled tooltip with all features 1
   >
     <button
       aria-describedby="_r_1p_"
-      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-gradient-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) hover:from-(--color-primary-hover) hover:to-(--color-primary) active:bg-(--color-primary-active) focus-visible:ring-(--color-primary) px-md py-sm text-base rounded-lg"
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-gradient-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) hover:from-(--color-primary-hover) hover:to-(--color-primary) active:bg-(--color-primary-active) focus-visible:ring-(--color-primary) px-md py-sm text-md rounded-lg"
       type="button"
     >
       <span>

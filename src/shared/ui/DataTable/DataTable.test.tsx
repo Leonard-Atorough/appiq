@@ -58,9 +58,10 @@ describe("DataTable", () => {
     render(<DataTable data={testData} columns={sortableColumns} sortable />);
 
     const nameHeader = screen.getByText("Name");
+    const th = nameHeader.closest("th")!;
     const user = userEvent.setup();
     await user.click(nameHeader);
-    expect(nameHeader.textContent).toMatch(/↑|↓/);
+    expect(th).toHaveAttribute("aria-sort", "ascending");
   });
 
   it("does not allow sorting when sortable=false", () => {

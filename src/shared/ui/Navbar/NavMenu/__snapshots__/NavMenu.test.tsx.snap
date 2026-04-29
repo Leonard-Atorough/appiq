@@ -1,0 +1,77 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NavMenu > Snapshots > matches snapshot with default active route 1`] = `
+<nav
+  aria-label="Main menu"
+  class="flex items-center gap-md"
+>
+  <ul
+    class="flex items-center gap-md list-none p-0 m-0"
+    role="list"
+  >
+    <li>
+      <a
+        aria-current="page"
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-primary"
+        href="/"
+      >
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-secondary"
+        href="/applications"
+      >
+        Applications
+      </a>
+    </li>
+    <li>
+      <a
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-secondary"
+        href="/jobs"
+      >
+        Jobs
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`NavMenu > Snapshots > matches snapshot with mid-list active route 1`] = `
+<nav
+  aria-label="Main menu"
+  class="flex items-center gap-md"
+>
+  <ul
+    class="flex items-center gap-md list-none p-0 m-0"
+    role="list"
+  >
+    <li>
+      <a
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-secondary"
+        href="/"
+      >
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a
+        aria-current="page"
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-primary"
+        href="/applications"
+      >
+        Applications
+      </a>
+    </li>
+    <li>
+      <a
+        class="flex items-center gap-sm text-sm font-medium rounded-sm transition-colors duration-150 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary text-secondary"
+        href="/jobs"
+      >
+        Jobs
+      </a>
+    </li>
+  </ul>
+</nav>
+`;

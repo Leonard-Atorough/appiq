@@ -36,7 +36,15 @@ export const DragItem = ({ id, type, children, disabled = false, className }: Dr
     clone.style.left = "-9999px";
     clone.style.width = `${el.offsetWidth}px`;
     document.body.appendChild(clone);
-    e.dataTransfer.setDragImage(clone, e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+
+    try {
+      e.dataTransfer.setDragImage(clone, e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err) {
+      // setDragImage may not be available in test environments or some browsers
+      // Fallback to default drag image is acceptable
+    }
+
     setTimeout(() => document.body.removeChild(clone), 0);
   };
 

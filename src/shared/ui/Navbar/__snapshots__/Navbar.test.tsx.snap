@@ -25,6 +25,7 @@ exports[`Navbar > Snapshots > matches snapshot with all slots 1`] = `
       Dashboard
     </a>
   </div>
+   
   <div
     class="shrink-0 flex items-center gap-md"
   >
@@ -38,7 +39,12 @@ exports[`Navbar > Snapshots > matches snapshot with all slots 1`] = `
 exports[`Navbar > Snapshots > matches snapshot with default props 1`] = `
 <header
   class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out static px-lg py-md"
-/>
+>
+  <div
+    class="flex-1"
+  />
+   
+</header>
 `;
 
 exports[`Navbar > Snapshots > matches snapshot with menuPosition='right' 1`] = `
@@ -66,6 +72,7 @@ exports[`Navbar > Snapshots > matches snapshot with menuPosition='right' 1`] = `
       Dashboard
     </a>
   </div>
+   
   <div
     class="shrink-0 flex items-center gap-md"
   >
@@ -78,12 +85,16 @@ exports[`Navbar > Snapshots > matches snapshot with menuPosition='right' 1`] = `
 
 exports[`Navbar > Snapshots > matches snapshot with size and position variants 1`] = `
 <header
-  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out sticky top-0 z-40 px-2xl py-lg"
+  class="flex items-center gap-md border-b border-border bg-surface transition-all duration-200 ease-out sticky top-0 left-0 right-0 z-40 w-full px-2xl py-lg"
 >
   <div
     class="shrink-0 flex items-center"
   >
     Test
   </div>
+  <div
+    class="flex-1"
+  />
+   
 </header>
 `;

@@ -54,7 +54,7 @@ describe("Button", () => {
     render(<Button size="md">Medium</Button>);
     const button = screen.getByRole("button", { name: /medium/i });
     expect(button.className).toContain("px-md");
-    expect(button.className).toContain("text-base");
+    expect(button.className).toContain("text-md");
   });
 
   it("applies large size", () => {

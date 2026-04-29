@@ -22,7 +22,7 @@ exports[`Select > matches snapshot with adornments 1`] = `
     </div>
     <select
       aria-invalid="false"
-      class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary pl-lg pr-lg"
+      class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 w-full h-10 px-md text-sm focus-visible:ring-primary pl-lg pr-lg"
       id="_r_18_"
     >
       <option
@@ -60,7 +60,7 @@ exports[`Select > matches snapshot with adornments 1`] = `
 exports[`Select > matches snapshot with default props 1`] = `
 <select
   aria-invalid="false"
-  class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary"
+  class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 w-full h-10 px-md text-sm focus-visible:ring-primary"
   id="_r_15_"
 >
   <option
@@ -99,7 +99,7 @@ exports[`Select > matches snapshot with error state 1`] = `
   <select
     aria-describedby="_r_17_-error"
     aria-invalid="true"
-    class="appearance-none flex items-center rounded-md bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm border-2 border-error focus-visible:ring-error"
+    class="appearance-none flex items-center rounded-md bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 w-full h-10 px-md text-sm border-2 border-error focus-visible:ring-error"
     id="_r_17_"
   >
     <option
@@ -146,7 +146,7 @@ exports[`Select > matches snapshot with label and helper text 1`] = `
   <select
     aria-describedby="_r_16_-helper"
     aria-invalid="false"
-    class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 h-10 px-md text-sm focus-visible:ring-primary"
+    class="appearance-none flex items-center rounded-md border border-base bg-surface px-md py-sm transition-shadow duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-1 hover:shadow-md hover:border-primary shadow-sm focus-visible:shadow-md disabled:cursor-not-allowed disabled:opacity-50 w-full h-10 px-md text-sm focus-visible:ring-primary"
     id="_r_16_"
   >
     <option

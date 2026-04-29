@@ -2,6 +2,7 @@
 
 exports[`DropTarget > matches snapshot in idle state 1`] = `
 <div
+  class="relative rounded h-full"
   data-droppable-id="snap-zone"
 >
   <div>

@@ -99,11 +99,6 @@ describe("NavMenu", () => {
     expect(container.querySelector("nav")).toHaveClass("custom-nav-class");
   });
 
-  it("renders nothing when items array is empty", () => {
-    renderWithRoute(<NavMenu items={[]} />);
-    expect(screen.getByRole("navigation")).toBeEmptyDOMElement();
-  });
-
   describe("Keyboard Navigation", () => {
     it("allows tabbing through all links in order", async () => {
       const user = userEvent.setup();

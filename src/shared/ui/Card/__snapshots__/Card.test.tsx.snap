@@ -3,7 +3,7 @@
 exports[`Card > matches snapshot for default card 1`] = `
 <div
   aria-labelledby="_r_i_"
-  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
+  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
   draggable="true"
   role="group"
   tabindex="0"
@@ -15,7 +15,9 @@ exports[`Card > matches snapshot for default card 1`] = `
     >
       Software Engineer
     </div>
-    <div>
+    <div
+      class="min-h-2xl bg-outline rounded-sm"
+    >
       Acme Corp — Remote
     </div>
     <div
@@ -34,7 +36,7 @@ exports[`Card > matches snapshot for draggable card with dragId 1`] = `
 >
   <div
     aria-labelledby="_r_o_"
-    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface"
     draggable="false"
     role="group"
     tabindex="0"
@@ -46,7 +48,9 @@ exports[`Card > matches snapshot for draggable card with dragId 1`] = `
       >
         Draggable
       </div>
-      <div>
+      <div
+        class="min-h-2xl bg-outline rounded-sm"
+      >
         Content
       </div>
     </div>
@@ -59,7 +63,7 @@ exports[`Card > matches snapshot for loading state 1`] = `
   aria-busy="true"
   aria-disabled="true"
   aria-labelledby="_r_n_"
-  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface cursor-wait opacity-75"
+  class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md hover:shadow-md active:scale-[0.98] border-l-4 border-l-(--color-base) bg-surface cursor-wait opacity-75"
   draggable="true"
   role="group"
   tabindex="0"
@@ -73,7 +77,9 @@ exports[`Card > matches snapshot for loading state 1`] = `
     >
       Loading
     </div>
-    <div>
+    <div
+      class="min-h-2xl bg-outline rounded-sm"
+    >
       Content
     </div>
   </div>
@@ -92,7 +98,7 @@ exports[`Card > matches snapshot for status variants 1`] = `
 <div>
   <div
     aria-labelledby="_r_j_"
-    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-success bg-success-light"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-success bg-success-light"
     draggable="true"
     role="group"
     tabindex="0"
@@ -104,14 +110,16 @@ exports[`Card > matches snapshot for status variants 1`] = `
       >
         Offer
       </div>
-      <div>
+      <div
+        class="min-h-2xl bg-outline rounded-sm"
+      >
         Success
       </div>
     </div>
   </div>
   <div
     aria-labelledby="_r_k_"
-    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-warning bg-warning-light"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-warning bg-warning-light"
     draggable="true"
     role="group"
     tabindex="0"
@@ -123,14 +131,16 @@ exports[`Card > matches snapshot for status variants 1`] = `
       >
         Awaiting
       </div>
-      <div>
+      <div
+        class="min-h-2xl bg-outline rounded-sm"
+      >
         Warning
       </div>
     </div>
   </div>
   <div
     aria-labelledby="_r_l_"
-    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-error bg-error-light"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-error bg-error-light"
     draggable="true"
     role="group"
     tabindex="0"
@@ -142,14 +152,16 @@ exports[`Card > matches snapshot for status variants 1`] = `
       >
         Rejected
       </div>
-      <div>
+      <div
+        class="min-h-2xl bg-outline rounded-sm"
+      >
         Error
       </div>
     </div>
   </div>
   <div
     aria-labelledby="_r_m_"
-    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-info bg-info-light"
+    class="relative border border-base rounded-lg shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary) hover:cursor-pointer p-md cursor-pointer hover:shadow-md active:scale-[0.98] border-l-4 border-l-info bg-info-light"
     draggable="true"
     role="group"
     tabindex="0"
@@ -161,7 +173,9 @@ exports[`Card > matches snapshot for status variants 1`] = `
       >
         Interview
       </div>
-      <div>
+      <div
+        class="min-h-2xl bg-outline rounded-sm"
+      >
         Info
       </div>
     </div>

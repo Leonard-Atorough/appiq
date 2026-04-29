@@ -270,8 +270,8 @@ describe("Navbar", () => {
       const { container } = render(
         <Navbar title="Logo" menu={<a href="/">Dashboard</a>} menuPosition="center" />,
       );
-      const nav = container.querySelector("nav");
-      const menuContainer = nav?.querySelector(":scope > div.flex-1");
+      const headerEl = container.querySelector("header");
+      const menuContainer = headerEl?.querySelector(":scope > div.flex-1");
       expect(menuContainer).toBeInTheDocument();
       expect(menuContainer?.textContent).toContain("Dashboard");
     });
