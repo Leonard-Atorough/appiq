@@ -28,7 +28,7 @@ const jobTypeLabel: Record<NonNullable<JobApplication["jobType"]>, string> = {
   internship: "Internship",
 };
 
-const locationLabel: Record<NonNullable<JobApplication["location"]>, string> = {
+const workingStyleLabel: Record<NonNullable<JobApplication["workingStyle"]>, string> = {
   remote: "Remote",
   "on-site": "On-site",
   hybrid: "Hybrid",
@@ -40,10 +40,19 @@ export function ApplicationCard({
   onEdit,
   onNavigate,
 }: ApplicationCardProps) {
-  const { position, company, status, dateApplied, location, jobType, salaryMin, salaryMax } =
-    application;
+  const {
+    position,
+    company,
+    status,
+    dateApplied,
+    location,
+    workingStyle,
+    jobType,
+    salaryMin,
+    salaryMax,
+  } = application;
   const hasSalary = salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
-  const hasMeta = location || jobType || hasSalary;
+  const hasMeta = location || workingStyle || jobType || hasSalary;
 
   return (
     <>
@@ -66,6 +75,8 @@ export function ApplicationCard({
                 {position}
               </p>
               <p className="text-xs font-medium text-secondary truncate">{company}</p>
+              {/* location */}
+              {location && <p className="text-sm text-muted truncate">{location}</p>}
             </button>
             <div className="shrink-0 -mt-xs -mr-xs">
               <Dropdown
@@ -89,12 +100,12 @@ export function ApplicationCard({
           {/* Date applied */}
           <p className="text-xs text-muted">Applied {formatDate(dateApplied)}</p>
 
-          {/* Meta tags: location, job type, salary */}
+          {/* Meta tags: location, working style, job type, salary */}
           {hasMeta && (
             <div className="flex flex-wrap gap-xs pt-xs border-t border-base">
-              {location && (
+              {workingStyle && (
                 <Badge variant="default" size="sm" outline rounded={false}>
-                  {locationLabel[location]}
+                  {workingStyleLabel[workingStyle]}
                 </Badge>
               )}
               {jobType && (

@@ -27,7 +27,7 @@ interface ApplicationInfoZoneProps {
 }
 
 export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZoneProps) {
-  const { position, company, status, dateApplied, location, jobType, salaryMin, salaryMax } =
+  const { position, company, status, dateApplied, location, workingStyle, jobType, salaryMin, salaryMax } =
     application;
   const hasSalary =
     salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
@@ -60,6 +60,11 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
         {location && (
           <Badge variant="default" size="sm" outline rounded={false}>
             {location}
+          </Badge>
+        )}
+        {workingStyle && (
+          <Badge variant="default" size="sm" outline rounded={false}>
+            {workingStyle}
           </Badge>
         )}
         {jobType && (

@@ -11,6 +11,7 @@ export function mapRowToJobApplication(row: ApplicationRow): JobApplication {
     salaryMin: row.salaryMin,
     salaryMax: row.salaryMax,
     location: row.location ?? undefined,
+    workingStyle: row.workingStyle ?? undefined,
     jobType: row.jobType ?? undefined,
     notes: row.notes ?? "",
   };
@@ -27,6 +28,7 @@ export function mapJobApplicationToRow(
     salaryMin: application.salaryMin ?? 0,
     salaryMax: application.salaryMax ?? 0,
     location: application.location ?? null,
+    workingStyle: application.workingStyle ?? null,
     jobType: application.jobType ?? null,
     notes: application.notes ?? "",
     dateCreated: new Date().toISOString(),
@@ -50,6 +52,7 @@ export function mapUpdatedApplicationToRow(
     salaryMin: updatedFields.salaryMin ?? existingRow.salaryMin,
     salaryMax: updatedFields.salaryMax ?? existingRow.salaryMax,
     location: updatedFields.location ?? existingRow.location,
+    workingStyle: updatedFields.workingStyle ?? existingRow.workingStyle,
     jobType: updatedFields.jobType ?? existingRow.jobType,
     notes: updatedFields.notes ?? existingRow.notes,
     dateUpdated: new Date().toISOString(),

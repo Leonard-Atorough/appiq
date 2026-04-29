@@ -42,7 +42,8 @@ const EMPTY_FORM = {
   company: "",
   position: "",
   status: "saved" as ApplicationStatus,
-  location: "" as ApplicationLocationType | "",
+  location: "",
+  workingStyle: "" as ApplicationLocationType | "",
   jobType: "" as ApplicationJobType | "",
   salaryMin: "",
   salaryMax: "",
@@ -56,6 +57,7 @@ function toFormState(app: JobApplication | null): typeof EMPTY_FORM {
     position: app.position,
     status: app.status,
     location: app.location ?? "",
+    workingStyle: app.workingStyle ?? "",
     jobType: app.jobType ?? "",
     salaryMin: app.salaryMin != null ? String(app.salaryMin) : "",
     salaryMax: app.salaryMax != null ? String(app.salaryMax) : "",
@@ -89,6 +91,7 @@ export function AddApplicationForm({
       position: formData.position.trim(),
       status: formData.status,
       location: formData.location || undefined,
+      workingStyle: formData.workingStyle || undefined,
       jobType: formData.jobType || undefined,
       salaryMin: formData.salaryMin ? Number(formData.salaryMin) : undefined,
       salaryMax: formData.salaryMax ? Number(formData.salaryMax) : undefined,
@@ -144,6 +147,7 @@ export function AddApplicationForm({
               value={formData.company}
               onChange={(e) => set("company", e.target.value)}
               disabled={isSubmitting}
+              required
             />
           </div>
           <div className="flex-1 min-w-0">
@@ -153,11 +157,12 @@ export function AddApplicationForm({
               value={formData.position}
               onChange={(e) => set("position", e.target.value)}
               disabled={isSubmitting}
+              required
             />
           </div>
         </div>
 
-        {/* Status + Location + Job type */}
+        {/* Status */}
         <div className="flex gap-md">
           <div className="flex-1 min-w-0">
             <Select
@@ -178,13 +183,26 @@ export function AddApplicationForm({
               ))}
             </Select>
           </div>
+        </div>
+
+        {/* Location + Working Style + Job type */}
+        <div className="flex gap-md">
+          <div className="flex-1 min-w-0">
+            <Input
+              label="Location"
+              placeholder="e.g. San Francisco, CA"
+              value={formData.location}
+              onChange={(e) => set("location", e.target.value)}
+              disabled={isSubmitting}
+            />
+          </div>
           <div className="flex-1 min-w-0">
             <Select
-              label="Location"
-              value={formData.location}
+              label="Working Style"
+              value={formData.workingStyle}
               onChange={(e) =>
                 set(
-                  "location",
+                  "workingStyle",
                   (e as React.ChangeEvent<HTMLSelectElement>).target.value as
                     | ApplicationLocationType
                     | "",

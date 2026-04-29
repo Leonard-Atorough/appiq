@@ -8,7 +8,8 @@ export interface JobApplication {
   dateApplied: string; // ISO date string
   salaryMin?: number;
   salaryMax?: number;
-  location?: ApplicationLocationType;
+  location?: string; // Address (e.g. "San Francisco, CA" or "123 Main St")
+  workingStyle?: ApplicationLocationType; // remote, on-site, hybrid
   jobType?: ApplicationJobType;
   notes?: string;
 }
