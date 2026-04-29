@@ -98,7 +98,7 @@ exports[`Tabs > Snapshot > matches snapshot for default tabs 1`] = `
     <button
       aria-controls="_r_r_-panel-tab1"
       aria-selected="true"
-      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
+      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base hover:bg-surface text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
       id="_r_r_-tab-tab1"
       role="tab"
       tabindex="0"
@@ -109,7 +109,7 @@ exports[`Tabs > Snapshot > matches snapshot for default tabs 1`] = `
     <button
       aria-controls="_r_r_-panel-tab2"
       aria-selected="false"
-      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
+      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base hover:bg-surface text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
       id="_r_r_-tab-tab2"
       role="tab"
       tabindex="-1"
@@ -120,7 +120,7 @@ exports[`Tabs > Snapshot > matches snapshot for default tabs 1`] = `
     <button
       aria-controls="_r_r_-panel-tab3"
       aria-selected="false"
-      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
+      class="relative inline-flex items-center justify-center whitespace-nowrap font-medium transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary disabled:opacity-50 disabled:cursor-not-allowed border-transparent hover:border-base hover:bg-surface text-secondary hover:text-base aria-selected:text-base px-md py-sm text-md border-b-2 -mb-px aria-selected:border-primary"
       disabled=""
       id="_r_r_-tab-tab3"
       role="tab"
