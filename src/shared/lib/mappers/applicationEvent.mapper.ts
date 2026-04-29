@@ -16,7 +16,7 @@ export function mapRowToApplicationEvent(row: ApplicationEventRow): ApplicationE
 export function mapApplicationEventToRow(
   event: Omit<ApplicationEvent, "id" | "createdAt">,
 ): Omit<ApplicationEventRow, "id"> {
-    return {
+  return {
     applicationId: event.applicationId,
     type: event.type,
     title: event.title,
@@ -35,8 +35,6 @@ export function mapUpdatedApplicationEventToRow(
     type: updatedFields.type ?? existingRow.type,
     title: updatedFields.title ?? existingRow.title,
     description: updatedFields.description ?? existingRow.description,
-    date: updatedFields.date
-      ? new Date(updatedFields.date).toISOString()
-      : existingRow.date,
+    date: updatedFields.date ? new Date(updatedFields.date).toISOString() : existingRow.date,
   };
 }
