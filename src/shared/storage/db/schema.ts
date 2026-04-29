@@ -9,7 +9,8 @@ export type ApplicationRow = {
   dateApplied: string; // ISO date string
   salaryMin: number;
   salaryMax: number;
-  location: ApplicationLocationType | null;
+  location: string | null; // Address (e.g. "San Francisco, CA")
+  workingStyle: ApplicationLocationType | null; // remote, on-site, hybrid
   jobType: ApplicationJobType | null;
   notes: string;
   dateCreated: string; // ISO date string
@@ -33,13 +34,6 @@ export class jobiqDbClient extends Dexie {
 
   constructor() {
     super("jobiqDbClient");
-    this.version(1).stores({
-      applications: "id, company, status, appliedDate, [status+appliedDate]",
-    });
-    this.version(2).stores({
-      applications: "id, company, status, appliedDate, [status+appliedDate]",
-      applicationEvents: "id, applicationId, date",
-    });
   }
 }
 
