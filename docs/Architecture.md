@@ -49,7 +49,7 @@ src/
     │   ├─ storage/
     │   ├─ hooks/
     │   └─ types/
-    ├─ pages/          # Route-level containers
+    ├─ app/            # App-level concerns (routing, global providers)
     ├─ widgets/        # Layout pieces (AppShell, Header, Sidebar)
     ├─ styles/         # tokens/ (colors, spacing, typography, radii, themes), Tailwind entry
     └─ main.tsx        # App bootstrap
@@ -114,10 +114,10 @@ Dark mode is controlled by Tailwind's `darkMode: 'class'` strategy. The `.dark` 
 
 ```js
 // Toggle dark mode
-document.documentElement.classList.toggle('dark');
+document.documentElement.classList.toggle("dark");
 
 // Persist preference
-localStorage.setItem('theme', 'dark');
+localStorage.setItem("theme", "dark");
 ```
 
 This gives the user explicit control independent of their OS preference.
