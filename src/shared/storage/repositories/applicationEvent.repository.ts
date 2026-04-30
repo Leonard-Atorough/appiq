@@ -22,13 +22,15 @@ export class ApplicationEventRepositoryImpl {
   }
 
   async createEvent(event: Omit<ApplicationEvent, "id" | "createdAt">): Promise<ApplicationEvent> {
+    const id = crypto.randomUUID();
     const now = new Date().toISOString();
     const newEvent: ApplicationEvent = {
-      id: crypto.randomUUID(),
+      id,
       createdAt: now,
       ...event,
     };
-    await this.db.applicationEvents.add(mapApplicationEventToRow(newEvent));
+    const row = mapApplicationEventToRow(newEvent);
+    await this.db.applicationEvents.add({ ...row, id });
     return newEvent;
   }
 
