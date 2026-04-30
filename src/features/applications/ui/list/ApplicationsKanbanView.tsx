@@ -1,7 +1,7 @@
-import { useApplicationActions, useApplications } from "../../data/useApplications";
+import { useApplications } from "../../data/useApplications";
+import { useApplicationActions } from "../../data/useApplicationActions";
 import { ApplicationCard } from "../items/ApplicationCard";
 import { Badge, DropTarget, Skeleton } from "@/shared/ui";
-import { useToast } from "@/shared/lib";
 import { cn } from "@/shared/lib/cn";
 import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";
 import type { ApplicationStatus } from "@/entities";
@@ -28,8 +28,10 @@ export function ApplicationsKanbanView({
   onNavigateToApplication,
 }: ApplicationsKanbanViewProps) {
   const { applications, loading, error } = useApplications();
-  const { moveAsync: moveApplication, deleteAsync } = useApplicationActions();
-  const { addToast } = useToast();
+  const { moveAsync: moveApplication, deleteAsync } = useApplicationActions({
+    withSuccess: true,
+    withError: true,
+  });
 
   if (loading) {
     return (
@@ -76,13 +78,7 @@ export function ApplicationsKanbanView({
                 droppableId={col.id}
                 accept="application-card"
                 onDrop={(draggedId) => {
-                  void moveApplication.execute(draggedId, col.id).catch((err) => {
-                    addToast({
-                      title: "Error moving application",
-                      description: err instanceof Error ? err.message : "Unknown error",
-                      variant: "error",
-                    });
-                  });
+                  void moveApplication.execute(draggedId, col.id);
                 }}
               >
                 {({ isDragOver, isDragAccepted }) => (
@@ -100,13 +96,7 @@ export function ApplicationsKanbanView({
                           key={app.id}
                           application={app}
                           onDelete={(id) => {
-                            void deleteAsync.execute(id).catch((err) => {
-                              addToast({
-                                title: "Error deleting application",
-                                description: err instanceof Error ? err.message : "Unknown error",
-                                variant: "error",
-                              });
-                            });
+                            void deleteAsync.execute(id);
                           }}
                           onEdit={(app) => onEditApplication(app.id)}
                           onNavigate={onNavigateToApplication}

@@ -4,8 +4,8 @@ import { ApplicationsTableView } from "../list/ApplicationsTableView";
 import { ApplicationsKanbanView } from "../list/ApplicationsKanbanView";
 import { AddApplicationForm } from "../forms/AddApplicationForm";
 import { Button, Tabs } from "@/shared/ui";
-import { useApplicationActions, useApplications } from "../../data/useApplications";
-import { useToast } from "@/shared/lib";
+import { useApplications } from "../../data/useApplications";
+import { useApplicationActions } from "../../data/useApplicationActions";
 import type { JobApplication } from "@/entities";
 
 export default function ApplicationsPage() {
@@ -14,12 +14,11 @@ export default function ApplicationsPage() {
   const [editApplicationId, setEditApplicationId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const { applications } = useApplications();
-  const { addToast } = useToast();
   const {
     createAsync: createApplication,
     updateAsync: updateApplication,
     deleteAsync: deleteApplication,
-  } = useApplicationActions();
+  } = useApplicationActions({ withSuccess: true, withError: true });
 
   const openCreateModal = () => {
     setEditApplicationId(null);
@@ -69,22 +68,7 @@ export default function ApplicationsPage() {
           onCreateApplication={openCreateModal}
           onEditApplication={openEditModal}
           onDeleteApplication={(id) => {
-            void deleteApplication
-              .execute(id)
-              .then(() => {
-                addToast({
-                  title: "Application deleted",
-                  description: "The application was successfully deleted.",
-                  variant: "success",
-                });
-              })
-              .catch((err) => {
-                addToast({
-                  title: "Error deleting application",
-                  description: err instanceof Error ? err.message : "Unknown error",
-                  variant: "error",
-                });
-              });
+            void deleteApplication.execute(id);
           }}
           onNavigateToApplication={handleNavigateToApplication}
         />

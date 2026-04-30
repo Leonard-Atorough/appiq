@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useApplicationActions, useApplications } from "../../data/useApplications";
+import { useApplications } from "../../data/useApplications";
+import { useApplicationActions } from "../../data/useApplicationActions";
 import { ApplicationInfoZone } from "../detail/ApplicationInfoZone";
 import { ApplicationNotesTab } from "../detail/tabs/ApplicationNotesTab";
 import { ApplicationTimelineTab } from "../detail/tabs/ApplicationTimelineTab";
