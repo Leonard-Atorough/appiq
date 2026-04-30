@@ -5,7 +5,7 @@ export function ToastContainer() {
   const { toasts, removeToast } = useToast();
 
   return (
-    <div className="fixed bottom-0 right-0 p-md z-50 pointer-events-none flex flex-col gap-sm max-w-md">
+    <div className="fixed bottom-md right-md z-50 pointer-events-none flex flex-col gap-sm px-md">
       {toasts.map(({ id, ...toastProps }) => (
         <div key={id} className="pointer-events-auto">
           <Toast

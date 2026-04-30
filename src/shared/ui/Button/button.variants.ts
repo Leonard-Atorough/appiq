@@ -50,6 +50,13 @@ export const buttonVariants = cva(
           "active:text-(--color-primary-active) active:shadow-none",
           "focus-visible:ring-(--color-primary)",
         ].join(" "),
+        danger: [
+          "bg-(--color-error)",
+          "text-(--color-error-foreground)",
+          "hover:bg-(--color-error-hover)",
+          "active:bg-(--color-error-active)",
+          "focus-visible:ring-(--color-error)",
+        ].join(" "),
       },
       size: {
         sm: "px-sm py-xs text-sm rounded-md",

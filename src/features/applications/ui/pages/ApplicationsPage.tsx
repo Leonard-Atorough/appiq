@@ -59,9 +59,7 @@ export default function ApplicationsPage() {
         />
       </div>
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          Total Applications: {applications.length}
-        </p>
+        <p className="text-sm text-muted-foreground">Total Applications: {applications.length}</p>
         <Button variant="primary" size="sm" onClick={openCreateModal}>
           Add Application
         </Button>
@@ -71,13 +69,22 @@ export default function ApplicationsPage() {
           onCreateApplication={openCreateModal}
           onEditApplication={openEditModal}
           onDeleteApplication={(id) => {
-            void deleteApplication.execute(id).catch((err) => {
-              addToast({
-                title: "Error deleting application",
-                description: err instanceof Error ? err.message : "Unknown error",
-                variant: "error",
+            void deleteApplication
+              .execute(id)
+              .then(() => {
+                addToast({
+                  title: "Application deleted",
+                  description: "The application was successfully deleted.",
+                  variant: "success",
+                });
+              })
+              .catch((err) => {
+                addToast({
+                  title: "Error deleting application",
+                  description: err instanceof Error ? err.message : "Unknown error",
+                  variant: "error",
+                });
               });
-            });
           }}
           onNavigateToApplication={handleNavigateToApplication}
         />

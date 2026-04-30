@@ -3,7 +3,9 @@ import { applicationColumns } from "../../model/columns";
 import { DataTable, Dropdown, Icon } from "@/shared/ui";
 import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
+import { ConfirmDeleteForm } from "../forms/ConfirmDeleteForm";
 import type { Row } from "@tanstack/react-table";
+import { useState } from "react";
 
 interface ApplicationsTableViewProps {
   onCreateApplication: () => void;
@@ -26,7 +28,7 @@ export function ApplicationsTableView({
 }: ApplicationsTableViewProps) {
   //NOTE: we'll needto pass onEditApplication down into the columns definitions. We can spread the columns and add an "actions" column at the end that uses it to render edit buttons for each row.
   const { applications, loading, error } = useApplications();
-
+  const [deleteId, setDeleteId] = useState<string | null>(null);
   const combinedColumns = [
     ...applicationColumns,
     {
@@ -52,7 +54,7 @@ export function ApplicationsTableView({
                 label: "Delete",
                 icon: <Icon name="delete" size="sm" />,
                 variant: "danger" as const,
-                onClick: () => onDeleteApplication(application.id),
+                onClick: () => setDeleteId(application.id),
               },
             ]}
           />
@@ -97,6 +99,18 @@ export function ApplicationsTableView({
   return (
     <div>
       <DataTable data={applications} columns={combinedColumns} sortable stickyHeader />
+      <ConfirmDeleteForm
+        open={!!deleteId}
+        onOpenChange={(open) => {
+          if (!open) setDeleteId(null);
+        }}
+        onConfirm={() => {
+          if (deleteId) {
+            onDeleteApplication(deleteId);
+            setDeleteId(null);
+          }
+        }}
+      />
     </div>
   );
 }
