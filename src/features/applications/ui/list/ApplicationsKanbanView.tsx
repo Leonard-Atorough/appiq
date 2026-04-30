@@ -1,6 +1,6 @@
 import { useApplicationActions, useApplications } from "../../data/useApplications";
 import { ApplicationCard } from "../items/ApplicationCard";
-import { Badge, Button, DropTarget, Icon, Skeleton } from "@/shared/ui";
+import { Badge, DropTarget, Skeleton } from "@/shared/ui";
 import { useToast } from "@/shared/lib";
 import { cn } from "@/shared/lib/cn";
 import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";
@@ -19,13 +19,11 @@ const COLUMNS: {
 ];
 
 interface ApplicationsKanbanViewProps {
-  onAddApplication: () => void;
   onEditApplication: (id: string) => void;
   onNavigateToApplication: (id: string) => void;
 }
 
 export function ApplicationsKanbanView({
-  onAddApplication,
   onEditApplication,
   onNavigateToApplication,
 }: ApplicationsKanbanViewProps) {
@@ -58,20 +56,8 @@ export function ApplicationsKanbanView({
     );
   }
 
-  const handleAddApplication = () => {
-    onAddApplication();
-  };
-
   return (
     <div className="flex flex-col gap-md">
-      <div className="flex items-center justify-between px-md pt-md">
-        <h2 className="text-base font-semibold text-primary">Applications</h2>
-        <Button size="sm" onClick={handleAddApplication}>
-          <div className="flex items-center gap-2">
-            <Icon name="plus" size="sm" color="dark" /> Add Application
-          </div>
-        </Button>
-      </div>
       <div className="flex gap-md px-md pb-md overflow-x-auto">
         {COLUMNS.map((col) => {
           const cards = applications.filter((app) => app.status === col.id);
@@ -86,10 +72,6 @@ export function ApplicationsKanbanView({
                   {cards.length}
                 </Badge>
               </div>
-              {/* {col.id === "saved" && (
-                  <Button size="sm" variant="outline" onClick={onAddApplication}>
-                    Add Application
-                  </Button> */}
               <DropTarget
                 droppableId={col.id}
                 accept="application-card"

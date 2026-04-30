@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { ApplicationsTableView } from "../list/ApplicationsTableView";
 import { ApplicationsKanbanView } from "../list/ApplicationsKanbanView";
 import { AddApplicationForm } from "../forms/AddApplicationForm";
-import { Tabs } from "@/shared/ui";
+import { Button, Tabs } from "@/shared/ui";
 import { useApplicationActions, useApplications } from "../../data/useApplications";
 import { useToast } from "@/shared/lib";
 import type { JobApplication } from "@/entities";
@@ -20,6 +20,16 @@ export default function ApplicationsPage() {
     updateAsync: updateApplication,
     deleteAsync: deleteApplication,
   } = useApplicationActions();
+
+  const openCreateModal = () => {
+    setEditApplicationId(null);
+    setModalOpen(true);
+  };
+
+  const openEditModal = (id: string) => {
+    setEditApplicationId(id);
+    setModalOpen(true);
+  };
 
   const handleModalOpenChange = (open: boolean) => {
     setModalOpen(open);
@@ -48,13 +58,18 @@ export default function ApplicationsPage() {
           variant="pill"
         />
       </div>
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">
+          Total Applications: {applications.length}
+        </p>
+        <Button variant="primary" size="sm" onClick={openCreateModal}>
+          Add Application
+        </Button>
+      </div>
       {selectedView === "table" ? (
         <ApplicationsTableView
-          onAddApplication={() => setModalOpen(true)}
-          onEditApplication={(id) => {
-            setEditApplicationId(id);
-            setModalOpen(true);
-          }}
+          onCreateApplication={openCreateModal}
+          onEditApplication={openEditModal}
           onDeleteApplication={(id) => {
             void deleteApplication.execute(id).catch((err) => {
               addToast({
@@ -68,11 +83,7 @@ export default function ApplicationsPage() {
         />
       ) : (
         <ApplicationsKanbanView
-          onAddApplication={() => setModalOpen(true)}
-          onEditApplication={(id) => {
-            setEditApplicationId(id);
-            setModalOpen(true);
-          }}
+          onEditApplication={openEditModal}
           onNavigateToApplication={handleNavigateToApplication}
         />
       )}
