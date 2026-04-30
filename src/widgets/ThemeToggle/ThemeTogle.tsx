@@ -1,6 +1,6 @@
 import { Button } from "@shared/ui";
 import { Icon } from "@shared/ui";
-import { useTheme } from "@/shared/lib/hooks";
+import { useTheme } from "@/shared/lib";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();

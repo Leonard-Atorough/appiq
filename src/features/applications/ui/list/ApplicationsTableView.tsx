@@ -1,6 +1,6 @@
 import { useApplications } from "../../data/useApplications";
 import { applicationColumns } from "../../model/columns";
-import { DataTable, Dropdown, Icon } from "@/shared/ui";
+import { Button, DataTable, Dropdown, Icon } from "@/shared/ui";
 import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
 import type { Row } from "@tanstack/react-table";
@@ -96,5 +96,17 @@ export function ApplicationsTableView({
     );
   }
 
-  return <DataTable data={applications} columns={combinedColumns} sortable stickyHeader />;
+  return (
+    <div>
+      <div className="flex items-center justify-between px-md py-md">
+        <h2 className="text-base font-semibold text-primary">Applications</h2>
+        <Button size="sm" onClick={() => onAddApplication()}>
+          <div className="flex items-center gap-2">
+            <Icon name="plus" size="sm" color="dark" /> Add Application
+          </div>
+        </Button>
+      </div>
+      <DataTable data={applications} columns={combinedColumns} sortable stickyHeader />
+    </div>
+  );
 }

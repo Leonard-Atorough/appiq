@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useApplications } from "../../data/useApplications";
+import { useApplicationActions, useApplications } from "../../data/useApplications";
 import { ApplicationInfoZone } from "../detail/ApplicationInfoZone";
 import { ApplicationNotesTab } from "../detail/tabs/ApplicationNotesTab";
 import { ApplicationTimelineTab } from "../detail/tabs/ApplicationTimelineTab";
@@ -14,7 +14,8 @@ interface ApplicationDetailsPageProps {
 
 export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPageProps) {
   const navigate = useNavigate();
-  const { applications, updateApplication } = useApplications();
+  const { applications } = useApplications();
+  const {updateAsync: updateApplication } = useApplicationActions();
   const application = applications.find((a) => a.id === applicationId);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -38,7 +39,7 @@ export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPage
       content: (
         <ApplicationNotesTab
           application={application}
-          onSave={(notes) => updateApplication(applicationId, { notes })}
+          onSave={(notes) => updateApplication.execute(applicationId, { notes })}
         />
       ),
     },
@@ -77,7 +78,7 @@ export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPage
         onOpenChange={setIsEditOpen}
         data={application}
         onCreateApplication={async () => {}}
-        onUpdateApplication={(updates) => updateApplication(applicationId, updates)}
+        onUpdateApplication={(updates) => updateApplication.execute(applicationId, updates)}
       />
     </div>
   );

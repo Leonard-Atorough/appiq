@@ -74,6 +74,7 @@ export function AddApplicationForm({
 }: AddApplicationFormProps) {
   const [formData, setFormData] = useState(() => toFormState(data));
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (open) setFormData(toFormState(data));
@@ -99,6 +100,7 @@ export function AddApplicationForm({
     };
 
     setIsSubmitting(true);
+    setError(null);
     try {
       if (data && onUpdateApplication) {
         await onUpdateApplication(payload);
@@ -106,6 +108,8 @@ export function AddApplicationForm({
         await onCreateApplication({ ...payload, dateApplied: new Date().toISOString() });
       }
       onOpenChange(false);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }
@@ -138,6 +142,11 @@ export function AddApplicationForm({
       }
     >
       <div className="flex flex-col gap-md p-md">
+        {error && (
+          <div className="rounded-lg border border-error bg-error/10 p-sm">
+            <p className="text-sm font-medium text-error">{error}</p>
+          </div>
+        )}
         {/* Required fields */}
         <div className="flex gap-md">
           <div className="flex-1 min-w-0">

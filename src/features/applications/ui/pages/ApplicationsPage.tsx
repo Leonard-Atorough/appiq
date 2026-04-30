@@ -4,7 +4,8 @@ import { ApplicationsTableView } from "../list/ApplicationsTableView";
 import { ApplicationsKanbanView } from "../list/ApplicationsKanbanView";
 import { AddApplicationForm } from "../forms/AddApplicationForm";
 import { Tabs } from "@/shared/ui";
-import { useApplications } from "../../data/useApplications";
+import { useApplicationActions, useApplications } from "../../data/useApplications";
+import { useToast } from "@/shared/lib";
 import type { JobApplication } from "@/entities";
 
 export default function ApplicationsPage() {
@@ -12,8 +13,13 @@ export default function ApplicationsPage() {
   const [selectedView, setSelectedView] = useState<"table" | "kanban">("table");
   const [editApplicationId, setEditApplicationId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const { createApplication, updateApplication, deleteApplication, applications } =
-    useApplications();
+  const { applications } = useApplications();
+  const { addToast } = useToast();
+  const {
+    createAsync: createApplication,
+    updateAsync: updateApplication,
+    deleteAsync: deleteApplication,
+  } = useApplicationActions();
 
   const handleModalOpenChange = (open: boolean) => {
     setModalOpen(open);
@@ -22,7 +28,7 @@ export default function ApplicationsPage() {
 
   const handleUpdateApplication = async (data: Partial<Omit<JobApplication, "id">>) => {
     if (!editApplicationId) return;
-    await updateApplication(editApplicationId, data);
+    await updateApplication.execute(editApplicationId, data);
   };
 
   const handleNavigateToApplication = (id: string) => {
@@ -49,7 +55,15 @@ export default function ApplicationsPage() {
             setEditApplicationId(id);
             setModalOpen(true);
           }}
-          onDeleteApplication={deleteApplication}
+          onDeleteApplication={(id) => {
+            void deleteApplication.execute(id).catch((err) => {
+              addToast({
+                title: "Error deleting application",
+                description: err instanceof Error ? err.message : "Unknown error",
+                variant: "error",
+              });
+            });
+          }}
           onNavigateToApplication={handleNavigateToApplication}
         />
       ) : (
@@ -65,7 +79,7 @@ export default function ApplicationsPage() {
       <AddApplicationForm
         open={modalOpen}
         onOpenChange={handleModalOpenChange}
-        onCreateApplication={createApplication}
+        onCreateApplication={(data) => createApplication.execute(data)}
         onUpdateApplication={handleUpdateApplication}
         data={
           editApplicationId

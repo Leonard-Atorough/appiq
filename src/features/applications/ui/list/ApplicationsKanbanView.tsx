@@ -1,6 +1,7 @@
-import { useApplications } from "../../data/useApplications";
+import { useApplicationActions, useApplications } from "../../data/useApplications";
 import { ApplicationCard } from "../items/ApplicationCard";
 import { Badge, Button, DropTarget, Icon, Skeleton } from "@/shared/ui";
+import { useToast } from "@/shared/lib";
 import { cn } from "@/shared/lib/cn";
 import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";
 import type { ApplicationStatus } from "@/entities";
@@ -28,7 +29,9 @@ export function ApplicationsKanbanView({
   onEditApplication,
   onNavigateToApplication,
 }: ApplicationsKanbanViewProps) {
-  const { applications, loading, error, moveApplication, deleteApplication } = useApplications();
+  const { applications, loading, error } = useApplications();
+  const { moveAsync: moveApplication, deleteAsync } = useApplicationActions();
+  const { addToast } = useToast();
 
   if (loading) {
     return (
@@ -90,7 +93,15 @@ export function ApplicationsKanbanView({
               <DropTarget
                 droppableId={col.id}
                 accept="application-card"
-                onDrop={(draggedId) => moveApplication(draggedId, col.id)}
+                onDrop={(draggedId) => {
+                  void moveApplication.execute(draggedId, col.id).catch((err) => {
+                    addToast({
+                      title: "Error moving application",
+                      description: err instanceof Error ? err.message : "Unknown error",
+                      variant: "error",
+                    });
+                  });
+                }}
               >
                 {({ isDragOver, isDragAccepted }) => (
                   <div
@@ -106,7 +117,15 @@ export function ApplicationsKanbanView({
                         <ApplicationCard
                           key={app.id}
                           application={app}
-                          onDelete={(id) => void deleteApplication(id)}
+                          onDelete={(id) => {
+                            void deleteAsync.execute(id).catch((err) => {
+                              addToast({
+                                title: "Error deleting application",
+                                description: err instanceof Error ? err.message : "Unknown error",
+                                variant: "error",
+                              });
+                            });
+                          }}
                           onEdit={(app) => onEditApplication(app.id)}
                           onNavigate={onNavigateToApplication}
                         />
