@@ -5,24 +5,11 @@
 @config "../tailwind.config.js";
 
 :root {
-  /* Base typography & rendering — font families/sizes come from tokens/typography.css */
-  font-family: var(--font-sans);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-normal);
-  letter-spacing: var(--tracking-normal);
   color-scheme: light dark;
-  color: var(--color-text);
-  background: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (max-width: 1024px) {
-  :root {
-    font-size: 16px;
-  }
 }
 
 /* ===== THEME TRANSITION ===== */
@@ -39,6 +26,13 @@
 /* ===== LAYOUT BASE ===== */
 body {
   margin: 0;
+  /* Font set here so rem stays anchored to the browser default (16px) */
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
 }
 
 #root {

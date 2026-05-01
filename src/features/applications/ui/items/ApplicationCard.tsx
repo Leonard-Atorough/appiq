@@ -71,10 +71,10 @@ export function ApplicationCard({
               className="flex flex-col gap-xs min-w-0 text-left hover:opacity-80 transition-opacity duration-150"
               aria-label={`View details for ${position} at ${company}`}
             >
-              <p className="text-sm font-semibold text-primary leading-snug line-clamp-2">
+              <p className="text-base font-semibold text-primary leading-snug line-clamp-2">
                 {position}
               </p>
-              <p className="text-xs font-medium text-secondary truncate">{company}</p>
+              <p className="text-sm font-medium text-secondary truncate">{company}</p>
               {/* location */}
               {location && <p className="text-sm text-muted truncate">{location}</p>}
             </button>

@@ -29,7 +29,7 @@ import { Icon } from "../Icon";
  * Internal DataTableHeader component
  * Renders the table header row with column definitions, sorting, and keyboard navigation
  */
-function DataTableHeader<TData extends Record<string, any>>({
+function DataTableHeader<TData extends Record<string, unknown>>({
   table,
   props: { size = "md", variant = "default", sortable = false },
   headerClassName,
@@ -102,7 +102,7 @@ function DataTableHeader<TData extends Record<string, any>>({
   );
 }
 
-function DataTableCell<TData extends Record<string, any>>({
+function DataTableCell<TData extends Record<string, unknown>>({
   cell,
   props: { size = "md", variant = "default" },
   cellClassName,
@@ -122,7 +122,7 @@ function DataTableCell<TData extends Record<string, any>>({
   );
 }
 
-function DataTableRow<TData extends Record<string, any>>({
+function DataTableRow<TData extends Record<string, unknown>>({
   row,
   props: {
     size = "md",

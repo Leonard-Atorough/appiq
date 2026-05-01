@@ -14,9 +14,9 @@ export const dataTableHeadVariants = cva(
   {
     variants: {
       size: {
-        sm: "py-xs text-xs",
-        md: "py-sm text-sm",
-        lg: "py-md text-base",
+        sm: "py-xs text-sm",
+        md: "py-sm text-md",
+        lg: "py-md text-lg",
       },
       variant: {
         default: "bg-muted",

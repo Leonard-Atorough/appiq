@@ -24,7 +24,7 @@ export const dropdownMenuVariants = cva(
 export const dropdownItemVariants = cva(
   [
     "flex w-full items-center gap-sm",
-    "px-sm py-xs text-sm rounded-md",
+    "px-sm py-xs text-md rounded-md",
     "transition-all duration-100",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
     "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -33,7 +33,7 @@ export const dropdownItemVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-base hover:bg-muted",
+        default: "hover:bg-muted",
         danger: "text-error hover:bg-error-light",
       },
     },
