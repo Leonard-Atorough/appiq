@@ -1,37 +1,37 @@
 import React from "react";
 
 // Navigation icons
-import { KebabIcon } from "./navigation/KebabIcon";
-import { MeatballIcon } from "./navigation/MeatballIcon";
-import { BentoIcon } from "./navigation/BentoIcon";
-import { DonerIcon } from "./navigation/DonerIcon";
-import { HamburgerIcon } from "./navigation/HamburgerIcon";
-import { HomeIcon } from "./navigation/HomeIcon";
-import { ChevronLeftIcon } from "./navigation/ChevronLeftIcon";
-import { ChevronRightIcon } from "./navigation/ChevronRightIcon";
-import { ChevronDownIcon } from "./navigation/ChevronDownIcon";
-import { ChevronUpIcon } from "./navigation/ChevronUpIcon";
+import {
+  KebabIcon,
+  MeatballIcon,
+  BentoIcon,
+  DonerIcon,
+  HomeIcon,
+  HamburgerIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "./navigation";
 
 // Status icons
-import { CheckCircleIcon } from "./status/CheckCircleIcon";
-import { XCircleIcon } from "./status/XCircleIcon";
-import { AlertTriangleIcon } from "./status/AlertTriangleIcon";
-import { InfoIcon } from "./status/InfoIcon";
+import { CheckCircleIcon, XCircleIcon, AlertTriangleIcon, InfoIcon } from "./status";
 
 // UI icons
-import { BellIcon } from "./ui/BellIcon";
-import { CheckIcon } from "./ui/CheckIcon";
-import { MinusIcon } from "./ui/MinusIcon";
-import { XIcon } from "./ui/XIcon";
-import { BriefcaseIcon } from "./ui/BriefcaseIcon";
-import { SunIcon } from "./ui/SunIcon";
-import { MoonIcon } from "./ui/MoonIcon";
+import {
+  BellIcon,
+  CheckIcon,
+  MinusIcon,
+  XIcon,
+  BriefcaseIcon,
+  SunIcon,
+  MoonIcon,
+  CalendarIcon,
+  LocationIcon,
+} from "./ui";
 
 // Action icons
-import { PlusIcon } from "./actions/PlusIcon";
-import { DownloadIcon } from "./actions/DownloadIcon";
-import { DeleteIcon } from "./actions/DeleteIcon";
-import { EditIcon } from "./actions/EditIcon";
+import { PlusIcon, DownloadIcon, DeleteIcon, EditIcon } from "./actions";
 
 /**
  * Icon registry mapping icon names to their React components
@@ -64,7 +64,8 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   briefcase: BriefcaseIcon,
   sun: SunIcon,
   moon: MoonIcon,
-
+  calendar: CalendarIcon,
+  location: LocationIcon,
   // Actions
   plus: PlusIcon,
   download: DownloadIcon,

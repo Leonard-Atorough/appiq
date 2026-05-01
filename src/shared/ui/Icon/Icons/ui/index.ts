@@ -5,3 +5,5 @@ export { XIcon } from "./XIcon";
 export { BriefcaseIcon } from "./BriefcaseIcon";
 export { SunIcon } from "./SunIcon";
 export { MoonIcon } from "./MoonIcon";
+export { CalendarIcon } from "./CalendarIcon";
+export { LocationIcon } from "./LocationIcon";
