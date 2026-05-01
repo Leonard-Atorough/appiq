@@ -68,10 +68,10 @@ export function ApplicationCard({
           <div className="flex items-start justify-between gap-sm">
             <button
               onClick={() => onNavigate?.(application.id)}
-              className="flex flex-col gap-xs min-w-0 text-left hover:opacity-80 transition-opacity duration-150"
+              className="flex flex-col gap-xs min-w-0 text-left hover:opacity-80 transition-opacity duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               aria-label={`View details for ${position} at ${company}`}
             >
-              <p className="text-base font-semibold text-primary leading-snug line-clamp-2">
+              <p className="text-md font-semibold text-primary leading-snug line-clamp-2">
                 {position}
               </p>
               <p className="text-sm font-medium text-secondary truncate">{company}</p>

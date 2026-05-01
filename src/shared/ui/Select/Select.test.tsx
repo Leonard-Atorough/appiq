@@ -76,7 +76,7 @@ describe("Select", () => {
       </Select>
     );
     const select = screen.getByTestId("select");
-    expect(select).toHaveClass("h-12", "px-lg", "text-base");
+    expect(select).toHaveClass("h-12", "px-lg", "text-md");
   });
 
   // --- State Variants ---
@@ -420,7 +420,7 @@ describe("Select", () => {
       </Select>
     );
     const select = screen.getByTestId("select");
-    expect(select).toHaveClass("h-12", "px-lg", "text-base", "custom-class");
+    expect(select).toHaveClass("h-12", "px-lg", "text-md", "custom-class");
   });
 
   it("passes through HTML attributes", () => {

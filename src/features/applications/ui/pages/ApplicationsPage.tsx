@@ -46,7 +46,7 @@ export default function ApplicationsPage() {
 
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-md">
         <Tabs
           tabs={[
             { label: "Table View", id: "table" },
@@ -57,8 +57,8 @@ export default function ApplicationsPage() {
           variant="pill"
         />
       </div>
-      <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">Total Applications: {applications.length}</p>
+      <div className="mb-md flex items-center justify-between">
+        <p className="text-md text-muted">Total Applications: {applications.length}</p>
         <Button variant="primary" size="md" onClick={openCreateModal}>
           Add Application
         </Button>

@@ -33,11 +33,11 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
     salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
 
   return (
-    <div className="bg-surface border border-base rounded-xl p-lg shadow-sm flex flex-col gap-md">
+    <div className="bg-surface border border-base rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-md">
       <div className="flex items-start justify-between gap-md">
         <div className="flex flex-col gap-xs min-w-0">
           <h1 className="text-xl font-bold text-primary leading-tight">{position}</h1>
-          <p className="text-base font-medium">{company}</p>
+          <p className="text-md font-medium">{company}</p>
         </div>
         <div className="flex items-center gap-sm shrink-0">
           <Badge variant={STATUS_VARIANT[status]} size="md" rounded>

@@ -58,7 +58,7 @@ export const checkboxLabelVariants = cva("font-medium text-base select-none curs
     size: {
       sm: "text-sm",
       md: "text-sm",
-      lg: "text-base",
+      lg: "text-md",
     },
     disabled: {
       true: "opacity-50 cursor-not-allowed",

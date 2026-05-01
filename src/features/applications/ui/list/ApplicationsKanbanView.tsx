@@ -52,7 +52,7 @@ export function ApplicationsKanbanView({
       <div className="p-md">
         <div className="rounded-lg border border-error bg-error/10 p-md">
           <p className="text-sm font-medium text-error">Error loading applications</p>
-          <p className="text-xs text-error/80">{error.message}</p>
+          <p className="text-xs text-error-text">{error.message}</p>
         </div>
       </div>
     );

@@ -90,7 +90,7 @@ export const dataTableCellVariants = cva(
       size: {
         sm: "py-xs text-xs",
         md: "py-sm text-sm",
-        lg: "py-md text-base",
+        lg: "py-md text-md",
       },
       variant: {
         default: "bg-inherit",

@@ -16,7 +16,7 @@ export const inputVariants = cva(
       size: {
         sm: "h-8 px-sm",
         md: "h-10 px-md",
-        lg: "h-12 px-lg text-base",
+        lg: "h-12 px-lg text-md",
       },
       state: {
         default: "focus-within:ring-(--color-primary) hover:border-(--color-primary)",

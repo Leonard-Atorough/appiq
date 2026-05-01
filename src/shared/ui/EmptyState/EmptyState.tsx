@@ -45,7 +45,7 @@ export function EmptyState({
     >
       {resolvedIcon}
       <div className="flex flex-col gap-xs w-full">
-        <h3 className="text-base font-semibold">{title}</h3>
+        <h3 className="text-md font-semibold">{title}</h3>
         <p className="text-sm text-secondary leading-normal">{description}</p>
       </div>
 

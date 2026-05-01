@@ -35,14 +35,15 @@ export function ApplicationNotesTab({ application, onSave }: ApplicationNotesTab
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           autoGrow
+          size="md"
           minRows={4}
           placeholder="Add your notes here..."
         />
         <div className="flex gap-sm">
-          <Button variant="primary" size="sm" onClick={handleSave} loading={saving}>
+          <Button variant="primary" size="md" onClick={handleSave} loading={saving}>
             Save
           </Button>
-          <Button variant="ghost" size="sm" onClick={handleCancel}>
+          <Button variant="ghost" size="md" onClick={handleCancel}>
             Cancel
           </Button>
         </div>
@@ -66,18 +67,18 @@ export function ApplicationNotesTab({ application, onSave }: ApplicationNotesTab
   return (
     <div className="flex flex-col gap-md p-md">
       <div className="bg-muted rounded-lg p-md">
-        <p className="text-sm text-primary leading-relaxed whitespace-pre-wrap">
+        <p className="text-md text-primary leading-relaxed whitespace-pre-wrap">
           {application.notes}
         </p>
       </div>
       <Button
         variant="outline"
-        size="sm"
+        size="md"
         onClick={() => setIsEditing(true)}
         className="self-start"
       >
         <span className="flex items-center gap-xs">
-          <Icon name="edit" size="sm" />
+          <Icon name="edit" size="md" />
           Edit Notes
         </span>
       </Button>

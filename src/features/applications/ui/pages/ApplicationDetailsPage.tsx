@@ -16,7 +16,7 @@ interface ApplicationDetailsPageProps {
 export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPageProps) {
   const navigate = useNavigate();
   const { applications } = useApplications();
-  const {updateAsync: updateApplication } = useApplicationActions();
+  const { updateAsync: updateApplication } = useApplicationActions();
   const application = applications.find((a) => a.id === applicationId);
   const [isEditOpen, setIsEditOpen] = useState(false);
 
@@ -57,22 +57,22 @@ export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPage
   ];
 
   return (
-    <div className="flex flex-col gap-lg p-sm mx-auto">
+    <div className="flex flex-col gap-lg p-sm w-full">
       <Button
         variant="ghost"
-        size="sm"
+        size="md"
         onClick={() => void navigate({ to: "/applications" })}
         className="self-start"
       >
         <span className="flex items-center gap-xs">
-          <Icon name="chevron-left" size="sm" />
+          <Icon name="chevron-left" size="md" />
           Back
         </span>
       </Button>
 
       <ApplicationInfoZone application={application} onEdit={() => setIsEditOpen(true)} />
 
-      <Tabs tabs={tabs}  defaultTab="notes" />
+      <Tabs tabs={tabs} defaultTab="notes" />
 
       <AddApplicationForm
         open={isEditOpen}

@@ -20,12 +20,11 @@
   --font-size-xs: 0.75rem; /* 12px — captions, meta, labels */
   --font-size-sm: 0.875rem; /* 14px — helper text, secondary UI */
   --font-size-base: 1rem; /* 16px — standard body (desktop) */
-  --font-size-md: 1.125rem; /* 18px — comfortable reading body */
-  --font-size-lg: 1.25rem; /* 20px — subheadings, larger labels */
-  --font-size-xl: 1.5rem; /* 24px — section headings (h2) */
-  --font-size-2xl: 1.875rem; /* 30px — major headings */
-  --font-size-3xl: 2.25rem; /* 36px — page headings (h1 mobile) */
-  --font-size-4xl: 3rem; /* 48px — hero / display (h1 desktop) */
+  --font-size-lg: 1.125rem; /* 18px — standard body (mobile), subheadings */
+  --font-size-xl: 1.25rem; /* 20px — subheadings, UI that needs emphasis */
+  --font-size-2xl: 1.75rem; /* 28px — section headings, large UI */
+  --font-size-3xl: 2.25rem; /* 36px — main headings, hero text */
+  --font-size-4xl: 3rem; /* 48px — large display, rare use */
 
   /* ===== FONT WEIGHTS ===== */
   --font-weight-normal: 400;

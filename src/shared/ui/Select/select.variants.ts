@@ -17,7 +17,7 @@ export const selectVariants = cva(
       size: {
         sm: "h-8 px-sm text-xs",
         md: "h-10 px-md text-sm",
-        lg: "h-12 px-lg text-base",
+        lg: "h-12 px-lg text-md",
       },
       state: {
         default: "focus-visible:ring-primary",

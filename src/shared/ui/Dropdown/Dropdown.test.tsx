@@ -217,7 +217,7 @@ describe("Dropdown", () => {
       render(<Dropdown items={baseItems} />);
       await user.click(screen.getByRole("button", { name: /open menu/i }));
       const editItem = screen.getByRole("menuitem", { name: /edit/i });
-      expect(editItem).toHaveClass("text-base");
+      expect(editItem).toHaveClass("text-md");
     });
 
     it("applies danger variant styles to items", async () => {
