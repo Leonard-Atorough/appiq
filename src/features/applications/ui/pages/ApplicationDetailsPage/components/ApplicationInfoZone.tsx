@@ -1,6 +1,6 @@
 import { Badge, Button, Icon } from "@/shared/ui";
 import type { JobApplication, ApplicationStatus } from "@/entities";
-import { formatDate, formatSalary } from "../../lib/applicationFormatters";
+import { formatDate, formatSalary } from "../../../../lib/applicationFormatters";
 
 const STATUS_VARIANT: Record<
   ApplicationStatus,

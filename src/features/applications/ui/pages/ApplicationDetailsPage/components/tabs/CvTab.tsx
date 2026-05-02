@@ -1,6 +1,6 @@
 import { EmptyState } from "@/shared/ui";
 
-export function ApplicationCvTab() {
+export function CvTab() {
   return (
     <div className="p-md">
       <EmptyState

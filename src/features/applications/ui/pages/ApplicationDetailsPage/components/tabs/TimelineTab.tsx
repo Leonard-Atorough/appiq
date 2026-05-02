@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, EmptyState, Icon, Input, Select, Skeleton } from "@/shared/ui";
-import { useApplicationEvents } from "../../../data/useApplicationEvents";
-import { formatDate } from "../../../lib/applicationFormatters";
+import { useApplicationEvents } from "../../../../../data/useApplicationEvents";
+import { formatDate } from "../../../../../lib/applicationFormatters";
 import type { ApplicationEventType } from "@/entities";
 
 const EVENT_TYPE_LABELS: Record<ApplicationEventType, string> = {
@@ -18,7 +18,7 @@ const EVENT_TYPE_ICON: Record<ApplicationEventType, string> = {
   custom: "check",
 };
 
-interface ApplicationTimelineTabProps {
+interface TimelineTabProps {
   applicationId: string;
 }
 
@@ -36,7 +36,7 @@ const EMPTY_FORM: AddEventForm = {
   description: "",
 };
 
-export function ApplicationTimelineTab({ applicationId }: ApplicationTimelineTabProps) {
+export function TimelineTab({ applicationId }: TimelineTabProps) {
   const { events, loading, addEvent, deleteEvent } = useApplicationEvents(applicationId);
   const [isAdding, setIsAdding] = useState(false);
   const [form, setForm] = useState<AddEventForm>(EMPTY_FORM);

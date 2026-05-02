@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button, EmptyState, Icon, Textarea } from "@/shared/ui";
 import type { JobApplication } from "@/entities";
 
-interface ApplicationNotesTabProps {
+interface NotesTabProps {
   application: JobApplication;
   onSave: (notes: string) => Promise<void>;
 }
 
-export function ApplicationNotesTab({ application, onSave }: ApplicationNotesTabProps) {
+export function NotesTab({ application, onSave }: NotesTabProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(application.notes ?? "");
   const [saving, setSaving] = useState(false);

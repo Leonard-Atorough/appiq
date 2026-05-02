@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useApplications } from "../../data/useApplications";
-import { useApplicationActions } from "../../data/useApplicationActions";
-import { ApplicationInfoZone } from "../detail/ApplicationInfoZone";
-import { ApplicationNotesTab } from "../detail/tabs/ApplicationNotesTab";
-import { ApplicationTimelineTab } from "../detail/tabs/ApplicationTimelineTab";
-import { ApplicationCvTab } from "../detail/tabs/ApplicationCvTab";
-import { AddApplicationForm } from "../forms/AddApplicationForm";
+import { useApplications } from "../../../data/useApplications";
+import { useApplicationActions } from "../../../data/useApplicationActions";
+import { ApplicationInfoZone } from "./components/ApplicationInfoZone";
+import { NotesTab } from "./components/tabs/NotesTab";
+import { TimelineTab } from "./components/tabs/TimelineTab";
+import { CvTab } from "./components/tabs/CvTab";
+import { AddApplicationForm } from "../../forms/AddApplicationForm";
 import { Button, EmptyState, Icon, Tabs } from "@/shared/ui";
 
 interface ApplicationDetailsPageProps {
@@ -38,7 +38,7 @@ export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPage
       id: "notes",
       label: "Notes",
       content: (
-        <ApplicationNotesTab
+        <NotesTab
           application={application}
           onSave={(notes) => updateApplication.execute(applicationId, { notes })}
         />
@@ -47,12 +47,12 @@ export function ApplicationDetailsPage({ applicationId }: ApplicationDetailsPage
     {
       id: "timeline",
       label: "Timeline",
-      content: <ApplicationTimelineTab applicationId={applicationId} />,
+      content: <TimelineTab applicationId={applicationId} />,
     },
     {
       id: "cv",
       label: "CV",
-      content: <ApplicationCvTab />,
+      content: <CvTab />,
     },
   ];
 
