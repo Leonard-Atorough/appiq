@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ApplicationsTableView } from "../list/ApplicationsTableView";
-import { ApplicationsKanbanView } from "../list/ApplicationsKanbanView";
-import { AddApplicationForm } from "../forms/AddApplicationForm";
+import { ApplicationsTableView } from "./views/ApplicationsTableView";
+import { ApplicationsKanbanView } from "./views/ApplicationsKanbanView";
+import { AddApplicationForm } from "../../forms/AddApplicationForm";
 import { Button, Tabs } from "@/shared/ui";
-import { useApplications } from "../../data/useApplications";
-import { useApplicationActions } from "../../data/useApplicationActions";
+import { useApplications } from "../../../data/useApplications";
+import { useApplicationActions } from "../../../data/useApplicationActions";
 import type { JobApplication } from "@/entities";
 
 export default function ApplicationsPage() {
