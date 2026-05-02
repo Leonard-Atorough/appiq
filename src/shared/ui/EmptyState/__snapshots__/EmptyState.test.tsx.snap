@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EmptyState > matches snapshot with all props 1`] = `
+<div
+  aria-label="No applications yet"
+  class="flex flex-col items-center justify-center text-center rounded-lg border border-dashed border-muted bg-surface gap-md p-2xl"
+  role="status"
+>
+  <span
+    aria-hidden="true"
+    class="flex items-center justify-center w-2xl h-2xl text-base"
+  >
+    <svg
+      aria-hidden="true"
+      class="w-full h-full"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        height="14"
+        rx="2"
+        width="20"
+        x="2"
+        y="7"
+      />
+      <path
+        d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="12"
+        y2="16"
+      />
+      <line
+        x1="10"
+        x2="14"
+        y1="14"
+        y2="14"
+      />
+    </svg>
+  </span>
+  <div
+    class="flex flex-col gap-xs w-full"
+  >
+    <h3
+      class="text-md font-semibold"
+    >
+      No applications yet
+    </h3>
+    <p
+      class="text-sm text-secondary leading-normal"
+    >
+      Start tracking your job search.
+    </p>
+  </div>
+  <div
+    class="mt-sm"
+  >
+    <button
+      class="relative inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md active:shadow-lg active:scale-[0.98] bg-gradient-to-br from-(--color-primary) to-(--color-primary-hover) text-(--color-primary-foreground) hover:from-(--color-primary-hover) hover:to-(--color-primary) active:bg-(--color-primary-active) focus-visible:ring-(--color-primary) px-md py-sm text-md rounded-lg"
+      type="button"
+    >
+      <span>
+        Add Application
+      </span>
+    </button>
+  </div>
+</div>
+`;
