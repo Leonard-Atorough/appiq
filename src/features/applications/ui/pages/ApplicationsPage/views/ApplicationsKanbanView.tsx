@@ -35,7 +35,7 @@ export function ApplicationsKanbanView({
 
   if (loading) {
     return (
-      <div className="flex gap-md p-md">
+      <div className="flex gap-md p-md" data-testid="kanban-loading">
         {COLUMNS.map((col) => (
           <div key={col.id} className="flex-1 min-w-0 flex flex-col gap-sm">
             <Skeleton className="h-8 w-full" />

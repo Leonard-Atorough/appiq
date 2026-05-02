@@ -62,6 +62,7 @@ export function ApplicationCard({
         status={statusCardAccent[status]}
         dragId={application.id}
         dragType="application-card"
+        data-testid="application-card"
       >
         <div className="flex flex-col gap-sm">
           {/* Title row: position + actions menu */}
