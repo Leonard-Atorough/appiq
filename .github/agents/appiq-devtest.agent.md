@@ -219,6 +219,7 @@ describe('ApplicationCard', () => {
 - **DON'T**: Use inline styles; use Tailwind utilities or design tokens
 - **DON'T**: Ignore TypeScript errors; resolve all strict-mode violations
 - **DON'T**: Skip testing hooks and data fetching; they are the core of feature behavior
+- **DON'T**: Default to using `any` type; define clear interfaces and types for all data structures or, when necessary, use `unknown` and narrow it down properly.
 
 ## Common Tasks
 
