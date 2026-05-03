@@ -1,6 +1,6 @@
 import { useDashboardMetrics } from "../../../data/useDashboardMetrics";
 import { Card } from "@/shared/ui";
-import { MetricsPanel } from "./MetricsPanel/MetricsPanel";
+import { MetricsPanel } from "./components/MetricsPanel";
 
 export default function DashboardPage() {
   const { metrics, loading, error } = useDashboardMetrics();

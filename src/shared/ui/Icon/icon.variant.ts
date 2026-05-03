@@ -3,8 +3,8 @@ import { cva } from "class-variance-authority";
 export const iconVariants = cva("", {
   variants: {
     size: {
-      xs: "w-sm h-sm",
-      sm: "w-md h-md",
+      xs: "w-md h-md",
+      sm: "w-lg h-lg",
       md: "w-xl h-xl",
       lg: "w-2xl h-2xl",
       xl: "w-3xl h-3xl",
