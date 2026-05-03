@@ -50,4 +50,8 @@ export class ApplicationEventRepositoryImpl {
   async deleteEvent(id: string): Promise<void> {
     await this.db.applicationEvents.delete(id);
   }
+
+  async deleteByApplicationId(applicationId: string): Promise<void> {
+    await this.db.applicationEvents.where("applicationId").equals(applicationId).delete();
+  }
 }

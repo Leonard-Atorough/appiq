@@ -1,9 +1,12 @@
 import { useDashboardMetrics } from "../../../data/useDashboardMetrics";
+import { useSankeyData } from "../../../data/useSankeyData";
 import { Card } from "@/shared/ui";
 import { MetricsPanel } from "./components/MetricsPanel";
+import { SankeyChartPanel } from "./components/SankeyChartPanel";
 
 export default function DashboardPage() {
   const { metrics, loading, error } = useDashboardMetrics();
+  const { data: sankeyData, loading: sankeyLoading } = useSankeyData();
 
   if (error) {
     return (
@@ -17,19 +20,12 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col gap-lg p-md">
+    <div className="flex flex-col gap-lg p-md justify-center">
       {/* Metrics Panel */}
       <MetricsPanel loading={loading} metrics={metrics} />
 
-      {/* Funnel Chart */}
-      <section aria-labelledby="funnel-heading">
-        <h2 id="funnel-heading" className="text-lg font-semibold text-primary mb-md">
-          Application Progress
-        </h2>
-        <div className="bg-surface border border-base rounded-lg p-lg flex items-center justify-center h-48 text-muted text-sm">
-          Funnel chart coming soon
-        </div>
-      </section>
+      {/* Sankey Flow Chart */}
+      <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
 
       {/* Recent Activity + Placeholder Section */}
       <section aria-labelledby="activity-heading">

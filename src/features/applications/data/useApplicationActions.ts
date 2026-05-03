@@ -53,7 +53,11 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
   const deleteAsync = useAsync(
     async (id: string) => {
       const repo = new JobApplicationRepositoryImpl(db);
-      await repo.deleteApplication(id);
+      const eventRepo = new ApplicationEventRepositoryImpl(db);
+      await db.transaction("rw", db.applications, db.applicationEvents, async () => {
+        await repo.deleteApplication(id);
+        await eventRepo.deleteByApplicationId(id);
+      });
     },
     {
       autoExecute: false,

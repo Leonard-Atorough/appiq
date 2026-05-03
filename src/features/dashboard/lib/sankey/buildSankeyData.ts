@@ -5,17 +5,17 @@ import { SANKEY_NODE_LABELS, SANKEY_NODES, type SankeyData, type SankeyLink } fr
 /**
  * Builds Sankey graph data from a flat list of application events.
  *
- * Only `status_change` events that carry both `fromStatus` and `toStatus` are
- * processed. Events whose transition is not in VALID_TRANSITIONS are silently
- * ignored — they represent data inconsistencies or direct edits and should not
- * pollute the pipeline flow.
+ * Each unique valid transition edge (e.g. applied→interviewing) is counted
+ * at most once per application, regardless of how many times that application
+ * bounced between statuses. This ensures the link weights represent the number
+ * of *applications* that traversed each edge, not the number of raw events.
  *
- * Applications that have never been moved (no qualifying events) do not
- * generate any links and will not appear as a flow in the chart.
+ * Events without fromStatus/toStatus or whose transition is not in
+ * VALID_TRANSITIONS are silently ignored.
  */
 export function buildSankeyData(events: ApplicationEvent[]): SankeyData {
-  const linkCounts = new Map<string, number>();
-
+  // Group status_change events by applicationId, filtering out unusable events up front.
+  const byApp = new Map<string, ApplicationEvent[]>();
   for (const event of events) {
     if (
       event.type !== "status_change" ||
@@ -24,16 +24,35 @@ export function buildSankeyData(events: ApplicationEvent[]): SankeyData {
     ) {
       continue;
     }
+    const bucket = byApp.get(event.applicationId) ?? [];
+    bucket.push(event);
+    byApp.set(event.applicationId, bucket);
+  }
 
-    const from = event.fromStatus as ApplicationStatus;
-    const to = event.toStatus as ApplicationStatus;
+  const linkCounts = new Map<string, number>();
 
-    if (!isValidTransition(from, to)) {
-      continue;
+  for (const appEvents of byApp.values()) {
+    // Process in chronological order so the first recorded transition wins.
+    const sorted = [...appEvents].sort((a, b) => a.date.localeCompare(b.date));
+
+    // Track which edges this application has already contributed to so a
+    // bounce (A→B→A→B) only increments the A→B link once.
+    const seenEdges = new Set<string>();
+
+    for (const event of sorted) {
+      const from = event.fromStatus as ApplicationStatus;
+      const to = event.toStatus as ApplicationStatus;
+
+      if (!isValidTransition(from, to)) {
+        continue;
+      }
+
+      const key = `${from}→${to}`;
+      if (!seenEdges.has(key)) {
+        seenEdges.add(key);
+        linkCounts.set(key, (linkCounts.get(key) ?? 0) + 1);
+      }
     }
-
-    const key = `${from}→${to}`;
-    linkCounts.set(key, (linkCounts.get(key) ?? 0) + 1);
   }
 
   const links: SankeyLink[] = [];
@@ -46,8 +65,6 @@ export function buildSankeyData(events: ApplicationEvent[]): SankeyData {
     });
   }
 
-  // Include all pipeline nodes regardless of whether they appear in links so
-  // the chart structure is stable even with sparse data.
   const nodes = SANKEY_NODES.map((id) => ({
     id,
     label: SANKEY_NODE_LABELS[id],
