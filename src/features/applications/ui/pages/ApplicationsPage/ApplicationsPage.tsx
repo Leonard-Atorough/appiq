@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { ApplicationsTableView } from "./views/ApplicationsTableView";
 import { ApplicationsKanbanView } from "./views/ApplicationsKanbanView";
-import { AddApplicationForm } from "../../forms/AddApplicationForm";
+import { AddApplicationForm } from "../../components/forms/AddApplicationForm";
 import { Button, Tabs } from "@/shared/ui";
 import { useApplications } from "../../../data/useApplications";
 import { useApplicationActions } from "../../../data/useApplicationActions";

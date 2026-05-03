@@ -1,7 +1,7 @@
 import { Card } from "@/shared/ui/Card";
 import { Badge, Dropdown, Icon } from "@/shared/ui";
 import type { JobApplication, ApplicationStatus } from "@/entities";
-import { formatDate, formatSalary } from "../../lib/applicationFormatters";
+import { formatDate, formatSalary } from "../../../lib/applicationFormatters";
 
 interface ApplicationCardProps {
   application: JobApplication;

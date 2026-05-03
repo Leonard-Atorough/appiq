@@ -1,2 +1,2 @@
-export { default as DashboardPage } from './DashboardPage/DashboardPage';
-export { MetricCard } from './Items/MetricCard';
+export { default as DashboardPage } from './pages/DashboardPage/DashboardPage';
+export { MetricCard } from './components/cards/MetricCard';

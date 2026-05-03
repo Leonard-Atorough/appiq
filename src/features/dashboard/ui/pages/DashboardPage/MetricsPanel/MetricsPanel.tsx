@@ -1,6 +1,6 @@
 import { Skeleton, Icon } from "@/shared/ui";
-import { MetricCard } from "../..";
-import type { DashboardMetrics } from "@/features/dashboard/model/calculateMetrics";
+import { MetricCard } from "../../../components/cards/MetricCard";
+import type { DashboardMetrics } from "@/features/dashboard/lib/calculateMetrics";
 
 export function MetricsPanel({loading, metrics}: {loading: boolean, metrics: DashboardMetrics}) {
 

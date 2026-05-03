@@ -1,6 +1,6 @@
 import { useApplications } from "@/features/applications/data/useApplications";
 import { useMemo } from "react";
-import { calculateDashboardMetrics } from "./calculateMetrics";
+import { calculateDashboardMetrics } from "../lib/calculateMetrics";
 
 /**
  * Custom hook to compute dashboard metrics based on job applications.

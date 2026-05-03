@@ -6,7 +6,7 @@ import { ApplicationInfoZone } from "./components/ApplicationInfoZone";
 import { NotesTab } from "./components/tabs/NotesTab";
 import { TimelineTab } from "./components/tabs/TimelineTab";
 import { CvTab } from "./components/tabs/CvTab";
-import { AddApplicationForm } from "../../forms/AddApplicationForm";
+import { AddApplicationForm } from "../../components/forms/AddApplicationForm";
 import { Button, EmptyState, Icon, Tabs } from "@/shared/ui";
 
 interface ApplicationDetailsPageProps {

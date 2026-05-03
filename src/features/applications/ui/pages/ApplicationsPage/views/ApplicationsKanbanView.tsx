@@ -1,6 +1,6 @@
 import { useApplications } from "@features/applications/data/useApplications";
 import { useApplicationActions } from "@features/applications/data/useApplicationActions";
-import { ApplicationCard } from "../../../items/ApplicationCard";
+import { ApplicationCard } from "../../../components/cards/ApplicationCard";
 import { Badge, DropTarget, Skeleton } from "@/shared/ui";
 import { cn } from "@/shared/lib/cn";
 import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";

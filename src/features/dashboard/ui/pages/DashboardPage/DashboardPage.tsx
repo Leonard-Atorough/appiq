@@ -1,4 +1,4 @@
-import { useDashboardMetrics } from "../../model/useDashboardMetrics";
+import { useDashboardMetrics } from "../../../data/useDashboardMetrics";
 import { Card } from "@/shared/ui";
 import { MetricsPanel } from "./MetricsPanel/MetricsPanel";
 

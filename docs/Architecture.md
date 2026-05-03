@@ -55,19 +55,40 @@ src/
     └─ main.tsx        # App bootstrap
 ```
 
-## Feature structure (example)
+## Feature structure
 
-Each feature should be a self-contained vertical slice:
+Each feature is a self-contained vertical slice. All features follow this uniform layout:
 
 ```
-features/applications/
-    ├─ ui/       # Presentational components (cards, lists)
-    ├─ data/     # API hooks, adapters
-    ├─ model/    # State hooks, commands, selectors
-    └─ lib/      # Small helpers / view models
+features/<featureName>/
+    ├─ index.ts                        # public API — named exports only
+    ├─ data/                           # data-fetching & mutation hooks (+ co-located tests)
+    ├─ lib/                            # pure utility functions only (no hooks, no JSX)
+    ├─ model/                          # column/table definitions (optional)
+    └─ ui/
+        ├─ index.ts                    # re-exports all public UI symbols
+        ├─ pages/                      # one folder per route-level page
+        │   └─ <FeatureName>Page/
+        │       ├─ index.ts
+        │       ├─ <FeatureName>Page.tsx
+        │       ├─ views/              # alternate renderings (table, kanban…)
+        │       └─ components/         # subcomponents private to this page
+        └─ components/                 # components reused across 2+ pages in this feature
+            ├─ forms/                  # modal / inline forms
+            └─ cards/                  # list / card display items
 ```
 
-This keeps logic close to the UI that uses it and simplifies reasoning and testing.
+**Layer rules:**
+
+| Folder | Allowed content |
+|---|---|
+| `pages/` | Route-bound components only |
+| `components/` | Anything reused across 2+ pages within the feature |
+| `data/` | Hooks that fetch or mutate data — no pure utilities |
+| `lib/` | Pure functions only — no hooks, no JSX |
+| `index.ts` (root) | Named exports only |
+
+This keeps logic close to the UI that uses it, enforces a consistent mental model across features, and simplifies reasoning and testing.
 
 ## State Management & Data Flow
 
@@ -163,9 +184,10 @@ This gives the user explicit control independent of their OS preference.
 
 ## Decision Log (short)
 
-- Feature-first folder structure: chosen for rapid iteration and small-team velocity.
-- Dexie.js: chosen for reliable client-side persistence and offline-first UX.
-- Tailwind + CSS tokens: chosen for fast, consistent styling and easy theming.
+- Feature-first folder structure: chosen for rapid iteration and small-team velocity. See [ADR-0001](./adrs/0001-feature-first-structure.md).
+- Dexie.js: chosen for reliable client-side persistence and offline-first UX. See [ADR-0002](./adrs/0002-dexie-client-storage.md).
+- Tailwind + CSS tokens: chosen for fast, consistent styling and easy theming. See [ADR-0003](./adrs/0003-tailwind-css-tokens.md).
+- Standardised `ui/` folder conventions: enforced `pages/`, `components/cards/`, `components/forms/` layout across all features, and separated `data/` (hooks) from `lib/` (pure functions). See [ADR-0008](./adrs/0008-feature-ui-folder-conventions.md).
 
 ## Next steps / Recommendations
 

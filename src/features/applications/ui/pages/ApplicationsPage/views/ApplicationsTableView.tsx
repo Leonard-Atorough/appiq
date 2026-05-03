@@ -3,7 +3,7 @@ import { applicationColumns } from "@features/applications/model/columns";
 import { DataTable, Dropdown, Icon } from "@/shared/ui";
 import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
-import { ConfirmDeleteForm } from "../../../forms/ConfirmDeleteForm";
+import { ConfirmDeleteForm } from "../../../components/forms/ConfirmDeleteForm";
 import type { Row } from "@tanstack/react-table";
 import { useState } from "react";
 
