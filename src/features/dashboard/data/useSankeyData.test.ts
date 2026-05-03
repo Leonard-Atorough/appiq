@@ -1,17 +1,17 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
+import type { Mock } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useSankeyData } from "./useSankeyData";
+import { db } from "@/shared/storage/indexeddb/dexieClient";
 import type { ApplicationEvent } from "@/entities";
-
-const mockDb = {
-  applicationEvents: {
-    toArray: vi.fn(),
-  },
-};
 
 // Mock the Dexie module
 vi.mock("@/shared/storage/indexeddb/dexieClient", () => ({
-  db: mockDb,
+  db: {
+    applicationEvents: {
+      toArray: vi.fn(),
+    },
+  },
 }));
 
 // Mock the mappers
@@ -43,7 +43,7 @@ describe("useSankeyData", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     // Default mock: empty array
-    mockDb.applicationEvents.toArray.mockResolvedValue([]);
+    (db.applicationEvents.toArray as Mock).mockResolvedValue([]);
   });
 
   it("initializes with loading state", async () => {
@@ -58,7 +58,7 @@ describe("useSankeyData", () => {
   });
 
   it("returns empty links and all nodes when no events", async () => {
-    mockDb.applicationEvents.toArray.mockResolvedValueOnce([]);
+    (db.applicationEvents.toArray as Mock).mockResolvedValueOnce([]);
 
     const { result } = renderHook(() => useSankeyData());
 
@@ -94,7 +94,7 @@ describe("useSankeyData", () => {
         toStatus: "interviewing",
       },
     ];
-    mockDb.applicationEvents.toArray.mockResolvedValueOnce(mockEvents as unknown);
+    (db.applicationEvents.toArray as Mock).mockResolvedValueOnce(mockEvents as unknown);
 
     const { result } = renderHook(() => useSankeyData());
 
@@ -117,7 +117,7 @@ describe("useSankeyData", () => {
 
   it("handles errors from database", async () => {
     const testError = new Error("Database error");
-    mockDb.applicationEvents.toArray.mockRejectedValueOnce(testError);
+    (db.applicationEvents.toArray as Mock).mockRejectedValueOnce(testError);
 
     const { result } = renderHook(() => useSankeyData());
 
@@ -130,7 +130,7 @@ describe("useSankeyData", () => {
   });
 
   it("handles non-Error exceptions", async () => {
-    mockDb.applicationEvents.toArray.mockRejectedValueOnce("String error");
+    (db.applicationEvents.toArray as Mock).mockRejectedValueOnce("String error");
 
     const { result } = renderHook(() => useSankeyData());
 

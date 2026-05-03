@@ -23,8 +23,8 @@ const STATUS_COLORS: Record<string, string> = {
 
 //NOTE: Not working as expected. Only one color shows up in the chart, even though nodes are correctly receiving different colors. Suspect this is an issue with how @nivo/sankey handles the colors prop, but haven't had time to investigate further. For now, hardcoding all nodes to the same color, but leaving this here for future reference.
 const LABEL_TEXT_COLOR = {
-  dark: "hsl(0 0% 0%)",
-  light: "hsl(210 20% 90%)",
+  light: "hsl(0 0% 0%)",
+  dark: "hsl(210 20% 90%)",
 };
 
 export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
@@ -68,6 +68,11 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
                     text: {
                       fontSize: 14,
                       fontWeight: 600,
+                    },
+                  },
+                  tooltip: {
+                    container: {
+                      color: "hsl(0 0% 0%)",
                     },
                   },
                 }}
