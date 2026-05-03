@@ -26,6 +26,8 @@ export type ApplicationEventRow = {
   description: string;
   date: string; // ISO
   createdAt: string; // ISO
+  fromStatus?: string | null;
+  toStatus?: string | null;
 };
 
 export class jobiqDbClient extends Dexie {

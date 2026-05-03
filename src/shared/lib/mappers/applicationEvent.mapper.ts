@@ -1,4 +1,4 @@
-import type { ApplicationEvent, ApplicationEventType } from "@/entities";
+import type { ApplicationEvent, ApplicationEventType, ApplicationStatus } from "@/entities";
 import type { ApplicationEventRow } from "@/shared/storage/db/schema";
 
 export function mapRowToApplicationEvent(row: ApplicationEventRow): ApplicationEvent {
@@ -10,6 +10,8 @@ export function mapRowToApplicationEvent(row: ApplicationEventRow): ApplicationE
     description: row.description || undefined,
     date: row.date,
     createdAt: row.createdAt,
+    fromStatus: (row.fromStatus as ApplicationStatus) || undefined,
+    toStatus: (row.toStatus as ApplicationStatus) || undefined,
   };
 }
 
@@ -23,6 +25,8 @@ export function mapApplicationEventToRow(
     description: event.description || "",
     date: new Date(event.date).toISOString(),
     createdAt: new Date().toISOString(),
+    fromStatus: event.fromStatus ?? null,
+    toStatus: event.toStatus ?? null,
   };
 }
 
@@ -36,5 +40,7 @@ export function mapUpdatedApplicationEventToRow(
     title: updatedFields.title ?? existingRow.title,
     description: updatedFields.description ?? existingRow.description,
     date: updatedFields.date ? new Date(updatedFields.date).toISOString() : existingRow.date,
+    fromStatus: updatedFields.fromStatus ?? existingRow.fromStatus,
+    toStatus: updatedFields.toStatus ?? existingRow.toStatus,
   };
 }
