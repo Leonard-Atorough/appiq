@@ -2,17 +2,19 @@ import { Card } from "@/shared/ui/Card/Card";
 
 interface MetricCardProps {
   icon: React.ReactNode;
-  description: string;
+  label: string;
   value: string | number;
 }
 
-export function MetricCard({ icon, description, value }: MetricCardProps) {
+export function MetricCard({ icon, label, value }: MetricCardProps) {
   return (
-    <Card className="flex items-center gap-4 p-4" draggable={false}>
-      <div className="text-2xl">{icon}</div>
-      <div>
-        <p className="text-sm text-muted-foreground">{description}</p>
-        <p className="text-lg font-semibold">{value}</p>
+    <Card size="md" interactive={false} className="flex-1 min-w-0">
+      <div className="flex flex-col gap-sm">
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-muted font-medium">{label}</p>
+          <span className="text-muted">{icon}</span>
+        </div>
+        <p className="text-2xl font-bold text-primary">{value}</p>
       </div>
     </Card>
   );

@@ -1,8 +1,8 @@
 import { useToast } from "@/shared/lib";
 import { useAsync } from "@/shared/lib";
-import { JobApplicationRepositoryImpl } from "@/shared/storage/repositories/jobApplication.repository";
-import { ApplicationEventRepositoryImpl } from "@/shared/storage/repositories/applicationEvent.repository";
-import { db } from "@/shared/storage/indexeddb/dexieClient";
+import { JobApplicationRepositoryImpl } from "@/shared/storage";
+import { ApplicationEventRepositoryImpl } from "@/shared/storage";
+import { db } from "@/shared/storage";
 import type { ApplicationStatus, JobApplication } from "@/entities";
 
 interface UseApplicationActionsOptions {

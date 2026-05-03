@@ -1,5 +1,6 @@
 export { Badge, type BadgeProps } from "./Badge";
 export { Button, type ButtonProps } from "./Button";
+export { Card, type CardProps } from "./Card";
 export { Checkbox, type CheckboxProps } from "./Checkbox";
 export { EmptyState, type EmptyStateProps } from "./EmptyState";
 export { Dialog, type DialogProps } from "./Dialog";
