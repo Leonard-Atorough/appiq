@@ -36,7 +36,7 @@ describe("Icon Component", () => {
       sizes.forEach((size) => {
         const { container } = render(<Icon name="kebab" size={size} />);
         const span = container.querySelector("span");
-        expect(span).toHaveClass(`w-${size === "xs" ? "sm" : size === "sm" ? "md" : size === "md" ? "xl" : size === "lg" ? "2xl" : "3xl"}`);
+        expect(span).toHaveClass(`w-${size === "xs" ? "md" : size === "sm" ? "lg" : size === "md" ? "xl" : size === "lg" ? "2xl" : "3xl"}`);
       });
     });
 
