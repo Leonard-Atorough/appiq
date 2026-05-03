@@ -20,6 +20,8 @@ describe("ApplicationEvent Mappers", () => {
     description: "Successfully submitted to Acme Corp",
     date: eventDate,
     createdAt: now,
+    fromStatus: "saved",
+    toStatus: "applied",
     ...overrides,
   });
 
@@ -56,6 +58,8 @@ describe("ApplicationEvent Mappers", () => {
         description: "Successfully submitted to Acme Corp",
         date: eventDate,
         createdAt: now,
+        fromStatus: "saved",
+        toStatus: "applied",
       });
     });
 
@@ -118,6 +122,8 @@ describe("ApplicationEvent Mappers", () => {
         description: "Successfully submitted to Acme Corp",
         date: eventDate,
         createdAt: now,
+        fromStatus: null,
+        toStatus: null,
       });
     });
 
@@ -271,6 +277,8 @@ describe("ApplicationEvent Mappers", () => {
         title: event.title,
         description: event.description,
         date: event.date,
+        fromStatus: event.fromStatus,
+        toStatus: event.toStatus,
       });
 
       // Should match original (createdAt matches because we set it to 'now')
@@ -281,6 +289,8 @@ describe("ApplicationEvent Mappers", () => {
         description: originalRow.description,
         date: originalRow.date,
         createdAt: now,
+        fromStatus: originalRow.fromStatus,
+        toStatus: originalRow.toStatus,
       });
     });
 
