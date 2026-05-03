@@ -30,12 +30,18 @@ export function MetricsPanel({
             icon={<Icon name="briefcase" size="md" variant="primary" />}
           />
           <MetricCard
-            label={metrics.applicationsThisMonth === 1 ? "Application This Month" : "Applications This Month"}
+            label={
+              metrics.applicationsThisMonth === 1
+                ? "Application This Month"
+                : "Applications This Month"
+            }
             value={metrics.applicationsThisMonth}
             icon={<Icon name="check" size="sm" variant="success" />}
           />
           <MetricCard
-            label={metrics.interviewsScheduled === 1 ? "Interview Scheduled" : "Interviews Scheduled"}
+            label={
+              metrics.interviewsScheduled === 1 ? "Interview Scheduled" : "Interviews Scheduled"
+            }
             value={metrics.interviewsScheduled}
             icon={<Icon name="info" size="sm" variant="info" />}
           />
@@ -45,7 +51,7 @@ export function MetricsPanel({
             icon={<Icon name="check-circle" size="sm" variant="success" />}
           />
           <MetricCard
-            label={metrics.rejectionRate === 1 ? "Rejection Rate" : "Rejection Rates"}
+            label="Rejection Rate"
             value={`${metrics.rejectionRate.toFixed(1)}%`}
             icon={<Icon name="alert-triangle" size="sm" variant="warning" />}
           />
