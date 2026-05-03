@@ -30,4 +30,7 @@ export interface ApplicationEvent {
   description?: string;
   date: string; // ISO
   createdAt: string; // ISO
+  /** Populated for status_change events to record the transition path. */
+  fromStatus?: ApplicationStatus;
+  toStatus?: ApplicationStatus;
 }

@@ -141,12 +141,16 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
     async (id: string, newStatus: ApplicationStatus) => {
       const repo = new JobApplicationRepositoryImpl(db);
       const eventRepo = new ApplicationEventRepositoryImpl(db);
+      const current = await repo.getApplicationById(id);
+      const fromStatus = current?.status;
       await repo.updateApplication(id, { status: newStatus });
       await eventRepo.createEvent({
         applicationId: id,
         type: "status_change",
         title: `Status changed to ${newStatus}`,
         date: new Date().toISOString(),
+        fromStatus,
+        toStatus: newStatus,
       });
     },
     {
