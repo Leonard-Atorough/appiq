@@ -1,4 +1,5 @@
 export { cn } from "./cn";
+export { responsive } from "./responsive";
 export {
   mapJobApplicationToRow,
   mapRowToJobApplication,
