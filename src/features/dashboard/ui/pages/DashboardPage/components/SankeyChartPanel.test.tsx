@@ -1,16 +1,26 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { SankeyChartPanel } from "./SankeyChartPanel";
 import type { SankeyData } from "@/features/dashboard/lib/sankey/sankeyTypes";
 
-// Mock @nivo/sankey
-vi.mock("@nivo/sankey", () => ({
-  ResponsiveSankey: ({ data, labelTextColor }: { data: SankeyData; labelTextColor: string }) => (
-    <div data-testid="sankey-chart" data-label-color={labelTextColor}>
-      Sankey Chart - {data.links.length} links
-    </div>
-  ),
-}));
+// Hoisted mocks
+const { mockSetOption, mockDispose, mockInit } = vi.hoisted(() => {
+  const setOpt = vi.fn();
+  const disp = vi.fn();
+  const init = vi.fn(() => ({
+    setOption: setOpt,
+    dispose: disp,
+    resize: vi.fn(),
+    getOption: vi.fn(() => ({})),
+  }));
+  return { mockSetOption: setOpt, mockDispose: disp, mockInit: init };
+});
+
+vi.mock("echarts", () => {
+  return {
+    init: mockInit,
+  };
+});
 
 // Mock useTheme
 vi.mock("@/shared/lib", async () => {
@@ -22,6 +32,9 @@ vi.mock("@/shared/lib", async () => {
 });
 
 describe("SankeyChartPanel", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
   describe("loading state", () => {
     it("renders skeleton when loading is true", () => {
       const data: SankeyData = { nodes: [], links: [] };
@@ -43,9 +56,7 @@ describe("SankeyChartPanel", () => {
       };
       render(<SankeyChartPanel loading={false} data={data} />);
 
-      expect(
-        screen.getByText(/move applications through statuses/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/move applications through statuses/i)).toBeInTheDocument();
     });
 
     it("does not render skeleton in empty state", () => {
@@ -58,20 +69,52 @@ describe("SankeyChartPanel", () => {
   });
 
   describe("chart rendering", () => {
-    it("renders Sankey chart when data has links", () => {
+    it("renders chart container when data has links", () => {
       const data: SankeyData = {
         nodes: [
           { id: "saved", label: "Saved" },
           { id: "applied", label: "Applied" },
         ],
-        links: [
-          { source: "saved", target: "applied", value: 5 },
-        ],
+        links: [{ source: "saved", target: "applied", value: 1 }],
       };
       render(<SankeyChartPanel loading={false} data={data} />);
 
-      expect(screen.getByTestId("sankey-chart")).toBeInTheDocument();
-      expect(screen.getByText(/1 links/)).toBeInTheDocument();
+      // Chart container should be in the DOM
+      const container = document.querySelector("div.h-150");
+      expect(container).toBeInTheDocument();
+    });
+
+    it("calls echarts.init with theme", () => {
+      const data: SankeyData = {
+        nodes: [{ id: "saved", label: "Saved" }],
+        links: [{ source: "saved", target: "applied", value: 1 }],
+      };
+      render(<SankeyChartPanel loading={false} data={data} />);
+
+      // echarts.init should have been called with 'light' theme
+      expect(mockInit).toHaveBeenCalledWith(expect.any(HTMLElement), "light");
+    });
+
+    it("calls setOption with sankey data", () => {
+      const data: SankeyData = {
+        nodes: [
+          { id: "saved", label: "Saved" },
+          { id: "applied", label: "Applied" },
+        ],
+        links: [{ source: "saved", target: "applied", value: 2 }],
+      };
+      render(<SankeyChartPanel loading={false} data={data} />);
+
+      expect(mockSetOption).toHaveBeenCalledWith(
+        expect.objectContaining({
+          series: expect.arrayContaining([
+            expect.objectContaining({
+              type: "sankey",
+              links: data.links,
+            }),
+          ]),
+        }),
+      );
     });
 
     it("does not render empty state when data has links", () => {
@@ -134,8 +177,14 @@ describe("SankeyChartPanel", () => {
       };
       render(<SankeyChartPanel loading={false} data={data} />);
 
-      const legend = screen.getByLabelText("Status legend");
-      expect(legend).toHaveClass("flex", "flex-wrap", "gap-md", "justify-center");
+      const legendItems = document.querySelectorAll('[role="listitem"]');
+      expect(legendItems.length).toBeGreaterThan(0);
+
+      // Each legend item should have a color indicator
+      legendItems.forEach((item) => {
+        const colorSpan = item.querySelector(".w-md.h-md");
+        expect(colorSpan).toBeInTheDocument();
+      });
     });
   });
 
@@ -158,17 +207,17 @@ describe("SankeyChartPanel", () => {
     });
   });
 
-  describe("theme integration", () => {
-    it("receives labelTextColor from useTheme hook", () => {
+  describe("cleanup", () => {
+    it("disposes chart on unmount", () => {
       const data: SankeyData = {
         nodes: [{ id: "saved", label: "Saved" }],
         links: [{ source: "saved", target: "applied", value: 1 }],
       };
-      render(<SankeyChartPanel loading={false} data={data} />);
+      const { unmount } = render(<SankeyChartPanel loading={false} data={data} />);
 
-      const chart = screen.getByTestId("sankey-chart");
-      // In light mode, text color should be black
-      expect(chart).toHaveAttribute("data-label-color", "hsl(0 0% 0%)");
+      unmount();
+
+      expect(mockDispose).toHaveBeenCalled();
     });
   });
 });
