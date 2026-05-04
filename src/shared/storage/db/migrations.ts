@@ -22,5 +22,12 @@ export function setupMigrations(db: jobiqDbClient): void {
     applications: "id, company, status, appliedDate, [status+appliedDate]",
     applicationEvents: "id, applicationId, date",
   });
+
+  // Version 4: Added interviewStartDate and interviewEndDate
+  // No index needed; fields are optional and queried in-memory
+  db.version(4).stores({
+    applications: "id, company, status, appliedDate, [status+appliedDate]",
+    applicationEvents: "id, applicationId, date",
+  });
 }
 

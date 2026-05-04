@@ -6,6 +6,8 @@ export interface JobApplication {
   position: string;
   status: ApplicationStatus;
   dateApplied: string; // ISO date string
+  interviewStartDate?: string; // ISO date string, only relevant for "interviewing" status
+  interviewEndDate?: string; // ISO date string, only relevant for "interviewing" status
   salaryMin?: number;
   salaryMax?: number;
   location?: string; // Address (e.g. "San Francisco, CA" or "123 Main St")

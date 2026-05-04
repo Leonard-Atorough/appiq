@@ -7,6 +7,8 @@ export type ApplicationRow = {
   position: string;
   status: ApplicationStatus | null;
   dateApplied: string; // ISO date string
+  interviewStartDate: string | null;
+  interviewEndDate: string | null;
   salaryMin: number;
   salaryMax: number;
   location: string | null; // Address (e.g. "San Francisco, CA")

@@ -1,6 +1,6 @@
 import { Badge, Button, Icon } from "@/shared/ui";
 import type { JobApplication, ApplicationStatus } from "@/entities";
-import { formatDate, formatSalary } from "../../../../lib/applicationFormatters";
+import { formatDate, formatTime, formatSalary } from "../../../../lib/applicationFormatters";
 
 const STATUS_VARIANT: Record<
   ApplicationStatus,
@@ -27,7 +27,7 @@ interface ApplicationInfoZoneProps {
 }
 
 export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZoneProps) {
-  const { position, company, status, dateApplied, location, workingStyle, jobType, salaryMin, salaryMax } =
+  const { position, company, status, dateApplied, interviewStartDate, interviewEndDate, location, workingStyle, jobType, salaryMin, salaryMax } =
     application;
   const hasSalary =
     salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
@@ -57,6 +57,19 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
           <Icon name="check-circle" size="sm" variant="muted" />
           Applied {formatDate(dateApplied)}
         </div>
+        {status === "interviewing" && (
+          interviewStartDate ? (
+            <div className="flex items-center gap-xs text-sm text-success">
+              <Icon name="calendar" size="sm" variant="success" />
+              Interview: {formatDate(interviewStartDate)}{interviewEndDate ? ` – ${formatTime(interviewEndDate)}` : ""}
+            </div>
+          ) : (
+            <div className="flex items-center gap-xs text-sm text-warning">
+              <Icon name="alert-triangle" size="sm" variant="warning" />
+              No interview date set
+            </div>
+          )
+        )}
         {location && (
           <Badge variant="default" size="sm" outline rounded={false}>
             {location}

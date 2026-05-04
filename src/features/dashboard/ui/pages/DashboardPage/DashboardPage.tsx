@@ -1,11 +1,16 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useDashboardMetrics } from "../../../data/useDashboardMetrics";
+import { useDashboardApplications } from "../../../data/useDashboardApplications";
 import { useSankeyData } from "../../../data/useSankeyData";
 import { Card } from "@/shared/ui";
 import { MetricsPanel } from "./components/MetricsPanel";
 import { SankeyChartPanel } from "./components/SankeyChartPanel";
+import { UpcomingInterviewsPanel } from "../../components/UpcomingInterviewsPanel";
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const { metrics, loading, error } = useDashboardMetrics();
+  const { upcomingInterviews } = useDashboardApplications();
   const { data: sankeyData, loading: sankeyLoading } = useSankeyData();
 
   if (error) {
@@ -24,9 +29,18 @@ export default function DashboardPage() {
       {/* Metrics Panel */}
       <MetricsPanel loading={loading} metrics={metrics} />
 
-      {/* Sankey Flow Chart */}
-      <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
-
+      {/* Upcoming Interviews and Sankey Flow Chart */}
+      <div className="flex flex-col gap-lg lg:flex-row">
+        <div className="flex-shrink-0 w-full lg:w-1/4">
+          <UpcomingInterviewsPanel
+            upcomingInterviews={upcomingInterviews}
+            onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
+          />
+        </div>
+        <div className="flex-1">
+          <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
+        </div>
+      </div>
       {/* Recent Activity + Placeholder Section */}
       <section aria-labelledby="activity-heading">
         <h2 id="activity-heading" className="sr-only">

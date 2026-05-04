@@ -47,6 +47,8 @@ const EMPTY_FORM = {
   jobType: "" as ApplicationJobType | "",
   salaryMin: "",
   salaryMax: "",
+  interviewStartDate: "",
+  interviewEndDate: "",
   notes: "",
 };
 
@@ -61,6 +63,8 @@ function toFormState(app: JobApplication | null): typeof EMPTY_FORM {
     jobType: app.jobType ?? "",
     salaryMin: app.salaryMin != null ? String(app.salaryMin) : "",
     salaryMax: app.salaryMax != null ? String(app.salaryMax) : "",
+    interviewStartDate: app.interviewStartDate ?? "",
+    interviewEndDate: app.interviewEndDate ?? "",
     notes: app.notes ?? "",
   };
 }
@@ -96,6 +100,8 @@ export function AddApplicationForm({
       jobType: formData.jobType || undefined,
       salaryMin: formData.salaryMin ? Number(formData.salaryMin) : undefined,
       salaryMax: formData.salaryMax ? Number(formData.salaryMax) : undefined,
+      interviewStartDate: formData.interviewStartDate || undefined,
+      interviewEndDate: formData.interviewEndDate || undefined,
       notes: formData.notes.trim() || undefined,
     };
 
@@ -193,6 +199,30 @@ export function AddApplicationForm({
             </Select>
           </div>
         </div>
+
+        {/* Interview Date - only show if status is interviewing */}
+        {formData.status === "interviewing" && (
+          <div className="flex gap-md">
+            <div className="flex-1 min-w-0">
+              <Input
+                label="Interview Start"
+                type="datetime-local"
+                value={formData.interviewStartDate}
+                onChange={(e) => set("interviewStartDate", e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <Input
+                label="Interview End"
+                type="datetime-local"
+                value={formData.interviewEndDate}
+                onChange={(e) => set("interviewEndDate", e.target.value)}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        )}
 
         {/* Location + Working Style + Job type */}
         <div className="flex gap-md">

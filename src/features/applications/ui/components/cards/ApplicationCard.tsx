@@ -45,6 +45,7 @@ export function ApplicationCard({
     company,
     status,
     dateApplied,
+    interviewStartDate,
     location,
     workingStyle,
     jobType,
@@ -61,6 +62,7 @@ export function ApplicationCard({
         interactive={false}
         status={statusCardAccent[status]}
         dragId={application.id}
+        draggable
         dragType="application-card"
         data-testid="application-card"
       >
@@ -100,6 +102,21 @@ export function ApplicationCard({
 
           {/* Date applied */}
           <p className="text-xs text-muted">Applied {formatDate(dateApplied)}</p>
+
+          {/* Interview date or warning */}
+          {status === "interviewing" && (
+            interviewStartDate ? (
+              <p className="text-xs text-success flex items-center gap-xs">
+                <Icon name="calendar" size="xs" />
+                Interview: {formatDate(interviewStartDate)}
+              </p>
+            ) : (
+              <p className="text-xs text-error flex items-center gap-xs">
+                <Icon name="alert-triangle" size="xs" />
+                No interview date set
+              </p>
+            )
+          )}
 
           {/* Meta tags: location, working style, job type, salary */}
           {hasMeta && (

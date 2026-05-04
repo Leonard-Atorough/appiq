@@ -8,6 +8,8 @@ export function mapRowToJobApplication(row: ApplicationRow): JobApplication {
     position: row.position,
     status: row.status ?? "applied",
     dateApplied: row.dateApplied,
+    interviewStartDate: row.interviewStartDate ?? undefined,
+    interviewEndDate: row.interviewEndDate ?? undefined,
     salaryMin: row.salaryMin,
     salaryMax: row.salaryMax,
     location: row.location ?? undefined,
@@ -25,6 +27,8 @@ export function mapJobApplicationToRow(
     position: application.position,
     status: application.status,
     dateApplied: new Date(application.dateApplied).toISOString(),
+    interviewStartDate: application.interviewStartDate ?? null,
+    interviewEndDate: application.interviewEndDate ?? null,
     salaryMin: application.salaryMin ?? 0,
     salaryMax: application.salaryMax ?? 0,
     location: application.location ?? null,
@@ -49,6 +53,12 @@ export function mapUpdatedApplicationToRow(
     dateApplied: updatedFields.dateApplied
       ? new Date(updatedFields.dateApplied).toISOString()
       : existingRow.dateApplied,
+    interviewStartDate: "interviewStartDate" in updatedFields
+      ? (updatedFields.interviewStartDate ?? null)
+      : existingRow.interviewStartDate,
+    interviewEndDate: "interviewEndDate" in updatedFields
+      ? (updatedFields.interviewEndDate ?? null)
+      : existingRow.interviewEndDate,
     salaryMin: updatedFields.salaryMin ?? existingRow.salaryMin,
     salaryMax: updatedFields.salaryMax ?? existingRow.salaryMax,
     location: updatedFields.location ?? existingRow.location,

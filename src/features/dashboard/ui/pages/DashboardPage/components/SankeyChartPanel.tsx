@@ -122,11 +122,11 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
   }, []);
 
   return (
-    <section aria-labelledby="sankey-heading">
-      <h2 id="sankey-heading" className="text-lg font-semibold text-primary mb-md">
-        Application Flow
-      </h2>
+    <section aria-labelledby="sankey-heading" className="flex-1">
       <Card size="md" interactive={false}>
+        <h2 id="sankey-heading" className="text-lg font-semibold text-primary mb-md">
+          Application Flow
+        </h2>
         {loading ? (
           <Skeleton className="w-full h-96" />
         ) : !hasLinks ? (
