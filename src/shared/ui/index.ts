@@ -8,6 +8,7 @@ export { DragItem, type DragItemProps } from "./DragItem";
 export { Dropdown, type DropdownProps, type DropdownItem } from "./Dropdown";
 export { DropTarget, type DropTargetProps } from "./DropTarget";
 export { Field, type FieldProps } from "./Field";
+export { Flex, type FlexProps } from "./Flex";
 export {
   Icon,
   iconVariants,
