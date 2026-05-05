@@ -224,5 +224,4 @@ describe("ApplicationEventRepositoryImpl", () => {
     });
   });
 
-  // Additional tests for  deleteEvent, deleteByApplicationId would go here - do tomorrow
 });
