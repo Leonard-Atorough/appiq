@@ -20,6 +20,7 @@
   --color-bg: var(--gray-900);
   --color-surface: hsl(210 15% 12%);
   --color-muted-bg: var(--gray-800);
+  --color-secondary-bg: var(--gray-800); /* secondary panel/alternate-row background */
 
   /* ===== PRIMARY ===== */
   --color-primary: var(--green-400);
@@ -55,6 +56,8 @@
   --color-warning: hsl(45 90% 65%);
   --color-warning-light: hsl(45 80% 15%);
   --color-error: hsl(0 84% 70%);
+  --color-error-hover: hsl(0 84% 78%); /* lighter hover on dark surface */
+  --color-error-active: hsl(0 84% 65%); /* pressed state — step back toward base */
   --color-error-light: hsl(0 78% 22%);
   --color-info: hsl(210 88% 66%);
   --color-info-light: hsl(210 90% 20%);
