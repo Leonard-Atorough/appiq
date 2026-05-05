@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
-import { Skeleton } from "@/shared/ui";
+import { Flex, Skeleton } from "@/shared/ui";
 import { Card } from "@/shared/ui/Card/Card";
 import { useTheme } from "@/shared/lib";
 import {
@@ -122,43 +122,45 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
   }, []);
 
   return (
-    <section aria-labelledby="sankey-heading" className="flex-1">
-      <Card size="md" interactive={false}>
-        <h2 id="sankey-heading" className="text-lg font-semibold text-primary mb-md">
-          Application Flow
-        </h2>
-        {loading ? (
-          <Skeleton className="w-full h-96" />
-        ) : !hasLinks ? (
-          <div className="flex items-center justify-center h-96 text-muted text-sm">
-            Move applications through statuses to see your pipeline flow here.
-          </div>
-        ) : (
-          <>
-            <div ref={containerRef} className="h-150 w-full" />
+    <Card size="md" interactive={false} aria-labelledby="sankey-heading" className="flex-1 h-full">
+      <h2 id="sankey-heading" className="text-lg font-semibold text-primary mb-md">
+        Application Flow
+      </h2>
+      {loading ? (
+        <Skeleton className="w-full h-96" />
+      ) : !hasLinks ? (
+        <Flex justify="center" align="center" className="h-96 text-muted text-sm">
+          Move applications through statuses to see your pipeline flow here.
+        </Flex>
+      ) : (
+        <>
+          <Flex ref={containerRef} className="h-150 w-full" />
 
-            {/* Legend */}
-            <div
-              className="flex flex-wrap gap-md justify-center pt-md border-t border-base mt-sm"
-              role="list"
-              aria-label="Status legend"
-            >
-              {SANKEY_NODES.map((id) => (
-                <div key={id} className="flex items-center gap-xs" role="listitem">
-                  <span
-                    className="inline-block w-md h-md rounded-sm shrink-0"
-                    style={{
-                      backgroundColor: STATUS_COLORS[theme][id as keyof typeof STATUS_COLORS.light],
-                    }}
-                    aria-hidden="true"
-                  />
-                  <span className="text-md text-secondary">{SANKEY_NODE_LABELS[id]}</span>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </Card>
-    </section>
+          {/* Legend */}
+          <Flex
+            justify="center"
+            gap="md"
+            paddingY="md"
+            wrap
+            className="border-t border-base mt-sm"
+            role="list"
+            aria-label="Status legend"
+          >
+            {SANKEY_NODES.map((id) => (
+              <Flex justify="center" align="center" gap="xs" key={id} role="listitem">
+                <span
+                  className="inline-block w-md h-md rounded-sm shrink-0"
+                  style={{
+                    backgroundColor: STATUS_COLORS[theme][id as keyof typeof STATUS_COLORS.light],
+                  }}
+                  aria-hidden="true"
+                />
+                <span className="text-md text-secondary">{SANKEY_NODE_LABELS[id]}</span>
+              </Flex>
+            ))}
+          </Flex>
+        </>
+      )}
+    </Card>
   );
 }

@@ -1,4 +1,4 @@
-import { Skeleton, Icon } from "@/shared/ui";
+import { Skeleton, Icon, Flex } from "@/shared/ui";
 import { MetricCard } from "../../../components/cards/MetricCard";
 import type { DashboardMetrics } from "@/features/dashboard/lib/calculateMetrics";
 
@@ -10,7 +10,7 @@ export function MetricsPanel({
   metrics: DashboardMetrics;
 }) {
   return (
-    <section aria-labelledby="metrics-heading">
+    <section aria-labelledby="metrics-heading" className="w-full">
       <h2 id="metrics-heading" className="sr-only">
         Application Metrics
       </h2>
@@ -23,7 +23,7 @@ export function MetricsPanel({
             ))}
         </div>
       ) : (
-        <div className="flex gap-md">
+        <Flex direction="row" gap="lg" fullWidth>
           <MetricCard
             label={metrics.totalApplications === 1 ? "Total Application" : "Total Applications"}
             value={metrics.totalApplications}
@@ -55,7 +55,7 @@ export function MetricsPanel({
             value={`${metrics.rejectionRate.toFixed(1)}%`}
             icon={<Icon name="alert-triangle" size="sm" variant="warning" />}
           />
-        </div>
+        </Flex>
       )}
     </section>
   );

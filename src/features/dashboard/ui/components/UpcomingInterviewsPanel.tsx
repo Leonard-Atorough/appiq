@@ -1,4 +1,4 @@
-import { Button, Icon } from "@/shared/ui";
+import { Button, Flex, Icon } from "@/shared/ui";
 import { Card } from "@/shared/ui/Card/Card";
 import { formatDateParts, formatTime } from "@/features/applications/lib/applicationFormatters";
 import type { JobApplication } from "@/entities";
@@ -13,16 +13,23 @@ export function UpcomingInterviewsPanel({
   onNavigate,
 }: UpcomingInterviewsPanelProps) {
   return (
-    <Card size="md" interactive={false} className="h-full">
-      <div className="flex flex-col gap-md h-full">
-        <h2 className="text-lg font-semibold text-primary">Upcoming Interviews</h2>
+    <Card
+      size="md"
+      interactive={false}
+      aria-labelledby="upcoming-interviews-heading"
+      className="flex-1 overflow-hidden h-full"
+    >
+      <Flex direction="column" gap="md">
+        <h2 id="upcoming-interviews-heading" className="text-lg font-semibold text-primary">
+          Upcoming Interviews
+        </h2>
 
         {upcomingInterviews.length === 0 ? (
           <p className="text-sm text-muted">
             No upcoming interviews. Apply to more jobs to see them here!
           </p>
         ) : (
-          <ul className="flex flex-col gap-sm" role="list">
+          <ul className="flex flex-col gap-sm w-full overflow-y-auto" role="list">
             {upcomingInterviews.map((interview) => {
               const parts = interview.interviewStartDate
                 ? formatDateParts(interview.interviewStartDate)
@@ -37,10 +44,15 @@ export function UpcomingInterviewsPanel({
               return (
                 <li key={interview.id} role="listitem">
                   <Card size="sm" interactive={false}>
-                    <div className="flex items-center gap-md">
+                    <Flex gap="md" align="center">
                       {/* Vertical date block */}
                       {parts ? (
-                        <div className="flex flex-col items-center justify-center w-12 shrink-0 text-center">
+                        <Flex
+                          direction="column"
+                          align="center"
+                          justify="center"
+                          className="w-12 shrink-0 text-center"
+                        >
                           <span className="text-xl font-bold text-primary leading-none">
                             {parts.day}
                           </span>
@@ -48,18 +60,18 @@ export function UpcomingInterviewsPanel({
                             {parts.month}
                           </span>
                           <span className="text-xs text-muted">{parts.year}</span>
-                        </div>
+                        </Flex>
                       ) : (
-                        <div className="flex items-center justify-center w-12 shrink-0">
+                        <Flex align="center" justify="center" className="w-12 shrink-0">
                           <Icon name="alert-triangle" size="md" variant="warning" />
-                        </div>
+                        </Flex>
                       )}
 
                       {/* Divider */}
                       <div className="w-px self-stretch bg-base shrink-0" aria-hidden="true" />
 
                       {/* Content */}
-                      <div className="flex flex-col gap-xs min-w-0 flex-1">
+                      <Flex direction="column" gap="xs" className="min-w-0 flex-1">
                         <p className="text-sm text-secondary truncate">{interview.company}</p>
                         <p className="text-md font-semibold text-primary truncate">
                           {interview.position}
@@ -67,12 +79,12 @@ export function UpcomingInterviewsPanel({
                         {startTime ? (
                           <p className="text-xs text-muted">
                             {startTime}
-                            {endTime ? ` \u2013 ${endTime}` : ""}
+                            {endTime ? ` – ${endTime}` : ""}
                           </p>
                         ) : (
                           <p className="text-xs text-warning">No time set</p>
                         )}
-                      </div>
+                      </Flex>
 
                       {/* Navigate action */}
                       <Button
@@ -84,14 +96,14 @@ export function UpcomingInterviewsPanel({
                       >
                         <Icon name="chevron-right" size="md" />
                       </Button>
-                    </div>
+                    </Flex>
                   </Card>
                 </li>
               );
             })}
           </ul>
         )}
-      </div>
+      </Flex>
     </Card>
   );
 }
