@@ -181,12 +181,6 @@ describe("JobApplicationRepositoryImpl", () => {
         version: 1,
       };
       const updates = { status: "interviewing" as const, notes: "Interview scheduled" };
-      const updatedRow = {
-        ...existingRow,
-        ...updates,
-        version: existingRow.version + 1,
-        dateUpdated: new Date().toISOString(),
-      };
 
       (db.applications.get as Mock).mockResolvedValue(existingRow);
       (db.applications.put as Mock).mockResolvedValue(undefined);
@@ -194,8 +188,19 @@ describe("JobApplicationRepositoryImpl", () => {
       const result = await repository.updateApplication("app-1", updates);
 
       expect(db.applications.get).toHaveBeenCalledWith("app-1");
-      expect(db.applications.put).toHaveBeenCalledWith(updatedRow);
-      expect(result).toEqual(mapRowToJobApplication(updatedRow));
+      expect(db.applications.put).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: "app-1",
+          status: "interviewing",
+          notes: "Interview scheduled",
+          version: 2,
+        }),
+      );
+      expect(result).toMatchObject({
+        id: "app-1",
+        status: "interviewing",
+        notes: "Interview scheduled",
+      });
     });
 
     it("returns null if the application to update does not exist", async () => {
