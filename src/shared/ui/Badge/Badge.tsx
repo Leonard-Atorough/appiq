@@ -52,9 +52,9 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
 
         <span>{children}</span>
 
-        {actions?.map((action, i) => (
+        {actions?.map((action) => (
           <button
-            key={i}
+            key={action.id ?? action.label}
             type="button"
             className="ml-xs rounded-sm text-xs underline hover:no-underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-(--color-primary)"
             onClick={(e) => {

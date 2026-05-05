@@ -2,6 +2,8 @@ import type { VariantProps } from "class-variance-authority";
 import type { badgeVariants } from "./badge.variants";
 
 export interface BadgeAction {
+  /** Stable identifier for React reconciliation. Defaults to `label` if not provided. */
+  id?: string;
   /** Button label text. */
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -25,5 +27,4 @@ export interface BadgeProps
   rounded?: boolean;
   /** Inline action buttons inside the badge. Rendered as `<button>` elements inside a `<span>` container to avoid invalid nested-button HTML. */
   actions?: BadgeAction[];
-  
 }
