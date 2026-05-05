@@ -31,6 +31,18 @@ const STATUS_COLORS = {
   },
 };
 
+/** Visual patterns to distinguish status colors for colorblind users */
+const STATUS_PATTERNS: Record<string, string> = {
+  saved:
+    "repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,.2) 4px, rgba(0,0,0,.2) 6px)",
+  applied: "radial-gradient(circle, rgba(0,0,0,.25) 2px, transparent 2px)",
+  interviewing:
+    "repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,.2) 4px, rgba(0,0,0,.2) 6px)",
+  offer: "none",
+  rejected:
+    "repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,.2) 4px, rgba(0,0,0,.2) 6px), repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(0,0,0,.2) 4px, rgba(0,0,0,.2) 6px)",
+};
+
 export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,13 +66,56 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
 
     const colors = STATUS_COLORS[theme];
 
-    // Transform data to echarts format
+    // Transform data to echarts format with colorblind-friendly node styling
     const nodeColors = data.nodes.map((node) => ({
       name: node.id,
       itemStyle: {
         color: colors[node.id as keyof typeof colors] || colors.saved,
+        // Apply visual distinction for colorblind users using varying border thickness
+        ...getNodeStyle(node.id as string),
       },
     }));
+
+    // Helper function to provide visual distinction per node type for colorblind accessibility
+    function getNodeStyle(nodeId: string) {
+      switch (nodeId) {
+        case "saved":
+          // Thin border for Saved (Gray)
+          return {
+            borderWidth: 1,
+            borderColor: "rgba(0, 0, 0, 0.2)",
+          };
+        case "applied":
+          // Medium border for Applied (Blue)
+          return {
+            borderWidth: 2,
+            borderColor: "rgba(0, 0, 0, 0.25)",
+          };
+        case "interviewing":
+          // Thick border for Interviewing (Purple)
+          return {
+            borderWidth: 3,
+            borderColor: "rgba(0, 0, 0, 0.3)",
+          };
+        case "offer":
+          // Subtle border for Offer (Green) - baseline
+          return {
+            borderWidth: 1,
+            borderColor: "rgba(0, 0, 0, 0.15)",
+          };
+        case "rejected":
+          // Extra-thick border for Rejected (Red) - highest visual weight
+          return {
+            borderWidth: 4,
+            borderColor: "rgba(0, 0, 0, 0.35)",
+          };
+        default:
+          return {
+            borderWidth: 1,
+            borderColor: "rgba(0, 0, 0, 0.1)",
+          };
+      }
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const option: any = {
@@ -134,7 +189,23 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
         </Flex>
       ) : (
         <>
-          <Flex ref={containerRef} className="h-150 w-full" />
+          {/* Screen reader description */}
+          <p id="sankey-description" className="sr-only">
+            Sankey flow diagram showing how applications progress through different stages:{" "}
+            {data.nodes
+              .map((n) => SANKEY_NODE_LABELS[n.id as keyof typeof SANKEY_NODE_LABELS])
+              .join(", ")}
+            .
+          </p>
+
+          <Flex
+            ref={containerRef}
+            className="h-150 w-full"
+            role="img"
+            aria-labelledby="sankey-heading"
+            aria-describedby="sankey-description"
+            tabIndex={0}
+          />
 
           {/* Legend */}
           <Flex
@@ -149,13 +220,15 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
             {SANKEY_NODES.map((id) => (
               <Flex justify="center" align="center" gap="xs" key={id} role="listitem">
                 <span
-                  className="inline-block w-md h-md rounded-sm shrink-0"
+                  className="inline-block w-md h-md rounded-sm shrink-0 border border-muted-light"
                   style={{
                     backgroundColor: STATUS_COLORS[theme][id as keyof typeof STATUS_COLORS.light],
+                    backgroundImage: STATUS_PATTERNS[id],
+                    backgroundSize: "8px 8px",
                   }}
                   aria-hidden="true"
                 />
-                <span className="text-md text-secondary">{SANKEY_NODE_LABELS[id]}</span>
+                <span className="text-md text-secondary font-medium">{SANKEY_NODE_LABELS[id]}</span>
               </Flex>
             ))}
           </Flex>
