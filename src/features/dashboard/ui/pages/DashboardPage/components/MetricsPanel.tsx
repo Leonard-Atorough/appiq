@@ -15,15 +15,23 @@ export function MetricsPanel({
         Application Metrics
       </h2>
       {loading ? (
-        <div className="flex gap-md">
+        <div className="flex flex-col gap-md md:flex-row">
           {Array(5)
             .fill(0)
             .map((_, i) => (
-              <Skeleton key={i} className="flex-1 h-28" />
+              <Skeleton
+                key={i}
+                className="w-full h-24 md:flex-1 md:h-28"
+              />
             ))}
         </div>
       ) : (
-        <Flex direction="row" gap="lg" fullWidth>
+        <Flex
+          direction="row"
+          gap="lg"
+          fullWidth
+          className="flex-col h-auto md:flex-row md:h-full"
+        >
           <MetricCard
             label={metrics.totalApplications === 1 ? "Total Application" : "Total Applications"}
             value={metrics.totalApplications}

@@ -15,7 +15,7 @@ export default function DashboardPage() {
 
   if (error) {
     return (
-      <Flex direction="column" gap="lg" padding="md">
+      <Flex direction="column" gap="lg" padding="md" className="p-md md:p-lg">
         <div className="rounded-lg border border-error bg-error-light p-md">
           <p className="text-sm font-medium text-error">Error loading dashboard</p>
           <p className="text-xs text-muted">{error.message}</p>
@@ -25,19 +25,27 @@ export default function DashboardPage() {
   }
 
   return (
-    <Flex direction="column" gap="lg" padding="md" justify="center" fullWidth>
+    <Flex direction="column" gap="lg" justify="center" className="p-xs lg:p-lg" fullWidth>
       {/* Metrics Panel */}
       <MetricsPanel loading={loading} metrics={metrics} />
 
       {/* Upcoming Interviews and Sankey Flow Chart */}
-      <Flex direction="row" gap="lg" fullWidth align="stretch" className="h-180">
-        <Flex className="w-1/4 shrink-0 h-full">
+      <Flex
+        direction="row"
+        gap="lg"
+        fullWidth
+        align="stretch"
+        className="flex-col-reverse h-auto md:flex-row lg:h-180"
+      >
+        <Flex
+          className="w-full md:shrink-0 lg:w-1/4 lg:shrink-0 lg:h-full"
+        >
           <UpcomingInterviewsPanel
             upcomingInterviews={upcomingInterviews}
             onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
           />
         </Flex>
-        <Flex className="flex-1 h-full">
+        <Flex className="md:flex-1 lg:h-full">
           <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
         </Flex>
       </Flex>
@@ -46,7 +54,13 @@ export default function DashboardPage() {
         <h2 id="activity-heading" className="sr-only">
           Recent Activity and Upcoming
         </h2>
-        <Flex direction="row" gap="lg" fullWidth align="stretch">
+        <Flex
+          direction="row"
+          gap="lg"
+          fullWidth
+          align="stretch"
+          className="flex-col md:flex-row"
+        >
           {/* Recent Activity */}
           <Card size="md" interactive={false} className="flex-1">
             <Flex direction="column" gap="md">
