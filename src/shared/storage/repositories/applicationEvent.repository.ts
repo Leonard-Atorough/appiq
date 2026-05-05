@@ -6,7 +6,18 @@ import {
   mapUpdatedApplicationEventToRow,
 } from "@/entities/application";
 
-export class ApplicationEventRepositoryImpl {
+export interface ApplicationEventRepository {
+  getByApplicationId(applicationId: string): Promise<ApplicationEvent[]>;
+  createEvent(event: Omit<ApplicationEvent, "id" | "createdAt">): Promise<ApplicationEvent>;
+  updateEvent(
+    id: string,
+    updatedFields: Partial<Omit<ApplicationEvent, "id" | "applicationId" | "createdAt">>,
+  ): Promise<ApplicationEvent | null>;
+  deleteEvent(id: string): Promise<void>;
+  deleteByApplicationId(applicationId: string): Promise<void>;
+}
+
+export class ApplicationEventRepositoryImpl implements ApplicationEventRepository {
   private db: JobiqDbClient;
 
   constructor(db: JobiqDbClient) {
