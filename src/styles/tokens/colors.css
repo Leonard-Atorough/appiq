@@ -67,6 +67,8 @@
   /* ===== SEMANTIC: BACKGROUNDS & SURFACES ===== */
   --color-bg: var(--gray-50);
   --color-surface: hsl(210 20% 100%);
+  --color-surface-hover: var(--gray-50);  /* interactive hover state for surface-based controls */
+  --color-surface-active: var(--gray-100);  /* pressed state for surface-based controls */
   --color-muted-bg: var(--gray-100);
   --color-secondary-bg: var(--gray-100);  /* secondary panel/alternate-row background */
 
