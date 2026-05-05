@@ -42,6 +42,8 @@ export default {
         base: "var(--color-bg)",
         secondary: "var(--color-secondary-bg)",
         surface: "var(--color-surface)",
+        "surface-hover": "var(--color-surface-hover)",
+        "surface-active": "var(--color-surface-active)",
         muted: "var(--color-muted-bg)",
         skeleton: "var(--color-skeleton)",
       },
