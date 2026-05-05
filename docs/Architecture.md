@@ -43,6 +43,14 @@ Top-level folders and their responsibilities:
 src/
     ├─ features/       # Feature verticals (applications, jobBoards, cvBuilder, ...)
     ├─ entities/       # Pure domain models and validation
+    │   ├─ application/
+    │   │   ├─ model/         # Type definitions, validation schemas
+    │   │   ├─ mappers/       # Map external API data to internal models
+    │   │   ├─ lib/           # Pure functions related to applications (e.g., status transitions)
+    │   │   └─ index.ts       # Re-export public API for this entity
+    │   ├─ jobBoard/
+    │   ├─ interview/
+    │   └─ user/
     ├─ shared/         # Reusable UI atoms, hooks, api clients, storage adapters
     │   ├─ ui/
     │   ├─ api/
@@ -50,6 +58,8 @@ src/
     │   ├─ hooks/
     │   └─ types/
     ├─ app/            # App-level concerns (routing, global providers)
+    │   ├─ routes/         # Route definitions and route-level components
+    │   ├─ providers/      # Global context providers (AuthProvider, ThemeProvider)
     ├─ widgets/        # Layout pieces (AppShell, Header, Sidebar)
     ├─ styles/         # tokens/ (colors, spacing, typography, radii, themes), Tailwind entry
     └─ main.tsx        # App bootstrap
@@ -80,13 +90,13 @@ features/<featureName>/
 
 **Layer rules:**
 
-| Folder | Allowed content |
-|---|---|
-| `pages/` | Route-bound components only |
-| `components/` | Anything reused across 2+ pages within the feature |
-| `data/` | Hooks that fetch or mutate data — no pure utilities |
-| `lib/` | Pure functions only — no hooks, no JSX |
-| `index.ts` (root) | Named exports only |
+| Folder            | Allowed content                                     |
+| ----------------- | --------------------------------------------------- |
+| `pages/`          | Route-bound components only                         |
+| `components/`     | Anything reused across 2+ pages within the feature  |
+| `data/`           | Hooks that fetch or mutate data — no pure utilities |
+| `lib/`            | Pure functions only — no hooks, no JSX              |
+| `index.ts` (root) | Named exports only                                  |
 
 This keeps logic close to the UI that uses it, enforces a consistent mental model across features, and simplifies reasoning and testing.
 
