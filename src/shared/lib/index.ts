@@ -1,5 +1,4 @@
 export { cn } from "./cn";
-export { responsive } from "./responsive";
 export { useAsync } from "./hooks/useAsync";
 export type { AsyncState } from "./hooks/useAsync";
 export { useTheme } from "./hooks/useTheme";
