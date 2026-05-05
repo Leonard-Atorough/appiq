@@ -1,14 +1,14 @@
-import React from 'react';
-import { cn } from '@/shared/lib/cn';
-import { flexVariants } from './flex.variants';
-import type { FlexProps } from './flex.types';
+import React from "react";
+import { cn } from "@/shared/lib/cn";
+import { flexVariants } from "./flex.variants";
+import type { FlexProps } from "./flex.types";
 
 /**
  * Flex - A flexible layout component that handles spacing and alignment.
  *
  * Replaces raw div layouts with a semantic, typed component that enforces
- * design system spacing and alignment rules. For responsive overrides, use
- * the `className` prop combined with the `responsive()` helper.
+ * design system spacing and alignment rules. For responsive overrides, pass
+ * Tailwind responsive variants directly via the `className` prop.
  *
  * @example
  * // Simple horizontal layout with gap
@@ -19,11 +19,10 @@ import type { FlexProps } from './flex.types';
  *
  * @example
  * // Responsive with className override
- * import { responsive } from '@/shared/lib/responsive';
  * <Flex
  *   direction="column"
  *   gap="sm"
- *   className={responsive({ lg: 'flex-row lg:gap-lg' })}
+ *   className="lg:flex-row lg:gap-lg"
  * >
  *   <Item />
  *   <Item />
@@ -44,7 +43,7 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div
@@ -61,12 +60,12 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
             wrap,
             fullWidth,
           }),
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
-Flex.displayName = 'Flex';
+Flex.displayName = "Flex";

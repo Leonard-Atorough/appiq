@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Flex } from './Flex';
-import { responsive } from '@/shared/lib/responsive';
 
 const meta: Meta<typeof Flex> = {
   title: 'Shared/Flex',
@@ -220,9 +219,7 @@ export const Responsive: Story = {
       gap="sm"
       justify="start"
       align="stretch"
-      className={responsive({
-        lg: 'flex-row lg:gap-lg lg:justify-between lg:items-center',
-      })}
+      className="lg:flex-row lg:gap-lg lg:justify-between lg:items-center"
       style={{ minHeight: '200px' }}
     >
       <div className="bg-muted p-md rounded">Column on mobile, row on lg</div>
