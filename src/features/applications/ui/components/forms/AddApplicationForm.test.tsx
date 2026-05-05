@@ -167,6 +167,8 @@ describe("AddApplicationForm", () => {
       location: "New York",
       workingStyle: "hybrid",
       jobType: "full-time",
+      interviewStartDate: undefined,
+      interviewEndDate: undefined,
       salaryMin: 90000,
       salaryMax: 120000,
       notes: "Had a great interview!",

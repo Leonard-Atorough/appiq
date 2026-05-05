@@ -1,8 +1,8 @@
 import { useToast } from "@/shared/lib";
 import { useAsync } from "@/shared/lib";
-import { JobApplicationRepositoryImpl } from "@/shared/storage";
-import { ApplicationEventRepositoryImpl } from "@/shared/storage";
-import { db } from "@/shared/storage";
+import { JobApplicationRepositoryImpl, ApplicationEventRepositoryImpl, db } from "@/shared/storage";
+import type { JobApplicationRepository } from "@/shared/storage";
+import type { ApplicationEventRepository } from "@/shared/storage";
 import type { ApplicationStatus, JobApplication } from "@/entities";
 
 interface UseApplicationActionsOptions {
@@ -42,7 +42,11 @@ function getFriendlyErrorMessage(err: unknown, action: string): string {
  * await createAsync.execute(data);  // Toast shown automatically
  * ```
  */
-export function useApplicationActions(options: UseApplicationActionsOptions = {}) {
+export function useApplicationActions(
+  options: UseApplicationActionsOptions = {},
+  repo: JobApplicationRepository = new JobApplicationRepositoryImpl(db),
+  eventRepo: ApplicationEventRepository = new ApplicationEventRepositoryImpl(db),
+) {
   const { withSuccess = false, withError = false } = options;
 
   // Always call the hook (rules of hooks - must be unconditional)
@@ -52,8 +56,6 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
   // Delete operation
   const deleteAsync = useAsync(
     async (id: string) => {
-      const repo = new JobApplicationRepositoryImpl(db);
-      const eventRepo = new ApplicationEventRepositoryImpl(db);
       await db.transaction("rw", db.applications, db.applicationEvents, async () => {
         await repo.deleteApplication(id);
         await eventRepo.deleteByApplicationId(id);
@@ -85,7 +87,6 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
   // Create operation
   const createAsync = useAsync(
     async (application: Omit<JobApplication, "id">) => {
-      const repo = new JobApplicationRepositoryImpl(db);
       await repo.createApplication(application);
     },
     {
@@ -114,7 +115,6 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
   // Update operation
   const updateAsync = useAsync(
     async (id: string, updates: Partial<Omit<JobApplication, "id">>) => {
-      const repo = new JobApplicationRepositoryImpl(db);
       await repo.updateApplication(id, updates);
     },
     {
@@ -143,8 +143,6 @@ export function useApplicationActions(options: UseApplicationActionsOptions = {}
   // Move operation
   const moveAsync = useAsync(
     async (id: string, newStatus: ApplicationStatus) => {
-      const repo = new JobApplicationRepositoryImpl(db);
-      const eventRepo = new ApplicationEventRepositoryImpl(db);
       const current = await repo.getApplicationById(id);
       const fromStatus = current?.status;
       await repo.updateApplication(id, { status: newStatus });

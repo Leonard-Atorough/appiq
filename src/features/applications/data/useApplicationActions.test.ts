@@ -1,91 +1,59 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 
-/**
- * Type definitions for mocks
- */
-interface MockJobApplicationRepository {
-  deleteApplication: ReturnType<typeof vi.fn>;
-  createApplication: ReturnType<typeof vi.fn>;
-  updateApplication: ReturnType<typeof vi.fn>;
-  getApplicationById: ReturnType<typeof vi.fn>;
-}
-
-interface MockApplicationEventRepository {
-  deleteByApplicationId: ReturnType<typeof vi.fn>;
-  createEvent: ReturnType<typeof vi.fn>;
-}
-
-/**
- * PARTIAL MOCK: Shared storage module
- * Preserve real implementations (repositories) but allow test setup via
- * constructor mocks to control behavior per test.
- */
 vi.mock("@/shared/storage", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/shared/storage")>();
   return {
     ...actual,
-    JobApplicationRepositoryImpl: vi.fn(),
-    ApplicationEventRepositoryImpl: vi.fn(),
-    db: { transaction: vi.fn() },
+    db: { transaction: vi.fn(), applications: {}, applicationEvents: {} },
   };
 });
 
-/**
- * PARTIAL MOCK: Shared lib
- * Preserve real implementations but mock useToast to control toast feedback.
- */
 vi.mock("@/shared/lib", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/shared/lib")>();
-  return {
-    ...actual,
-    useToast: vi.fn(),
-  };
+  return { ...actual, useToast: vi.fn() };
 });
 
-// Import after mocks are defined
 import { useApplicationActions } from "./useApplicationActions";
-import { JobApplicationRepositoryImpl, ApplicationEventRepositoryImpl, db } from "@/shared/storage";
+import { db } from "@/shared/storage";
 import { useToast } from "@/shared/lib";
+import type { JobApplicationRepository } from "@/shared/storage";
+import type { ApplicationEventRepository } from "@/shared/storage";
 import type { JobApplication } from "@/entities";
 
+function makeMockJobRepo(): JobApplicationRepository {
+  return {
+    listApplications: vi.fn().mockResolvedValue([]),
+    getApplicationById: vi.fn().mockResolvedValue(null),
+    createApplication: vi.fn().mockResolvedValue(undefined),
+    updateApplication: vi.fn().mockResolvedValue(null),
+    deleteApplication: vi.fn().mockResolvedValue(undefined),
+  };
+}
+
+function makeMockEventRepo(): ApplicationEventRepository {
+  return {
+    getByApplicationId: vi.fn().mockResolvedValue([]),
+    createEvent: vi.fn().mockResolvedValue(undefined),
+    updateEvent: vi.fn().mockResolvedValue(null),
+    deleteEvent: vi.fn().mockResolvedValue(undefined),
+    deleteByApplicationId: vi.fn().mockResolvedValue(undefined),
+  };
+}
+
 describe("useApplicationActions", () => {
-  let mockRepo: MockJobApplicationRepository;
-  let mockEventRepo: MockApplicationEventRepository;
+  let mockRepo: ReturnType<typeof makeMockJobRepo>;
+  let mockEventRepo: ReturnType<typeof makeMockEventRepo>;
   let mockAddToast: ReturnType<typeof vi.fn>;
-  const jobAppRepoMock = JobApplicationRepositoryImpl as ReturnType<typeof vi.fn>;
-  const eventRepoMock = ApplicationEventRepositoryImpl as ReturnType<typeof vi.fn>;
-  const useToastMock = useToast as ReturnType<typeof vi.fn>;
   const dbTransactionMock = db.transaction as ReturnType<typeof vi.fn>;
+  const useToastMock = useToast as ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     vi.clearAllMocks();
-
-    // Setup repository mocks
-    mockRepo = {
-      deleteApplication: vi.fn().mockResolvedValue(undefined),
-      createApplication: vi.fn().mockResolvedValue(undefined),
-      updateApplication: vi.fn().mockResolvedValue(undefined),
-      getApplicationById: vi.fn().mockResolvedValue(null),
-    };
-
-    mockEventRepo = {
-      deleteByApplicationId: vi.fn().mockResolvedValue(undefined),
-      createEvent: vi.fn().mockResolvedValue(undefined),
-    };
-
+    mockRepo = makeMockJobRepo();
+    mockEventRepo = makeMockEventRepo();
     mockAddToast = vi.fn();
-
-    // Setup constructor mocks - must return object when called with new
-    jobAppRepoMock.mockImplementation(function () {
-      return mockRepo;
-    });
-    eventRepoMock.mockImplementation(function () {
-      return mockEventRepo;
-    });
     useToastMock.mockReturnValue({ addToast: mockAddToast });
-
-    // Setup db.transaction to run the callback
     dbTransactionMock.mockImplementation((_mode: string, ..._args: unknown[]) => {
       const callback = _args[_args.length - 1] as () => Promise<void>;
       return callback();
@@ -94,7 +62,7 @@ describe("useApplicationActions", () => {
 
   describe("create", () => {
     it("should create application", async () => {
-      const { result } = renderHook(() => useApplicationActions());
+      const { result } = renderHook(() => useApplicationActions({}, mockRepo, mockEventRepo));
       const app: Omit<JobApplication, "id"> = {
         company: "Acme",
         position: "Engineer",
@@ -110,7 +78,9 @@ describe("useApplicationActions", () => {
     });
 
     it("should show success toast when enabled", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withSuccess: true }));
+      const { result } = renderHook(() =>
+        useApplicationActions({ withSuccess: true }, mockRepo, mockEventRepo),
+      );
 
       await act(async () => {
         await result.current.createAsync.execute({
@@ -122,16 +92,15 @@ describe("useApplicationActions", () => {
       });
 
       expect(mockAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          title: "Application created",
-          variant: "success",
-        }),
+        expect.objectContaining({ title: "Application created", variant: "success" }),
       );
     });
 
     it("should show error toast when enabled and fails", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withError: true }));
-      mockRepo.createApplication.mockRejectedValueOnce(new Error("DB error"));
+      const { result } = renderHook(() =>
+        useApplicationActions({ withError: true }, mockRepo, mockEventRepo),
+      );
+      vi.mocked(mockRepo.createApplication).mockRejectedValueOnce(new Error("DB error"));
 
       await act(async () => {
         await result.current.createAsync
@@ -145,46 +114,40 @@ describe("useApplicationActions", () => {
       });
 
       expect(mockAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          title: "Error creating application",
-          variant: "error",
-        }),
+        expect.objectContaining({ title: "Error creating application", variant: "error" }),
       );
     });
   });
 
   describe("update", () => {
     it("should update application", async () => {
-      const { result } = renderHook(() => useApplicationActions());
+      const { result } = renderHook(() => useApplicationActions({}, mockRepo, mockEventRepo));
 
       await act(async () => {
         await result.current.updateAsync.execute("app-1", { status: "interviewing" });
       });
 
-      expect(mockRepo.updateApplication).toHaveBeenCalledWith("app-1", {
-        status: "interviewing",
-      });
+      expect(mockRepo.updateApplication).toHaveBeenCalledWith("app-1", { status: "interviewing" });
     });
 
     it("should show success toast when enabled", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withSuccess: true }));
+      const { result } = renderHook(() =>
+        useApplicationActions({ withSuccess: true }, mockRepo, mockEventRepo),
+      );
 
       await act(async () => {
         await result.current.updateAsync.execute("app-1", { status: "offer" });
       });
 
       expect(mockAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          title: "Application updated",
-          variant: "success",
-        }),
+        expect.objectContaining({ title: "Application updated", variant: "success" }),
       );
     });
   });
 
   describe("delete", () => {
     it("should delete application and events in transaction", async () => {
-      const { result } = renderHook(() => useApplicationActions());
+      const { result } = renderHook(() => useApplicationActions({}, mockRepo, mockEventRepo));
 
       await act(async () => {
         await result.current.deleteAsync.execute("app-1");
@@ -196,25 +159,24 @@ describe("useApplicationActions", () => {
     });
 
     it("should show success toast when enabled", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withSuccess: true }));
+      const { result } = renderHook(() =>
+        useApplicationActions({ withSuccess: true }, mockRepo, mockEventRepo),
+      );
 
       await act(async () => {
         await result.current.deleteAsync.execute("app-1");
       });
 
       expect(mockAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          title: "Application deleted",
-          variant: "success",
-        }),
+        expect.objectContaining({ title: "Application deleted", variant: "success" }),
       );
     });
   });
 
   describe("move", () => {
     it("should update status and create event", async () => {
-      const { result } = renderHook(() => useApplicationActions());
-      mockRepo.getApplicationById.mockResolvedValueOnce({
+      const { result } = renderHook(() => useApplicationActions({}, mockRepo, mockEventRepo));
+      vi.mocked(mockRepo.getApplicationById).mockResolvedValueOnce({
         id: "app-1",
         company: "Acme",
         position: "Engineer",
@@ -226,9 +188,7 @@ describe("useApplicationActions", () => {
         await result.current.moveAsync.execute("app-1", "interviewing");
       });
 
-      expect(mockRepo.updateApplication).toHaveBeenCalledWith("app-1", {
-        status: "interviewing",
-      });
+      expect(mockRepo.updateApplication).toHaveBeenCalledWith("app-1", { status: "interviewing" });
       expect(mockEventRepo.createEvent).toHaveBeenCalledWith(
         expect.objectContaining({
           applicationId: "app-1",
@@ -240,8 +200,10 @@ describe("useApplicationActions", () => {
     });
 
     it("should show success toast when enabled", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withSuccess: true }));
-      mockRepo.getApplicationById.mockResolvedValueOnce({
+      const { result } = renderHook(() =>
+        useApplicationActions({ withSuccess: true }, mockRepo, mockEventRepo),
+      );
+      vi.mocked(mockRepo.getApplicationById).mockResolvedValueOnce({
         id: "app-1",
         company: "Acme",
         position: "Engineer",
@@ -254,18 +216,19 @@ describe("useApplicationActions", () => {
       });
 
       expect(mockAddToast).toHaveBeenCalledWith(
-        expect.objectContaining({
-          title: "Application moved",
-          variant: "success",
-        }),
+        expect.objectContaining({ title: "Application moved", variant: "success" }),
       );
     });
   });
 
   describe("error handling", () => {
     it("should not expose sensitive error details in toast", async () => {
-      const { result } = renderHook(() => useApplicationActions({ withError: true }));
-      mockRepo.createApplication.mockRejectedValueOnce(new Error("database lost at 192.168.1.1"));
+      const { result } = renderHook(() =>
+        useApplicationActions({ withError: true }, mockRepo, mockEventRepo),
+      );
+      vi.mocked(mockRepo.createApplication).mockRejectedValueOnce(
+        new Error("database lost at 192.168.1.1"),
+      );
 
       await act(async () => {
         await result.current.createAsync

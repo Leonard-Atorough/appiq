@@ -1,23 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
 import { liveQuery } from "dexie";
-import { db } from "@/shared/storage/indexeddb/dexieClient";
-import { ApplicationEventRepositoryImpl } from "@/shared/storage/repositories/applicationEvent.repository";
+import { db, ApplicationEventRepositoryImpl } from "@/shared/storage";
+import type { ApplicationEventRepository } from "@/shared/storage";
 import type { ApplicationEvent } from "@/entities";
-import { mapRowToApplicationEvent } from "@/entities/application";
 
-export function useApplicationEvents(applicationId: string) {
+export function useApplicationEvents(
+  applicationId: string,
+  repo: ApplicationEventRepository = new ApplicationEventRepositoryImpl(db),
+) {
   const [events, setEvents] = useState<ApplicationEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const subscription = liveQuery(() =>
-      db.applicationEvents.where("applicationId").equals(applicationId).toArray(),
-    ).subscribe({
-      next: (rows) => {
-        const mapped: ApplicationEvent[] = rows.map(mapRowToApplicationEvent);
-        mapped.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-        setEvents(mapped);
+    const subscription = liveQuery(() => repo.getByApplicationId(applicationId)).subscribe({
+      next: (fetched) => {
+        const sorted = [...fetched].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+        setEvents(sorted);
         setLoading(false);
         setError(null);
       },
@@ -28,28 +27,23 @@ export function useApplicationEvents(applicationId: string) {
     });
 
     return () => subscription.unsubscribe();
-  }, [applicationId]);
+  }, [applicationId, repo]);
 
-  const addEvent = useCallback(async (event: Omit<ApplicationEvent, "id" | "createdAt">) => {
-    const repo = new ApplicationEventRepositoryImpl(db);
-    await repo.createEvent(event);
-  }, []);
-
-  const updateEvent = useCallback(
-    async (
-      id: string,
-      updatedFields: Partial<Omit<ApplicationEvent, "id" | "applicationId" | "createdAt">>,
-    ) => {
-      const repo = new ApplicationEventRepositoryImpl(db);
-      await repo.updateEvent(id, updatedFields);
-    },
-    [],
+  const addEvent = useCallback(
+    (event: Omit<ApplicationEvent, "id" | "createdAt">) => repo.createEvent(event),
+    [repo],
   );
 
-  const deleteEvent = useCallback(async (id: string) => {
-    const repo = new ApplicationEventRepositoryImpl(db);
-    await repo.deleteEvent(id);
-  }, []);
+  const updateEvent = useCallback(
+    (
+      id: string,
+      updatedFields: Partial<Omit<ApplicationEvent, "id" | "applicationId" | "createdAt">>,
+    ) => repo.updateEvent(id, updatedFields),
+    [repo],
+  );
+
+  const deleteEvent = useCallback((id: string) => repo.deleteEvent(id), [repo]);
 
   return { events, loading, error, addEvent, updateEvent, deleteEvent };
 }
+
