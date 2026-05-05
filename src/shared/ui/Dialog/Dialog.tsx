@@ -1,8 +1,17 @@
-import { forwardRef, useCallback, useEffect, useId, useRef } from "react";
+import { forwardRef, useEffect, useId, useLayoutEffect, useRef } from "react";
 import { cn } from "@shared/lib/cn";
 import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
 import { Button } from "@shared/ui/Button";
+
+const FOCUSABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(", ");
 
 /**
  * Dialog
@@ -48,11 +57,20 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     }, [open, modal]);
 
     useEffect(() => {
-      if (open && focusRef?.current) {
+      if (!open) return;
+      if (focusRef?.current) {
         focusRef.current.focus();
-      } else if (closeButtonRef.current) {
-        closeButtonRef.current.focus();
+        return;
       }
+      if (closeButtonRef.current) {
+        closeButtonRef.current.focus();
+        return;
+      }
+      // Fallback: first focusable child, or the panel itself (covers buttonRow case)
+      const panel = internalRef.current;
+      if (!panel) return;
+      const first = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+      (first ?? panel).focus();
     }, [open, focusRef]);
 
     useEffect(() => {
@@ -78,16 +96,18 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
 
     const shouldShowClose = showClose ?? !buttonRow;
 
-    // Internal ref for the dialog panel, merged with the forwarded ref
+    // Internal ref for the dialog panel; synced with forwarded ref via useLayoutEffect
     const internalRef = useRef<HTMLDivElement>(null);
-    const mergedRef = useCallback(
-      (node: HTMLDivElement | null) => {
-        internalRef.current = node;
-        if (typeof ref === "function") ref(node);
-        else if (ref) ref.current = node;
-      },
-      [ref],
-    );
+
+    // Sync internal ref with forwarded ref after DOM updates
+    useLayoutEffect(() => {
+      const node = internalRef.current;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        (ref as React.RefObject<HTMLDivElement | null>).current = node;
+      }
+    }, [ref]);
 
     useEffect(() => {
       if (open) {
@@ -104,37 +124,44 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       const panel = internalRef.current;
       if (!panel) return;
 
-      const FOCUSABLE = [
-        "a[href]",
-        "button:not([disabled])",
-        "input:not([disabled])",
-        "select:not([disabled])",
-        "textarea:not([disabled])",
-        '[tabindex]:not([tabindex="-1"])',
-      ].join(", ");
-
       const handleTab = (e: KeyboardEvent) => {
         if (e.key !== "Tab") return;
-        const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE));
-        if (focusable.length === 0) return;
+        const focusable = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+        if (focusable.length === 0) {
+          e.preventDefault();
+          panel.focus();
+          return;
+        }
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
         if (e.shiftKey) {
-          if (document.activeElement === first) {
+          if (document.activeElement === first || document.activeElement === panel) {
             e.preventDefault();
             last.focus();
           }
         } else {
-          if (document.activeElement === last) {
+          if (document.activeElement === last || document.activeElement === panel) {
             e.preventDefault();
             first.focus();
           }
         }
       };
 
+      // For modal dialogs: redirect focus back in if AT/browser moves it outside
+      const handleFocusIn = (e: FocusEvent) => {
+        if (modal && !panel.contains(e.target as Node)) {
+          const focusable = panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+          (focusable[0] ?? panel).focus();
+        }
+      };
+
       document.addEventListener("keydown", handleTab);
-      return () => document.removeEventListener("keydown", handleTab);
-    }, [open]);
+      if (modal) document.addEventListener("focusin", handleFocusIn);
+      return () => {
+        document.removeEventListener("keydown", handleTab);
+        document.removeEventListener("focusin", handleFocusIn);
+      };
+    }, [open, modal]);
 
     if (!open) return null;
 
@@ -150,7 +177,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
         )}
 
         <div
-          ref={mergedRef}
+          ref={internalRef}
           role="dialog"
           aria-modal={modal}
           tabIndex={-1}
