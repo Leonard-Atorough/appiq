@@ -4,7 +4,7 @@ import {
   mapRowToApplicationEvent,
   mapApplicationEventToRow,
   mapUpdatedApplicationEventToRow,
-} from "@/shared/lib";
+} from "@/entities/application";
 
 export class ApplicationEventRepositoryImpl {
   private db: JobiqDbClient;

@@ -4,7 +4,7 @@ import {
   mapJobApplicationToRow,
   mapRowToJobApplication,
   mapUpdatedApplicationToRow,
-} from "@/shared/lib";
+} from "@/entities/application";
 
 export interface JobApplicationRepository {
   listApplications(): Promise<JobApplication[]>;

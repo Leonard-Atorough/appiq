@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import type { Mock } from "vitest";
 import { db } from "@/shared/storage";
 import { JobApplicationRepositoryImpl } from "./jobApplication.repository";
-import { mapRowToJobApplication } from "@/shared/lib/mappers/application.mapper";
+import { mapRowToJobApplication } from "@/entities/application";
 
 vi.mock("@/shared/storage/indexeddb/dexieClient", () => ({
   db: {

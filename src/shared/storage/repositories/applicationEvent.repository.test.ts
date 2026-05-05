@@ -1,7 +1,7 @@
 // Mock db client
 import { db } from "@/shared/storage";
 import { ApplicationEventRepositoryImpl } from "./applicationEvent.repository";
-import { mapRowToApplicationEvent } from "@/shared/lib/mappers/applicationEvent.mapper";
+import { mapRowToApplicationEvent } from "@/entities/application";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Mock } from "vitest";
 import type { ApplicationEvent } from "@/entities";
