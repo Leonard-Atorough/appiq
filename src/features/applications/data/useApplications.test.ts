@@ -89,7 +89,6 @@ function setupMapperMock(transformedApps: ReturnType<typeof createMockTransforme
 describe("useApplications", () => {
   let mockUnsubscribe: ReturnType<typeof vi.fn>;
   beforeEach(() => {
-    vi.clearAllMocks();
     mockUnsubscribe = vi.fn();
   });
 
