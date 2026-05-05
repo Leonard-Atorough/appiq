@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { liveQuery } from "dexie";
-import { mapRowToJobApplication } from "@/shared/lib";
+import { mapRowToJobApplication } from "@entities/application";
 import { db } from "@/shared/storage/indexeddb/dexieClient";
-import type { JobApplication } from "@/entities";
+import type { JobApplication } from "@entities";
 
 export function useApplications() {
   const [applications, setApplications] = useState<JobApplication[]>([]);

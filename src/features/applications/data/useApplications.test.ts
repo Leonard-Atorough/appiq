@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useApplications } from "./useApplications";
-import * as mappers from "@/shared/lib";
+import * as mappers from "@/entities/application";
 import { liveQuery } from "dexie";
 import type { ApplicationStatus } from "@/entities";
 
@@ -31,8 +31,8 @@ vi.mock("@/shared/storage/indexeddb/dexieClient");
  * mapRowToJobApplication so we can control the transformation behavior
  * in individual tests. This allows testing the hook's integration with mappers.
  */
-vi.mock("@/shared/lib", async () => {
-  const actual = await vi.importActual("@/shared/lib");
+vi.mock("@entities/application", async () => {
+  const actual = await vi.importActual("@entities/application");
   return {
     ...actual,
     mapRowToJobApplication: vi.fn(),

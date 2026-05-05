@@ -198,12 +198,14 @@ describe("SankeyChartPanel", () => {
       expect(heading).toHaveClass("text-lg", "font-semibold", "text-primary");
     });
 
-    it("section has aria-labelledby pointing to heading", () => {
+    it("heading is rendered inside the panel", () => {
       const data: SankeyData = { nodes: [], links: [] };
-      const { container } = render(<SankeyChartPanel loading={false} data={data} />);
+      const { getByTestId } = render(<SankeyChartPanel loading={false} data={data} />);
 
-      const section = container.querySelector("section");
-      expect(section).toHaveAttribute("aria-labelledby", "sankey-heading");
+      const panel = getByTestId("sankey-chart-panel");
+      const heading = screen.getByText("Application Flow");
+      expect(panel).toContainElement(heading);
+      expect(heading).toHaveAttribute("id", "sankey-heading");
     });
   });
 

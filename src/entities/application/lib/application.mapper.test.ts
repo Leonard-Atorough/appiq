@@ -5,7 +5,7 @@ import {
   mapRowToJobApplication,
   mapJobApplicationToRow,
   mapUpdatedApplicationToRow,
-} from "./application.mapper";
+} from "@entities/application";
 
 describe("Application Mappers", () => {
   const now = "2026-04-29T12:00:00.000Z";
@@ -17,6 +17,8 @@ describe("Application Mappers", () => {
     position: "Senior Engineer",
     status: "applied",
     dateApplied: "2026-04-15T10:00:00.000Z",
+    interviewStartDate: null,
+    interviewEndDate: null,
     salaryMin: 80000,
     salaryMax: 120000,
     location: "San Francisco, CA",
@@ -94,33 +96,23 @@ describe("Application Mappers", () => {
     });
 
     it("should preserve zero salary values", () => {
-      const result = mapRowToJobApplication(
-        createRow({ salaryMin: 0, salaryMax: 0 }),
-      );
+      const result = mapRowToJobApplication(createRow({ salaryMin: 0, salaryMax: 0 }));
       expect(result.salaryMin).toBe(0);
       expect(result.salaryMax).toBe(0);
     });
 
-    it.each([
-      "saved",
-      "applied",
-      "interviewing",
-      "offer",
-      "rejected",
-    ] as const)("should map status '%s'", (status) => {
-      const result = mapRowToJobApplication(createRow({ status }));
-      expect(result.status).toBe(status);
-    });
-
-    it.each(["remote", "on-site", "hybrid"] as const)(
-      "should map working style '%s'",
-      (style) => {
-        const result = mapRowToJobApplication(
-          createRow({ workingStyle: style }),
-        );
-        expect(result.workingStyle).toBe(style);
+    it.each(["saved", "applied", "interviewing", "offer", "rejected"] as const)(
+      "should map status '%s'",
+      (status) => {
+        const result = mapRowToJobApplication(createRow({ status }));
+        expect(result.status).toBe(status);
       },
     );
+
+    it.each(["remote", "on-site", "hybrid"] as const)("should map working style '%s'", (style) => {
+      const result = mapRowToJobApplication(createRow({ workingStyle: style }));
+      expect(result.workingStyle).toBe(style);
+    });
   });
 
   describe("mapJobApplicationToRow", () => {
@@ -173,15 +165,13 @@ describe("Application Mappers", () => {
       expect(result.dateUpdated).toBe(now);
     });
 
-    it.each([
-      "full-time",
-      "part-time",
-      "contract",
-      "internship",
-    ] as const)("should map job type '%s'", (jobType) => {
-      const result = mapJobApplicationToRow(createApp({ jobType }));
-      expect(result.jobType).toBe(jobType);
-    });
+    it.each(["full-time", "part-time", "contract", "internship"] as const)(
+      "should map job type '%s'",
+      (jobType) => {
+        const result = mapJobApplicationToRow(createApp({ jobType }));
+        expect(result.jobType).toBe(jobType);
+      },
+    );
   });
 
   describe("mapUpdatedApplicationToRow", () => {
@@ -274,6 +264,8 @@ describe("Application Mappers", () => {
         position: "Senior Engineer",
         status: "interviewing",
         dateApplied: "2026-04-15T10:00:00.000Z",
+        interviewStartDate: "2026-04-20T10:00:00.000Z",
+        interviewEndDate: null,
         salaryMin: 90000,
         salaryMax: 130000,
         location: "San Francisco, CA",
@@ -307,6 +299,8 @@ describe("Application Mappers", () => {
         position: "Dev",
         status: "applied",
         dateApplied: "2026-04-15T10:00:00.000Z",
+        interviewStartDate: null,
+        interviewEndDate: null,
         salaryMin: 0,
         salaryMax: 0,
         location: null,

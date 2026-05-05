@@ -3,7 +3,7 @@ import { liveQuery } from "dexie";
 import { db } from "@/shared/storage/indexeddb/dexieClient";
 import { ApplicationEventRepositoryImpl } from "@/shared/storage/repositories/applicationEvent.repository";
 import type { ApplicationEvent } from "@/entities";
-import { mapRowToApplicationEvent } from "@/shared/lib";
+import { mapRowToApplicationEvent } from "@/entities/application";
 
 export function useApplicationEvents(applicationId: string) {
   const [events, setEvents] = useState<ApplicationEvent[]>([]);

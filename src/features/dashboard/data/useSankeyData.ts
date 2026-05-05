@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { liveQuery } from "dexie";
 import { db } from "@/shared/storage/indexeddb/dexieClient";
-import { mapRowToApplicationEvent } from "@/shared/lib";
+import { mapRowToApplicationEvent } from "@/entities/application";
 import { buildSankeyData } from "../lib/sankey/buildSankeyData";
 import type { SankeyData } from "../lib/sankey/sankeyTypes";
 
