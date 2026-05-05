@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { Flex, Skeleton } from "@/shared/ui";
-import { Card } from "@/shared/ui/Card/Card";
+import { Card } from "@/shared/ui";
 import { useTheme } from "@/shared/lib";
 import {
   SANKEY_NODE_LABELS,

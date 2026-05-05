@@ -1,4 +1,4 @@
-import { useToast } from "@/shared/lib/hooks/useToast";
+import { useToast } from "@/shared/lib";
 import { Toast } from "@/shared/ui";
 
 export function ToastContainer() {
@@ -8,10 +8,7 @@ export function ToastContainer() {
     <div className="fixed bottom-md right-md z-50 pointer-events-none flex flex-col gap-sm px-md">
       {toasts.map(({ id, ...toastProps }) => (
         <div key={id} className="pointer-events-auto">
-          <Toast
-            {...toastProps}
-            onDismiss={() => removeToast(id)}
-          />
+          <Toast {...toastProps} onDismiss={() => removeToast(id)} />
         </div>
       ))}
     </div>

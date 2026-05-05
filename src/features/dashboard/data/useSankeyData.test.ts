@@ -2,17 +2,21 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import type { Mock } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { useSankeyData } from "./useSankeyData";
-import { db } from "@/shared/storage/indexeddb/dexieClient";
+import { db } from "@/shared/storage";
 import type { ApplicationEvent } from "@/entities";
 
 // Mock the Dexie module
-vi.mock("@/shared/storage/indexeddb/dexieClient", () => ({
-  db: {
-    applicationEvents: {
-      toArray: vi.fn(),
+vi.mock("@/shared/storage", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/shared/storage")>();
+  return {
+    ...actual,
+    db: {
+      applicationEvents: {
+        toArray: vi.fn(),
+      },
     },
-  },
-}));
+  };
+});
 
 // Mock the mappers
 vi.mock("@/shared/lib", async () => {

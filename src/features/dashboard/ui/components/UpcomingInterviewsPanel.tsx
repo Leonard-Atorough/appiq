@@ -1,5 +1,5 @@
 import { Button, Flex, Icon } from "@/shared/ui";
-import { Card } from "@/shared/ui/Card/Card";
+import { Card } from "@/shared/ui";
 import { formatDateParts, formatTime } from "@/features/applications/lib/applicationFormatters";
 import type { JobApplication } from "@/entities";
 

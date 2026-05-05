@@ -6,7 +6,7 @@ export { EmptyState, type EmptyStateProps } from "./EmptyState";
 export { Dialog, type DialogProps } from "./Dialog";
 export { DragItem, type DragItemProps } from "./DragItem";
 export { Dropdown, type DropdownProps, type DropdownItem } from "./Dropdown";
-export { DropTarget, type DropTargetProps } from "./DropTarget";
+export { DropTarget, dropTargetVariants, type DropTargetProps } from "./DropTarget";
 export { Field, type FieldProps } from "./Field";
 export { Flex, type FlexProps } from "./Flex";
 export {

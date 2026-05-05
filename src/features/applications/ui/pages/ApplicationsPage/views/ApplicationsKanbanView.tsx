@@ -1,9 +1,8 @@
 import { useApplications } from "@features/applications/data/useApplications";
 import { useApplicationActions } from "@features/applications/data/useApplicationActions";
 import { ApplicationCard } from "../../../components/cards/ApplicationCard";
-import { Badge, DropTarget, Skeleton } from "@/shared/ui";
-import { cn } from "@/shared/lib/cn";
-import { dropTargetVariants } from "@/shared/ui/DropTarget/droptarget.variants";
+import { Badge, DropTarget, Skeleton, dropTargetVariants } from "@/shared/ui";
+import { cn } from "@/shared/lib";
 import type { ApplicationStatus } from "@/entities";
 
 const COLUMNS: {
