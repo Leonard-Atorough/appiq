@@ -28,20 +28,24 @@ vi.mock("@/shared/lib", async () => {
 });
 
 // Mock Dexie liveQuery
-vi.mock("dexie", () => ({
-  liveQuery: (fn: () => unknown) => ({
-    subscribe: (handlers: { next: (value: unknown) => void; error: (err: unknown) => void }) => {
-      // Simulate subscription
-      const result = fn();
-      if (result instanceof Promise) {
-        result.then(handlers.next).catch(handlers.error);
-      } else {
-        handlers.next(result);
-      }
-      return { unsubscribe: vi.fn() };
-    },
-  }),
-}));
+vi.mock("dexie", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("dexie")>();
+  return {
+    ...actual,
+    liveQuery: (fn: () => unknown) => ({
+      subscribe: (handlers: { next: (value: unknown) => void; error: (err: unknown) => void }) => {
+        // Simulate subscription
+        const result = fn();
+        if (result instanceof Promise) {
+          result.then(handlers.next).catch(handlers.error);
+        } else {
+          handlers.next(result);
+        }
+        return { unsubscribe: vi.fn() };
+      },
+    }),
+  };
+});
 
 describe("useSankeyData", () => {
   beforeEach(() => {
