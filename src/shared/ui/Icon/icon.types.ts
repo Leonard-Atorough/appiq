@@ -1,3 +1,5 @@
+import type { ResponsiveValue } from "@/shared/lib";
+
 /**
  * Available icon names in the AppIQ icon system
  * Organized by category: navigation, status, ui
@@ -61,9 +63,14 @@ export type IconVariant =
 export type IconColor = "default" | "light" | "dark";
 
 /**
+ * Icon size base values (without responsive wrapping)
+ */
+export type IconSizeValue = "xs" | "sm" | "md" | "lg" | "xl";
+
+/**
  * Icon size variants using design token scale
  */
-export type IconSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type IconSize = ResponsiveValue<IconSizeValue>;
 
 export interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**

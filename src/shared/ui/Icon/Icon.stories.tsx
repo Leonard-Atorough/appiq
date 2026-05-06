@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Icon } from "./Icon";
-import type { IconVariant, IconSize } from "./icon.types";
+import type { IconVariant, IconSizeValue } from "./icon.types";
 
 const meta: Meta<typeof Icon> = { title: "Shared/Icon", component: Icon };
 export default meta;
@@ -49,7 +49,7 @@ const variants: IconVariant[] = [
   "warning",
   "info",
 ];
-const sizes: IconSize[] = ["xs", "sm", "md", "lg", "xl"];
+const sizes: IconSizeValue[] = ["xs", "sm", "md", "lg", "xl"];
 
 export const AllIcons: Story = {
   render: () => (

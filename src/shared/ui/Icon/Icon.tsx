@@ -1,5 +1,5 @@
 import type { IconProps } from "./icon.types";
-import { cn } from "@/shared/lib";
+import { cn, useResponsive } from "@/shared/lib";
 import { iconVariants } from "./icon.variant";
 import { ICON_REGISTRY } from "./Icons";
 
@@ -25,6 +25,7 @@ export function Icon({
   "aria-hidden": ariaHidden = true,
   "aria-label": ariaLabel,
 }: IconProps) {
+  const resolvedSize = useResponsive(size);
   const IconComponent = ICON_REGISTRY[name];
 
   if (!IconComponent) {
@@ -34,7 +35,11 @@ export function Icon({
 
   return (
     <span
-      className={cn("flex items-center justify-center", iconVariants({ size, variant, color }), className)}
+      className={cn(
+        "flex items-center justify-center",
+        iconVariants({ size: resolvedSize, variant, color }),
+        className,
+      )}
       aria-hidden={ariaHidden}
       aria-label={ariaLabel}
       role={ariaLabel ? "img" : undefined}
