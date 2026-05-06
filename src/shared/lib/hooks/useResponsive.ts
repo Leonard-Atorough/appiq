@@ -52,6 +52,17 @@ export function useResponsive<T>(responsiveValue: ResponsiveValue<T>): T {
     if (matched) currentBreakpoint = bp;
   }
 
-  // Fall back to 'base' if the current breakpoint value is not defined
-  return responsiveValue[currentBreakpoint as keyof typeof responsiveValue] ?? responsiveValue.base;
+  // Cascade down to the largest defined breakpoint value
+  // E.g., if at xl but only lg is defined, use lg; if at lg but only base is defined, use base
+  const breakpointOrder: Breakpoint[] = ["base", "md", "lg", "xl"];
+  const currentIndex = breakpointOrder.indexOf(currentBreakpoint);
+  
+  for (let i = currentIndex; i >= 0; i--) {
+    const bp = breakpointOrder[i];
+    if (bp === "base" || (bp in responsiveValue && responsiveValue[bp as keyof typeof responsiveValue] !== undefined)) {
+      return responsiveValue[bp as keyof typeof responsiveValue] ?? responsiveValue.base;
+    }
+  }
+
+  return responsiveValue.base;
 }
