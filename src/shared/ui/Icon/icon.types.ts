@@ -25,6 +25,12 @@ export type IconName =
   | "minus"
   | "x"
   | "briefcase"
+  | "settings"
+  | "chart-bar"
+  | "user"
+  | "users"
+  // Help
+  | "help-circle"
   // Action icons
   | "plus"
   | "download"

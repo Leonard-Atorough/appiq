@@ -15,7 +15,7 @@ import {
 } from "./navigation";
 
 // Status icons
-import { CheckCircleIcon, XCircleIcon, AlertTriangleIcon, InfoIcon } from "./status";
+import { CheckCircleIcon, XCircleIcon, AlertTriangleIcon, InfoIcon, HelpCircleIcon } from "./status";
 
 // UI icons
 import {
@@ -28,6 +28,10 @@ import {
   MoonIcon,
   CalendarIcon,
   LocationIcon,
+  SettingsIcon,
+  ChartBarIcon,
+  UserIcon,
+  UsersIcon,
 } from "./ui";
 
 // Action icons
@@ -55,6 +59,7 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   "x-circle": XCircleIcon,
   "alert-triangle": AlertTriangleIcon,
   info: InfoIcon,
+  "help-circle": HelpCircleIcon,
 
   // UI
   bell: BellIcon,
@@ -66,6 +71,10 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   moon: MoonIcon,
   calendar: CalendarIcon,
   location: LocationIcon,
+  settings: SettingsIcon,
+  "chart-bar": ChartBarIcon,
+  user: UserIcon,
+  users: UsersIcon,
   // Actions
   plus: PlusIcon,
   download: DownloadIcon,

@@ -7,3 +7,7 @@ export { SunIcon } from "./SunIcon";
 export { MoonIcon } from "./MoonIcon";
 export { CalendarIcon } from "./CalendarIcon";
 export { LocationIcon } from "./LocationIcon";
+export { SettingsIcon } from "./SettingsIcon";
+export { ChartBarIcon } from "./ChartBarIcon";
+export { UserIcon } from "./UserIcon";
+export { UsersIcon } from "./UsersIcon";
