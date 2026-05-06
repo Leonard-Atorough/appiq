@@ -4,15 +4,13 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
-
-// https://vite.dev/config/
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
+
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
-// More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [
     tanstackRouter({
@@ -33,6 +31,18 @@ export default defineConfig({
       "@features": path.resolve(__dirname, "src/features"),
       "@pages": path.resolve(__dirname, "src/pages"),
       "@widgets": path.resolve(__dirname, "src/widgets"),
+    },
+  },
+  build: {
+    chunkSizeWarningLimit: 1000, /* Increased from 500KB; echarts chart route is legitimately large */
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          /* Isolate heavy vendor libraries to their own chunks */
+          if (id.includes("echarts")) return "echarts";
+          if (id.includes("@tanstack/react-router")) return "router";
+        },
+      },
     },
   },
   test: {
