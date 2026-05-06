@@ -36,11 +36,11 @@ export default function DashboardPage() {
 
       {/* Upcoming Interviews and Sankey Flow Chart */}
       <Flex
-        direction="row"
+        direction={{ base: "column-reverse", xl: "row" }}
         gap="lg"
         fullWidth
         align="stretch"
-        className="flex-col-reverse h-auto md:flex-row lg:h-180"
+        className="h-auto lg:h-180"
       >
         <Flex className="w-full md:shrink-0 lg:w-1/4 lg:shrink-0 lg:h-full">
           <UpcomingInterviewsPanel
