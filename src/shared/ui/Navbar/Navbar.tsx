@@ -2,6 +2,7 @@ import React from "react";
 import { cn } from "@shared/lib/cn";
 import { navbarVariants, navbarMenuVariants } from "./navbar.variants";
 import type { NavbarProps } from "./navbar.types";
+import { useResponsive } from "@/shared/lib";
 
 /**
  * Navbar — Page header layout primitive
@@ -43,15 +44,16 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
       menuPosition = "left",
       menuEnd,
       position = "static",
-      size = "md",
+      size ,
       className,
       children,
       ...props
     },
     ref,
   ) => {
+    const resolvedSize = useResponsive(size) || "md";
     return (
-      <header ref={ref} className={cn(navbarVariants({ position, size }), className)} {...props}>
+      <header ref={ref} className={cn(navbarVariants({ position, size: resolvedSize }), className)} {...props}>
         {/* Slot 1: toggle icon (shrink-to-fit) */}
         {menuIcon && <div className="shrink-0 flex items-center">{menuIcon}</div>}
         {/* Slot 2: branding / title (shrink-to-fit) */}
