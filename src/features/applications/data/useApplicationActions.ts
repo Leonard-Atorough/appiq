@@ -1,6 +1,7 @@
+import { useMemo, useCallback } from "react";
 import { useToast } from "@/shared/lib";
 import { useAsync } from "@/shared/lib";
-import { JobApplicationRepositoryImpl, ApplicationEventRepositoryImpl, db } from "@/shared/storage";
+import { jobApplicationRepository, applicationEventRepository, db } from "@/shared/storage";
 import type { JobApplicationRepository } from "@/shared/storage";
 import type { ApplicationEventRepository } from "@/shared/storage";
 import type { ApplicationStatus, JobApplication } from "@/entities";
@@ -44,10 +45,14 @@ function getFriendlyErrorMessage(err: unknown, action: string): string {
  */
 export function useApplicationActions(
   options: UseApplicationActionsOptions = {},
-  repo: JobApplicationRepository = new JobApplicationRepositoryImpl(db),
-  eventRepo: ApplicationEventRepository = new ApplicationEventRepositoryImpl(db),
+  repo: JobApplicationRepository = jobApplicationRepository,
+  eventRepo: ApplicationEventRepository = applicationEventRepository,
 ) {
   const { withSuccess = false, withError = false } = options;
+
+  // Memoize repositories to prevent unnecessary callback recreations
+  const memoizedRepo = useMemo(() => repo, [repo]);
+  const memoizedEventRepo = useMemo(() => eventRepo, [eventRepo]);
 
   // Always call the hook (rules of hooks - must be unconditional)
   // If feedback is disabled, this still gets called but the context won't be used
@@ -55,12 +60,15 @@ export function useApplicationActions(
 
   // Delete operation
   const deleteAsync = useAsync(
-    async (id: string) => {
-      await db.transaction("rw", db.applications, db.applicationEvents, async () => {
-        await repo.deleteApplication(id);
-        await eventRepo.deleteByApplicationId(id);
-      });
-    },
+    useCallback(
+      async (id: string) => {
+        await db.transaction("rw", db.applications, db.applicationEvents, async () => {
+          await memoizedRepo.deleteApplication(id);
+          await memoizedEventRepo.deleteByApplicationId(id);
+        });
+      },
+      [memoizedRepo, memoizedEventRepo],
+    ),
     {
       autoExecute: false,
       onSuccess: withSuccess
@@ -86,9 +94,12 @@ export function useApplicationActions(
 
   // Create operation
   const createAsync = useAsync(
-    async (application: Omit<JobApplication, "id">) => {
-      await repo.createApplication(application);
-    },
+    useCallback(
+      async (application: Omit<JobApplication, "id">) => {
+        await memoizedRepo.createApplication(application);
+      },
+      [memoizedRepo],
+    ),
     {
       autoExecute: false,
       onSuccess: withSuccess
@@ -114,9 +125,12 @@ export function useApplicationActions(
 
   // Update operation
   const updateAsync = useAsync(
-    async (id: string, updates: Partial<Omit<JobApplication, "id">>) => {
-      await repo.updateApplication(id, updates);
-    },
+    useCallback(
+      async (id: string, updates: Partial<Omit<JobApplication, "id">>) => {
+        await memoizedRepo.updateApplication(id, updates);
+      },
+      [memoizedRepo],
+    ),
     {
       autoExecute: false,
       onSuccess: withSuccess
@@ -142,19 +156,22 @@ export function useApplicationActions(
 
   // Move operation
   const moveAsync = useAsync(
-    async (id: string, newStatus: ApplicationStatus) => {
-      const current = await repo.getApplicationById(id);
-      const fromStatus = current?.status;
-      await repo.updateApplication(id, { status: newStatus });
-      await eventRepo.createEvent({
+    useCallback(
+      async (id: string, newStatus: ApplicationStatus) => {
+        const current = await memoizedRepo.getApplicationById(id);
+        const fromStatus = current?.status;
+        await memoizedRepo.updateApplication(id, { status: newStatus });
+        await memoizedEventRepo.createEvent({
         applicationId: id,
         type: "status_change",
         title: `Status changed to ${newStatus}`,
         date: new Date().toISOString(),
         fromStatus,
         toStatus: newStatus,
-      });
-    },
+        });
+      },
+      [memoizedRepo, memoizedEventRepo],
+    ),
     {
       autoExecute: false,
       onSuccess: withSuccess

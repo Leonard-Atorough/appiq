@@ -6,4 +6,4 @@ export {
   JobApplicationRepositoryImpl,
   type JobApplicationRepository,
 } from "./repositories/jobApplication.repository";
-export { db } from "./indexeddb/dexieClient";
+export { db, jobApplicationRepository, applicationEventRepository } from "./indexeddb/dexieClient";

@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { liveQuery } from "dexie";
-import { db, JobApplicationRepositoryImpl } from "@/shared/storage";
+import { jobApplicationRepository } from "@/shared/storage";
 import type { JobApplicationRepository } from "@/shared/storage";
 import type { JobApplication } from "@/entities";
 
 export function useApplications(
-  repo: JobApplicationRepository = new JobApplicationRepositoryImpl(db),
+  repo: JobApplicationRepository = jobApplicationRepository,
 ) {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  // Memoize the repository to prevent unnecessary re-subscriptions
+  const memoizedRepo = useMemo(() => repo, [repo]);
+
   useEffect(() => {
     // liveQuery uses Dexie's DBCore middleware to track which index ranges
     // are read during the query. Any write that touches those ranges — from
     // any hook instance or component — will re-run this subscriber automatically.
-    const subscription = liveQuery(() => repo.listApplications()).subscribe({
+    const subscription = liveQuery(() => memoizedRepo.listApplications()).subscribe({
       next: (apps) => {
         setApplications(apps);
         setLoading(false);
@@ -28,7 +31,7 @@ export function useApplications(
     });
 
     return () => subscription.unsubscribe();
-  }, [repo]);
+  }, [memoizedRepo]);
 
   return {
     applications,
