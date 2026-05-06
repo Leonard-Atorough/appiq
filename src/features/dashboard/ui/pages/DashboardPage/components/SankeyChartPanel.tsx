@@ -200,11 +200,13 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
 
           <Flex
             ref={containerRef}
-            className="h-150 w-full"
+            padding={{base: "xs", md:"md"}}
+            className="h-50 md:h-150 w-full"
             role="img"
             aria-labelledby="sankey-heading"
             aria-describedby="sankey-description"
             tabIndex={0}
+            data-testid="sankey-chart-container"
           />
 
           {/* Legend */}

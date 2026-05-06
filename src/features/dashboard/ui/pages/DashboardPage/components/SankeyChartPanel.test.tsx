@@ -80,7 +80,7 @@ describe("SankeyChartPanel", () => {
       render(<SankeyChartPanel loading={false} data={data} />);
 
       // Chart container should be in the DOM
-      const container = document.querySelector("div.h-150");
+      const container = screen.getByTestId("sankey-chart-container");
       expect(container).toBeInTheDocument();
     });
 
