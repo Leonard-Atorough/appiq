@@ -128,6 +128,14 @@ export default {
         heading: ["var(--font-heading)"],
         mono: ["var(--font-mono)"],
       },
+      /* Shadow tokens — theme-aware via CSS variables */
+      boxShadow: {
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
+        xl: "var(--shadow-xl)",
+        "2xl": "var(--shadow-2xl)",
+      },
       /* Custom animations */
       animation: {
         /* Toast timer drain bar — duration set via --timer-duration CSS var on the element */
