@@ -27,3 +27,7 @@ dist-ssr
 coverage
 *storybook.log
 storybook-static
+
+# System design docs
+docs/system design/DESIGN_SYSTEM_PACKAGE_CHECKLIST.md
+docs/system design/RESPONSIVE_PROPS_PATTERN.md

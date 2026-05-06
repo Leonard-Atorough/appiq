@@ -1,11 +1,16 @@
+import React, { Suspense } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useDashboardMetrics } from "../../../data/useDashboardMetrics";
 import { useDashboardApplications } from "../../../data/useDashboardApplications";
 import { useSankeyData } from "../../../data/useSankeyData";
-import { Card, Flex } from "@/shared/ui";
+import { Card, Flex, Skeleton } from "@/shared/ui";
 import { MetricsPanel } from "./components/MetricsPanel";
-import { SankeyChartPanel } from "./components/SankeyChartPanel";
 import { UpcomingInterviewsPanel } from "../../components/UpcomingInterviewsPanel";
+
+// Lazy-load SankeyChartPanel to reduce main bundle size (echarts is heavy)
+const SankeyChartPanel = React.lazy(() =>
+  import("./components/SankeyChartPanel").then((m) => ({ default: m.SankeyChartPanel })),
+);
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -37,16 +42,16 @@ export default function DashboardPage() {
         align="stretch"
         className="flex-col-reverse h-auto md:flex-row lg:h-180"
       >
-        <Flex
-          className="w-full md:shrink-0 lg:w-1/4 lg:shrink-0 lg:h-full"
-        >
+        <Flex className="w-full md:shrink-0 lg:w-1/4 lg:shrink-0 lg:h-full">
           <UpcomingInterviewsPanel
             upcomingInterviews={upcomingInterviews}
             onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
           />
         </Flex>
         <Flex className="md:flex-1 lg:h-full">
-          <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
+          <Suspense fallback={<Skeleton className="w-full h-full" />}>
+            <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
+          </Suspense>
         </Flex>
       </Flex>
       {/* Recent Activity + Placeholder Section */}
@@ -54,13 +59,7 @@ export default function DashboardPage() {
         <h2 id="activity-heading" className="sr-only">
           Recent Activity and Upcoming
         </h2>
-        <Flex
-          direction="row"
-          gap="lg"
-          fullWidth
-          align="stretch"
-          className="flex-col md:flex-row"
-        >
+        <Flex direction="row" gap="lg" fullWidth align="stretch" className="flex-col md:flex-row">
           {/* Recent Activity */}
           <Card size="md" interactive={false} className="flex-1">
             <Flex direction="column" gap="md">
