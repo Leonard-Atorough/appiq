@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { popoverVariants, popoverOverlayVariants } from "./popover.variants";
 import type { PopoverProps, PopoverSide, PopoverAlign } from "./popover.types";
 
@@ -47,10 +48,15 @@ function getSideOffsetStyle(side: PopoverSide, offset: number): React.CSSPropert
  *
  * In `modal` mode a transparent overlay captures outside clicks and traps focus.
  * Escape closes the panel when `closeOnEscape` is true.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Popover trigger={<Button>Filters</Button>} side="bottom" align="end">
  *   <FilterForm onSubmit={applyFilters} />
+ * </Popover>
+ * // Responsive: md=md, lg=lg
+ * <Popover trigger={<Button>Menu</Button>} size={{ base: "sm", md: "md", lg: "lg" }}>
+ *   <div>Rich content here</div>
  * </Popover>
  */
 export function Popover({
@@ -71,6 +77,7 @@ export function Popover({
   contentClassName,
   contentProps,
 }: PopoverProps) {
+  const resolvedSize = useResponsive(size ?? "md");
   const isControlled = controlledOpen !== undefined;
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const isOpen = isControlled ? controlledOpen! : internalOpen;
@@ -215,7 +222,7 @@ export function Popover({
             aria-label={modal ? undefined : "Popover"}
             tabIndex={-1}
             style={panelStyle}
-            className={cn(popoverVariants({ size }), panelPositionClasses, contentClassName)}
+            className={cn(popoverVariants({ size: resolvedSize }), panelPositionClasses, contentClassName)}
             {...contentProps}
           >
             {children}

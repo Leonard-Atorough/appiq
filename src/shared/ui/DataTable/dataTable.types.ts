@@ -1,4 +1,5 @@
 import type { ColumnDef, Row } from "@tanstack/react-table";
+import type { ResponsiveValue } from "@/shared/lib";
 import type {
   dataTableVariants,
   dataTableCellVariants,
@@ -31,17 +32,17 @@ export interface DataTableKeyboardConfig {
   allowEnterAction?: boolean;
 }
 
-export interface DataTableProps<TData extends Record<string, any> = any> extends VariantProps<
+export interface DataTableProps<TData extends Record<string, any> = any> extends Omit<VariantProps<
   typeof dataTableVariants
-> {
+>, "variant"> {
   /** Row data array. Each item maps to one row. Parent is responsible for loading/empty states. */
   data: TData[];
   /** TanStack Table column definitions. */
   columns: ColumnDef<TData, any>[];
   /** Row density. */
-  size?: DataTableSize;
+  size?: ResponsiveValue<DataTableSize>;
   /** Visual style variant. */
-  variant?: DataTableVariant;
+  variant?: ResponsiveValue<DataTableVariant>;
   /** Row appearance configuration (striped, hover, selectable). */
   rowStyle?: DataTableRowStyle;
   /** Enables click-to-sort on column headers. */
@@ -68,16 +69,16 @@ export interface DataTableProps<TData extends Record<string, any> = any> extends
 
 /** Styled `<td>` subcomponent. */
 export interface DataTableCellProps
-  extends React.TdHTMLAttributes<HTMLTableCellElement>, VariantProps<typeof dataTableCellVariants> {
-  size?: DataTableSize;
-  variant?: DataTableVariant;
+  extends Omit<React.TdHTMLAttributes<HTMLTableCellElement>, never>, Omit<VariantProps<typeof dataTableCellVariants>, "size" | "variant"> {
+  size?: ResponsiveValue<DataTableSize>;
+  variant?: ResponsiveValue<DataTableVariant>;
 }
 
 /** Styled `<tr>` subcomponent. */
 export interface DataTableRowProps
-  extends React.HTMLAttributes<HTMLTableRowElement>, VariantProps<typeof dataTableRowVariants> {
-  size?: DataTableSize;
-  variant?: DataTableVariant;
+  extends Omit<React.HTMLAttributes<HTMLTableRowElement>, never>, Omit<VariantProps<typeof dataTableRowVariants>, "variant"> {
+  size?: ResponsiveValue<DataTableSize>;
+  variant?: ResponsiveValue<DataTableVariant>;
   striped?: boolean;
   hoverable?: boolean;
   isSelected?: boolean;
@@ -86,9 +87,9 @@ export interface DataTableRowProps
 
 /** Styled `<th>` subcomponent. */
 export interface DataTableHeadProps
-  extends React.ThHTMLAttributes<HTMLTableCellElement>, VariantProps<typeof dataTableHeadVariants> {
-  size?: DataTableSize;
-  variant?: DataTableVariant;
+  extends Omit<React.ThHTMLAttributes<HTMLTableCellElement>, never>, Omit<VariantProps<typeof dataTableHeadVariants>, "size" | "variant"> {
+  size?: ResponsiveValue<DataTableSize>;
+  variant?: ResponsiveValue<DataTableVariant>;
   /** Renders sort indicator and cursor when true. */
   sortable?: boolean;
 }

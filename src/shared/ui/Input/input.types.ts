@@ -1,17 +1,18 @@
+import type { ResponsiveValue } from "@/shared/lib";
 import type { VariantProps } from "class-variance-authority";
 import type { inputVariants } from "./input.variants";
 
 export interface InputProps
   extends
     Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
-    VariantProps<typeof inputVariants> {
+    Omit<VariantProps<typeof inputVariants>, "size"> {
   /**
    * Visual feedback variant. Automatically derived from `error`/`success` props —
    * only set this explicitly when you need visual state without message text.
    */
   state?: "default" | "error" | "success";
   /** Control height and padding. */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Rendered via `Field` with `htmlFor` wired to the input's id. */
   label?: React.ReactNode;
   /** Shown as `role="alert"` below the input. Automatically sets `state="error"` and `aria-invalid`. */

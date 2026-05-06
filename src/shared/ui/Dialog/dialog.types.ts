@@ -1,4 +1,5 @@
 import React from "react";
+import type { ResponsiveValue } from "@/shared/lib";
 
 export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Controls whether the dialog is visible. */
@@ -14,7 +15,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Supporting text shown below the title. */
   description?: string;
   /** Panel width preset. `sm`=288px, `md`=384px, `lg`=640px. */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Element to focus when the dialog opens. Defaults to the first focusable element in the panel. */
   focusRef?: React.RefObject<HTMLElement | null>;
   /** Content rendered in the dialog footer (typically action buttons). */

@@ -13,6 +13,7 @@ import { useResponsive } from "@/shared/lib";
  *
  * The `<nav>` landmark lives inside `<NavMenu>`, so WCAG landmark requirements
  * are satisfied without wrapping the entire header in a `<nav>`.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * Accessibility Requirements:
  * - Pair with a `<main>` landmark on every page
@@ -34,6 +35,14 @@ import { useResponsive } from "@/shared/lib";
  * @example
  * // Plain page header (no nav)
  * <Navbar title={<h1>Dashboard</h1>} menuEnd={<ThemeToggle />} />
+ *
+ * @example
+ * // Responsive: md=md, lg=lg
+ * <Navbar
+ *   title={<Logo />}
+ *   size={{ base: "sm", md: "md", lg: "lg" }}
+ *   menu={<NavMenu items={navItems} />}
+ * />
  */
 export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
   (

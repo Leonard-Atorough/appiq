@@ -1,3 +1,5 @@
+import type React from "react";
+import type { ResponsiveValue } from "@/shared/lib";
 import type { VariantProps } from "class-variance-authority";
 import type { tooltipVariants } from "./tooltip.variants";
 export type { TooltipColor } from "./tooltip.variants";
@@ -6,7 +8,8 @@ export type TooltipSide = "top" | "right" | "bottom" | "left";
 
 export type TooltipAlign = "start" | "center" | "end";
 
-export interface TooltipProps extends VariantProps<typeof tooltipVariants> {
+export interface TooltipProps
+  extends Omit<VariantProps<typeof tooltipVariants>, "size"> {
   /** The message to display within the tooltip. */
   message: React.ReactNode;
 
@@ -33,4 +36,7 @@ export interface TooltipProps extends VariantProps<typeof tooltipVariants> {
 
   /** Extra class(es) merged onto the wrapper element that contains both the trigger and the tooltip.*/
   wrapperClassName?: string;
+  
+  /** Tooltip size can be responsive. */
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
 }

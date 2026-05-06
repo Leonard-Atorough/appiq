@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { textareaVariants } from "./textarea.variants";
 import type { TextareaProps } from "./textarea.types";
 import { Field } from "@/shared/ui/Field";
@@ -12,9 +13,12 @@ import { Field } from "@/shared/ui/Field";
  * (capped by `minRows`), configurable resize handles, and an optional
  * character count display. Manages `aria-invalid` and `aria-describedby`
  * automatically. All standard `<textarea>` attributes are forwarded.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Textarea label="Cover letter" autoGrow minRows={4} showCharacterCount />
+ * // Responsive: md=md, lg=lg
+ * <Textarea label="Notes" size={{ base: "sm", md: "md", lg: "lg" }} autoGrow />
  */
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
@@ -65,6 +69,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const generatedId = React.useId();
     const resolvedId = idProp ?? generatedId;
+    const resolvedSize = useResponsive(size ?? "md");
+    const resolvedVariant = useResponsive(variant ?? "primary");
 
     // Auto-grow logic
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
@@ -106,7 +112,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-invalid={!!error}
           aria-describedby={describedByIds}
           className={cn(
-            textareaVariants({ size, variant, full, state: effectiveState }),
+            textareaVariants({ size: resolvedSize, variant: resolvedVariant, full, state: effectiveState }),
             resize !== undefined && `resize-${resize}`,
             startAdornment && "pl-lg",
             endAdornment && "pr-lg",

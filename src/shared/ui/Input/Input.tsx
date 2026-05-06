@@ -1,6 +1,7 @@
 import React from "react";
 import type { InputProps } from "./input.types";
 import { cn } from "@/shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { inputVariants } from "./input.variants";
 import { Field } from "@/shared/ui/Field";
 
@@ -12,10 +13,13 @@ import { Field } from "@/shared/ui/Field";
  * when none is provided. Supports start and end adornments (icons or text).
  * Manages `aria-invalid` and `aria-describedby` automatically based on
  * `error`, `success`, and `helperText` props.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Input label="Search" placeholder="Search jobs…" startAdornment={<Icon name="search" />} />
  * <Input label="Email" type="email" error="Invalid address" />
+ * // Responsive: md=md, lg=lg
+ * <Input label="Company" size={{ base: "sm", md: "md", lg: "lg" }} />
  */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -39,6 +43,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const generatedId = React.useId();
     const resolvedId = idProp ?? generatedId;
+    const resolvedSize = useResponsive(size ?? "md");
 
     const effectiveState = error ? "error" : success ? "success" : state;
 
@@ -60,7 +65,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           aria-invalid={!!error}
           aria-describedby={describedByIds}
-          className={cn(inputVariants({ state: effectiveState, size }), className)}
+          className={cn(inputVariants({ state: effectiveState, size: resolvedSize }), className)}
           {...props}
         />
       ) : (
@@ -77,7 +82,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-invalid={!!error}
             aria-describedby={describedByIds}
             className={cn(
-              inputVariants({ state: effectiveState, size }),
+              inputVariants({ state: effectiveState, size: resolvedSize }),
               startAdornment ? "pl-lg" : "",
               endAdornment ? "pr-lg" : "",
               className,

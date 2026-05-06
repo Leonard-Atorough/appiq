@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import type { TabsProps } from "./tabs.types";
 import { tabListVariants, tabTriggerVariants } from "./tabs.variants";
 
@@ -14,6 +15,7 @@ import { tabListVariants, tabTriggerVariants } from "./tabs.variants";
  * Keyboard navigation: Arrow keys cycle through enabled tabs;
  * Home/End jump to first/last tab in the list.
  * Each panel is linked to its trigger via `aria-controls` / `aria-labelledby`.
+ * Supports responsive styling via ResponsiveValue for variant.
  *
  * @example
  * <Tabs
@@ -22,6 +24,11 @@ import { tabListVariants, tabTriggerVariants } from "./tabs.variants";
  *     { id: "archived", label: "Archived", content: <ArchivedList /> },
  *   ]}
  *   defaultTab="active"
+ * />
+ * // Responsive: md=underline, lg=pill
+ * <Tabs
+ *   tabs={tabs}
+ *   variant={{ base: "underline", md: "underline", lg: "pill" }}
  * />
  */
 export function Tabs({
@@ -35,6 +42,7 @@ export function Tabs({
   fullWidth = false,
   className,
 }: TabsProps) {
+  const resolvedVariant = useResponsive(variant);
   const isControlled = controlledActive !== undefined;
   const [internalActive, setInternalActive] = React.useState<string>(
     defaultTab ?? tabs.find((t) => !t.disabled)?.id ?? "",
@@ -107,7 +115,7 @@ export function Tabs({
       <div
         role="tablist"
         aria-orientation={orientation}
-        className={cn(tabListVariants({ variant, fullWidth, orientation }))}
+        className={cn(tabListVariants({ variant: resolvedVariant, fullWidth, orientation }))}
       >
         {tabs.map((tab) => (
           <button
@@ -119,7 +127,7 @@ export function Tabs({
             aria-controls={hasContent ? getPanelId(tab.id) : undefined}
             disabled={tab.disabled}
             tabIndex={tab.id === activeId ? 0 : -1}
-            className={cn(tabTriggerVariants({ variant, size, fullWidth, orientation }))}
+            className={cn(tabTriggerVariants({ variant: resolvedVariant, size, fullWidth, orientation }))}
             onClick={() => handleSelect(tab.id)}
             onKeyDown={(e) => handleKeyDown(e, tab.id)}
           >

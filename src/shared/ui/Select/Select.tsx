@@ -1,6 +1,7 @@
 import React from "react";
 import type { SelectProps } from "./select.types";
 import { cn } from "@/shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { selectVariants } from "./select.variants";
 import { Field } from "@/shared/ui/Field";
 
@@ -13,11 +14,17 @@ import { Field } from "@/shared/ui/Field";
  * Supports start and end adornments and manages `aria-invalid` /
  * `aria-describedby` automatically based on `error`, `success`, and
  * `helperText` props.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Select label="Status" error={errors.status}>
  *   <option value="applied">Applied</option>
  *   <option value="interview">Interview</option>
+ * </Select>
+ * // Responsive: md=md, lg=lg
+ * <Select label="Type" size={{ base: "sm", md: "md", lg: "lg" }}>
+ *   <option value="full">Full-time</option>
+ *   <option value="part">Part-time</option>
  * </Select>
  */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -42,6 +49,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const generatedId = React.useId();
     const resolvedId = idProp ?? generatedId;
+    const resolvedSize = useResponsive(size ?? "md");
 
     const effectiveState = error ? "error" : success ? "success" : state;
 
@@ -62,7 +70,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           id={resolvedId}
           aria-invalid={!!error}
           aria-describedby={describedByIds}
-          className={cn(selectVariants({ state: effectiveState, size }), className)}
+          className={cn(selectVariants({ state: effectiveState, size: resolvedSize }), className)}
           {...props}
         >
           {children}
@@ -80,7 +88,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             aria-invalid={!!error}
             aria-describedby={describedByIds}
             className={cn(
-              selectVariants({ state: effectiveState, size }),
+              selectVariants({ state: effectiveState, size: resolvedSize }),
               startAdornment ? "pl-lg" : "",
               endAdornment ? "pr-lg" : "",
               className,

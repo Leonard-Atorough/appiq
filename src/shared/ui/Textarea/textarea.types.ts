@@ -1,11 +1,13 @@
+import type { ResponsiveValue } from "@/shared/lib";
+
 export interface TextareaProps extends Omit<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
   "size"
 > {
   /** Control padding and font size. */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Background and border style. */
-  variant?: "primary" | "secondary" | "outline" | "ghost";
+  variant?: ResponsiveValue<"primary" | "secondary" | "outline" | "ghost">;
   /**
    * Visual feedback variant. Automatically derived from `error`/`success` props —
    * only set this explicitly when you need visual state without message text.

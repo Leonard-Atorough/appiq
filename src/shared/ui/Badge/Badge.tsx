@@ -1,4 +1,5 @@
 import { cn } from "@shared/lib";
+import { useResponsive } from "@/shared/lib";
 import { badgeVariants } from "./badge.variants";
 import type { BadgeProps } from "./badge.types";
 import React from "react";
@@ -12,10 +13,13 @@ import React from "react";
  * - Clickable (`onClick` only): renders as `<button>`
  * - Dismissable or with actions: renders as `<span>` container holding
  *   individual `<button>` elements — avoids invalid nested-button HTML.
+ * Supports responsive styling via ResponsiveValue for size, variant, and rounded.
  *
  * @example
  * <Badge variant="success">Applied</Badge>
  * <Badge variant="warning" dismissable onDismiss={() => remove(id)}>Pending</Badge>
+ * // Responsive: md=pill, lg=boxed (if using variant for layout)
+ * <Badge size={{ base: "sm", md: "md", lg: "lg" }} variant={{ base: "default", lg: "success" }}>Status</Badge>
  */
 export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
   (
@@ -35,6 +39,9 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
     },
     ref,
   ) => {
+    const resolvedVariant = useResponsive(variant);
+    const resolvedSize = useResponsive(size);
+    const resolvedRounded = useResponsive(rounded ?? false);
     const hasNestedButtons = dismissable || (actions && actions.length > 0);
 
     // <button> is only safe as the outer tag when there are no nested interactive elements
@@ -44,7 +51,16 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
       <Tag
         ref={ref as React.Ref<HTMLButtonElement & HTMLSpanElement>}
         type={!hasNestedButtons && onClick ? "button" : undefined}
-        className={cn(badgeVariants({ variant, outline, size, rounded }), "gap-xs", className)}
+        className={cn(
+          badgeVariants({
+            variant: resolvedVariant,
+            outline,
+            size: resolvedSize,
+            rounded: resolvedRounded,
+          }),
+          "gap-xs",
+          className,
+        )}
         onClick={!hasNestedButtons ? onClick : undefined}
         {...props}
       >

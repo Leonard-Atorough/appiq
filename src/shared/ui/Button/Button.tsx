@@ -1,4 +1,5 @@
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { buttonVariants } from "./button.variants";
 import type { ButtonProps } from "./button.types";
 import React from "react";
@@ -10,13 +11,18 @@ import React from "react";
  * Defaults to `type="button"` to prevent accidental form submission.
  * Renders a visual loading spinner when `loading` is true while keeping the element
  * accessible and non-interactive.
+ * Supports responsive sizing via ResponsiveValue, allowing different sizes at different breakpoints.
  *
  * @example
  * <Button variant="primary" onClick={handleSave}>Save</Button>
  * <Button variant="ghost" loading>Saving...</Button>
+ * // Responsive: md=small, lg=large
+ * <Button size={{ base: "sm", md: "md", lg: "lg" }}>Responsive Button</Button>
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, size, full, loading, className, disabled, onClick, ...props }, ref) => {
+    const resolvedVariant = useResponsive(variant ?? "primary");
+    const resolvedSize = useResponsive(size ?? "md");
     const onClickDisabled = (e: React.MouseEvent) => e.preventDefault(); // Prevents any action when the button is disabled
 
     return (
@@ -25,8 +31,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         type="button" // Default to "button" to prevent accidental form submissions
         className={cn(
           buttonVariants({
-            variant,
-            size,
+            variant: resolvedVariant,
+            size: resolvedSize,
             full,
             loading,
           }),

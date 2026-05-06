@@ -1,17 +1,18 @@
+import type { ResponsiveValue } from "@/shared/lib";
 import type { VariantProps } from "class-variance-authority";
 import type { selectVariants } from "./select.variants";
 
 export interface SelectProps
   extends
     Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size">,
-    VariantProps<typeof selectVariants> {
+    Omit<VariantProps<typeof selectVariants>, "size"> {
   /**
    * Visual feedback variant. Automatically derived from `error`/`success` props —
    * only set this explicitly when you need visual state without message text.
    */
   state?: "default" | "error" | "success";
   /** Control height and font size. */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Rendered via `Field` with `htmlFor` wired to the select's id. */
   label?: React.ReactNode;
   /** Shown as `role="alert"` below the select. Automatically sets `state="error"` and `aria-invalid`. */

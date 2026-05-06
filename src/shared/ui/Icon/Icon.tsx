@@ -11,10 +11,13 @@ import { ICON_REGISTRY } from "./Icons";
  * pass `aria-hidden={false}` and an `aria-label` on the parent when the
  * icon is the sole conveyor of meaning.
  * Logs a console warning if the requested icon name is not registered.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Icon name="check-circle" variant="success" />
  * <Icon name="briefcase" size="lg" aria-hidden={false} aria-label="Job applications" />
+ * // Responsive: md=md, lg=lg
+ * <Icon name="star" size={{ base: "sm", md: "md", lg: "lg" }} />
  */
 export function Icon({
   name,

@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useId, useLayoutEffect, useRef } from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { dialogVariants } from "./dialog.variants";
 import type { DialogProps } from "./dialog.types";
 import { Button } from "@shared/ui/Button";
@@ -17,6 +18,7 @@ const FOCUSABLE_SELECTOR = [
  * Dialog
  *
  * An accessible overlay dialog supporting modal and non-modal modes.
+ * Supports responsive sizing via ResponsiveValue.
  * - `open` and `onOpenChange` control visibility externally
  * - `modal` renders a backdrop overlay and sets `aria-modal` on the panel
  * - Focus is moved to `focusRef` (or the first focusable child) on open
@@ -46,6 +48,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
     },
     ref,
   ) => {
+    const resolvedSize = useResponsive(size);
     useEffect(() => {
       if (typeof document !== "undefined") {
         if (open && modal) document.body.style.overflow = "hidden";
@@ -184,7 +187,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
           aria-labelledby={title ? titleId : undefined}
           aria-label={!title ? "Dialog" : undefined}
           aria-describedby={description ? descId : undefined}
-          className={cn(dialogVariants({ size }), className)}
+          className={cn(dialogVariants({ size: resolvedSize }), className)}
           {...props}
         >
           {title && (

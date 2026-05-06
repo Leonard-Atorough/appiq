@@ -7,16 +7,22 @@
  *
  * Rendered via a React portal so the panel is never clipped by `overflow: hidden` ancestors.
  * The trigger element receives `aria-describedby` pointing at the tooltip panel when visible.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <Tooltip message="Save changes">
  *   <Button>Save</Button>
+ * </Tooltip>
+ * // Responsive: md=md, lg=lg
+ * <Tooltip message="More details" size={{ base: "sm", md: "md", lg: "lg" }}>
+ *   <Icon name="info" />
  * </Tooltip>
  */
 
 import React, { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import type { TooltipProps } from "./tooltip.types";
 import { tooltipVariants } from "./tooltip.variants";
 
@@ -85,6 +91,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   wrapperClassName,
   ...props
 }) => {
+  const resolvedSize = useResponsive(size ?? "md");
   const tooltipId = useId();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -190,7 +197,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             id={tooltipId}
             role="tooltip"
             style={positionStyles}
-            className={cn(tooltipVariants({ size, bordered, color }), messageClassName)}
+            className={cn(tooltipVariants({ size: resolvedSize, bordered, color }), messageClassName)}
             onMouseEnter={() => {
               panelHoveredRef.current = true;
             }}

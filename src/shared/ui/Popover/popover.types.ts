@@ -1,4 +1,5 @@
 import type React from "react";
+import type { ResponsiveValue } from "@/shared/lib";
 import type { VariantProps } from "class-variance-authority";
 import type { popoverVariants } from "./popover.variants";
 
@@ -11,7 +12,7 @@ export type PopoverSide = "top" | "right" | "bottom" | "left";
 /** Alignment of the panel along the chosen side. */
 export type PopoverAlign = "start" | "center" | "end";
 
-export interface PopoverProps extends VariantProps<typeof popoverVariants> {
+export interface PopoverProps extends Omit<VariantProps<typeof popoverVariants>, "size"> {
   // --- Open state (controlled / uncontrolled) ---
   open?: boolean;
   defaultOpen?: boolean;
@@ -41,6 +42,9 @@ export interface PopoverProps extends VariantProps<typeof popoverVariants> {
 
   // --- Content ---
   children: React.ReactNode;
+
+  // --- Sizing can be responsive ---
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
 
   // --- DOM escape hatches (targeted, not a root HTML spread) ---
   /** Extra class(es) merged onto the trigger element's className. */

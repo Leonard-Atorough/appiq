@@ -1,12 +1,14 @@
 import type { VariantProps } from "class-variance-authority";
+import type { ResponsiveValue } from "@/shared/lib";
 import type { buttonVariants } from "./button.variants";
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, never>,
+    Omit<VariantProps<typeof buttonVariants>, "variant" | "size"> {
   /** Visual style. `primary` for the main CTA; `ghost`/`link` for low-emphasis actions. */
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "link" | "danger" ;
+  variant?: ResponsiveValue<"primary" | "secondary" | "outline" | "ghost" | "link" | "danger">;
   /** Control height and padding. */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Expands the button to 100% of its container width. */
   full?: boolean;
   /** Shows a spinner and blocks clicks. Children stay at `opacity-0` so the accessible name is preserved via `aria-busy`. */

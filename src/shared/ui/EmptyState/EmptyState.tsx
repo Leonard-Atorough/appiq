@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { emptyStateVariants } from "./emptyState.variants";
 import type { EmptyStateProps } from "./emptyState.types";
 import { Icon, type IconSize } from "../Icon";
@@ -12,11 +13,18 @@ import { Button } from "../Button";
  * Provides a contextual icon, title, description, and an optional call-to-action.
  * Defaults to a briefcase icon sized proportionally to the `size` prop.
  * Renders with `role="status"` and `aria-label` for screen reader announcement.
+ * Supports responsive sizing via ResponsiveValue.
  *
  * @example
  * <EmptyState
  *   title="No applications yet"
  *   action={<Button onClick={openForm}>Add Application</Button>}
+ * />
+ * // Responsive: md=md, lg=lg
+ * <EmptyState
+ *   size={{ base: "sm", md: "md", lg: "lg" }}
+ *   title="No results"
+ *   description="Try adjusting your filters"
  * />
  */
 export function EmptyState({
@@ -28,20 +36,23 @@ export function EmptyState({
   size,
   className,
 }: EmptyStateProps) {
-  const iconSizeMap: Record<NonNullable<EmptyStateProps["size"]>, IconSize> = {
+  const resolvedVariant = useResponsive(variant ?? "default");
+  const resolvedSize = useResponsive(size ?? "md");
+  
+  const iconSizeMap: Record<"sm" | "md" | "lg", IconSize> = {
     sm: "md",
     md: "lg",
     lg: "xl",
   };
 
-  const iconSize = iconSizeMap[size || "md"] satisfies IconSize;
+  const iconSize = iconSizeMap[resolvedSize as keyof typeof iconSizeMap] satisfies IconSize;
   const resolvedIcon = icon ?? <Icon name="briefcase" size={iconSize} aria-hidden={true} />;
 
   return (
     <div
       role="status"
       aria-label={title}
-      className={cn(emptyStateVariants({ variant, size }), className)}
+      className={cn(emptyStateVariants({ variant: resolvedVariant, size: resolvedSize }), className)}
     >
       {resolvedIcon}
       <div className="flex flex-col gap-xs w-full">

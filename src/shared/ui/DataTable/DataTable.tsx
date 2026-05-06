@@ -1,8 +1,7 @@
 import type {
   DataTableProps,
-  DataTableHeadProps,
-  DataTableCellProps,
-  DataTableRowProps,
+  DataTableSize,
+  DataTableVariant,
 } from "./dataTable.types";
 import {
   flexRender,
@@ -13,7 +12,7 @@ import {
   type Cell,
   type Row,
 } from "@tanstack/react-table";
-import { cn } from "@shared/lib";
+import { cn, useResponsive } from "@shared/lib";
 import {
   dataTableCellVariants,
   dataTableHeadVariants,
@@ -35,7 +34,7 @@ function DataTableHeader<TData extends Record<string, unknown>>({
   headerClassName,
 }: {
   table: ReturnType<typeof useReactTable<TData>>;
-  props: DataTableHeadProps;
+  props: { size?: DataTableSize; variant?: DataTableVariant; sortable?: boolean };
   headerClassName?: string;
 }) {
   return (
@@ -108,7 +107,7 @@ function DataTableCell<TData extends Record<string, unknown>>({
   cellClassName,
 }: {
   cell: Cell<TData, unknown>;
-  props: DataTableCellProps;
+  props: { size?: DataTableSize; variant?: DataTableVariant };
   cellClassName?: string;
 }) {
   return (
@@ -140,7 +139,7 @@ function DataTableRow<TData extends Record<string, unknown>>({
   tabIndex,
 }: {
   row: Row<TData>;
-  props: DataTableRowProps;
+  props: { size?: DataTableSize; variant?: DataTableVariant; striped?: boolean; hoverable?: boolean; isSelected?: boolean; isFocused?: boolean };
   rowClassName?: string;
   onKeyDown?: (e: React.KeyboardEvent) => void;
   onClick?: () => void;
@@ -189,6 +188,7 @@ function DataTableRow<TData extends Record<string, unknown>>({
  * - Arrow key row navigation
  * - Space bar row selection
  * - Custom cell and header rendering via ColumnDef
+ * - Responsive sizing via ResponsiveValue
  *
  * @example
  * // Feature component handles loading/empty, passes data to DataTable:
@@ -204,6 +204,8 @@ function DataTableRow<TData extends Record<string, unknown>>({
  *
  *   return <DataTable data={applications} columns={columns} sortable />;
  * }
+ * // Responsive: md=md, lg=lg
+ * <DataTable data={items} columns={cols} size={{ base: "sm", md: "md", lg: "lg" }} variant={{ base: "default", lg: "compact" }} />
  */
 export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
   (
@@ -227,6 +229,10 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
     },
     ref,
   ) => {
+    // Resolve responsive values
+    const resolvedSize = useResponsive(size);
+    const resolvedVariant = useResponsive(variant);
+
     // Determine if controlled or uncontrolled
     const isControlled = controlledSelectedRowIds !== undefined;
     
@@ -321,10 +327,10 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
     };
 
     return (
-      <table ref={ref} className={cn(dataTableVariants({ variant, stickyHeader }))} {...props}>
+      <table ref={ref} className={cn(dataTableVariants({ variant: resolvedVariant, stickyHeader }))} {...props}>
         <DataTableHeader
           table={table}
-          props={{ size, variant, sortable }}
+          props={{ size: resolvedSize, variant: resolvedVariant, sortable }}
           headerClassName={headerClassName}
         />
         <tbody>
@@ -333,8 +339,8 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
               key={row.id}
               row={row}
               props={{
-                size,
-                variant,
+                size: resolvedSize,
+                variant: resolvedVariant,
                 striped: rowStyle.striped,
                 hoverable: rowStyle.hoverable,
                 isSelected: selectedRowIds[row.id] ?? false,
