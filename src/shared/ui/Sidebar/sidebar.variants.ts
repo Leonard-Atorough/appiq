@@ -27,7 +27,7 @@ export const sidebarWrapperVariants = cva([], {
     position: {
       static: "",
       sticky: "sticky top-0",
-      fixed: "fixed top-0 left-0 h-screen",
+      fixed: "fixed top-0 left-0 h-screen z-50",
     },
   },
   defaultVariants: {

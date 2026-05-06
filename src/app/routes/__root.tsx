@@ -1,17 +1,6 @@
-import { AppHeader, AppNav, AppShell } from "@/widgets";
-import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { ToastContainer } from "@/widgets/ToastContainer";
-import { ToastProvider } from "../providers/ToastProvider";
+import { createRootRoute } from "@tanstack/react-router";
+import { RootLayout } from "./-RootLayout";
 
 export const Route = createRootRoute({
-  component: () => {
-    return (
-      <ToastProvider>
-        <AppShell header={<AppHeader />} nav={<AppNav />}>
-          <Outlet />
-        </AppShell>
-        <ToastContainer />
-      </ToastProvider>
-    );
-  },
+  component: RootLayout,
 });

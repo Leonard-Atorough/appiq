@@ -123,7 +123,7 @@ export const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
         >
           {header && (
             <div className={sidebarHeaderVariants()}>
-              <div className="flex items-center justify-between gap-md w-full">
+              <div className="flex items-center justify-end gap-md w-full">
                 {isOpen && <div className="flex-1">{header}</div>}
                 {collapsible && !hideToggle && (
                   <button
