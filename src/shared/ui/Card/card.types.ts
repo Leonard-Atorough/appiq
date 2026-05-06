@@ -1,8 +1,17 @@
+import type { ResponsiveValue } from "@/shared/lib";
 import type { VariantProps } from "class-variance-authority";
 import type { cardVariants } from "./card.variants";
 
+// Base variant value types
+type CardSize = "sm" | "md" | "lg";
+type CardVariant = "default" | "elevated" | "outlined";
+type CardStatus = "none" | "success" | "warning" | "error" | "info";
+type CardInteractive = boolean;
+
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
+  extends
+    Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
+    Omit<VariantProps<typeof cardVariants>, "size" | "variant" | "interactive" | "status"> {
   /** Content rendered in the card header (typically a title or summary). */
   header?: React.ReactNode;
   /** Content rendered in the card footer (typically actions or metadata). */
@@ -19,6 +28,13 @@ export interface CardProps
   selected?: boolean;
   /** Prevents interaction and applies a disabled visual style. */
   disabled?: boolean;
+
+  // Responsive layout variants
+  size?: ResponsiveValue<CardSize>;
+  variant?: ResponsiveValue<CardVariant>;
+  interactive?: ResponsiveValue<CardInteractive>;
+  status?: ResponsiveValue<CardStatus>;
+
   onDragStart?: React.DragEventHandler<HTMLDivElement>;
   onDragEnd?: React.DragEventHandler<HTMLDivElement>;
   onDragOver?: React.DragEventHandler<HTMLDivElement>;
