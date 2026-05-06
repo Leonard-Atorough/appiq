@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/shared/lib/cn";
+import { cn, useResponsive } from "@/shared/lib";
 import { flexVariants } from "./flex.variants";
 import type { FlexProps } from "./flex.types";
 
@@ -7,8 +7,7 @@ import type { FlexProps } from "./flex.types";
  * Flex - A flexible layout component that handles spacing and alignment.
  *
  * Replaces raw div layouts with a semantic, typed component that enforces
- * design system spacing and alignment rules. For responsive overrides, pass
- * Tailwind responsive variants directly via the `className` prop.
+ * design system spacing and alignment rules. All layout props support responsive values.
  *
  * @example
  * // Simple horizontal layout with gap
@@ -18,11 +17,10 @@ import type { FlexProps } from "./flex.types";
  * </Flex>
  *
  * @example
- * // Responsive with className override
+ * // Responsive props
  * <Flex
- *   direction="column"
- *   gap="sm"
- *   className="lg:flex-row lg:gap-lg"
+ *   direction={{ base: "column", lg: "row" }}
+ *   gap={{ base: "sm", md: "md", lg: "lg" }}
  * >
  *   <Item />
  *   <Item />
@@ -45,19 +43,29 @@ export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
     },
     ref,
   ) => {
+    // Resolve responsive values to their current breakpoint value
+    const resolvedDirection = useResponsive(direction ?? "row");
+    const resolvedGap = useResponsive(gap ?? "md");
+    const resolvedPadding = useResponsive(padding ?? undefined);
+    const resolvedPaddingX = useResponsive(paddingX ?? undefined);
+    const resolvedPaddingY = useResponsive(paddingY ?? undefined);
+    const resolvedJustify = useResponsive(justify ?? "start");
+    const resolvedAlign = useResponsive(align ?? "start");
+    const resolvedWrap = useResponsive(wrap ?? false);
+
     return (
       <div
         ref={ref}
         className={cn(
           flexVariants({
-            direction,
-            gap,
-            padding,
-            paddingX,
-            paddingY,
-            justify,
-            align,
-            wrap,
+            direction: resolvedDirection,
+            gap: resolvedGap,
+            padding: resolvedPadding,
+            paddingX: resolvedPaddingX,
+            paddingY: resolvedPaddingY,
+            justify: resolvedJustify,
+            align: resolvedAlign,
+            wrap: resolvedWrap,
             fullWidth,
           }),
           className,
