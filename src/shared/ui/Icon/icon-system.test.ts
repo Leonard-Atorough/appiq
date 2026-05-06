@@ -21,6 +21,19 @@ describe("Icon System", () => {
         "bell",
         "x",
         "briefcase",
+        "settings",
+        "chart-bar",
+        "user",
+        "users",
+        // Help
+        "help-circle",
+        // Navigation extras
+        "home",
+        "chevron-left",
+        "chevron-right",
+        "chevron-up",
+        "chevron-down",
+        "calendar",
       ];
 
       expectedIcons.forEach((iconName) => {

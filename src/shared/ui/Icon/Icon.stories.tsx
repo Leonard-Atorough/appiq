@@ -7,24 +7,36 @@ export default meta;
 type Story = StoryObj<typeof Icon>;
 
 const allIcons = [
+  // Navigation
   "kebab",
   "meatball",
   "bento",
   "doner",
   "hamburger",
+  "home",
   "chevron-left",
   "chevron-right",
   "chevron-up",
   "chevron-down",
+  // Status
   "check-circle",
   "x-circle",
   "alert-triangle",
   "info",
+  "help-circle",
+  // UI
   "bell",
   "check",
   "minus",
   "x",
   "briefcase",
+  "settings",
+  "chart-bar",
+  "user",
+  "users",
+  "calendar",
+  "sun",
+  "moon",
 ];
 
 const variants: IconVariant[] = [
@@ -159,7 +171,13 @@ export const StatusIndicators: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
       <div className="flex items-center gap-md p-md rounded-md bg-success/10 border border-success">
-        <Icon name="check-circle" variant="success" size="lg" aria-hidden={false} aria-label="Success" />
+        <Icon
+          name="check-circle"
+          variant="success"
+          size="lg"
+          aria-hidden={false}
+          aria-label="Success"
+        />
         <span className="text-sm">Application submitted successfully</span>
       </div>
       <div className="flex items-center gap-md p-md rounded-md bg-error/10 border border-error">
@@ -167,7 +185,13 @@ export const StatusIndicators: Story = {
         <span className="text-sm">Unable to process request</span>
       </div>
       <div className="flex items-center gap-md p-md rounded-md bg-warning/10 border border-warning">
-        <Icon name="alert-triangle" variant="warning" size="lg" aria-hidden={false} aria-label="Warning" />
+        <Icon
+          name="alert-triangle"
+          variant="warning"
+          size="lg"
+          aria-hidden={false}
+          aria-label="Warning"
+        />
         <span className="text-sm">Please review before proceeding</span>
       </div>
       <div className="flex items-center gap-md p-md rounded-md bg-info/10 border border-info">
