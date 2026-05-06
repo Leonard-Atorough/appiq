@@ -19,23 +19,20 @@ export function MetricsPanel({
           {Array(5)
             .fill(0)
             .map((_, i) => (
-              <Skeleton
-                key={i}
-                className="w-full h-24 md:flex-1 md:h-28"
-              />
+              <Skeleton key={i} className="w-full h-24 md:flex-1 md:h-28" />
             ))}
         </div>
       ) : (
         <Flex
-          direction="row"
+          direction={{ base: "column", md: "row" }}
           gap="lg"
           fullWidth
-          className="flex-col h-auto md:flex-row md:h-full"
+          className="h-auto md:h-full"
         >
           <MetricCard
             label={metrics.totalApplications === 1 ? "Total Application" : "Total Applications"}
             value={metrics.totalApplications}
-            icon={<Icon name="briefcase" size="md" variant="primary" />}
+            icon={<Icon name="briefcase" size={{ base: "sm", md: "md" }} variant="primary" />}
           />
           <MetricCard
             label={
@@ -44,24 +41,24 @@ export function MetricsPanel({
                 : "Applications This Month"
             }
             value={metrics.applicationsThisMonth}
-            icon={<Icon name="check" size="sm" variant="success" />}
+            icon={<Icon name="check" size={{ base: "sm", md: "md" }} variant="success" />}
           />
           <MetricCard
             label={
               metrics.interviewsScheduled === 1 ? "Interview Scheduled" : "Interviews Scheduled"
             }
             value={metrics.interviewsScheduled}
-            icon={<Icon name="info" size="sm" variant="info" />}
+            icon={<Icon name="info" size={{ base: "sm", md: "md" }} variant="info" />}
           />
           <MetricCard
             label={metrics.offersReceived === 1 ? "Offer Received" : "Offers Received"}
             value={metrics.offersReceived}
-            icon={<Icon name="check-circle" size="sm" variant="success" />}
+            icon={<Icon name="check-circle" size={{ base: "sm", md: "md" }} variant="success" />}
           />
           <MetricCard
             label="Rejection Rate"
             value={`${metrics.rejectionRate.toFixed(1)}%`}
-            icon={<Icon name="alert-triangle" size="sm" variant="warning" />}
+            icon={<Icon name="alert-triangle" size={{ base: "sm", md: "md" }} variant="warning" />}
           />
         </Flex>
       )}

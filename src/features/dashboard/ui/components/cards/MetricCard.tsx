@@ -17,8 +17,8 @@ export function MetricCard({ icon, label, value }: MetricCardProps) {
         <span className="text-muted" aria-hidden="true">
           {icon}
         </span>
-        <p className="text-3xl font-bold text-primary">{value}</p>
-        <p className="text-lg text-muted font-medium">{label}</p>
+        <p className=" text-2xl lg:text-3xl font-bold text-primary">{value}</p>
+        <p className="text-sm lg:text-lg text-muted font-medium">{label}</p>
       </Flex>
     </Card>
   );
