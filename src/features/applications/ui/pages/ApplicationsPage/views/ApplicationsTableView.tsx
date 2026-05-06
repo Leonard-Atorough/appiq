@@ -5,7 +5,8 @@ import { Skeleton } from "@/shared/ui";
 import { EmptyState } from "@/shared/ui";
 import { ConfirmDeleteForm } from "../../../components/forms/ConfirmDeleteForm";
 import type { Row } from "@tanstack/react-table";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import type { JobApplication } from "@/entities";
 
 interface ApplicationsTableViewProps {
   onCreateApplication: () => void;
@@ -29,39 +30,43 @@ export function ApplicationsTableView({
   //NOTE: we'll needto pass onEditApplication down into the columns definitions. We can spread the columns and add an "actions" column at the end that uses it to render edit buttons for each row.
   const { applications, loading, error } = useApplications();
   const [deleteId, setDeleteId] = useState<string | null>(null);
-  const combinedColumns = [
-    ...applicationColumns,
-    {
-      id: "actions",
-      header: "Actions",
-      cell: ({ row }: { row: Row<(typeof applications)[number]> }) => {
-        const application = row.original;
-        return (
-          <Dropdown
-            triggerLabel="Row Actions"
-            items={[
-              {
-                label: "View Details",
-                icon: <Icon name="chevron-right" size="sm" />,
-                onClick: () => onNavigateToApplication(application.id),
-              },
-              {
-                label: "Edit",
-                icon: <Icon name="edit" size="sm" />,
-                onClick: () => onEditApplication(application.id),
-              },
-              {
-                label: "Delete",
-                icon: <Icon name="delete" size="sm" />,
-                variant: "danger" as const,
-                onClick: () => setDeleteId(application.id),
-              },
-            ]}
-          />
-        );
+
+  const combinedColumns = useMemo(
+    () => [
+      ...applicationColumns,
+      {
+        id: "actions",
+        header: "Actions",
+        cell: ({ row }: { row: Row<JobApplication> }) => {
+          const application = row.original;
+          return (
+            <Dropdown
+              triggerLabel="Row Actions"
+              items={[
+                {
+                  label: "View Details",
+                  icon: <Icon name="chevron-right" size="sm" />,
+                  onClick: () => onNavigateToApplication(application.id),
+                },
+                {
+                  label: "Edit",
+                  icon: <Icon name="edit" size="sm" />,
+                  onClick: () => onEditApplication(application.id),
+                },
+                {
+                  label: "Delete",
+                  icon: <Icon name="delete" size="sm" />,
+                  variant: "danger" as const,
+                  onClick: () => setDeleteId(application.id),
+                },
+              ]}
+            />
+          );
+        },
       },
-    },
-  ];
+    ],
+    [onNavigateToApplication, onEditApplication],
+  );
 
   if (loading) {
     return (

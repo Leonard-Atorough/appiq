@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { ApplicationsTableView } from "./views/ApplicationsTableView";
 import { ApplicationsKanbanView } from "./views/ApplicationsKanbanView";
@@ -20,29 +20,35 @@ export default function ApplicationsPage() {
     deleteAsync: deleteApplication,
   } = useApplicationActions({ withSuccess: true, withError: true });
 
-  const openCreateModal = () => {
+  const openCreateModal = useCallback(() => {
     setEditApplicationId(null);
     setModalOpen(true);
-  };
+  }, []);
 
-  const openEditModal = (id: string) => {
+  const openEditModal = useCallback((id: string) => {
     setEditApplicationId(id);
     setModalOpen(true);
-  };
+  }, []);
 
-  const handleModalOpenChange = (open: boolean) => {
+  const handleModalOpenChange = useCallback((open: boolean) => {
     setModalOpen(open);
     if (!open) setEditApplicationId(null);
-  };
+  }, []);
 
-  const handleUpdateApplication = async (data: Partial<Omit<JobApplication, "id">>) => {
-    if (!editApplicationId) return;
-    await updateApplication.execute(editApplicationId, data);
-  };
+  const handleUpdateApplication = useCallback(
+    async (data: Partial<Omit<JobApplication, "id">>) => {
+      if (!editApplicationId) return;
+      await updateApplication.execute(editApplicationId, data);
+    },
+    [editApplicationId, updateApplication],
+  );
 
-  const handleNavigateToApplication = (id: string) => {
-    void navigate({ to: "/applications/$id", params: { id } });
-  };
+  const handleNavigateToApplication = useCallback(
+    (id: string) => {
+      void navigate({ to: "/applications/$id", params: { id } });
+    },
+    [navigate],
+  );
 
   return (
     <div>
