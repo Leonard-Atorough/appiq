@@ -1,4 +1,4 @@
-import { Skeleton, Icon, Flex } from "@/shared/ui";
+import { Skeleton, Icon } from "@/shared/ui";
 import { MetricCard } from "../../../components/cards/MetricCard";
 import type { DashboardMetrics } from "@/features/dashboard/lib/calculateMetrics";
 
@@ -15,20 +15,15 @@ export function MetricsPanel({
         Application Metrics
       </h2>
       {loading ? (
-        <div className="flex flex-col gap-md md:flex-row">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-lg">
           {Array(5)
             .fill(0)
             .map((_, i) => (
-              <Skeleton key={i} className="w-full h-24 md:flex-1 md:h-28" />
+              <Skeleton key={i} className="w-full h-24" />
             ))}
         </div>
       ) : (
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          gap="lg"
-          fullWidth
-          className="h-auto md:h-full"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-sm md:gap-md">
           <MetricCard
             label={metrics.totalApplications === 1 ? "Total Application" : "Total Applications"}
             value={metrics.totalApplications}
@@ -59,8 +54,9 @@ export function MetricsPanel({
             label="Rejection Rate"
             value={`${metrics.rejectionRate.toFixed(1)}%`}
             icon={<Icon name="alert-triangle" size={{ base: "sm", md: "md" }} variant="warning" />}
+            className="col-span-2 md:col-auto w-full md:w-auto justify-self-center md:justify-self-auto"
           />
-        </Flex>
+        </div>
       )}
     </section>
   );
