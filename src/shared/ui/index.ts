@@ -9,6 +9,7 @@ export { Dropdown, type DropdownProps, type DropdownItem } from "./Dropdown";
 export { DropTarget, dropTargetVariants, type DropTargetProps } from "./DropTarget";
 export { Field, type FieldProps } from "./Field";
 export { Flex, type FlexProps } from "./Flex";
+export { Header, type HeaderProps } from "./Header";
 export {
   Icon,
   iconVariants,
@@ -51,6 +52,7 @@ export {
   type SkeletonFieldProps,
 } from "./Skeleton";
 export { Sidebar, type SidebarProps } from "./Sidebar";
+export { Text, type TextProps } from "./Text";
 export { Textarea, type TextareaProps } from "./Textarea";
 export { Toast, type ToastProps } from "./Toast";
 export { Tooltip, type TooltipProps, type TooltipColor } from "./Tooltip";
