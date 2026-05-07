@@ -30,7 +30,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <Flex direction="column" gap="lg" justify="center" className="p-xs lg:p-lg" fullWidth>
+    <Flex direction="column" gap="lg" justify="center" padding={{ base: "xs", lg: "lg" }} fullWidth>
       {/* Metrics Panel */}
       <MetricsPanel loading={loading} metrics={metrics} />
 

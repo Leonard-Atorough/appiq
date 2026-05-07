@@ -19,7 +19,7 @@ export function AppNavItem({ item, isActive, isSidebarOpen, isMobile, onClick }:
       className={isSidebarOpen ? "justify-start" : "aspect-square p-0"}
     >
       <Flex gap="md" align="center">
-        <Icon name={item.icon} size="md" aria-hidden />
+        <Icon name={item.icon} size={isSidebarOpen ? "md" : "sm"} aria-hidden />
         {isSidebarOpen && <span className="truncate">{item.label}</span>}
       </Flex>
     </Button>
