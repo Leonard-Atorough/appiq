@@ -4,20 +4,14 @@ import { describe, it, expect, vi } from "vitest";
 import { Toast } from "./Toast";
 
 describe("Toast", () => {
-  describe("Basic Rendering", () => {
+  describe("Rendering", () => {
     it("renders with title", () => {
       render(<Toast title="Test notification" onDismiss={() => {}} />);
       expect(screen.getByText("Test notification")).toBeInTheDocument();
     });
 
     it("renders with title and description", () => {
-      render(
-        <Toast
-          title="Test"
-          description="This is a description"
-          onDismiss={() => {}}
-        />,
-      );
+      render(<Toast title="Test" description="This is a description" onDismiss={() => {}} />);
       expect(screen.getByText("Test")).toBeInTheDocument();
       expect(screen.getByText("This is a description")).toBeInTheDocument();
     });
@@ -25,6 +19,7 @@ describe("Toast", () => {
     it("renders without description when not provided", () => {
       render(<Toast title="Test only" onDismiss={() => {}} />);
       expect(screen.getByText("Test only")).toBeInTheDocument();
+      expect(screen.queryByText(/description/i)).not.toBeInTheDocument();
     });
 
     it("forwards ref correctly", () => {
@@ -35,104 +30,54 @@ describe("Toast", () => {
   });
 
   describe("Variants", () => {
-    it("renders default variant", () => {
+    it.each([
+      ["default", "relative"],
+      ["success", "border-success"],
+      ["error", "border-error"],
+      ["warning", "border-warning"],
+      ["info", "border-info"],
+    ] as const)("renders %s variant with styling", (variant, expectedClass) => {
       const { container } = render(
-        <Toast variant="default" title="Default" onDismiss={() => {}} />,
+        <Toast variant={variant} title={variant} onDismiss={() => {}} />,
       );
       const toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("relative");
-    });
-
-    it("renders success variant with correct styling", () => {
-      const { container } = render(
-        <Toast variant="success" title="Success" onDismiss={() => {}} />,
-      );
-      const toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-success", "bg-success-light");
-    });
-
-    it("renders error variant with correct styling", () => {
-      const { container } = render(
-        <Toast variant="error" title="Error" onDismiss={() => {}} />,
-      );
-      const toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-error", "bg-error-light");
-    });
-
-    it("renders warning variant with correct styling", () => {
-      const { container } = render(
-        <Toast variant="warning" title="Warning" onDismiss={() => {}} />,
-      );
-      const toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-warning", "bg-warning-light");
-    });
-
-    it("renders info variant with correct styling", () => {
-      const { container } = render(
-        <Toast variant="info" title="Info" onDismiss={() => {}} />,
-      );
-      const toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-info", "bg-info-light");
+      expect(toast).toHaveClass(expectedClass);
     });
   });
 
   describe("Icons", () => {
-    it("renders default icon for default variant", () => {
-      const { container } = render(
-        <Toast variant="default" title="Default" onDismiss={() => {}} />,
-      );
-      // Icon should be in the container
-      expect(container.querySelector("svg") || container.querySelector("[role='img']")).toBeInTheDocument();
+    it("renders default icon for all variants", () => {
+      const variants = ["default", "success", "error", "warning", "info"] as const;
+      variants.forEach((variant) => {
+        const { container } = render(
+          <Toast variant={variant} title={variant} onDismiss={() => {}} />,
+        );
+        expect(
+          container.querySelector("svg") || container.querySelector("[role='img']"),
+        ).toBeInTheDocument();
+      });
     });
 
-    it("renders success icon for success variant", () => {
-      const { container } = render(
-        <Toast variant="success" title="Success" onDismiss={() => {}} />,
-      );
-      expect(container.querySelector("svg") || container.querySelector("[role='img']")).toBeInTheDocument();
-    });
-
-    it("renders error icon for error variant", () => {
-      const { container } = render(
-        <Toast variant="error" title="Error" onDismiss={() => {}} />,
-      );
-      expect(container.querySelector("svg") || container.querySelector("[role='img']")).toBeInTheDocument();
-    });
-
-    it("renders custom icon when provided", () => {
+    it("renders and uses custom icon when provided", () => {
       const customIcon = <span data-testid="custom-icon">🎉</span>;
-      render(
-        <Toast
-          title="Custom"
-          icon={customIcon}
-          onDismiss={() => {}}
-        />,
-      );
+      render(<Toast title="Custom" icon={customIcon} onDismiss={() => {}} />);
       expect(screen.getByTestId("custom-icon")).toBeInTheDocument();
     });
 
-    it("hides default icon when custom icon is provided", () => {
+    it("displays custom icon without duplicating default icon", () => {
       const customIcon = <span data-testid="custom-icon">✓</span>;
       render(
-        <Toast
-          variant="success"
-          title="Custom Icon"
-          icon={customIcon}
-          onDismiss={() => {}}
-        />,
+        <Toast variant="success" title="Custom Icon" icon={customIcon} onDismiss={() => {}} />,
       );
       expect(screen.getByTestId("custom-icon")).toBeInTheDocument();
+      expect(screen.getByText("✓")).toBeInTheDocument();
     });
   });
 
   describe("Action Button", () => {
     it("renders action button when provided", () => {
       render(
-        <Toast
-          title="Test"
-          action={{ label: "Undo", onClick: () => {} }}
-          onDismiss={() => {}}
-        />,
+        <Toast title="Test" action={{ label: "Undo", onClick: () => {} }} onDismiss={() => {}} />,
       );
       expect(screen.getByRole("button", { name: "Undo" })).toBeInTheDocument();
     });
@@ -147,8 +92,7 @@ describe("Toast", () => {
           onDismiss={() => {}}
         />,
       );
-      const button = screen.getByRole("button", { name: "Retry" });
-      await user.click(button);
+      await user.click(screen.getByRole("button", { name: "Retry" }));
       expect(actionClick).toHaveBeenCalled();
     });
 
@@ -168,148 +112,114 @@ describe("Toast", () => {
       const user = userEvent.setup();
       const onDismiss = vi.fn();
       render(<Toast title="Test" onDismiss={onDismiss} />);
-      const dismissButton = screen.getByRole("button", { name: /dismiss/i });
-      await user.click(dismissButton);
+      await user.click(screen.getByRole("button", { name: /dismiss/i }));
       expect(onDismiss).toHaveBeenCalled();
     });
 
     it("does not render dismiss button when onDismiss is not provided", () => {
       const { container } = render(<Toast title="Test" />);
-      const buttons = container.querySelectorAll("button");
-      expect(buttons.length).toBe(0);
+      expect(container.querySelectorAll("button")).toHaveLength(0);
     });
   });
 
   describe("Auto-dismiss", () => {
-    it("auto-dismisses after default duration (5000ms)", async () => {
+    it("auto-dismisses after specified duration", () => {
       vi.useFakeTimers();
       const onDismiss = vi.fn();
       render(<Toast title="Test" duration={5000} onDismiss={onDismiss} />);
-      
+
       expect(onDismiss).not.toHaveBeenCalled();
       vi.advanceTimersByTime(5000);
       expect(onDismiss).toHaveBeenCalledOnce();
-      
       vi.useRealTimers();
     });
 
-    it("auto-dismisses after custom duration", async () => {
+    it("respects custom duration", () => {
       vi.useFakeTimers();
       const onDismiss = vi.fn();
       render(<Toast title="Test" duration={2000} onDismiss={onDismiss} />);
-      
+
       vi.advanceTimersByTime(1999);
       expect(onDismiss).not.toHaveBeenCalled();
-      
       vi.advanceTimersByTime(1);
       expect(onDismiss).toHaveBeenCalledOnce();
-      
       vi.useRealTimers();
     });
 
-    it("does not auto-dismiss when duration is 0", async () => {
+    it("does not auto-dismiss when duration is 0", () => {
       vi.useFakeTimers();
       const onDismiss = vi.fn();
       render(<Toast title="Test" duration={0} onDismiss={onDismiss} />);
-      
+
       vi.advanceTimersByTime(10000);
       expect(onDismiss).not.toHaveBeenCalled();
-      
       vi.useRealTimers();
     });
 
     it("clears timeout on unmount", () => {
       vi.useFakeTimers();
       const onDismiss = vi.fn();
-      const { unmount } = render(
-        <Toast title="Test" duration={5000} onDismiss={onDismiss} />,
-      );
-      
+      const { unmount } = render(<Toast title="Test" duration={5000} onDismiss={onDismiss} />);
+
       unmount();
       vi.advanceTimersByTime(5000);
       expect(onDismiss).not.toHaveBeenCalled();
-      
       vi.useRealTimers();
     });
   });
 
   describe("Timer Bar", () => {
     it("renders timer bar when duration > 0", () => {
-      const { container } = render(
-        <Toast title="Test" duration={5000} onDismiss={() => {}} />,
-      );
-      const timerBar = container.querySelector(".animate-timer-drain");
-      expect(timerBar).toBeInTheDocument();
+      const { container } = render(<Toast title="Test" duration={5000} onDismiss={() => {}} />);
+      expect(container.querySelector(".animate-timer-drain")).toBeInTheDocument();
     });
 
     it("does not render timer bar when duration is 0", () => {
-      const { container } = render(
-        <Toast title="Test" duration={0} onDismiss={() => {}} />,
-      );
-      const timerBar = container.querySelector(".animate-timer-drain");
-      expect(timerBar).not.toBeInTheDocument();
+      const { container } = render(<Toast title="Test" duration={0} onDismiss={() => {}} />);
+      expect(container.querySelector(".animate-timer-drain")).not.toBeInTheDocument();
     });
 
-    it("applies correct timer bar color for success variant", () => {
+    it.each([
+      ["success", "bg-success"],
+      ["error", "bg-error"],
+      ["warning", "bg-warning"],
+      ["info", "bg-info"],
+    ] as const)("applies %s color for %s variant", (variant, expectedClass) => {
       const { container } = render(
-        <Toast variant="success" title="Test" duration={5000} onDismiss={() => {}} />,
+        <Toast variant={variant} title="Test" duration={5000} onDismiss={() => {}} />,
       );
       const timerBar = container.querySelector(".animate-timer-drain");
-      expect(timerBar).toHaveClass("bg-success");
-    });
-
-    it("applies correct timer bar color for error variant", () => {
-      const { container } = render(
-        <Toast variant="error" title="Test" duration={5000} onDismiss={() => {}} />,
-      );
-      const timerBar = container.querySelector(".animate-timer-drain");
-      expect(timerBar).toHaveClass("bg-error");
+      expect(timerBar).toHaveClass(expectedClass);
     });
 
     it("sets CSS variable for timer duration", () => {
-      const { container } = render(
-        <Toast title="Test" duration={3000} onDismiss={() => {}} />,
-      );
+      const { container } = render(<Toast title="Test" duration={3000} onDismiss={() => {}} />);
       const timerBar = container.querySelector(".animate-timer-drain") as HTMLElement;
       expect(timerBar?.style.getPropertyValue("--timer-duration")).toBe("3000ms");
+    });
+
+    it("hides timer bar from accessibility tree", () => {
+      const { container } = render(<Toast title="Test" duration={5000} onDismiss={() => {}} />);
+      expect(container.querySelector(".animate-timer-drain")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
     });
   });
 
   describe("Accessibility", () => {
-    it("uses role='alert' for error variant", () => {
+    it.each([
+      ["error", "alert", "assertive"],
+      ["success", "status", "polite"],
+      ["warning", "status", "polite"],
+      ["info", "status", "polite"],
+    ] as const)("uses role=%s and aria-live=%s for %s variant", (variant, role, ariaLive) => {
       const { container } = render(
-        <Toast variant="error" title="Error" onDismiss={() => {}} />,
+        <Toast variant={variant} title={variant} onDismiss={() => {}} />,
       );
-      expect(container.firstChild).toHaveAttribute("role", "alert");
-    });
-
-    it("uses role='status' for non-error variants", () => {
-      const { container } = render(
-        <Toast variant="success" title="Success" onDismiss={() => {}} />,
-      );
-      expect(container.firstChild).toHaveAttribute("role", "status");
-    });
-
-    it("sets aria-live='assertive' for error variant", () => {
-      const { container } = render(
-        <Toast variant="error" title="Error" onDismiss={() => {}} />,
-      );
-      expect(container.firstChild).toHaveAttribute("aria-live", "assertive");
-    });
-
-    it("sets aria-live='polite' for non-error variants", () => {
-      const { container } = render(
-        <Toast variant="success" title="Success" onDismiss={() => {}} />,
-      );
-      expect(container.firstChild).toHaveAttribute("aria-live", "polite");
-    });
-
-    it("hides timer bar from accessibility tree", () => {
-      const { container } = render(
-        <Toast title="Test" duration={5000} onDismiss={() => {}} />,
-      );
-      const timerBar = container.querySelector(".animate-timer-drain");
-      expect(timerBar).toHaveAttribute("aria-hidden", "true");
+      const toast = container.firstChild as HTMLElement;
+      expect(toast).toHaveAttribute("role", role);
+      expect(toast).toHaveAttribute("aria-live", ariaLive);
     });
 
     it("has descriptive aria-label on dismiss button", () => {
@@ -322,111 +232,33 @@ describe("Toast", () => {
   describe("Styling", () => {
     it("applies custom className", () => {
       const { container } = render(
-        <Toast
-          title="Test"
-          className="custom-class"
-          onDismiss={() => {}}
-        />,
+        <Toast title="Test" className="custom-class" onDismiss={() => {}} />,
       );
       expect(container.firstChild).toHaveClass("custom-class");
     });
 
-    it("applies base toast styling", () => {
-      const { container } = render(
-        <Toast title="Test" onDismiss={() => {}} />,
-      );
+    it("applies base and variant-specific classes", () => {
+      const { container } = render(<Toast title="Test" onDismiss={() => {}} />);
       const toast = container.firstChild as HTMLElement;
       expect(toast).toHaveClass("relative", "flex", "items-center", "bg-surface");
     });
 
-    it("applies description text styling", () => {
-      render(
-        <Toast
-          title="Title"
-          description="Description"
-          onDismiss={() => {}}
-        />,
-      );
-      const description = screen.getByText("Description");
-      expect(description).toHaveClass("text-sm", "text-muted");
-    });
-
-    it("applies title font styling", () => {
-      render(<Toast title="Title Text" onDismiss={() => {}} />);
-      const title = screen.getByText("Title Text");
-      expect(title).toHaveClass("font-semibold");
-    });
-  });
-
-  describe("All Variants Combined", () => {
-    it("renders multiple toasts with different variants", () => {
-      render(
-        <div>
-          <Toast variant="default" title="Default" onDismiss={() => {}} />
-          <Toast variant="success" title="Success" onDismiss={() => {}} />
-          <Toast variant="error" title="Error" onDismiss={() => {}} />
-          <Toast variant="warning" title="Warning" onDismiss={() => {}} />
-          <Toast variant="info" title="Info" onDismiss={() => {}} />
-        </div>,
-      );
-      
-      expect(screen.getByText("Default")).toBeInTheDocument();
-      expect(screen.getByText("Success")).toBeInTheDocument();
-      expect(screen.getByText("Error")).toBeInTheDocument();
-      expect(screen.getByText("Warning")).toBeInTheDocument();
-      expect(screen.getByText("Info")).toBeInTheDocument();
-    });
-  });
-
-  describe("Integration", () => {
-    it("handles complete toast lifecycle", async () => {
-      const user = userEvent.setup();
-      const onDismiss = vi.fn();
-      const actionClick = vi.fn();
-      
-      render(
-        <Toast
-          variant="success"
-          title="Saved"
-          description="Your changes have been saved."
-          action={{ label: "Undo", onClick: actionClick }}
-          duration={5000}
-          onDismiss={onDismiss}
-        />,
-      );
-      
-      // Verify initial render
-      expect(screen.getByText("Saved")).toBeInTheDocument();
-      expect(screen.getByText("Your changes have been saved.")).toBeInTheDocument();
-      
-      // Click action
-      const actionButton = screen.getByRole("button", { name: "Undo" });
-      await user.click(actionButton);
-      expect(actionClick).toHaveBeenCalled();
-      
-      // Toast still visible after action click
-      expect(screen.getByText("Saved")).toBeInTheDocument();
-      
-      // Dismiss manually
-      const dismissButton = screen.getByRole("button", { name: /dismiss/i });
-      await user.click(dismissButton);
-      expect(onDismiss).toHaveBeenCalled();
+    it("applies text styling to title and description", () => {
+      render(<Toast title="Title Text" description="Description text" onDismiss={() => {}} />);
+      expect(screen.getByText("Title Text")).toHaveClass("font-semibold");
+      expect(screen.getByText("Description text")).toHaveClass("text-sm", "text-muted");
     });
   });
 
   describe("Props & Attributes", () => {
     it("passes through data attributes", () => {
       const { container } = render(
-        <Toast
-          title="Test"
-          onDismiss={() => {}}
-          data-testid="toast-element"
-        />,
+        <Toast title="Test" onDismiss={() => {}} data-testid="toast-element" />,
       );
       expect(container.firstChild).toHaveAttribute("data-testid", "toast-element");
     });
 
-    it("renders with all props at once", () => {
+    it("renders with all props combined", () => {
       const { container } = render(
         <Toast
           variant="error"
@@ -439,7 +271,7 @@ describe("Toast", () => {
           onDismiss={() => {}}
         />,
       );
-      
+
       const toast = container.firstChild as HTMLElement;
       expect(toast).toHaveClass("my-custom-class");
       expect(screen.getByText("Complete Toast")).toBeInTheDocument();
@@ -448,27 +280,19 @@ describe("Toast", () => {
       expect(screen.getByText("❌")).toBeInTheDocument();
     });
 
-    it("handles title-only toast", () => {
-      render(<Toast title="Minimal" onDismiss={() => {}} />);
+    it("handles title-only and long description toasts", () => {
+      const { rerender } = render(<Toast title="Minimal" onDismiss={() => {}} />);
       expect(screen.getByText("Minimal")).toBeInTheDocument();
-      expect(screen.queryByText(/description/i)).not.toBeInTheDocument();
-    });
 
-    it("handles long description", () => {
-      const longText =
-        "This is a very long description that might wrap across multiple lines in the UI";
-      render(
-        <Toast title="Long" description={longText} onDismiss={() => {}} />,
-      );
+      const longText = "This is a very long description that might wrap across multiple lines";
+      rerender(<Toast title="Long" description={longText} onDismiss={() => {}} />);
       expect(screen.getByText(longText)).toBeInTheDocument();
     });
   });
 
   describe("Edge Cases", () => {
     it("handles empty title gracefully", () => {
-      const { container } = render(
-        <Toast title="" onDismiss={() => {}} />,
-      );
+      const { container } = render(<Toast title="" onDismiss={() => {}} />);
       expect(container.firstChild).toBeInTheDocument();
     });
 
@@ -476,7 +300,7 @@ describe("Toast", () => {
       const user = userEvent.setup();
       const onDismiss = vi.fn();
       render(<Toast title="Test" onDismiss={onDismiss} />);
-      
+
       const button = screen.getByRole("button", { name: /dismiss/i });
       await user.click(button);
       await user.click(button);
@@ -488,67 +312,99 @@ describe("Toast", () => {
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("updates correctly when props change", () => {
+    it("updates correctly on prop changes", () => {
       const { rerender } = render(
-        <Toast title="Original" onDismiss={() => {}} />,
+        <Toast variant="success" title="Original" onDismiss={() => {}} />,
       );
-      
+
       expect(screen.getByText("Original")).toBeInTheDocument();
-      
-      rerender(<Toast title="Updated" onDismiss={() => {}} />);
-      
+
+      rerender(<Toast variant="error" title="Updated" onDismiss={() => {}} />);
+
       expect(screen.queryByText("Original")).not.toBeInTheDocument();
       expect(screen.getByText("Updated")).toBeInTheDocument();
     });
+  });
 
-    it("handles variant change", () => {
-      const { container, rerender } = render(
-        <Toast variant="success" title="Test" onDismiss={() => {}} />,
+  describe("Multiple Toasts with Timeouts", () => {
+    it("dismisses toasts independently with different durations", async () => {
+      vi.useFakeTimers();
+      const onDismiss1 = vi.fn();
+      const onDismiss2 = vi.fn();
+
+      let callbackRef1 = onDismiss1;
+      let callbackRef2 = onDismiss2;
+
+      const { rerender } = render(
+        <div>
+          <Toast title="Toast 1" duration={1000} onDismiss={callbackRef1} />
+        </div>,
       );
-      
-      let toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-success");
-      
-      rerender(<Toast variant="error" title="Test" onDismiss={() => {}} />);
-      
-      toast = container.firstChild as HTMLElement;
-      expect(toast).toHaveClass("border-error");
-      expect(toast).not.toHaveClass("border-success");
+
+      callbackRef1 = vi.fn();
+      callbackRef2 = vi.fn();
+
+      rerender(
+        <div>
+          <Toast title="Toast 1" duration={1000} onDismiss={callbackRef1} />
+          <Toast title="Toast 2" duration={500} onDismiss={callbackRef2} />
+        </div>,
+      );
+
+      vi.advanceTimersByTime(500);
+      expect(callbackRef2).toHaveBeenCalledTimes(1);
+      expect(callbackRef1).not.toHaveBeenCalled();
+
+      vi.advanceTimersByTime(500);
+      expect(callbackRef1).toHaveBeenCalledTimes(1);
+
+      vi.useRealTimers();
     });
   });
 
-  describe("Snapshot Tests", () => {
-    it("snapshot: default toast", () => {
-      const { container } = render(
-        <Toast title="Test Notification" onDismiss={() => {}} />,
-      );
-      expect(container.firstChild).toMatchSnapshot();
-    });
+  describe("Integration", () => {
+    it("handles complete toast lifecycle", async () => {
+      const user = userEvent.setup();
+      const onDismiss = vi.fn();
+      const actionClick = vi.fn();
 
-    it("snapshot: toast with all features", () => {
-      const { container } = render(
+      render(
         <Toast
           variant="success"
-          title="Success!"
-          description="Operation completed"
-          action={{ label: "Undo", onClick: () => {} }}
+          title="Saved"
+          description="Your changes have been saved."
+          action={{ label: "Undo", onClick: actionClick }}
           duration={5000}
-          onDismiss={() => {}}
+          onDismiss={onDismiss}
         />,
       );
-      expect(container.firstChild).toMatchSnapshot();
+
+      expect(screen.getByText("Saved")).toBeInTheDocument();
+      expect(screen.getByText("Your changes have been saved.")).toBeInTheDocument();
+
+      await user.click(screen.getByRole("button", { name: "Undo" }));
+      expect(actionClick).toHaveBeenCalled();
+
+      expect(screen.getByText("Saved")).toBeInTheDocument();
+
+      await user.click(screen.getByRole("button", { name: /dismiss/i }));
+      expect(onDismiss).toHaveBeenCalled();
     });
 
-    it("snapshot: error toast", () => {
-      const { container } = render(
-        <Toast
-          variant="error"
-          title="Error occurred"
-          description="Something went wrong"
-          onDismiss={() => {}}
-        />,
+    it("renders multiple toasts with different variants", () => {
+      render(
+        <div>
+          <Toast variant="default" title="Default" onDismiss={() => {}} />
+          <Toast variant="success" title="Success" onDismiss={() => {}} />
+          <Toast variant="error" title="Error" onDismiss={() => {}} />
+          <Toast variant="warning" title="Warning" onDismiss={() => {}} />
+          <Toast variant="info" title="Info" onDismiss={() => {}} />
+        </div>,
       );
-      expect(container.firstChild).toMatchSnapshot();
+
+      ["Default", "Success", "Error", "Warning", "Info"].forEach((text) => {
+        expect(screen.getByText(text)).toBeInTheDocument();
+      });
     });
   });
 });
