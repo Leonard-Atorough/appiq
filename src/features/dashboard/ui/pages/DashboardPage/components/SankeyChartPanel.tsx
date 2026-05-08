@@ -182,9 +182,9 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
         Application Flow
       </h2>
       {loading ? (
-        <Skeleton className="w-full h-96" />
+        <Skeleton className="w-full h-75" />
       ) : !hasLinks ? (
-        <Flex justify="center" align="center" className="h-96 text-muted text-sm">
+        <Flex justify="center" align="center" className="h-75 text-muted text-sm">
           Move applications through statuses to see your pipeline flow here.
         </Flex>
       ) : (
@@ -201,7 +201,7 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
           <Flex
             ref={containerRef}
             padding={{base: "xs", md:"md"}}
-            className="h-50 md:h-150 w-full"
+            className="h-50 md:h-75 w-full"
             role="img"
             aria-labelledby="sankey-heading"
             aria-describedby="sankey-description"

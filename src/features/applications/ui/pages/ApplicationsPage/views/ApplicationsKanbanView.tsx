@@ -1,7 +1,7 @@
 import { useApplications } from "@features/applications/data/useApplications";
 import { useApplicationActions } from "@features/applications/data/useApplicationActions";
 import { ApplicationCard } from "../../../components/cards/ApplicationCard";
-import { Badge, DropTarget, Skeleton, dropTargetVariants } from "@/shared/ui";
+import { Badge, DropTarget, Flex, Header, Skeleton, dropTargetVariants } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 import type { ApplicationStatus } from "@/entities";
 
@@ -34,15 +34,15 @@ export function ApplicationsKanbanView({
 
   if (loading) {
     return (
-      <div className="flex gap-md p-md" data-testid="kanban-loading">
+      <Flex gap="md" padding="md" data-testid="kanban-loading">
         {COLUMNS.map((col) => (
-          <div key={col.id} className="flex-1 min-w-0 flex flex-col gap-sm">
+          <Flex key={col.id} direction="column" gap="sm" fullWidth className="min-w-0">
             <Skeleton className="h-8 w-full" />
             <Skeleton className="h-24 w-full" />
             <Skeleton className="h-24 w-full" />
-          </div>
+          </Flex>
         ))}
-      </div>
+      </Flex>
     );
   }
 
@@ -51,64 +51,73 @@ export function ApplicationsKanbanView({
       <div className="p-md">
         <div className="rounded-lg border border-error bg-error/10 p-md">
           <p className="text-sm font-medium text-error">Error loading applications</p>
-          <p className="text-xs text-error-text">{error.message}</p>
+          <p className="text-xs text-error-text">{error?.message}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-md">
-      <div className="flex gap-md px-md pb-md overflow-x-auto">
-        {COLUMNS.map((col) => {
-          const cards = applications.filter((app) => app.status === col.id);
-          return (
-            <div
-              key={col.id}
-              className="flex flex-col gap-sm min-w-56 flex-1 bg-muted rounded-lg p-sm"
+    <Flex
+      direction="row"
+      gap={{ base: "sm", lg: "md" }}
+      paddingX={{ base: "xs", lg: "md" }}
+      className="overflow-x-auto h-[80vh]"
+    >
+      {COLUMNS.map((col) => {
+        const cards = applications.filter((app) => app.status === col.id);
+        return (
+          <Flex
+            key={col.id}
+            direction="column"
+            gap="sm"
+            padding="sm"
+            justify="start"
+            fullWidth
+            className="min-w-[95%] md:min-w-70 bg-muted rounded-lg h-full"
+          >
+            <Flex align="center" justify="between" paddingX="xs" fullWidth>
+              <Header level={3} size="h6" weight="semibold">{col.label}</Header>
+              <Badge variant={col.badge} size="sm" outline rounded={false}>
+                {cards.length}
+              </Badge>
+            </Flex>
+            <DropTarget
+              droppableId={col.id}
+              accept="application-card"
+              onDrop={(draggedId) => {
+                void moveApplication.execute(draggedId, col.id);
+              }}
+              className="h-full w-full overflow-y-auto"
             >
-              <div className="flex items-center justify-between px-xs">
-                <h3 className="text-sm font-semibold text-secondary">{col.label}</h3>
-                <Badge variant={col.badge} size="sm" outline rounded={false}>
-                  {cards.length}
-                </Badge>
-              </div>
-              <DropTarget
-                droppableId={col.id}
-                accept="application-card"
-                onDrop={(draggedId) => {
-                  void moveApplication.execute(draggedId, col.id);
-                }}
-              >
-                {({ isDragOver, isDragAccepted }) => (
-                  <div
-                    className={cn(
-                      dropTargetVariants({ isActive: isDragOver && isDragAccepted }),
-                      "flex flex-col gap-sm p-sm min-h-32",
-                    )}
-                  >
-                    {cards.length === 0 ? (
-                      <p className="text-xs text-muted text-center m-auto">Drop here</p>
-                    ) : (
-                      cards.map((app) => (
-                        <ApplicationCard
-                          key={app.id}
-                          application={app}
-                          onDelete={(id) => {
-                            void deleteAsync.execute(id);
-                          }}
-                          onEdit={(app) => onEditApplication(app.id)}
-                          onNavigate={onNavigateToApplication}
-                        />
-                      ))
-                    )}
-                  </div>
-                )}
-              </DropTarget>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+              {({ isDragOver, isDragAccepted }) => (
+                <div
+                  className={cn(
+                    dropTargetVariants({ isActive: isDragOver && isDragAccepted }),
+                    "flex flex-col gap-sm p-sm w-full min-h-32",
+                  )}
+                >
+                  {cards.length === 0 ? (
+                    <p className="text-xs text-muted text-center m-auto">Drop here</p>
+                  ) : (
+                    cards.map((app) => (
+                      <ApplicationCard
+                        key={app.id}
+                        application={app}
+                        onDelete={(id) => {
+                          void deleteAsync.execute(id);
+                        }}
+                        onEdit={(app) => onEditApplication(app.id)}
+                        onNavigate={onNavigateToApplication}
+                      />
+                    ))
+                  )}
+                </div>
+              )}
+            </DropTarget>
+          </Flex>
+        );
+      })}
+    </Flex>
   );
 }

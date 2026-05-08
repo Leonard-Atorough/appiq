@@ -35,23 +35,38 @@ export default function DashboardPage() {
       <MetricsPanel loading={loading} metrics={metrics} />
 
       {/* Upcoming Interviews and Sankey Flow Chart */}
-      <Flex
-        direction={{ base: "column-reverse", xl: "row" }}
-        gap="lg"
-        fullWidth
-        align="stretch"
-        className="h-auto lg:h-180"
-      >
-        <Flex className="w-full md:shrink-0 lg:w-1/4 lg:shrink-0 lg:h-full">
-          <UpcomingInterviewsPanel
-            upcomingInterviews={upcomingInterviews}
-            onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
-          />
-        </Flex>
-        <Flex className="md:flex-1 lg:h-full">
+      <Flex direction={{ base: "column" }} gap="lg" fullWidth align="stretch" className="h-auto">
+        <Flex>
           <Suspense fallback={<Skeleton className="w-full h-full" />}>
             <SankeyChartPanel loading={sankeyLoading} data={sankeyData} />
           </Suspense>
+        </Flex>
+        <Flex
+          direction={{ base: "column", xxl: "row" }}
+          gap="lg"
+          fullWidth
+          align="stretch"
+          className="h-auto min-h-80 lg:max-h-96"
+        >
+          <Flex direction={{ base: "column", md: "row" }} gap="lg" fullWidth align="stretch">
+            <UpcomingInterviewsPanel
+              upcomingInterviews={upcomingInterviews}
+              onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
+            />
+            <Card size="md" interactive={false} className="flex-1">
+              <Flex direction="column" gap="md">
+                <h3 className="text-md font-semibold text-primary">Recent Activity</h3>
+                <p className="text-sm text-muted">
+                  No recent activity. Start applying to jobs to see your progress here!
+                </p>
+              </Flex>
+            </Card>
+          </Flex>
+          <Card size="md" interactive={false} className="flex-1 xl:w-1/3 xl:flex-none">
+            <Flex direction="column" gap="md" justify="center" align="center" className="h-48">
+              <p className="text-sm text-muted">Coming soon: Job recommendations</p>
+            </Flex>
+          </Card>
         </Flex>
       </Flex>
       {/* Recent Activity + Placeholder Section */}
@@ -61,21 +76,6 @@ export default function DashboardPage() {
         </h2>
         <Flex direction="row" gap="lg" fullWidth align="stretch" className="flex-col md:flex-row">
           {/* Recent Activity */}
-          <Card size="md" interactive={false} className="flex-1">
-            <Flex direction="column" gap="md">
-              <h3 className="text-md font-semibold text-primary">Recent Activity</h3>
-              <p className="text-sm text-muted">
-                No recent activity. Start applying to jobs to see your progress here!
-              </p>
-            </Flex>
-          </Card>
-
-          {/* Placeholder Card */}
-          <Card size="md" interactive={false} className="flex-1">
-            <Flex direction="column" gap="md" justify="center" align="center" className="h-48">
-              <p className="text-sm text-muted">Coming soon</p>
-            </Flex>
-          </Card>
         </Flex>
       </section>
     </Flex>

@@ -17,7 +17,7 @@ export function UpcomingInterviewsPanel({
       size="md"
       interactive={false}
       aria-labelledby="upcoming-interviews-heading"
-      className="flex-1 overflow-hidden h-full"
+      className="flex-1 overflow-hidden max-h-96 lg:max-h-none"
     >
       <Flex direction="column" gap="md">
         <h2 id="upcoming-interviews-heading" className="text-lg font-semibold text-primary">
