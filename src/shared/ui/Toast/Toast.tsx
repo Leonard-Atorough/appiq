@@ -41,14 +41,21 @@ const defaultIcons: Record<string, React.ReactNode> = {
  */
 export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ title, description, action, variant, duration = 5000, onDismiss, icon, ...props }, ref) => {
+    const onDismissRef = React.useRef(onDismiss);
+
+    // Update ref when onDismiss changes, but don't trigger useEffect
+    React.useLayoutEffect(() => {
+      onDismissRef.current = onDismiss;
+    }, [onDismiss]);
+
     React.useEffect(() => {
       if (duration > 0) {
         const timer = setTimeout(() => {
-          onDismiss?.();
+          onDismissRef.current?.();
         }, duration);
         return () => clearTimeout(timer);
       }
-    }, [duration, onDismiss]);
+    }, [duration]);
 
     const iconToShow = icon ?? defaultIcons[variant || "default"];
     const showTimerBar = duration > 0;
