@@ -21,6 +21,7 @@ import { CheckCircleIcon, XCircleIcon, AlertTriangleIcon, InfoIcon, HelpCircleIc
 import {
   BellIcon,
   CheckIcon,
+  CircleFillIcon,
   MinusIcon,
   XIcon,
   BriefcaseIcon,
@@ -64,6 +65,7 @@ export const ICON_REGISTRY: Record<string, React.ComponentType<React.SVGProps<SV
   // UI
   bell: BellIcon,
   check: CheckIcon,
+  "circle-fill": CircleFillIcon,
   minus: MinusIcon,
   x: XIcon,
   briefcase: BriefcaseIcon,
