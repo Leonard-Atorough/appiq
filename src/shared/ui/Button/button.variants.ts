@@ -37,9 +37,10 @@ export const buttonVariants = cva(
         ].join(" "),
         ghost: [
           "bg-transparent",
+          "shadow-none",
           "text-(--color-text)",
-          "hover:bg-muted",
-          "active:bg-(--color-border-muted)",
+          "hover:bg-muted hover:shadow-none",
+          "active:bg-(--color-border-muted) active:shadow-none",
           "focus-visible:ring-(--color-text)",
         ].join(" "),
         link: [
@@ -76,4 +77,3 @@ export const buttonVariants = cva(
     },
   },
 );
-

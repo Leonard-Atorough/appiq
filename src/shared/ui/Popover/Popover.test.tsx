@@ -274,7 +274,7 @@ describe("Popover", () => {
       await user.click(screen.getByRole("button"));
       const panel = screen.getByRole("dialog");
       expect(panel).toHaveClass(
-        "z-50",
+        "z-modal",
         "bg-surface",
         "border",
         "border-base",
