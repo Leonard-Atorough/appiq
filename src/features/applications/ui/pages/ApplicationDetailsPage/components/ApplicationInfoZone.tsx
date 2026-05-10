@@ -27,13 +27,23 @@ interface ApplicationInfoZoneProps {
 }
 
 export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZoneProps) {
-  const { position, company, status, dateApplied, interviewStartDate, interviewEndDate, location, workingStyle, jobType, salaryMin, salaryMax } =
-    application;
-  const hasSalary =
-    salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
+  const {
+    position,
+    company,
+    status,
+    dateApplied,
+    interviewStartDate,
+    interviewEndDate,
+    location,
+    workingStyle,
+    jobType,
+    salaryMin,
+    salaryMax,
+  } = application;
+  const hasSalary = salaryMin != null && salaryMax != null && (salaryMin > 0 || salaryMax > 0);
 
   return (
-    <div className="bg-surface border border-base rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-md">
+    <div className="bg-surface border border-base rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow duration-normal flex flex-col gap-md">
       <div className="flex items-start justify-between gap-md">
         <div className="flex flex-col gap-xs min-w-0">
           <h1 className="text-xl font-bold text-primary leading-tight">{position}</h1>
@@ -57,19 +67,19 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
           <Icon name="check-circle" size="sm" variant="muted" />
           Applied {formatDate(dateApplied)}
         </div>
-        {status === "interviewing" && (
-          interviewStartDate ? (
+        {status === "interviewing" &&
+          (interviewStartDate ? (
             <div className="flex items-center gap-xs text-sm text-success">
               <Icon name="calendar" size="sm" variant="success" />
-              Interview: {formatDate(interviewStartDate)}{interviewEndDate ? ` – ${formatTime(interviewEndDate)}` : ""}
+              Interview: {formatDate(interviewStartDate)}
+              {interviewEndDate ? ` – ${formatTime(interviewEndDate)}` : ""}
             </div>
           ) : (
             <div className="flex items-center gap-xs text-sm text-warning">
               <Icon name="alert-triangle" size="sm" variant="warning" />
               No interview date set
             </div>
-          )
-        )}
+          ))}
         {location && (
           <Badge variant="default" size="sm" outline rounded={false}>
             {location}
