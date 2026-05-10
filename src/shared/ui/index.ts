@@ -34,7 +34,6 @@ export {
   type PopoverSide,
   type PopoverAlign,
 } from "./Popover";
-export { Radio, radioBoxVariants, radioIconVariants, type RadioProps } from "./Radio";
 export {
   RadioGroup,
   radioGroupVariants,
