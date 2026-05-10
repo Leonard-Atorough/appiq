@@ -104,6 +104,20 @@
   --color-text-light: var(--gray-500); /* decorative/placeholder — not for body text */
   --color-text-dark: var(--gray-900);
 
+  /* ===== SEMANTIC: FEEDBACK ===== */
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-error: var(--error);
+  --color-error-light: var(--error-light);
+  --color-info: var(--info);
+  --color-info-light: var(--info-light);
+  --color-success-text: var(--success);
+  --color-warning-text: var(--warning);
+  --color-error-text: var(--error);
+  --color-info-text: var(--info);
+
   /* ===== SEMANTIC: BORDERS ===== */
   --color-border: var(--gray-200);
   --color-border-muted: var(--gray-100);
@@ -201,29 +215,29 @@
 
   /* ===== ELEVATION (Z-INDEX) TOKENS ===== */
   /* Stacking context hierarchy for overlays and floating elements */
-  --z-dropdown: 40; /* dropdowns, popovers */
-  --z-modal: 45; /* modal backdrops and dialogs */
-  --z-toast: 50; /* toast notifications — highest overlay */
-  --z-tooltip: 50; /* tooltips — same as toast since they don't overlap */
+  --z-dropdown: 40;  /* dropdowns, popovers */
+  --z-modal: 45;     /* modal backdrops and dialogs */
+  --z-toast: 50;     /* toast notifications — highest overlay */
+  --z-tooltip: 50;   /* tooltips — same as toast since they don't overlap */
 
   /* ===== FOCUS RING TOKENS ===== */
   /* Focus indicators for keyboard navigation */
-  --ring-width: 2px; /* standard focus ring width */
-  --ring-offset: 2px; /* space between element and ring */
+  --ring-width: 2px;         /* standard focus ring width */
+  --ring-offset: 2px;        /* space between element and ring */
   --ring-color: var(--color-primary); /* focus ring color */
 
   /* ===== CONTAINER QUERY TOKENS ===== */
   /* Named breakpoints for container-based responsive design */
-  --container-sm: 28rem; /* 448px */
-  --container-md: 42rem; /* 672px */
-  --container-lg: 64rem; /* 1024px */
-  --container-xl: 80rem; /* 1280px */
-  --container-max: 96rem; /* 1536px */
+  --container-sm: 28rem;    /* 448px */
+  --container-md: 42rem;    /* 672px */
+  --container-lg: 64rem;    /* 1024px */
+  --container-xl: 80rem;    /* 1280px */
+  --container-max: 96rem;   /* 1536px */
 
   /* ===== OPACITY TOKENS ===== */
   /* Semantic opacity levels for different states */
-  --opacity-disabled: 0.5; /* 50% — disabled/inactive elements */
-  --opacity-muted: 0.7; /* 70% — muted/secondary content */
+  --opacity-disabled: 0.5;   /* 50% — disabled/inactive elements */
+  --opacity-muted: 0.7;      /* 70% — muted/secondary content */
 }
 
 /* ===== THEME OVERRIDES — DARK MODE ===== */

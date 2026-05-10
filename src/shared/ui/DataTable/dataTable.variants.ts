@@ -77,7 +77,7 @@ export const dataTableRowVariants = cva(
  */
 export const dataTableCellVariants = cva(
   [
-    "px-md text-secondary whitespace-nowrap overflow-hidden text-ellipsis",
+    "px-md whitespace-nowrap overflow-hidden text-ellipsis",
     "transition-all duration-normal",
     "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
   ].join(" "),

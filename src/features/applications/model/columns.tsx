@@ -26,7 +26,7 @@ export const applicationColumns: ColumnDef<JobApplication>[] = [
     header: "Status",
     accessorKey: "status",
     cell: (info) => (
-      <Badge variant={statusVariant[info.getValue() as JobApplication["status"]]} size="sm">
+      <Badge variant={statusVariant[info.getValue() as JobApplication["status"]]} size="md">
         {info.getValue() as string}
       </Badge>
     ),
