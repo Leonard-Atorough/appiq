@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { Checkbox } from "./Checkbox";
 
@@ -73,6 +73,7 @@ export const ControlledGroup: Story = {
     const toggle = (opt: string) =>
       setSelected((prev) => {
         const next = new Set(prev);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         next.has(opt) ? next.delete(opt) : next.add(opt);
         return next;
       });
