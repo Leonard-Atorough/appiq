@@ -193,7 +193,7 @@ describe("Badge", () => {
 
     it("has transition classes for smooth animations", () => {
       const { container } = render(<Badge>Transitioned</Badge>);
-      expect(container.firstChild).toHaveClass("transition-all", "duration-200");
+      expect(container.firstChild).toHaveClass("transition-all", "duration-normal");
     });
 
     it("has proper layout classes", () => {

@@ -131,7 +131,7 @@ describe("Select", () => {
       expect(select).toHaveClass("appearance-none", "rounded-md");
       expect(select).toHaveClass("border", "border-base", "bg-surface");
       expect(select).toHaveClass("shadow-sm", "focus-visible:shadow-md");
-      expect(select).toHaveClass("transition-shadow", "duration-200", "ease-out");
+      expect(select).toHaveClass("transition-shadow", "duration-normal", "ease-out");
       expect(select).toHaveClass("focus-visible:ring-2", "focus-visible:ring-offset-1");
     });
 
@@ -143,7 +143,7 @@ describe("Select", () => {
       );
       const select = screen.getByTestId("select");
       expect(select).toBeDisabled();
-      expect(select).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-50");
+      expect(select).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-disabled");
     });
   });
 

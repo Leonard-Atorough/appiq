@@ -130,7 +130,7 @@ describe("Navbar", () => {
     expect(header).toHaveClass("flex", "items-center", "gap-md");
     expect(header).toHaveClass("border-b", "border-border");
     expect(header).toHaveClass("bg-surface");
-    expect(header).toHaveClass("transition-all", "duration-200", "ease-out");
+    expect(header).toHaveClass("transition-all", "duration-normal", "ease-out");
   });
 
   describe("Keyboard Navigation & Accessibility", () => {

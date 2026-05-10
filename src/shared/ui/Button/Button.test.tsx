@@ -105,7 +105,7 @@ describe("Button", () => {
     it("applies disabled styling", () => {
       render(<Button disabled>Disabled</Button>);
       const button = screen.getByRole("button");
-      expect(button.className).toContain("disabled:opacity-50");
+      expect(button.className).toContain("disabled:opacity-disabled");
     });
   });
 
@@ -114,7 +114,7 @@ describe("Button", () => {
       render(<Button loading>Loading</Button>);
       const button = screen.getByRole("button");
       expect(button.className).toContain("cursor-wait");
-      expect(button.className).toContain("opacity-75");
+      expect(button.className).toContain("opacity-muted");
       expect(button).toHaveAttribute("aria-busy", "true");
     });
 
@@ -186,7 +186,7 @@ describe("Button", () => {
       render(<Button>Transition</Button>);
       const button = screen.getByRole("button");
       expect(button.className).toContain("transition-all");
-      expect(button.className).toContain("duration-200");
+      expect(button.className).toContain("duration-normal");
     });
 
     it("has active scale transform effect", () => {

@@ -281,7 +281,7 @@ describe("Popover", () => {
         "rounded-lg",
         "shadow-md",
         "transition-all",
-        "duration-200",
+        "duration-normal",
         "ease-out",
       );
     });
