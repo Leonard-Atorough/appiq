@@ -6,7 +6,6 @@ import type { cardVariants } from "./card.variants";
 type CardSize = "sm" | "md" | "lg";
 type CardVariant = "default" | "elevated" | "outlined";
 type CardStatus = "none" | "success" | "warning" | "error" | "info";
-type CardInteractive = boolean;
 
 export interface CardProps
   extends
@@ -32,7 +31,6 @@ export interface CardProps
   // Responsive layout variants
   size?: ResponsiveValue<CardSize>;
   variant?: ResponsiveValue<CardVariant>;
-  interactive?: ResponsiveValue<CardInteractive>;
   status?: ResponsiveValue<CardStatus>;
 
   onDragStart?: React.DragEventHandler<HTMLDivElement>;

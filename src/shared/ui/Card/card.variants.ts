@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 /**
  * Card component variants
  * Base styles, size variants, and interactive states
- * The card component is an interactive, versatile component that contains content and actions about a single subject. It is drag-drop enabled by default, fits into the established design system and customisable.
+ * The card component is an interactive, versatile component that contains content and actions about a single subject. It is drag-drop enabled by default.
  */
 export const cardVariants = cva(
   [

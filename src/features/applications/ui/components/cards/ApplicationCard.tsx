@@ -59,7 +59,6 @@ export function ApplicationCard({
     <>
       <Card
         size="sm"
-        interactive={false}
         status={statusCardAccent[status]}
         dragId={application.id}
         draggable

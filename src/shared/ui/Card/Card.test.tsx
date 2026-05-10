@@ -39,7 +39,7 @@ describe("Card", () => {
     });
 
     it("uses role='group' when no onClick is provided", () => {
-      render(<Card interactive={false}>Static</Card>);
+      render(<Card>Static</Card>);
       expect(screen.getByRole("group")).toBeTruthy();
     });
 

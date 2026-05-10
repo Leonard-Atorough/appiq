@@ -53,7 +53,7 @@ export default function DashboardPage() {
               upcomingInterviews={upcomingInterviews}
               onNavigate={(id) => void navigate({ to: `/applications/${id}` })}
             />
-            <Card size="md" interactive={false} className="flex-1">
+            <Card size="md" className="flex-1">
               <Flex direction="column" gap="md">
                 <h3 className="text-md font-semibold text-primary">Recent Activity</h3>
                 <p className="text-sm text-muted">
@@ -62,7 +62,7 @@ export default function DashboardPage() {
               </Flex>
             </Card>
           </Flex>
-          <Card size="md" interactive={false} className="flex-1 xl:w-1/3 xl:flex-none">
+          <Card size="md" className="flex-1 xl:w-1/3 xl:flex-none">
             <Flex direction="column" gap="md" justify="center" align="center" className="h-48">
               <p className="text-sm text-muted">Coming soon: Job recommendations</p>
             </Flex>

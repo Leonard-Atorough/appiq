@@ -15,7 +15,6 @@ export function UpcomingInterviewsPanel({
   return (
     <Card
       size="md"
-      interactive={false}
       aria-labelledby="upcoming-interviews-heading"
       className="flex-1 overflow-hidden max-h-96 lg:max-h-none"
     >
@@ -43,7 +42,7 @@ export function UpcomingInterviewsPanel({
 
               return (
                 <li key={interview.id} role="listitem">
-                  <Card size="sm" interactive={false}>
+                  <Card size="sm">
                     <Flex gap="md" align="center">
                       {/* Vertical date block */}
                       {parts ? (

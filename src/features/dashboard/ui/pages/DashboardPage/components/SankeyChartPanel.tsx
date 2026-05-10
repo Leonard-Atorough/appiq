@@ -177,7 +177,7 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
   }, []);
 
   return (
-    <Card size="md" interactive={false} className="flex-1 h-full" data-testid="sankey-chart-panel">
+    <Card size="md" className="flex-1 h-full" data-testid="sankey-chart-panel">
       <h2 id="sankey-heading" className="text-lg font-semibold text-primary mb-md">
         Application Flow
       </h2>

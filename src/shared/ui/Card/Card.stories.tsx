@@ -58,7 +58,7 @@ export const Loading: Story = { render: () => (
 )};
 
 export const NonInteractive: Story = { render: () => (
-  <Card header="Read-only Card" interactive={false}>
+  <Card header="Read-only Card">
     No hover or cursor changes.
   </Card>
 )};

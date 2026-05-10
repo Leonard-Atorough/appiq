@@ -11,7 +11,6 @@ export function MetricCard({ icon, label, value, className }: MetricCardProps) {
   return (
     <Card
       size={{ base: "md", xl: "lg" }}
-      interactive={false}
       className={`w-full md:flex-1 md:min-w-0 ${className || ""}`}
     >
       <Flex direction="column" gap="sm" role="region" aria-label={label} className="h-full">
