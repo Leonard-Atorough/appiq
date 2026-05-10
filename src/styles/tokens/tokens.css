@@ -1,0 +1,279 @@
+/*
+ * Design Tokens — Complete System
+ *
+ * Consolidated single source of truth for all semantic colors, spacing,
+ * typography, radii, shadows, themes, and animations.
+ *
+ * Import this single file in src/index.css to pull in the complete AppIQ design system.
+ * Import order matters: `themes.css` overrides must come after color definitions.
+ */
+
+/*
+ * ===== COLOR TOKENS =====
+ *
+ * Design philosophy: calming, stress-reducing palette for a job-tracking app.
+ * Base brand color: #50bb4e (HSL 119° 43% 52%) — growth-oriented green.
+ * Complementary accent: soft purple (HSL 299° 35%) — low saturation for harmony.
+ * Neutrals: cool-tinted grays (HSL 210°) — familiar and easy on the eyes.
+ *
+ * All values are in HSL. The primitive ramps (--green-*, --gray-*, --purple-*)
+ * are the raw scale. The semantic tokens (--color-*) are what components use.
+ * Never reference primitive ramps in component code — always use semantic tokens.
+ */
+
+:root {
+  /* ===== PRIMITIVE: GREEN RAMP ===== */
+  /* Shared hue/saturation so the whole ramp scales together */
+  --green-h: 119;
+  --green-s: 43%;
+
+  --green-50: hsl(var(--green-h) var(--green-s) 95%); /* lightest tint – hover backgrounds */
+  --green-100: hsl(var(--green-h) var(--green-s) 90%);
+  --green-200: hsl(var(--green-h) var(--green-s) 80%);
+  --green-300: hsl(var(--green-h) var(--green-s) 70%);
+  --green-400: hsl(var(--green-h) var(--green-s) 60%);
+  --green-500: hsl(var(--green-h) var(--green-s) 52%); /* #50bb4e – brand base */
+  --green-600: hsl(var(--green-h) var(--green-s) 45%);
+  --green-700: hsl(var(--green-h) var(--green-s) 35%);
+  --green-800: hsl(var(--green-h) var(--green-s) 25%);
+  --green-900: hsl(var(--green-h) var(--green-s) 15%); /* darkest shade – dark-mode surfaces */
+
+  /* ===== PRIMITIVE: PURPLE RAMP (complementary accent) ===== */
+  /* Saturation kept intentionally low (35%) so it complements without competing */
+  --purple-h: 299;
+  --purple-s: 35%;
+
+  --purple-50: hsl(var(--purple-h) var(--purple-s) 95%);
+  --purple-100: hsl(var(--purple-h) var(--purple-s) 90%);
+  --purple-200: hsl(var(--purple-h) var(--purple-s) 80%);
+  --purple-300: hsl(var(--purple-h) var(--purple-s) 70%);
+  --purple-500: hsl(var(--purple-h) var(--purple-s) 55%);
+  --purple-600: hsl(var(--purple-h) var(--purple-s) 45%);
+  --purple-700: hsl(var(--purple-h) var(--purple-s) 35%);
+
+  /* ===== PRIMITIVE: NEUTRAL GRAY RAMP ===== */
+  /* Slight cool tint (210°) avoids flat lifeless grays */
+  --gray-50: hsl(210 20% 97%);
+  --gray-100: hsl(210 20% 95%);
+  --gray-200: hsl(210 16% 90%);
+  --gray-300: hsl(210 12% 84%);
+  --gray-400: hsl(210 11% 68%);
+  --gray-500: hsl(210 10% 52%);
+  --gray-600: hsl(210 10% 42%);
+  --gray-700: hsl(210 10% 32%);
+  --gray-800: hsl(210 12% 18%);
+  --gray-900: hsl(210 18% 8%);
+
+  /* ===== PRIMITIVE: FEEDBACK ===== */
+  --success: var(--green-500);
+  --success-light: var(--green-100);
+  --warning: hsl(45 93% 56%);
+  --warning-light: hsl(45 93% 90%);
+  --error: hsl(0 84% 60%);
+  --error-light: hsl(0 100% 95%);
+  --info: hsl(210 88% 56%);
+  --info-light: hsl(210 100% 95%);
+
+  /* ===== SEMANTIC: BACKGROUNDS & SURFACES ===== */
+  --color-bg: var(--gray-50);
+  --color-surface: hsl(210 20% 100%);
+  --color-surface-hover: var(--gray-50); /* interactive hover state for surface-based controls */
+  --color-surface-active: var(--gray-100); /* pressed state for surface-based controls */
+  --color-muted-bg: var(--gray-100);
+  --color-secondary-bg: var(--gray-100); /* secondary panel/alternate-row background */
+
+  /* ===== SEMANTIC: PRIMARY ===== */
+  --color-primary: var(--green-500);
+  --color-primary-hover: var(--green-600);
+  --color-primary-active: var(--green-700);
+  --color-primary-light: var(--green-50);
+  --color-primary-foreground: hsl(210 18% 12%);
+  --color-primary-text: var(--green-700); /* link/inline text on page backgrounds */
+
+  /* ===== SEMANTIC: SECONDARY ===== */
+  --color-secondary: var(--purple-500);
+  --color-secondary-hover: var(--purple-600);
+  --color-secondary-active: var(--purple-700);
+  --color-secondary-light: var(--purple-50);
+  --color-secondary-foreground: hsl(210 18% 12%);
+
+  /* ===== SEMANTIC: TEXT ===== */
+  --color-text: var(--gray-800);
+  --color-text-secondary: var(--gray-600);
+  --color-text-muted: var(--gray-600);
+  --color-text-light: var(--gray-500); /* decorative/placeholder — not for body text */
+  --color-text-dark: var(--gray-900);
+
+  /* ===== SEMANTIC: BORDERS ===== */
+  --color-border: var(--gray-200);
+  --color-border-muted: var(--gray-100);
+
+  /* ===== SPACING TOKENS ===== */
+  /* Based on a 4 px base unit, scaled with a t-shirt size naming convention */
+  /* (xs → 5xl) for semantic clarity. */
+  --spacing-xs: 0.25rem; /*  4px — icon nudges, tight inline gaps */
+  --spacing-sm: 0.5rem; /*  8px — compact stacks, small gaps */
+  --spacing-md: 1rem; /* 16px — standard padding, form fields */
+  --spacing-lg: 1.5rem; /* 24px — card padding, section spacing */
+  --spacing-xl: 2rem; /* 32px — page sections */
+  --spacing-2xl: 3rem; /* 48px — major sections, hero spacing */
+  --spacing-3xl: 4rem; /* 64px — page-level separation */
+  --spacing-4xl: 6rem; /* 96px — large breakout sections */
+  --spacing-5xl: 8rem; /* 128px — hero, full-bleed areas */
+
+  /* ===== TYPOGRAPHY TOKENS ===== */
+  /* Font families, size scale, weights, line heights, and letter spacing. */
+
+  /* FONT FAMILIES */
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, Consolas, monospace;
+
+  /* FONT SIZE SCALE */
+  /* Named for semantic intent: xs → base → display */
+  --font-size-xs: 0.75rem; /* 12px — captions, meta, labels */
+  --font-size-sm: 0.875rem; /* 14px — helper text, secondary UI */
+  --font-size-base: 1rem; /* 16px — standard body (desktop) */
+  --font-size-md: 1rem; /* 16px — standard body (desktop) */
+  --font-size-lg: 1.125rem; /* 18px — standard body (mobile), subheadings */
+  --font-size-xl: 1.25rem; /* 20px — subheadings, UI that needs emphasis */
+  --font-size-2xl: 1.75rem; /* 28px — section headings, large UI */
+  --font-size-3xl: 2.25rem; /* 36px — main headings, hero text */
+  --font-size-4xl: 3rem; /* 48px — large display, rare use */
+
+  /* FONT WEIGHTS */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* LINE HEIGHTS */
+  --line-height-tight: 1.15; /* headings, hero text */
+  --line-height-snug: 1.275; /* subheadings */
+  --line-height-normal: 1.45; /* body copy */
+  --line-height-relaxed: 1.625; /* long-form content */
+  --line-height-loose: 2; /* UI labels that need breathing room */
+
+  /* LETTER SPACING */
+  --tracking-tight: -0.04em; /* large display headings */
+  --tracking-normal: 0.01em; /* body text */
+  --tracking-wide: 0.05em; /* uppercase labels, badges */
+
+  /* ===== BORDER RADIUS TOKENS ===== */
+  /* A consistent curve scale from sharp (none) to fully-round (pill/avatar). */
+  --radius-none: 0;
+  --radius-sm: 0.25rem; /*  4px */
+  --radius-md: 0.375rem; /*  6px */
+  --radius-lg: 0.5rem; /*  8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-full: 9999px;
+
+  /* ===== SHADOW TOKENS ===== */
+  /* Multi-layer elevation system based on Josh Comeau's shadow palette generator. */
+  /* Light mode — layered black shadows on light surfaces */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --shadow-md: 0 1px 2px 0 rgb(0 0 0 / 0.05), 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+  --shadow-lg:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.1), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  --shadow-xl:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05),
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+  --shadow-2xl:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05),
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+/* ===== THEME OVERRIDES — DARK MODE ===== */
+.dark {
+  /* ===== BACKGROUNDS & SURFACES ===== */
+  --color-bg: var(--gray-900);
+  --color-surface: hsl(210 15% 12%);
+  --color-surface-hover: hsl(210 15% 16%); /* interactive hover state for surface-based controls */
+  --color-surface-active: hsl(210 15% 20%); /* pressed state for surface-based controls */
+  --color-muted-bg: var(--gray-800);
+  --color-secondary-bg: var(--gray-800); /* secondary panel/alternate-row background */
+
+  /* ===== PRIMARY ===== */
+  --color-primary: var(--green-400);
+  --color-primary-hover: var(--green-300);
+  --color-primary-active: var(--green-500);
+  --color-primary-light: var(--green-900);
+  --color-primary-foreground: hsl(210 18% 12%);
+  --color-primary-text: var(--green-300); /* link/inline text on dark surfaces */
+
+  /* ===== SECONDARY ===== */
+  --color-secondary: var(--purple-300);
+  --color-secondary-hover: var(--purple-200);
+  --color-secondary-active: var(--purple-100);
+  --color-secondary-light: var(--purple-700);
+  --color-secondary-foreground: hsl(210 18% 12%);
+
+  /* ===== TEXT ===== */
+  --color-text: var(--gray-100);
+  --color-text-secondary: var(--gray-300);
+  --color-text-muted: var(--gray-400);
+  --color-text-light: var(--gray-500);
+
+  /* ===== BORDERS ===== */
+  --color-border: var(--gray-700);
+  --color-border-muted: var(--gray-800);
+
+  /* ===== SKELETON & PLACEHOLDERS ===== */
+  --color-skeleton: var(--gray-700);
+
+  /* ===== FEEDBACK ===== */
+  --color-success: var(--green-400);
+  --color-success-light: var(--green-900);
+  --color-warning: hsl(45 90% 65%);
+  --color-warning-light: hsl(45 80% 15%);
+  --color-error: hsl(0 84% 70%);
+  --color-error-hover: hsl(0 84% 78%); /* lighter hover on dark surface */
+  --color-error-active: hsl(0 84% 65%); /* pressed state — step back toward base */
+  --color-error-light: hsl(0 78% 22%);
+  --color-info: hsl(210 88% 66%);
+  --color-info-light: hsl(210 90% 20%);
+
+  /* Vivid feedback colors are bright enough for text on dark surfaces */
+  --color-success-text: var(--green-400);
+  --color-warning-text: hsl(45 90% 65%);
+  --color-error-text: hsl(0 84% 70%);
+  --color-info-text: hsl(210 88% 66%);
+
+  /* ===== DARK MODE SHADOWS ===== */
+  /* Layered light shadows on dark surfaces */
+  /* Warmer white (hsl 0° instead of pure white) to avoid harsh contrast */
+  /* Higher base opacity and softer falloff for visibility on dark backgrounds */
+  --shadow-sm: 0 1px 2px 0 hsl(0 0% 100% / 0.1);
+
+  --shadow-md: 0 1px 2px 0 hsl(0 0% 100% / 0.08), 0 4px 6px -1px hsl(0 0% 100% / 0.12);
+
+  --shadow-lg:
+    0 1px 3px 0 hsl(0 0% 100% / 0.1), 0 4px 6px -2px hsl(0 0% 100% / 0.1),
+    0 10px 15px -3px hsl(0 0% 100% / 0.12);
+
+  --shadow-xl:
+    0 1px 3px 0 hsl(0 0% 100% / 0.1), 0 4px 6px -2px hsl(0 0% 100% / 0.05),
+    0 10px 15px -3px hsl(0 0% 100% / 0.12), 0 20px 25px -5px hsl(0 0% 100% / 0.12);
+
+  --shadow-2xl:
+    0 1px 3px 0 hsl(0 0% 100% / 0.1), 0 4px 6px -2px hsl(0 0% 100% / 0.05),
+    0 10px 15px -3px hsl(0 0% 100% / 0.12), 0 20px 25px -5px hsl(0 0% 100% / 0.12),
+    0 25px 50px -12px hsl(0 0% 100% / 0.15);
+}
+
+/* ===== ANIMATIONS ===== */
+/* Reusable keyframe animations for common patterns across the design system. */
+/* All animations respect the `prefers-reduced-motion` media query for accessibility. */
+
+/* Reduced motion: disable all animations (Tailwind's built-in + custom) */
+@media (prefers-reduced-motion: reduce) {
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}

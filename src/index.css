@@ -1,5 +1,5 @@
 /* Import the full design token system before Tailwind */
-@import "./styles/tokens/index.css";
+@import "./styles/tokens/tokens.css";
 
 @import "tailwindcss";
 @config "../tailwind.config.js";
