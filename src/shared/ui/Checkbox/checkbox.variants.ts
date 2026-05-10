@@ -8,14 +8,14 @@ export const checkboxBoxVariants = cva(
   [
     "relative flex items-center justify-center shrink-0",
     "rounded-xs border border-base bg-surface",
-    "transition-all duration-200",
+    "transition-all duration-normal",
     // Checked & indeterminate fill
     "peer-checked:bg-(--color-primary) peer-checked:border-(--color-primary)",
     "peer-[&:indeterminate]:bg-(--color-primary) peer-[&:indeterminate]:border-(--color-primary)",
     // Focus ring piped from the hidden input
     "peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-(--color-primary)",
     // Disabled
-    "peer-disabled:opacity-50 peer-disabled:cursor-not-allowed",
+    "peer-disabled:opacity-disabled peer-disabled:cursor-not-allowed",
     // Shadows for depth (ADR 0005 — Layered Depth & Elevation)
     "shadow-sm peer-checked:shadow-md peer-focus-visible:shadow-md",
     // Micro-interaction: active press scale (ADR 0005 — Smooth Transitions)
@@ -61,7 +61,7 @@ export const checkboxLabelVariants = cva("font-medium text-base select-none curs
       lg: "text-md",
     },
     disabled: {
-      true: "opacity-50 cursor-not-allowed",
+      true: "opacity-disabled cursor-not-allowed",
     },
   },
   defaultVariants: {

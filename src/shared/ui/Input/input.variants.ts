@@ -5,10 +5,10 @@ export const inputVariants = cva(
     "flex items-center rounded-md",
     "border border-base bg-surface",
     "px-md py-sm text-sm",
-    "transition-all transition-shadow duration-200 ease-out",
+    "transition-all transition-shadow duration-normal ease-out",
     "focus-within:ring-2 focus-within:ring-(--color-primary) focus-within:ring-offset-1",
     "shadow-sm focus-within:shadow-md",
-    "disabled:cursor-not-allowed disabled:opacity-50",
+    "disabled:cursor-not-allowed disabled:opacity-disabled",
     "w-full",
   ].join(" "),
   {

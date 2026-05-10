@@ -2,9 +2,9 @@ import { cva } from "class-variance-authority";
 
 export const popoverVariants = cva(
   [
-    "z-50 bg-surface border border-base rounded-lg",
+    "z-modal bg-surface border border-base rounded-lg",
     "shadow-md",
-    "transition-all duration-200 ease-out",
+    "transition-all duration-normal ease-out",
     "focus:outline-none",
   ].join(" "),
   {
@@ -22,7 +22,7 @@ export const popoverVariants = cva(
 );
 
 export const popoverOverlayVariants = cva(
-  ["fixed inset-0 z-40", "bg-black/50", "transition-opacity duration-200 ease-out"].join(
+  ["fixed inset-0 z-40", "bg-black/50", "transition-opacity duration-normal ease-out"].join(
     " ",
   ),
 );
@@ -32,7 +32,7 @@ export const popoverTriggerVariants = cva(
     "inline-flex items-center justify-center",
     "cursor-pointer",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
-    "transition-transform duration-200 ease-out",
+    "transition-transform duration-normal ease-out",
     "active:scale-[0.98]",
   ].join(" "),
 );

@@ -7,7 +7,7 @@ export const dropTargetVariants = cva("relative rounded border-2 border-dashed t
       false: "border-transparent hover:border-primary/50 hover:bg-primary/5",
     },
     disabled: {
-      true: "border-transparent bg-transparent cursor-not-allowed opacity-50",
+      true: "border-transparent bg-transparent cursor-not-allowed opacity-disabled",
       false: "",
     },
   },

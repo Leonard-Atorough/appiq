@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const dropdownMenuVariants = cva(
   [
-    "z-50 min-w-[10rem]",
+    "z-dropdown min-w-[10rem]",
     "bg-surface border border-base rounded-lg shadow-lg",
     "py-xs",
     "focus:outline-none",
@@ -25,9 +25,9 @@ export const dropdownItemVariants = cva(
   [
     "flex w-full items-center gap-sm",
     "px-sm py-xs text-md rounded-md",
-    "transition-all duration-100",
+    "transition-all duration-fast",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "disabled:opacity-disabled disabled:cursor-not-allowed",
     "cursor-pointer",
   ].join(" "),
   {

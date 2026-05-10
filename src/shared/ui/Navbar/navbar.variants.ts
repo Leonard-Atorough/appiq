@@ -5,7 +5,7 @@ export const navbarVariants = cva(
     "flex items-center gap-md",
     "border-b border-border",
     "bg-surface",
-    "transition-all duration-200 ease-out",
+    "transition-all duration-normal ease-out",
   ].join(" "),
   {
     variants: {

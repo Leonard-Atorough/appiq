@@ -136,6 +136,44 @@ export default {
         xl: "var(--shadow-xl)",
         "2xl": "var(--shadow-2xl)",
       },
+      /* Motion tokens — transition durations and easing */
+      transitionDuration: {
+        fast: "var(--duration-fast)",
+        normal: "var(--duration-normal)",
+        slow: "var(--duration-slow)",
+      },
+      transitionTimingFunction: {
+        "in": "var(--ease-in)",
+        "out": "var(--ease-out)",
+        "spring": "var(--ease-spring)",
+      },
+      /* Elevation tokens — z-index stacking context */
+      zIndex: {
+        dropdown: "var(--z-dropdown)",
+        modal: "var(--z-modal)",
+        toast: "var(--z-toast)",
+        tooltip: "var(--z-tooltip)",
+      },
+      /* Focus ring tokens */
+      outlineWidth: {
+        ring: "var(--ring-width)",
+      },
+      outlineOffset: {
+        ring: "var(--ring-offset)",
+      },
+      /* Container query breakpoints */
+      containers: {
+        sm: "var(--container-sm)",
+        md: "var(--container-md)",
+        lg: "var(--container-lg)",
+        xl: "var(--container-xl)",
+        max: "var(--container-max)",
+      },
+      /* Opacity tokens */
+      opacity: {
+        disabled: "var(--opacity-disabled)",
+        muted: "var(--opacity-muted)",
+      },
       /* Custom animations */
       animation: {
         /* Toast timer drain bar — duration set via --timer-duration CSS var on the element */

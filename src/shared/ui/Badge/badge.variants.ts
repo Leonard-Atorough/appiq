@@ -3,10 +3,10 @@ import { cva } from "class-variance-authority";
 export const badgeVariants = cva(
   [
     "inline-flex items-center font-medium",
-    "transition-all duration-200",
+    "transition-all duration-normal",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-(--color-primary)",
     "active:scale-[0.98]",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "disabled:opacity-disabled disabled:cursor-not-allowed",
     "rounded-full",
   ].join(" "),
   {

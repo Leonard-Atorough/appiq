@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
  */
 export const sidebarVariants = cva(
   [
-    "transition-all duration-200",
+    "transition-all duration-normal",
     "flex flex-col",
     "h-full",
     "border-r border-base",
@@ -27,7 +27,7 @@ export const sidebarWrapperVariants = cva([], {
     position: {
       static: "",
       sticky: "sticky top-0",
-      fixed: "fixed top-0 left-0 h-screen z-50",
+      fixed: "fixed top-0 left-0 h-screen z-toast",
     },
   },
   defaultVariants: {
@@ -81,7 +81,7 @@ export const sidebarToggleVariants = cva(
     "inline-flex items-center justify-center",
     "h-11 w-11",
     "rounded-md",
-    "transition-all duration-200",
+    "transition-all duration-normal",
     "hover:bg-muted",
     "active:scale-[0.98]",
     "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary",

@@ -14,7 +14,7 @@ export type TooltipColor =
   | "info";
 
 export const tooltipVariants = cva(
-  ["z-50 rounded-md shadow-md", "leading-snug", "focus:outline-none"].join(" "),
+  ["z-tooltip rounded-md shadow-md", "leading-snug", "focus:outline-none"].join(" "),
   {
     variants: {
       /**

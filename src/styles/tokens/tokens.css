@@ -187,6 +187,43 @@
     0 1px 3px 0 rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05),
     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* ===== MOTION TOKENS ===== */
+  /* Transition durations for different interaction speeds */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+
+  /* Easing functions for different motion intentions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* accelerating from zero velocity */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* decelerating to zero velocity */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* springy easing for playful interactions */
+
+  /* ===== ELEVATION (Z-INDEX) TOKENS ===== */
+  /* Stacking context hierarchy for overlays and floating elements */
+  --z-dropdown: 40; /* dropdowns, popovers */
+  --z-modal: 45; /* modal backdrops and dialogs */
+  --z-toast: 50; /* toast notifications — highest overlay */
+  --z-tooltip: 50; /* tooltips — same as toast since they don't overlap */
+
+  /* ===== FOCUS RING TOKENS ===== */
+  /* Focus indicators for keyboard navigation */
+  --ring-width: 2px; /* standard focus ring width */
+  --ring-offset: 2px; /* space between element and ring */
+  --ring-color: var(--color-primary); /* focus ring color */
+
+  /* ===== CONTAINER QUERY TOKENS ===== */
+  /* Named breakpoints for container-based responsive design */
+  --container-sm: 28rem; /* 448px */
+  --container-md: 42rem; /* 672px */
+  --container-lg: 64rem; /* 1024px */
+  --container-xl: 80rem; /* 1280px */
+  --container-max: 96rem; /* 1536px */
+
+  /* ===== OPACITY TOKENS ===== */
+  /* Semantic opacity levels for different states */
+  --opacity-disabled: 0.5; /* 50% — disabled/inactive elements */
+  --opacity-muted: 0.7; /* 70% — muted/secondary content */
 }
 
 /* ===== THEME OVERRIDES — DARK MODE ===== */

@@ -2,9 +2,9 @@ import { cva } from "class-variance-authority";
 
 export const textareaVariants = cva(
   [
-    "block w-full font-medium transition-all duration-200 ease-out",
+    "block w-full font-medium transition-all duration-normal ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "disabled:opacity-disabled disabled:cursor-not-allowed",
     "min-h-[2.5rem]",
   ].join(" "),
   {

@@ -33,9 +33,9 @@ export const tabListVariants = cva("flex", {
 export const tabTriggerVariants = cva(
   [
     "relative inline-flex items-center justify-center whitespace-nowrap font-medium",
-    "transition-all duration-200 cursor-pointer select-none",
+    "transition-all duration-normal cursor-pointer select-none",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
-    "disabled:opacity-50 disabled:cursor-not-allowed",
+    "disabled:opacity-disabled disabled:cursor-not-allowed",
   ].join(" "),
   {
     variants: {

@@ -9,7 +9,7 @@ export const dataTableHeadVariants = cva(
     "px-md font-semibold text-secondary",
     "bg-muted border-b border-base",
     "text-left text-sm uppercase tracking-wide",
-    "transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
+    "transition-all duration-normal focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
   ].join(" "),
   {
     variants: {
@@ -27,7 +27,7 @@ export const dataTableHeadVariants = cva(
         true: "sticky top-0 z-10",
       },
       sortable: {
-        true: "cursor-pointer hover:bg-muted hover:shadow-sm select-none transition-shadow duration-200",
+        true: "cursor-pointer hover:bg-muted hover:shadow-sm select-none transition-shadow duration-normal",
       },
     },
     defaultVariants: {
@@ -44,7 +44,7 @@ export const dataTableHeadVariants = cva(
  * Striping, hover states, selection states, and focus indicators
  */
 export const dataTableRowVariants = cva(
-  ["border-b border-base", "transition-all duration-200"].join(" "),
+  ["border-b border-base", "transition-all duration-normal"].join(" "),
   {
     variants: {
       style: {
@@ -53,7 +53,7 @@ export const dataTableRowVariants = cva(
         full: "border border-base [&:first-child]:border-t-0 [&:last-child]:border-b-0",
       },
       hoverable: {
-        true: "hover:bg-muted hover:shadow-sm cursor-pointer transition-shadow duration-200",
+        true: "hover:bg-muted hover:shadow-sm cursor-pointer transition-shadow duration-normal",
       },
       selected: {
         true: "bg-primary/10 hover:bg-primary/10 ring-2 ring-primary/50 ring-inset",
@@ -78,7 +78,7 @@ export const dataTableRowVariants = cva(
 export const dataTableCellVariants = cva(
   [
     "px-md text-secondary whitespace-nowrap overflow-hidden text-ellipsis",
-    "transition-all duration-200",
+    "transition-all duration-normal",
     "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary",
   ].join(" "),
   {

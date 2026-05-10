@@ -5,11 +5,11 @@ export const selectVariants = cva(
     "appearance-none flex items-center rounded-md",
     "border border-base bg-surface text-base",
     "px-md py-sm text-sm",
-    "transition-all transition-shadow duration-200 ease-out",
+    "transition-all transition-shadow duration-normal ease-out",
     "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
     "hover:shadow-md hover:border-primary",
     "shadow-sm focus-visible:shadow-md",
-    "disabled:cursor-not-allowed disabled:opacity-50",
+    "disabled:cursor-not-allowed disabled:opacity-disabled",
     "w-full",
   ].join(" "),
   {

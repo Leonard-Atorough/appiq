@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
  * Flex component variants using CVA for static layout props.
  * Responsive overrides should be passed as plain Tailwind responsive classes via className.
  */
-export const flexVariants = cva('flex transition-all duration-200', {
+export const flexVariants = cva('flex transition-all duration-normal', {
   variants: {
     direction: {
       row: 'flex-row',
