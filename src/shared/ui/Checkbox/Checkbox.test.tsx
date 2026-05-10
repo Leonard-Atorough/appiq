@@ -82,4 +82,44 @@ describe("Checkbox", () => {
       expect(screen.getByRole("checkbox")).toBeChecked();
     });
   });
+
+  describe("Switch Mode", () => {
+    it("renders as switch when type='switch'", () => {
+      const { container } = render(<Checkbox type="switch" />);
+      const checkbox = screen.getByRole("checkbox");
+      expect(checkbox).toBeTruthy();
+      // Switch has track + thumb, checkbox has just box
+      const switches = container.querySelectorAll("span[aria-hidden='true']");
+      expect(switches.length).toBeGreaterThan(0);
+    });
+
+    it("renders switch with label", () => {
+      render(<Checkbox type="switch" label="Enable notifications" />);
+      expect(screen.getByText("Enable notifications")).toBeTruthy();
+      expect(screen.getByRole("checkbox")).toBeTruthy();
+    });
+
+    it("switch mode ignores indeterminate prop", () => {
+      render(<Checkbox type="switch" indeterminate />);
+      expect((screen.getByRole("checkbox") as HTMLInputElement).indeterminate).toBe(false);
+    });
+
+    it("switch reflects checked state", () => {
+      render(<Checkbox type="switch" label="Option" checked readOnly />);
+      expect(screen.getByRole("checkbox")).toBeChecked();
+    });
+
+    it("switch calls onChange when clicked", async () => {
+      const user = userEvent.setup();
+      const onChange = vi.fn();
+      render(<Checkbox type="switch" label="Toggle" onChange={onChange} />);
+      await user.click(screen.getByLabelText("Toggle"));
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it("switch applies error state", () => {
+      render(<Checkbox type="switch" state="error" />);
+      expect(screen.getByRole("checkbox")).toHaveAttribute("aria-invalid", "true");
+    });
+  });
 });

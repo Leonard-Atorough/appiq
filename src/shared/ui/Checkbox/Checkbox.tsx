@@ -5,24 +5,37 @@ import {
   checkboxBoxVariants,
   checkboxIconVariants,
   checkboxLabelVariants,
+  switchTrackVariants,
+  switchThumbVariants,
 } from "./checkbox.variants";
 import { Icon } from "../Icon";
 
 /**
  * Checkbox
  *
- * An accessible checkbox supporting controlled/uncontrolled modes,
- * indeterminate state, and optional label, description, and error message.
- * The native `<input>` is visually hidden; a styled sibling `<span>` responds
- * to `:checked` and `:focus-visible` via Tailwind `peer-*` modifiers.
- * The `indeterminate` prop is set imperatively via `useEffect` since it is
- * not a valid HTML attribute.
+ * An accessible control supporting both checkbox and switch modes.
+ *
+ * **Checkbox mode (default):** Square box with check/minus icon. Supports indeterminate state.
+ * **Switch mode:** Track with sliding thumb for binary on/off selection.
+ *
+ * Controlled/uncontrolled modes, with native `<input>` visually hidden and a styled sibling
+ * responding to `:checked` and `:focus-visible` via Tailwind `peer-*` modifiers.
+ * The `indeterminate` prop is set imperatively via `useEffect` (checkbox mode only).
  *
  * @example
+ * // Checkbox mode
  * <Checkbox
  *   label="Accept terms"
  *   checked={accepted}
  *   onChange={(e) => setAccepted(e.target.checked)}
+ * />
+ *
+ * // Switch mode
+ * <Checkbox
+ *   type="switch"
+ *   label="Enable notifications"
+ *   checked={enabled}
+ *   onChange={(e) => setEnabled(e.target.checked)}
  * />
  */
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
@@ -34,6 +47,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       state,
       size = "md",
       indeterminate = false,
+      type = "checkbox",
       className,
       disabled,
       id,
@@ -61,20 +75,22 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       onChange?.(e);
     };
 
-    // Set indeterminate imperatively — not a native HTML attribute
     const innerRef = React.useRef<HTMLInputElement>(null);
     const resolvedRef = (ref ?? innerRef) as React.RefObject<HTMLInputElement>;
+
+    // Set indeterminate imperatively — not a native HTML attribute
+    // Only applies to checkbox mode, switch mode ignores indeterminate prop
     React.useEffect(() => {
-      if (resolvedRef.current) {
+      if (resolvedRef.current && type === "checkbox") {
         resolvedRef.current.indeterminate = indeterminate;
       }
-    }, [indeterminate, resolvedRef]);
+    }, [indeterminate, resolvedRef, type]);
 
     const showCheck = isChecked && !indeterminate;
     const showMinus = indeterminate;
 
     const control = (
-      // Wrapper keeps input + visual box as siblings so peer-* works
+      // Wrapper keeps input + visual box/track as siblings so peer-* works
       <span className="relative inline-flex items-center justify-center">
         <input
           ref={resolvedRef}
@@ -89,18 +105,32 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           onChange={handleChange}
           {...props}
         />
-        {/* Visual box — peer-* modifiers respond to the hidden input above */}
-        <span
-          className={cn(
-            checkboxBoxVariants({ size, state: hasError ? "error" : state }),
-            className,
-          )}
-          aria-hidden="true"
-          onClick={() => resolvedRef.current?.click()}
-        >
-          {showCheck && <Icon name="check" className={checkboxIconVariants({ size })} />}
-          {showMinus && <Icon name="minus" className={checkboxIconVariants({ size })} />}
-        </span>
+        {type === "checkbox" ? (
+          /* Checkbox: Visual box with check/minus icon */
+          <span
+            className={cn(
+              checkboxBoxVariants({ size, state: hasError ? "error" : state }),
+              className,
+            )}
+            aria-hidden="true"
+            onClick={() => resolvedRef.current?.click()}
+          >
+            {showCheck && <Icon name="check" className={checkboxIconVariants({ size })} />}
+            {showMinus && <Icon name="minus" className={checkboxIconVariants({ size })} />}
+          </span>
+        ) : (
+          /* Switch: Track with sliding thumb */
+          <span
+            className={cn(
+              switchTrackVariants({ size, state: hasError ? "error" : state }),
+              className,
+            )}
+            aria-hidden="true"
+            onClick={() => resolvedRef.current?.click()}
+          >
+            <span className={switchThumbVariants({ size })} />
+          </span>
+        )}
       </span>
     );
 

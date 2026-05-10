@@ -22,6 +22,13 @@ export interface CheckboxProps
 
   /**
    * Indeterminate state — rendered as a dash. Sets `indeterminate` on the underlying <input> imperatively (not a native HTML attribute).
+   * Only applies when type="checkbox".
    */
   indeterminate?: boolean;
+
+  /**
+   * Control type: "checkbox" renders a square box with check/minus icon;
+   * "switch" renders a track with sliding thumb. Defaults to "checkbox".
+   */
+  type?: "checkbox" | "switch";
 }

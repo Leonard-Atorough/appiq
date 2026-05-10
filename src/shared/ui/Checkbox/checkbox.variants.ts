@@ -68,3 +68,64 @@ export const checkboxLabelVariants = cva("font-medium text-base select-none curs
     size: "md",
   },
 });
+
+/**
+ * Visual switch track — styled as a sibling of a `peer` <input>.
+ * Checked/focus/disabled states are driven by peer-* modifiers.
+ */
+export const switchTrackVariants = cva(
+  [
+    "relative inline-flex align-center items-center justify-start shrink-0",
+    "rounded-full border border-base bg-muted",
+    "transition-all duration-normal",
+    // Checked state
+    "peer-checked:bg-(--color-primary) peer-checked:border-(--color-primary) peer-checked:justify-end",
+    // Focus ring piped from the hidden input
+    "peer-focus-visible:ring-2 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-(--color-primary)",
+    // Disabled
+    "peer-disabled:opacity-disabled peer-disabled:cursor-not-allowed",
+    // Shadows for depth (ADR 0005)
+    "shadow-sm peer-checked:shadow-md peer-focus-visible:shadow-md",
+    "cursor-pointer",
+  ].join(" "),
+  {
+    variants: {
+      size: {
+        sm: "h-5 w-9 p-0.5",
+        md: "h-6 w-11 p-0.5",
+        lg: "h-7 w-14 p-0.5",
+      },
+      state: {
+        default: "",
+        error: "border-error peer-focus-visible:ring-(--color-error)",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      state: "default",
+    },
+  },
+);
+
+/**
+ * Switch thumb/indicator — sliding dot inside the track.
+ * Position driven by parent track's justify-content via flex (not peer-checked modifiers).
+ */
+export const switchThumbVariants = cva(
+  [
+    "rounded-full bg-surface",
+    "transition-all duration-normal",
+    "shadow-sm",
+    "flex-shrink-0",
+  ].join(" "),
+  {
+    variants: {
+      size: {
+        sm: "h-4 w-4",
+        md: "h-5 w-5",
+        lg: "h-6 w-6",
+      },
+    },
+    defaultVariants: { size: "md" },
+  },
+);
