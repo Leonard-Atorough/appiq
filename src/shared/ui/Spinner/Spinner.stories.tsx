@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Spinner } from "./Spinner";
 
 const meta = {
-  title: "UI / Spinner",
+  title: "Shared/Spinner",
   component: Spinner,
   parameters: {
     layout: "centered",
