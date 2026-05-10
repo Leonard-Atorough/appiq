@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ColumnDef, Row } from "@tanstack/react-table";
 import type { ResponsiveValue } from "@/shared/lib";
 import type {
@@ -17,8 +18,6 @@ export type DataTableVariant = "default" | "compact" | "minimal";
 export interface DataTableRowStyle {
   /** Alternating row background colours. */
   striped?: boolean;
-  /** Highlight row on hover. */
-  hoverable?: boolean;
   /** Enables row selection (checkbox column + `onRowsSelected`). */
   selectable?: boolean;
 }
@@ -72,6 +71,7 @@ export interface DataTableCellProps
   extends Omit<React.TdHTMLAttributes<HTMLTableCellElement>, never>, Omit<VariantProps<typeof dataTableCellVariants>, "size" | "variant"> {
   size?: ResponsiveValue<DataTableSize>;
   variant?: ResponsiveValue<DataTableVariant>;
+  className?: string;
 }
 
 /** Styled `<tr>` subcomponent. */
@@ -80,9 +80,14 @@ export interface DataTableRowProps
   size?: ResponsiveValue<DataTableSize>;
   variant?: ResponsiveValue<DataTableVariant>;
   striped?: boolean;
-  hoverable?: boolean;
   isSelected?: boolean;
   isFocused?: boolean;
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+  onClick?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  className?: string;
+  cellClassName?: string;
 }
 
 /** Styled `<th>` subcomponent. */

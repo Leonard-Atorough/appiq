@@ -1,5 +1,7 @@
 import type {
+  DataTableCellProps,
   DataTableProps,
+  DataTableRowProps,
   DataTableSize,
   DataTableVariant,
 } from "./dataTable.types";
@@ -83,11 +85,13 @@ function DataTableHeader<TData extends Record<string, unknown>>({
                     {flexRender(header.column.columnDef.header, header.getContext())}
                     {isSortable && (
                       <span className="ml-xs" aria-hidden="true">
-                        {header.column.getIsSorted() === "asc"
-                          ? <Icon name="chevron-up" size="sm" />
-                          : header.column.getIsSorted() === "desc"
-                            ? <Icon name="chevron-down" size="sm" />
-                            : ""}
+                        {header.column.getIsSorted() === "asc" ? (
+                          <Icon name="chevron-up" size="sm" />
+                        ) : header.column.getIsSorted() === "desc" ? (
+                          <Icon name="chevron-down" size="sm" />
+                        ) : (
+                          ""
+                        )}
                       </span>
                     )}
                   </div>
@@ -103,17 +107,20 @@ function DataTableHeader<TData extends Record<string, unknown>>({
 
 function DataTableCell<TData extends Record<string, unknown>>({
   cell,
-  props: { size = "md", variant = "default" },
-  cellClassName,
+  props: { size = "md", variant = "default", className: cellClassName },
 }: {
   cell: Cell<TData, unknown>;
-  props: { size?: DataTableSize; variant?: DataTableVariant };
-  cellClassName?: string;
+  props: DataTableCellProps;
 }) {
+  const resolvedVariant = useResponsive(variant);
+  const resolvedSize = useResponsive(size);
   return (
     <td
       key={cell.id}
-      className={cn(dataTableCellVariants({ size, variant }), cellClassName)}
+      className={cn(
+        dataTableCellVariants({ size: resolvedSize, variant: resolvedVariant }),
+        cellClassName,
+      )}
       tabIndex={0}
     >
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -127,34 +134,31 @@ function DataTableRow<TData extends Record<string, unknown>>({
     size = "md",
     variant = "default",
     striped = false,
-    hoverable = false,
     isSelected = false,
     isFocused = false,
+    className: rowClassName,
+    cellClassName,
+    onKeyDown,
+    onClick,
+    onFocus,
+    onBlur,
   },
-  rowClassName,
-  onKeyDown,
-  onClick,
-  onFocus,
-  onBlur,
   tabIndex,
 }: {
   row: Row<TData>;
-  props: { size?: DataTableSize; variant?: DataTableVariant; striped?: boolean; hoverable?: boolean; isSelected?: boolean; isFocused?: boolean };
-  rowClassName?: string;
-  onKeyDown?: (e: React.KeyboardEvent) => void;
-  onClick?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  props: DataTableRowProps;
   tabIndex?: number;
 }) {
+  const resolvedVariant = useResponsive(variant);
+
   return (
     <tr
       key={row.id}
       className={cn(
         dataTableRowVariants({
-          variant,
+          variant: resolvedVariant,
           striped,
-          hoverable,
+          hoverable: onClick || onFocus ? true : false, // Make row hoverable if it has an onClick or onFocus handler
           selected: isSelected,
           focused: isFocused,
         }),
@@ -169,7 +173,11 @@ function DataTableRow<TData extends Record<string, unknown>>({
       aria-selected={isSelected}
     >
       {row.getVisibleCells().map((cell) => (
-        <DataTableCell key={cell.id} cell={cell} props={{ size, variant }} />
+        <DataTableCell
+          key={cell.id}
+          cell={cell}
+          props={{ size, variant, className: cellClassName }}
+        />
       ))}
     </tr>
   );
@@ -235,22 +243,27 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
 
     // Determine if controlled or uncontrolled
     const isControlled = controlledSelectedRowIds !== undefined;
-    
+
     // Internal state for uncontrolled mode
-    const [internalSelectedRowIds, setInternalSelectedRowIds] = useState<Record<string, boolean>>({});
-    
+    const [internalSelectedRowIds, setInternalSelectedRowIds] = useState<Record<string, boolean>>(
+      {},
+    );
+
     // Use controlled value if provided, otherwise use internal state
     const selectedRowIds = isControlled ? controlledSelectedRowIds : internalSelectedRowIds;
-    
+
     // Helper to update selection state (works in both modes)
-    const updateSelectedRowIds = useCallback((updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
-      const newSelection = updater(selectedRowIds);
-      if (isControlled) {
-        onSelectedRowIdsChange?.(newSelection);
-      } else {
-        setInternalSelectedRowIds(newSelection);
-      }
-    }, [selectedRowIds, isControlled, onSelectedRowIdsChange]);
+    const updateSelectedRowIds = useCallback(
+      (updater: (prev: Record<string, boolean>) => Record<string, boolean>) => {
+        const newSelection = updater(selectedRowIds);
+        if (isControlled) {
+          onSelectedRowIdsChange?.(newSelection);
+        } else {
+          setInternalSelectedRowIds(newSelection);
+        }
+      },
+      [selectedRowIds, isControlled, onSelectedRowIdsChange],
+    );
 
     const [focusedRowIndex, setFocusedRowIndex] = useState<number | null>(null);
 
@@ -279,43 +292,46 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
       onRowFocus?.(focusedRowIndex);
     }, [focusedRowIndex, onRowFocus]);
 
-    const handleRowKeyDown = useCallback((rowIndex: number, e: React.KeyboardEvent) => {
-      if (!keyboard.enabled) return;
+    const handleRowKeyDown = useCallback(
+      (rowIndex: number, e: React.KeyboardEvent) => {
+        if (!keyboard.enabled) return;
 
-      const totalRows = rows.length;
-      let nextFocusIndex = focusedRowIndex;
+        const totalRows = rows.length;
+        let nextFocusIndex = focusedRowIndex;
 
-      switch (e.key) {
-        case "ArrowDown":
-          e.preventDefault();
-          nextFocusIndex =
-            focusedRowIndex === null ? 0 : Math.min(focusedRowIndex + 1, totalRows - 1);
-          setFocusedRowIndex(nextFocusIndex);
-          break;
-        case "ArrowUp":
-          e.preventDefault();
-          nextFocusIndex = focusedRowIndex === null ? 0 : Math.max(focusedRowIndex - 1, 0);
-          setFocusedRowIndex(nextFocusIndex);
-          break;
-        case " ":
-          if (keyboard.allowSpaceSelection && rowStyle.selectable) {
+        switch (e.key) {
+          case "ArrowDown":
             e.preventDefault();
-            const row = rows[rowIndex];
-            updateSelectedRowIds((prev) => ({
-              ...prev,
-              [row.id]: !prev[row.id],
-            }));
-          }
-          break;
-        case "Enter":
-          if (keyboard.allowEnterAction) {
+            nextFocusIndex =
+              focusedRowIndex === null ? 0 : Math.min(focusedRowIndex + 1, totalRows - 1);
+            setFocusedRowIndex(nextFocusIndex);
+            break;
+          case "ArrowUp":
             e.preventDefault();
-            // Trigger any action on the focused row (e.g., open details)
-            // This is a hook point for parent to implement
-          }
-          break;
-      }
-    }, [keyboard, focusedRowIndex, rowStyle.selectable, rows, updateSelectedRowIds]);
+            nextFocusIndex = focusedRowIndex === null ? 0 : Math.max(focusedRowIndex - 1, 0);
+            setFocusedRowIndex(nextFocusIndex);
+            break;
+          case " ":
+            if (keyboard.allowSpaceSelection && rowStyle.selectable) {
+              e.preventDefault();
+              const row = rows[rowIndex];
+              updateSelectedRowIds((prev) => ({
+                ...prev,
+                [row.id]: !prev[row.id],
+              }));
+            }
+            break;
+          case "Enter":
+            if (keyboard.allowEnterAction) {
+              e.preventDefault();
+              // Trigger any action on the focused row (e.g., open details)
+              // This is a hook point for parent to implement
+            }
+            break;
+        }
+      },
+      [keyboard, focusedRowIndex, rowStyle.selectable, rows, updateSelectedRowIds],
+    );
 
     const handleRowClick = (rowId: string) => {
       if (rowStyle.selectable) {
@@ -327,7 +343,11 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
     };
 
     return (
-      <table ref={ref} className={cn(dataTableVariants({ variant: resolvedVariant, stickyHeader }))} {...props}>
+      <table
+        ref={ref}
+        className={cn(dataTableVariants({ variant: resolvedVariant, stickyHeader }))}
+        {...props}
+      >
         <DataTableHeader
           table={table}
           props={{ size: resolvedSize, variant: resolvedVariant, sortable }}
@@ -342,16 +362,16 @@ export const DataTable = React.forwardRef<HTMLTableElement, DataTableProps>(
                 size: resolvedSize,
                 variant: resolvedVariant,
                 striped: rowStyle.striped,
-                hoverable: rowStyle.hoverable,
                 isSelected: selectedRowIds[row.id] ?? false,
                 isFocused: focusedRowIndex === rowIndex,
+                className: rowClassName,
+                cellClassName: cellClassName,
+                onKeyDown: (e) => handleRowKeyDown(rowIndex, e),
+                onClick: () => handleRowClick(row.id),
+                onFocus: () => setFocusedRowIndex(rowIndex),
+                onBlur: () => setFocusedRowIndex(null),
+                tabIndex: focusedRowIndex === rowIndex ? 0 : -1,
               }}
-              rowClassName={rowClassName}
-              onKeyDown={(e) => handleRowKeyDown(rowIndex, e)}
-              onClick={() => handleRowClick(row.id)}
-              onFocus={() => setFocusedRowIndex(rowIndex)}
-              onBlur={() => setFocusedRowIndex(null)}
-              tabIndex={focusedRowIndex === rowIndex ? 0 : -1}
             />
           ))}
         </tbody>
