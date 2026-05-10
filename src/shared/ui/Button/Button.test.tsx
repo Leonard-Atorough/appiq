@@ -69,7 +69,7 @@ describe("Button", () => {
 
   describe("Full Width", () => {
     it("applies full width class", () => {
-      render(<Button full>Full Width</Button>);
+      render(<Button fullWidth>Full Width</Button>);
       const button = screen.getByRole("button");
       expect(button.className).toContain("w-full");
     });
@@ -164,7 +164,7 @@ describe("Button", () => {
   describe("Composition", () => {
     it("combines variant, size, and full width", () => {
       render(
-        <Button variant="outline" size="lg" full>
+        <Button variant="outline" size="lg" fullWidth>
           Complex
         </Button>,
       );

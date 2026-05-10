@@ -20,7 +20,7 @@ import React from "react";
  * <Button size={{ base: "sm", md: "md", lg: "lg" }}>Responsive Button</Button>
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, full, loading, className, disabled, onClick, ...props }, ref) => {
+  ({ variant, size, fullWidth: full, loading, className, disabled, onClick, ...props }, ref) => {
     const resolvedVariant = useResponsive(variant ?? "primary");
     const resolvedSize = useResponsive(size ?? "md");
     const onClickDisabled = (e: React.MouseEvent) => e.preventDefault(); // Prevents any action when the button is disabled
@@ -33,7 +33,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({
             variant: resolvedVariant,
             size: resolvedSize,
-            full,
+            fullWidth: full,
             loading,
           }),
           className,

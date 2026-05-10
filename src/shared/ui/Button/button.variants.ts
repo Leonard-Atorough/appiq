@@ -63,7 +63,7 @@ export const buttonVariants = cva(
         md: "px-md py-sm text-md rounded-lg",
         lg: "px-lg py-md text-lg rounded-xl",
       },
-      full: {
+      fullWidth: {
         true: "w-full",
       },
       loading: {

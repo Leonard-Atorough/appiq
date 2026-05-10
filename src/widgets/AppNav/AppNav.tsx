@@ -71,7 +71,7 @@ export function AppNav({
           </div>
         }
         footer={
-          <Button variant="primary" full onClick={() => alert("Logout clicked")}>
+          <Button variant="primary" fullWidth onClick={() => alert("Logout clicked")}>
             Logout
           </Button>
         }

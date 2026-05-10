@@ -33,7 +33,7 @@ export const States: Story = { render: () => (
 
 export const FullWidth: Story = { render: () => (
   <div className="flex flex-col gap-md max-w-sm">
-    <Button full>Full Width</Button>
-    <Button full variant="outline">Full Width Outline</Button>
+    <Button fullWidth>Full Width</Button>
+    <Button fullWidth variant="outline">Full Width Outline</Button>
   </div>
 )};
