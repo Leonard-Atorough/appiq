@@ -62,7 +62,7 @@ export function AppNav({
         collapseMode="mini"
         position={isMobile ? "fixed" : "static"}
         collapsedWidth={isMobile ? "0" : "100%"}
-        width={isMobile ? "80vw" : "16rem"}
+        width={isMobile ? "100vw" : "16rem"}
         ariaLabel="Application navigation"
         className={isMobile ? "z-50" : className}
         header={

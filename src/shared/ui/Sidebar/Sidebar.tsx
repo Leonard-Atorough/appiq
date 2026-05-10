@@ -50,6 +50,7 @@ export const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
       ariaLabel = "Sidebar",
       asideRole = "complementary",
       className,
+      wrapperClassName,
       ...props
     },
     ref,
@@ -103,7 +104,7 @@ export const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
 
     return (
       <div
-        className={sidebarWrapperVariants({ position })}
+        className={cn(sidebarWrapperVariants({ position }), wrapperClassName)}
         style={{
           ...(position !== "static" && { [position]: positionOffsetPx }),
         }}

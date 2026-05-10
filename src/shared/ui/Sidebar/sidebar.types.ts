@@ -44,4 +44,6 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   ariaLabel?: string;
   /** Accessible landmark role. Defaults to "complementary". */
   asideRole?: string;
+  /** Additional className for the wrapper div. Merged with position variants. */
+  wrapperClassName?: string;
 }
