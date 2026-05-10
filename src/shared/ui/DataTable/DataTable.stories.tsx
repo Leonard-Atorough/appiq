@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DataTable } from "./DataTable";
 import { Badge } from "@shared/ui/Badge";
 import { Dropdown } from "../Dropdown";
-import { Checkbox } from "../Checkbox";
+import { Toggle } from "../Toggle";
 
 const meta: Meta<typeof DataTable> = { title: "Shared/DataTable", component: DataTable };
 export default meta;
@@ -58,10 +58,10 @@ const statusVariant: Record<Application["status"], "info" | "warning" | "success
 
 const columns: ColumnDef<Application>[] = [
   {
-    id: "checkbox",
+    id: "Toggle",
     header: "Select",
     cell: ({ row }) => (
-      <Checkbox
+      <Toggle
         aria-label={`Select application for ${row.original.position} at ${row.original.company}`}
       />
     ),
@@ -168,12 +168,12 @@ export const ControlledSelection: Story = {
 
     const controlledColumns: ColumnDef<Application>[] = [
       {
-        id: "checkbox",
+        id: "Toggle",
         header: ({ table }) => {
           const allSelected = table.getIsAllRowsSelected();
           const someSelected = table.getIsSomeRowsSelected();
           return (
-            <Checkbox
+            <Toggle
               checked={allSelected}
               indeterminate={someSelected && !allSelected}
               onChange={(checked) => {
@@ -190,7 +190,7 @@ export const ControlledSelection: Story = {
           );
         },
         cell: ({ row }) => (
-          <Checkbox
+          <Toggle
             checked={selectedIds[row.id] ?? false}
             onChange={(checked) => {
               const newSelection = { ...selectedIds };

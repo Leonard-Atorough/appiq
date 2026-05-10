@@ -2,7 +2,13 @@ export { Alert, alertVariants, type AlertProps, type AlertType } from "./Alert";
 export { Badge, type BadgeProps } from "./Badge";
 export { Button, type ButtonProps } from "./Button";
 export { Card, type CardProps } from "./Card";
-export { Checkbox, type CheckboxProps } from "./Checkbox";
+export {
+  Toggle,
+  type ToggleProps,
+  // Backward compatibility
+  Toggle as Checkbox,
+  type ToggleProps as CheckboxProps,
+} from "./Toggle";
 export { EmptyState, type EmptyStateProps } from "./EmptyState";
 export { Dialog, type DialogProps } from "./Dialog";
 export { Divider, dividerVariants, type DividerProps } from "./Divider";

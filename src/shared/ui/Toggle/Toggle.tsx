@@ -1,19 +1,19 @@
 import React from "react";
 import { cn } from "@/shared/lib/cn";
-import type { CheckboxProps } from "./checkbox.types";
+import type { ToggleProps } from "./toggle.types";
 import {
   checkboxBoxVariants,
   checkboxIconVariants,
   checkboxLabelVariants,
   switchTrackVariants,
   switchThumbVariants,
-} from "./checkbox.variants";
+} from "./toggle.variants";
 import { Icon } from "../Icon";
 
 /**
- * Checkbox
+ * Toggle
  *
- * An accessible control supporting both checkbox and switch modes.
+ * An accessible control supporting both checkbox and switch appearance modes.
  *
  * **Checkbox mode (default):** Square box with check/minus icon. Supports indeterminate state.
  * **Switch mode:** Track with sliding thumb for binary on/off selection.
@@ -23,22 +23,22 @@ import { Icon } from "../Icon";
  * The `indeterminate` prop is set imperatively via `useEffect` (checkbox mode only).
  *
  * @example
- * // Checkbox mode
- * <Checkbox
+ * // Checkbox appearance (default)
+ * <Toggle
  *   label="Accept terms"
  *   checked={accepted}
  *   onChange={(e) => setAccepted(e.target.checked)}
  * />
  *
- * // Switch mode
- * <Checkbox
+ * // Switch appearance
+ * <Toggle
  *   type="switch"
  *   label="Enable notifications"
  *   checked={enabled}
  *   onChange={(e) => setEnabled(e.target.checked)}
  * />
  */
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
   (
     {
       label,
@@ -106,7 +106,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           {...props}
         />
         {type === "checkbox" ? (
-          /* Checkbox: Visual box with check/minus icon */
+          /* Checkbox appearance: Visual box with check/minus icon */
           <span
             className={cn(
               checkboxBoxVariants({ size, state: hasError ? "error" : state }),
@@ -119,7 +119,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             {showMinus && <Icon name="minus" className={checkboxIconVariants({ size })} />}
           </span>
         ) : (
-          /* Switch: Track with sliding thumb */
+          /* Switch appearance: Track with sliding thumb */
           <span
             className={cn(
               switchTrackVariants({ size, state: hasError ? "error" : state }),
@@ -163,7 +163,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             )}
           </div>
         </div>
-        {/* Bare checkbox (no label) with an error message */}
+        {/* Bare toggle (no label) with an error message */}
         {!label && errorMessage && (
           <span id={errorId} role="alert" className="text-sm text-error-text">
             {errorMessage}
@@ -174,4 +174,4 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   },
 );
 
-Checkbox.displayName = "Checkbox";
+Toggle.displayName = "Toggle";

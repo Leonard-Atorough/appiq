@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { Checkbox } from "./Checkbox";
+import { Toggle } from "./Toggle";
 
-const meta: Meta<typeof Checkbox> = {
-  title: "Shared/Checkbox",
-  component: Checkbox,
+const meta: Meta<typeof Toggle> = {
+  title: "Shared/Toggle",
+  component: Toggle,
   parameters: { layout: "padded" },
   argTypes: {
     type: { control: "select", options: ["checkbox", "switch"] },
@@ -15,7 +15,7 @@ const meta: Meta<typeof Checkbox> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof Toggle>;
 
 export const Default: Story = {
   args: {
@@ -33,9 +33,9 @@ export const WithDescription: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox size="sm" label="Small" />
-      <Checkbox size="md" label="Medium (default)" />
-      <Checkbox size="lg" label="Large" />
+      <Toggle size="sm" label="Small" />
+      <Toggle size="md" label="Medium (default)" />
+      <Toggle size="lg" label="Large" />
     </div>
   ),
 };
@@ -43,11 +43,11 @@ export const Sizes: Story = {
 export const States: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox label="Unchecked" />
-      <Checkbox label="Checked" defaultChecked />
-      <Checkbox label="Indeterminate" indeterminate />
-      <Checkbox label="Disabled unchecked" disabled />
-      <Checkbox label="Disabled checked" disabled defaultChecked />
+      <Toggle label="Unchecked" />
+      <Toggle label="Checked" defaultChecked />
+      <Toggle label="Indeterminate" indeterminate />
+      <Toggle label="Disabled unchecked" disabled />
+      <Toggle label="Disabled checked" disabled defaultChecked />
     </div>
   ),
 };
@@ -55,8 +55,8 @@ export const States: Story = {
 export const ErrorState: Story = {
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox label="Accept terms" state="error" />
-      <Checkbox
+      <Toggle label="Accept terms" state="error" />
+      <Toggle
         label="Accept terms"
         description="Please read before accepting."
         state="error"
@@ -86,7 +86,7 @@ export const ControlledGroup: Story = {
 
     return (
       <div className="flex flex-col gap-sm">
-        <Checkbox
+        <Toggle
           label="All statuses"
           checked={allChecked}
           indeterminate={someChecked}
@@ -94,7 +94,7 @@ export const ControlledGroup: Story = {
         />
         <div className="pl-lg flex flex-col gap-sm">
           {options.map((opt) => (
-            <Checkbox
+            <Toggle
               key={opt}
               label={opt}
               checked={selected.has(opt)}
@@ -114,9 +114,9 @@ export const BareInput: Story = {
   name: "Bare input (no label)",
   render: () => (
     <div className="flex items-center gap-sm">
-      <Checkbox id="standalone" aria-label="Select row" />
-      <Checkbox id="standalone-checked" aria-label="Select row" defaultChecked />
-      <Checkbox id="standalone-disabled" aria-label="Select row" disabled />
+      <Toggle id="standalone" aria-label="Select row" />
+      <Toggle id="standalone-checked" aria-label="Select row" defaultChecked />
+      <Toggle id="standalone-disabled" aria-label="Select row" disabled />
     </div>
   ),
 };
@@ -146,9 +146,9 @@ export const SwitchSizes: Story = {
   name: "Switch: Sizes",
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox type="switch" size="sm" label="Small" defaultChecked />
-      <Checkbox type="switch" size="md" label="Medium (default)" defaultChecked />
-      <Checkbox type="switch" size="lg" label="Large" defaultChecked />
+      <Toggle type="switch" size="sm" label="Small" defaultChecked />
+      <Toggle type="switch" size="md" label="Medium (default)" defaultChecked />
+      <Toggle type="switch" size="lg" label="Large" defaultChecked />
     </div>
   ),
 };
@@ -157,10 +157,10 @@ export const SwitchStates: Story = {
   name: "Switch: States",
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox type="switch" label="Off" />
-      <Checkbox type="switch" label="On" defaultChecked />
-      <Checkbox type="switch" label="Disabled off" disabled />
-      <Checkbox type="switch" label="Disabled on" disabled defaultChecked />
+      <Toggle type="switch" label="Off" />
+      <Toggle type="switch" label="On" defaultChecked />
+      <Toggle type="switch" label="Disabled off" disabled />
+      <Toggle type="switch" label="Disabled on" disabled defaultChecked />
     </div>
   ),
 };
@@ -169,8 +169,8 @@ export const SwitchErrorState: Story = {
   name: "Switch: Error state",
   render: () => (
     <div className="flex flex-col gap-md">
-      <Checkbox type="switch" label="Agree to terms" state="error" />
-      <Checkbox
+      <Toggle type="switch" label="Agree to terms" state="error" />
+      <Toggle
         type="switch"
         label="Accept policy"
         description="You must accept to proceed."
@@ -188,7 +188,7 @@ export const SwitchControlled: Story = {
 
     return (
       <div className="flex flex-col gap-md">
-        <Checkbox
+        <Toggle
           type="switch"
           label="Enable feature"
           checked={enabled}
@@ -218,7 +218,7 @@ export const SwitchGroup: Story = {
       <div className="flex flex-col gap-lg ">
         <div className="flex justify-between items-center p-md bg-surface rounded-lg border border-base w-full">
           <span className="font-medium text-secondary">Notifications</span>
-          <Checkbox
+          <Toggle
             type="switch"
             checked={settings.notifications}
             onChange={() => toggle("notifications")}
@@ -227,7 +227,7 @@ export const SwitchGroup: Story = {
         </div>
         <div className="flex justify-between items-center p-md bg-surface rounded-lg border border-base w-full">
           <span className="font-medium text-secondary">Dark mode</span>
-          <Checkbox
+          <Toggle
             type="switch"
             checked={settings.darkMode}
             onChange={() => toggle("darkMode")}
@@ -236,7 +236,7 @@ export const SwitchGroup: Story = {
         </div>
         <div className="flex justify-between items-center p-md bg-surface rounded-lg border border-base w-full">
           <span className="font-medium text-secondary">Newsletter</span>
-          <Checkbox
+          <Toggle
             type="switch"
             checked={settings.newsletter}
             onChange={() => toggle("newsletter")}

@@ -1,12 +1,12 @@
 import type { VariantProps } from "class-variance-authority";
-import type { checkboxBoxVariants } from "./checkbox.variants";
+import type { checkboxBoxVariants } from "./toggle.variants";
 
-export interface CheckboxProps
+export interface ToggleProps
   extends
     Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,
     VariantProps<typeof checkboxBoxVariants> {
   /**
-   * Label text rendered next to the checkbox.
+   * Label text rendered next to the toggle.
    */
   label?: React.ReactNode;
 
