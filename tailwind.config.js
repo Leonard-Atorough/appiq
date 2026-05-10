@@ -143,9 +143,9 @@ export default {
         slow: "var(--duration-slow)",
       },
       transitionTimingFunction: {
-        "in": "var(--ease-in)",
-        "out": "var(--ease-out)",
-        "spring": "var(--ease-spring)",
+        in: "var(--ease-in)",
+        out: "var(--ease-out)",
+        spring: "var(--ease-spring)",
       },
       /* Elevation tokens — z-index stacking context */
       zIndex: {
