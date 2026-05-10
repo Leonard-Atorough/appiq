@@ -21,8 +21,6 @@ export interface BadgeProps
   size?: ResponsiveValue<"sm" | "md" | "lg">;
   /** Node rendered to the left of the label text. */
   icon?: React.ReactNode;
-  /** Renders a dismiss (×) button; fires `onDismiss` when clicked. */
-  dismissable?: boolean;
   /** Required when `dismissable` is true. */
   onDismiss?: () => void;
   /** `true` = pill shape; `false` = default corner radius. */

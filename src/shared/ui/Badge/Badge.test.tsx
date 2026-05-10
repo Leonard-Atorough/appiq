@@ -12,15 +12,14 @@ describe("Badge", () => {
     });
 
     it.each([
-      ["span", undefined, undefined],
-      ["button", () => {}, undefined],
-      ["span", undefined, true],
+      ["span", undefined],
+      ["button", () => {}],
     ] as const)(
-      "renders as %s when onClick=%j, dismissable=%j",
-      (element, onClick, dismissable) => {
+      "renders as %s when onClick=%j",
+      (element, onClick) => {
         const ref = React.createRef<HTMLElement>();
         render(
-          <Badge ref={ref} onClick={onClick} dismissable={dismissable} onDismiss={() => {}}>
+          <Badge ref={ref} onClick={onClick} onDismiss={() => {}}>
             Test
           </Badge>,
         );
@@ -84,9 +83,9 @@ describe("Badge", () => {
   });
 
   describe("Dismissable Behavior", () => {
-    it("renders dismiss button when dismissable=true", () => {
+    it("renders dismiss button when onDismiss is provided", () => {
       render(
-        <Badge dismissable onDismiss={() => {}}>
+        <Badge onDismiss={() => {}}>
           Dismissable
         </Badge>,
       );
@@ -98,10 +97,10 @@ describe("Badge", () => {
       expect(screen.queryByLabelText("Dismiss badge")).not.toBeInTheDocument();
     });
 
-    it("renders as span when dismissable (avoids nested buttons)", () => {
+    it("renders as span when onDismiss is provided (avoids nested buttons)", () => {
       const ref = React.createRef<HTMLElement>();
       render(
-        <Badge ref={ref} dismissable onDismiss={() => {}}>
+        <Badge ref={ref} onDismiss={() => {}}>
           Dismissable
         </Badge>,
       );
@@ -112,7 +111,7 @@ describe("Badge", () => {
       const user = userEvent.setup();
       const onDismiss = vi.fn();
       render(
-        <Badge dismissable onDismiss={onDismiss}>
+        <Badge onDismiss={onDismiss}>
           Dismissable
         </Badge>,
       );
@@ -125,7 +124,7 @@ describe("Badge", () => {
       const onClick = vi.fn();
       const onDismiss = vi.fn();
       render(
-        <Badge dismissable onDismiss={onDismiss} onClick={onClick}>
+        <Badge onDismiss={onDismiss} onClick={onClick}>
           Dismissable
         </Badge>,
       );
@@ -138,7 +137,7 @@ describe("Badge", () => {
       const user = userEvent.setup();
       const onDismiss = vi.fn();
       render(
-        <Badge dismissable onDismiss={onDismiss}>
+        <Badge onDismiss={onDismiss}>
           Keyboard Test
         </Badge>,
       );
@@ -166,7 +165,7 @@ describe("Badge", () => {
       const icon = <span data-testid="icon">●</span>;
 
       render(
-        <Badge icon={icon} dismissable onDismiss={onDismiss}>
+        <Badge icon={icon} onDismiss={onDismiss}>
           Combined
         </Badge>,
       );

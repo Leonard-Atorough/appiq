@@ -52,10 +52,10 @@ export const Sizes: Story = {
 export const Dismissable: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
-      <Badge variant="success" dismissable onDismiss={() => alert("dismissed")}>
+      <Badge variant="success" onDismiss={() => alert("dismissed")}>
         Dismissable
       </Badge>
-      <Badge variant="info" outline dismissable onDismiss={() => alert("dismissed")}>
+      <Badge variant="info" outline onDismiss={() => alert("dismissed")}>
         Outline Dismissable
       </Badge>
     </div>

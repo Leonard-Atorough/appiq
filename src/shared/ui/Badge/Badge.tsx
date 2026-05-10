@@ -11,13 +11,13 @@ import React from "react";
  * Automatically adapts its root element based on provided props:
  * - Static label: renders as `<span>`
  * - Clickable (`onClick` only): renders as `<button>`
- * - Dismissable or with actions: renders as `<span>` container holding
+ * - With `onDismiss` or actions: renders as `<span>` container holding
  *   individual `<button>` elements — avoids invalid nested-button HTML.
  * Supports responsive styling via ResponsiveValue for size, variant, and rounded.
  *
  * @example
  * <Badge variant="success">Applied</Badge>
- * <Badge variant="warning" dismissable onDismiss={() => remove(id)}>Pending</Badge>
+ * <Badge variant="warning" onDismiss={() => remove(id)}>Pending</Badge>
  * // Responsive: md=pill, lg=boxed (if using variant for layout)
  * <Badge size={{ base: "sm", md: "md", lg: "lg" }} variant={{ base: "default", lg: "success" }}>Status</Badge>
  */
@@ -29,7 +29,6 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
       size,
       rounded,
       icon,
-      dismissable,
       onDismiss,
       actions,
       children,
@@ -42,7 +41,7 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
     const resolvedVariant = useResponsive(variant);
     const resolvedSize = useResponsive(size);
     const resolvedRounded = useResponsive(rounded ?? false);
-    const hasNestedButtons = dismissable || (actions && actions.length > 0);
+    const hasNestedButtons = onDismiss || (actions && actions.length > 0);
 
     // <button> is only safe as the outer tag when there are no nested interactive elements
     const Tag = hasNestedButtons ? "span" : onClick ? "button" : "span";
@@ -82,7 +81,7 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
           </button>
         ))}
 
-        {dismissable && (
+        {onDismiss && (
           <button
             type="button"
             className="ml-xs flex items-center justify-center rounded-sm hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-(--color-primary)"

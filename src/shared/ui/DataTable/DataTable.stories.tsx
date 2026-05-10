@@ -132,7 +132,7 @@ export const Variants: Story = {
 
 export const Striped: Story = {
   render: () => (
-    <DataTable data={data} columns={columns} rowStyle={{ striped: true, hoverable: true }} />
+    <DataTable data={data} columns={columns} rowStyle={{ striped: true}} />
   ),
 };
 
@@ -147,7 +147,7 @@ export const Selectable: Story = {
     <DataTable 
       data={data} 
       columns={columns} 
-      rowStyle={{ selectable: true, hoverable: true }} 
+      rowStyle={{ selectable: true}} 
     />
   ),
 };
@@ -251,7 +251,7 @@ export const ControlledSelection: Story = {
         <DataTable
           data={data}
           columns={controlledColumns}
-          rowStyle={{ selectable: true, hoverable: true }}
+          rowStyle={{ selectable: true }}
           selectedRowIds={selectedIds}
           onSelectedRowIdsChange={setSelectedIds}
         />
