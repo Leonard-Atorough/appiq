@@ -12,8 +12,8 @@ describe("Badge", () => {
     });
 
     it.each([
-      ["span", undefined],
-      ["button", () => {}],
+      ["button", undefined],
+      ["span", () => {}],
     ] as const)(
       "renders as %s when onClick=%j",
       (element, onClick) => {

@@ -13,15 +13,15 @@ export const dataTableHeadVariants = cva(
   ].join(" "),
   {
     variants: {
-      size: {
+      textSize: {
         sm: "py-xs text-sm",
         md: "py-sm text-md",
         lg: "py-md text-lg",
       },
-      variant: {
-        default: "bg-muted",
-        compact: "bg-muted py-xs",
-        minimal: "bg-transparent border-b-2 border-base",
+      style: {
+        default: "",
+        minimal: "border-b border-muted",
+        full: "border border-base",
       },
       sticky: {
         true: "sticky top-0 z-10",
@@ -31,8 +31,8 @@ export const dataTableHeadVariants = cva(
       },
     },
     defaultVariants: {
-      size: "md",
-      variant: "default",
+      textSize: "md",
+      style: "default",
       sticky: true,
       sortable: false,
     },
@@ -47,13 +47,10 @@ export const dataTableRowVariants = cva(
   ["border-b border-base", "transition-all duration-200"].join(" "),
   {
     variants: {
-      variant: {
-        default: "bg-surface",
-        compact: "bg-surface",
-        minimal: "bg-transparent",
-      },
-      striped: {
-        true: "[&:nth-child(even)]:bg-muted",
+      style: {
+        default: "",
+        minimal: "border-b border-muted",
+        full: "border border-base [&:first-child]:border-t-0 [&:last-child]:border-b-0",
       },
       hoverable: {
         true: "hover:bg-muted hover:shadow-sm cursor-pointer transition-shadow duration-200",
@@ -66,8 +63,7 @@ export const dataTableRowVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
-      striped: false,
+      style: "default",
       hoverable: true,
       selected: false,
       focused: false,
@@ -87,23 +83,25 @@ export const dataTableCellVariants = cva(
   ].join(" "),
   {
     variants: {
-      size: {
+      textSize: {
         sm: "py-xs text-xs",
         md: "py-sm text-sm",
         lg: "py-md text-md",
       },
-      variant: {
-        default: "bg-inherit",
-        compact: "bg-inherit py-xs",
-        minimal: "bg-inherit border-b border-muted",
+      style: {
+        default: "",
+        minimal: "border-b border-muted",
+        full: "border border-base [&:first-child]:border-t-0 [&:last-child]:border-b-0",
       },
+      // For cells that should have muted/less prominent text (e.g. secondary info columns)
+       
       muted: {
         true: "text-muted",
       },
     },
     defaultVariants: {
-      size: "md",
-      variant: "default",
+      textSize: "md",
+      style: "default",
       muted: false,
     },
   },
@@ -121,17 +119,26 @@ export const dataTableVariants = cva(
   ].join(" "),
   {
     variants: {
-      variant: {
-        default: "shadow-sm",
-        compact: "shadow-xs",
-        minimal: "border-transparent shadow-none",
+      style: {
+        default: "",
+        minimal: "border-none",
+        full: "border-spacing-0 [&_td]:border [&_td]:border-base [&_th]:border [&_th]:border-base [&_td:first-child]:border-l-0 [&_td:last-child]:border-r-0 [&_th:first-child]:border-l-0 [&_th:last-child]:border-r-0",
+      },
+      density: {
+        condensed: "[&_td]:py-xs [&_th]:py-xs",
+        normal: "[&_td]:py-sm [&_th]:py-sm",
+        spacious: "[&_td]:py-md [&_th]:py-md",
+      },
+      striped: {
+        true: "[&_tr:nth-child(even)]:bg-muted",
       },
       stickyHeader: {
         true: "overflow-y-auto",
       },
     },
     defaultVariants: {
-      variant: "default",
+      style: "default",
+      density: "normal",
       stickyHeader: false,
     },
   },

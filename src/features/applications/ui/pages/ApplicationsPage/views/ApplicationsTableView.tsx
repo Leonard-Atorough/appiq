@@ -103,7 +103,7 @@ export function ApplicationsTableView({
 
   return (
     <div>
-      <DataTable data={applications} columns={combinedColumns} sortable stickyHeader />
+      <DataTable data={applications} columns={combinedColumns} sortable stickyHeader rowStyle={{ striped: true }} style="full" density="normal" textSize="lg"/>
       <ConfirmDeleteForm
         open={!!deleteId}
         onOpenChange={(open) => {

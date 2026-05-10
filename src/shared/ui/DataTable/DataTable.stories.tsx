@@ -120,12 +120,22 @@ export const Sortable: Story = {
   render: () => <DataTable data={data} columns={columns} sortable />,
 };
 
-export const Variants: Story = {
+export const Density: Story = {
   render: () => (
     <div className="flex flex-col gap-lg">
-      <DataTable data={data} columns={columns} variant="default" />
-      <DataTable data={data} columns={columns} variant="compact" />
-      <DataTable data={data} columns={columns} variant="minimal" />
+      <DataTable data={data} columns={columns} density="normal" />
+      <DataTable data={data} columns={columns} density="spacious" />
+      <DataTable data={data} columns={columns} density="condensed" />
+    </div>
+  ),
+};
+
+export const Styles: Story = {
+  render: () => (
+    <div className="flex flex-col gap-lg">
+      <DataTable data={data} columns={columns} style="default" />
+      <DataTable data={data} columns={columns} style="minimal" />
+      <DataTable data={data} columns={columns} style="full" />
     </div>
   ),
 };
