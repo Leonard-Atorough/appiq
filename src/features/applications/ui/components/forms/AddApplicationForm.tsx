@@ -130,7 +130,7 @@ export function AddApplicationForm({
       open={open}
       onOpenChange={onOpenChange}
       title={data ? "Edit Application" : "Add Application"}
-      buttonRow={
+      footer={
         <div className="flex gap-sm">
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
             Cancel

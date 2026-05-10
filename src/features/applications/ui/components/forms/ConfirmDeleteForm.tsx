@@ -25,7 +25,7 @@ export function ConfirmDeleteForm({
       onOpenChange={onOpenChange}
       title="Confirm Delete"
       description="Are you sure you want to delete this application? This action cannot be undone."
-      buttonRow={
+      footer={
         <div className="flex gap-sm">
           <Button
             variant="outline"

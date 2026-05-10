@@ -19,7 +19,7 @@ export interface DialogProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Element to focus when the dialog opens. Defaults to the first focusable element in the panel. */
   focusRef?: React.RefObject<HTMLElement | null>;
   /** Content rendered in the dialog footer (typically action buttons). */
-  buttonRow?: React.ReactNode;
-  /** Shows the built-in close (×) button. Defaults to `true` when no `buttonRow` is provided. */
+  footer?: React.ReactNode;
+  /** Shows the built-in close (×) button. Defaults to `true` when no `footer` is provided. */
   showClose?: boolean;
 }

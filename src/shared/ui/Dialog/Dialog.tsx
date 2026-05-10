@@ -42,7 +42,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(
       className,
       children,
       focusRef = null,
-      buttonRow,
+      footer: buttonRow,
       showClose,
       ...props
     },

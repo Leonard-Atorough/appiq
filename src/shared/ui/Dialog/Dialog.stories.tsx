@@ -18,7 +18,7 @@ function DialogDemo({ size }: { size?: "sm" | "md" | "lg" }) {
         title="Confirm Action"
         description="Are you sure you want to proceed? This action cannot be undone."
         size={size}
-        buttonRow={
+        footer={
           <div className="flex gap-sm justify-end">
             <Button variant="outline" onClick={() => setOpen(false)}>
               Cancel
@@ -75,7 +75,7 @@ export const NonModal: Story = {
           modal={false}
           title="Popover-like Dialog"
           description="No backdrop overlay, focus is not trapped. Click outside to close."
-          buttonRow={
+          footer={
             <div className="flex gap-sm justify-end">
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Close
@@ -103,7 +103,7 @@ export const CustomFocus: Story = {
           title="Confirm Deletion"
           description="This action cannot be undone."
           focusRef={focusRef as React.RefObject<HTMLElement>}
-          buttonRow={
+          footer={
             <div className="flex gap-sm justify-end">
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Cancel
@@ -132,7 +132,7 @@ export const WithFormContent: Story = {
           onOpenChange={setOpen}
           title="User Settings"
           size="md"
-          buttonRow={
+          footer={
             <div className="flex gap-sm justify-end">
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Cancel

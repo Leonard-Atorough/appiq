@@ -129,7 +129,7 @@ describe("Dialog", () => {
           open={true}
           onOpenChange={() => {}}
           title="My Dialog"
-          buttonRow={<button>Action</button>}
+          footer={<button>Action</button>}
         >
           <div>content</div>
         </Dialog>,
@@ -143,7 +143,7 @@ describe("Dialog", () => {
           open={true}
           onOpenChange={() => {}}
           title="My Dialog"
-          buttonRow={<button>Action</button>}
+          footer={<button>Action</button>}
         >
           <div>content</div>
         </Dialog>,
@@ -158,7 +158,7 @@ describe("Dialog", () => {
           onOpenChange={() => {}}
           title="My Dialog"
           showClose={true}
-          buttonRow={<button>Action</button>}
+          footer={<button>Action</button>}
         >
           <div>content</div>
         </Dialog>,
