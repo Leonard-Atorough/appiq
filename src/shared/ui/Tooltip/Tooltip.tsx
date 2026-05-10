@@ -77,7 +77,7 @@ function getPositionStyles(
 }
 
 export const Tooltip: React.FC<TooltipProps> = ({
-  message,
+  label: message,
   children,
   side = "bottom",
   align = "center",
@@ -106,6 +106,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
   useLayoutEffect(() => {
     if (!isOpen) {
+      //TODO: explore setting outside of useLayoutEffect to avoid potential flash of incorrectly positioned tooltip on open
+      // See: https://react.dev/learn/you-might-not-need-an-effect 
       setPositionStyles(HIDDEN_STYLES);
       return;
     }

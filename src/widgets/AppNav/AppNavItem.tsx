@@ -27,7 +27,7 @@ export function AppNavItem({ item, isActive, isSidebarOpen, isMobile, onClick }:
 
   if (!isSidebarOpen) {
     return (
-      <Tooltip message={item.label} side="right">
+      <Tooltip label={item.label} side="right">
         {button}
       </Tooltip>
     );

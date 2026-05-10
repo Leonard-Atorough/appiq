@@ -26,7 +26,7 @@ describe("Tooltip", () => {
   describe("Basic Rendering", () => {
     it("renders children", () => {
       render(
-        <Tooltip message="Tooltip text">
+        <Tooltip label="Tooltip text">
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -35,7 +35,7 @@ describe("Tooltip", () => {
 
     it("does not render tooltip panel initially", () => {
       render(
-        <Tooltip message="Tooltip text">
+        <Tooltip label="Tooltip text">
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -44,14 +44,14 @@ describe("Tooltip", () => {
 
     it("renders with simple and complex children", () => {
       const { rerender } = render(
-        <Tooltip message="Simple">
+        <Tooltip label="Simple">
           <button>Trigger</button>
         </Tooltip>,
       );
       expect(screen.getByRole("button", { name: "Trigger" })).toBeInTheDocument();
 
       rerender(
-        <Tooltip message="Complex">
+        <Tooltip label="Complex">
           <Button>Save</Button>
         </Tooltip>,
       );
@@ -62,7 +62,7 @@ describe("Tooltip", () => {
   describe("Hover & Delay", () => {
     it("shows tooltip after hover delay", () => {
       render(
-        <Tooltip message="Tooltip text" delay={300}>
+        <Tooltip label="Tooltip text" delay={300}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -77,7 +77,7 @@ describe("Tooltip", () => {
 
     it("hides tooltip on mouse leave", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip text" delay={0}>
+        <Tooltip label="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -88,7 +88,7 @@ describe("Tooltip", () => {
 
     it("respects delay=300ms", () => {
       render(
-        <Tooltip message="Tooltip" delay={300}>
+        <Tooltip label="Tooltip" delay={300}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -106,7 +106,7 @@ describe("Tooltip", () => {
 
     it("respects delay=1000ms", () => {
       render(
-        <Tooltip message="Tooltip" delay={1000}>
+        <Tooltip label="Tooltip" delay={1000}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -124,7 +124,7 @@ describe("Tooltip", () => {
 
     it("keeps tooltip open when hovering panel", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip text" delay={0}>
+        <Tooltip label="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -139,7 +139,7 @@ describe("Tooltip", () => {
 
     it("handles rapid hover/unhover", () => {
       render(
-        <Tooltip message="Tooltip" delay={300}>
+        <Tooltip label="Tooltip" delay={300}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -164,7 +164,7 @@ describe("Tooltip", () => {
   describe("Focus & Keyboard", () => {
     it("shows tooltip immediately on focus (no delay)", () => {
       render(
-        <Tooltip message="Focus tooltip" delay={500}>
+        <Tooltip label="Focus tooltip" delay={500}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -175,7 +175,7 @@ describe("Tooltip", () => {
 
     it("hides tooltip on blur when focus leaves wrapper", () => {
       render(
-        <Tooltip message="Focus tooltip" delay={0}>
+        <Tooltip label="Focus tooltip" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -188,7 +188,7 @@ describe("Tooltip", () => {
 
     it("keeps tooltip open when focus moves inside wrapper", () => {
       render(
-        <Tooltip message="Tooltip" delay={0}>
+        <Tooltip label="Tooltip" delay={0}>
           <div>
             <button>Button 1</button>
             <button>Button 2</button>
@@ -206,7 +206,7 @@ describe("Tooltip", () => {
 
     it("hides tooltip on Escape key", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip text" delay={0}>
+        <Tooltip label="Tooltip text" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -216,7 +216,7 @@ describe("Tooltip", () => {
 
     it("does not hide tooltip on other keys", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip" delay={0}>
+        <Tooltip label="Tooltip" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -228,7 +228,7 @@ describe("Tooltip", () => {
   describe("Disabled State", () => {
     it("does not show tooltip when disabled on hover", () => {
       render(
-        <Tooltip message="Should not show" disabled delay={0}>
+        <Tooltip label="Should not show" disabled delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -242,7 +242,7 @@ describe("Tooltip", () => {
 
     it("does not show tooltip when disabled on focus", () => {
       render(
-        <Tooltip message="Should not show" disabled>
+        <Tooltip label="Should not show" disabled>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -253,7 +253,7 @@ describe("Tooltip", () => {
 
     it("does not set aria-describedby when disabled", () => {
       render(
-        <Tooltip message="Description" disabled>
+        <Tooltip label="Description" disabled>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -264,7 +264,7 @@ describe("Tooltip", () => {
   describe("Accessibility", () => {
     it("sets and removes aria-describedby with tooltip visibility", () => {
       render(
-        <Tooltip message="Description" delay={0}>
+        <Tooltip label="Description" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -282,7 +282,7 @@ describe("Tooltip", () => {
 
     it("tooltip has role and unique id", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip" delay={0}>
+        <Tooltip label="Tooltip" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -298,7 +298,7 @@ describe("Tooltip", () => {
       "renders %s color variant",
       (color) => {
         renderAndOpen(
-          <Tooltip message={color} color={color} delay={0}>
+          <Tooltip label={color} color={color} delay={0}>
             <button>Trigger</button>
           </Tooltip>,
         );
@@ -310,7 +310,7 @@ describe("Tooltip", () => {
   describe("Sizes", () => {
     it.each(["sm", "md", "lg"] as const)("renders %s size variant", (size) => {
       renderAndOpen(
-        <Tooltip message={size} size={size} delay={0}>
+        <Tooltip label={size} size={size} delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -323,7 +323,7 @@ describe("Tooltip", () => {
       "renders tooltip at %s position",
       (side) => {
         renderAndOpen(
-          <Tooltip message={side} side={side} delay={0}>
+          <Tooltip label={side} side={side} delay={0}>
             <button>Trigger</button>
           </Tooltip>,
         );
@@ -337,7 +337,7 @@ describe("Tooltip", () => {
   describe("Alignment", () => {
     it.each(["start", "center", "end"] as const)("renders tooltip with %s alignment", (align) => {
       renderAndOpen(
-        <Tooltip message={align} align={align} delay={0}>
+        <Tooltip label={align} align={align} delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -348,7 +348,7 @@ describe("Tooltip", () => {
   describe("Bordered", () => {
     it.each([true, false])("renders with bordered=%s", (bordered) => {
       renderAndOpen(
-        <Tooltip message="Bordered" bordered={bordered} delay={0}>
+        <Tooltip label="Bordered" bordered={bordered} delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -359,7 +359,7 @@ describe("Tooltip", () => {
   describe("Message Content", () => {
     it("renders string message", () => {
       renderAndOpen(
-        <Tooltip message="String message" delay={0}>
+        <Tooltip label="String message" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -369,7 +369,7 @@ describe("Tooltip", () => {
     it("renders ReactNode message with rich content", () => {
       renderAndOpen(
         <Tooltip
-          message={
+          label={
             <span data-testid="rich-content">
               Rich <strong>content</strong>
             </span>
@@ -386,7 +386,7 @@ describe("Tooltip", () => {
     it("renders long message text", () => {
       const longMessage = "This is a very long tooltip message that might wrap to multiple lines";
       renderAndOpen(
-        <Tooltip message={longMessage} delay={0}>
+        <Tooltip label={longMessage} delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -397,7 +397,7 @@ describe("Tooltip", () => {
   describe("Class Names", () => {
     it("applies triggerClassName to trigger element", () => {
       render(
-        <Tooltip message="Tooltip" triggerClassName="custom-trigger" delay={0}>
+        <Tooltip label="Tooltip" triggerClassName="custom-trigger" delay={0}>
           <button className="original">Trigger</button>
         </Tooltip>,
       );
@@ -407,7 +407,7 @@ describe("Tooltip", () => {
 
     it("applies messageClassName to tooltip message", () => {
       renderAndOpen(
-        <Tooltip message="Tooltip" messageClassName="custom-message" delay={0}>
+        <Tooltip label="Tooltip" messageClassName="custom-message" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -416,7 +416,7 @@ describe("Tooltip", () => {
 
     it("applies wrapperClassName to wrapper element", () => {
       render(
-        <Tooltip message="Tooltip" wrapperClassName="custom-wrapper" delay={0}>
+        <Tooltip label="Tooltip" wrapperClassName="custom-wrapper" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -430,7 +430,7 @@ describe("Tooltip", () => {
     it("renders with multiple props combined", () => {
       render(
         <Tooltip
-          message="Complete tooltip"
+          label="Complete tooltip"
           color="primary"
           size="lg"
           side="top"
@@ -451,7 +451,7 @@ describe("Tooltip", () => {
 
     it("handles prop updates including message and side", () => {
       const { rerender } = render(
-        <Tooltip message="Original" side="bottom" delay={0}>
+        <Tooltip label="Original" side="bottom" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -463,7 +463,7 @@ describe("Tooltip", () => {
       expect(screen.getByRole("tooltip")).toHaveTextContent("Original");
 
       rerender(
-        <Tooltip message="Updated" side="top" delay={0}>
+        <Tooltip label="Updated" side="top" delay={0}>
           <button>Trigger</button>
         </Tooltip>,
       );
@@ -474,7 +474,7 @@ describe("Tooltip", () => {
   describe("Lifecycle", () => {
     it("clears pending timeout on unmount", () => {
       const { unmount } = render(
-        <Tooltip message="Tooltip" delay={300}>
+        <Tooltip label="Tooltip" delay={300}>
           <button>Trigger</button>
         </Tooltip>,
       );

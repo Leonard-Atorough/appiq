@@ -8,10 +8,9 @@ export type TooltipSide = "top" | "right" | "bottom" | "left";
 
 export type TooltipAlign = "start" | "center" | "end";
 
-export interface TooltipProps
-  extends Omit<VariantProps<typeof tooltipVariants>, "size"> {
+export interface TooltipProps extends Omit<VariantProps<typeof tooltipVariants>, "size"> {
   /** The message to display within the tooltip. */
-  message: React.ReactNode;
+  label: React.ReactNode;
 
   /** The element that triggers the tooltip on hover or focus. */
   children: React.ReactElement;
@@ -27,7 +26,7 @@ export interface TooltipProps
 
   /** Whether the tooltip is disabled. */
   disabled?: boolean;
-  
+
   /** Extra class(es) merged onto the trigger element's className. */
   triggerClassName?: string;
 
@@ -36,7 +35,7 @@ export interface TooltipProps
 
   /** Extra class(es) merged onto the wrapper element that contains both the trigger and the tooltip.*/
   wrapperClassName?: string;
-  
+
   /** Tooltip size can be responsive. */
   size?: ResponsiveValue<"sm" | "md" | "lg">;
 }
