@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Field } from "./Field";
-import { Checkbox } from "@shared/ui/Checkbox";
+import { Toggle } from "@shared/ui";
 
 const meta: Meta<typeof Field> = { title: "Shared/Field", component: Field };
 export default meta;
@@ -107,7 +107,7 @@ export const WithAriaDescribedBy: Story = {
 export const WithCustomControl: Story = {
   render: () => (
     <Field id="agree" label="Agree to terms">
-      <Checkbox id="agree" description="I agree to the Terms of Service and Privacy Policy" />
+      <Toggle id="agree" description="I agree to the Terms of Service and Privacy Policy" />
     </Field>
   ),
 };
