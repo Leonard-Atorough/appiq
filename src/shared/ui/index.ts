@@ -52,6 +52,7 @@ export {
   type SkeletonFieldProps,
 } from "./Skeleton";
 export { Sidebar, type SidebarProps } from "./Sidebar";
+export { Spinner, spinnerVariants, type SpinnerProps } from "./Spinner";
 export { Text, type TextProps } from "./Text";
 export { Textarea, type TextareaProps } from "./Textarea";
 export { Toast, type ToastProps } from "./Toast";

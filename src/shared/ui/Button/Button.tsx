@@ -3,6 +3,7 @@ import { useResponsive } from "@/shared/lib";
 import { buttonVariants } from "./button.variants";
 import type { ButtonProps } from "./button.types";
 import React from "react";
+import { Spinner } from "../Spinner";
 
 /**
  * Button
@@ -45,12 +46,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         <span className={loading ? "opacity-0" : undefined}>{props.children}</span>
-        {loading && (
-          <span
-            aria-hidden="true"
-            className="absolute animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"
-          />
-        )}
+        {loading && <Spinner size={resolvedSize} className="absolute inset-0 m-auto" aria-hidden="true" />}
       </button>
     );
   },
