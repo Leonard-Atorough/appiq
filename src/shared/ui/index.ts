@@ -4,6 +4,7 @@ export { Card, type CardProps } from "./Card";
 export { Checkbox, type CheckboxProps } from "./Checkbox";
 export { EmptyState, type EmptyStateProps } from "./EmptyState";
 export { Dialog, type DialogProps } from "./Dialog";
+export { Divider, dividerVariants, type DividerProps } from "./Divider";
 export { DragItem, type DragItemProps } from "./DragItem";
 export { Dropdown, type DropdownProps, type DropdownItem } from "./Dropdown";
 export { DropTarget, dropTargetVariants, type DropTargetProps } from "./DropTarget";
