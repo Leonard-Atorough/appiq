@@ -26,7 +26,7 @@ export const applicationColumns: ColumnDef<JobApplication>[] = [
     header: "Status",
     accessorKey: "status",
     cell: (info) => (
-      <Tag variant={statusVariant[info.getValue() as JobApplication["status"]]} size="md" label={info.getValue() as string} />
+      <Tag color={statusVariant[info.getValue() as JobApplication["status"]]} size="md" label={info.getValue() as string} />
     ),
   },
   {

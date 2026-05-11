@@ -38,7 +38,7 @@ import { Icon } from "../Icon";
 export const Tag = React.forwardRef<HTMLElement, TagProps>(
   (
     {
-      variant = "default",
+      color: variant = "default",
       outlined: outline,
       size,
       rounded,

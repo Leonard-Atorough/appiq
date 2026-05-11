@@ -36,7 +36,7 @@ describe("Tag", () => {
     it.each(["default", "success", "error", "warning", "info"] as const)(
       "renders with %s variant",
       (variant) => {
-        render(<Tag variant={variant} label={variant} />);
+        render(<Tag color={variant} label={variant} />);
         expect(screen.getByText(variant)).toBeInTheDocument();
       },
     );
@@ -48,7 +48,7 @@ describe("Tag", () => {
 
     it("applies outline styling", () => {
       const { container } = render(
-        <Tag variant="success" outlined label="Outlined" />,
+        <Tag color="success" outlined label="Outlined" />,
       );
       expect(container.firstChild).toHaveClass("bg-transparent", "border");
     });
@@ -169,7 +169,7 @@ describe("Tag", () => {
 
     it("combines multiple props correctly", () => {
       const { container } = render(
-        <Tag variant="success" outlined size="lg" rounded startAdornment={<span />} label="Multi-variant" />,
+        <Tag color="success" outlined size="lg" rounded startAdornment={<span />} label="Multi-variant" />,
       );
       expect(container.firstChild).toHaveClass("bg-transparent", "border");
     });

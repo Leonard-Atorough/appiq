@@ -128,13 +128,13 @@ export const OnNonButton: Story = {
   render: () => (
     <div className="flex flex-wrap justify-center gap-lg p-3xl">
       <Tooltip label="Status: Interviewing" color="warning">
-        <Tag variant="warning" label="Interviewing" />
+        <Tag color="warning" label="Interviewing" />
       </Tooltip>
       <Tooltip label="Application was rejected" color="error">
-        <Tag variant="error" label="Rejected" />
+        <Tag color="error" label="Rejected" />
       </Tooltip>
       <Tooltip label="Offer received — congratulations!" color="success">
-        <Tag variant="success" label="Offer" />
+        <Tag color="success" label="Offer" />
       </Tooltip>
     </div>
   ),

@@ -50,7 +50,7 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
           <p className="text-md font-medium">{company}</p>
         </div>
         <div className="flex items-center gap-sm shrink-0">
-          <Tag variant={STATUS_VARIANT[status]} size="md" rounded label={STATUS_LABEL[status]} />
+          <Tag color={STATUS_VARIANT[status]} size="md" rounded label={STATUS_LABEL[status]} />
           <Button variant="outline" size="sm" onClick={onEdit}>
             <span className="flex items-center gap-xs">
               <Icon name="edit" size="sm" />
@@ -79,13 +79,13 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
             </div>
           ))}
         {location && (
-          <Tag variant="default" size="sm" outlined rounded={false} label={location} />
+          <Tag color="default" size="sm" outlined rounded={false} label={location} />
         )}
         {workingStyle && (
-          <Tag variant="default" size="sm" outlined rounded={false} label={workingStyle} />
+          <Tag color="default" size="sm" outlined rounded={false} label={workingStyle} />
         )}
         {jobType && (
-          <Tag variant="default" size="sm" outlined rounded={false} label={jobType} />
+          <Tag color="default" size="sm" outlined rounded={false} label={jobType} />
         )}
         {hasSalary && (
           <span className="text-sm text-muted">{formatSalary(salaryMin!, salaryMax!)}</span>

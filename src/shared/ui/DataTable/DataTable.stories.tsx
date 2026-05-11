@@ -73,7 +73,7 @@ const columns: ColumnDef<Application>[] = [
     header: "Status",
     cell: (info) => {
       const s = info.getValue() as Application["status"];
-      return <Tag variant={statusVariant[s]} size="sm" label={s} />;
+      return <Tag color={statusVariant[s]} size="sm" label={s} />;
     },
   },
   {
@@ -208,7 +208,7 @@ export const ControlledSelection: Story = {
         header: "Status",
         cell: (info) => {
           const s = info.getValue() as Application["status"];
-          return <Tag variant={statusVariant[s]} size="sm" label={s} />;
+          return <Tag color={statusVariant[s]} size="sm" label={s} />;
         },
       },
       {

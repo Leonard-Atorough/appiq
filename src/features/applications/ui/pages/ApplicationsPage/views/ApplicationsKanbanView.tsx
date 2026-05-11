@@ -78,7 +78,7 @@ export function ApplicationsKanbanView({
           >
             <Flex align="center" justify="between" paddingX="xs" fullWidth>
               <Header level={3} size="h6" weight="semibold">{col.label}</Header>
-              <Tag variant={col.badge} size="sm" outlined rounded={false} label={cards.length} />
+              <Tag color={col.badge} size="sm" outlined rounded={false} label={cards.length} />
             </Flex>
             <DropTarget
               droppableId={col.id}

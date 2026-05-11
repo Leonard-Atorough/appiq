@@ -121,10 +121,10 @@ export function ApplicationCard({
           {hasMeta && (
             <div className="flex flex-wrap gap-xs pt-xs border-t border-base">
               {workingStyle && (
-                <Tag variant="default" size="sm" outlined rounded={false} label={workingStyleLabel[workingStyle]} />
+                <Tag color="default" size="sm" outlined rounded={false} label={workingStyleLabel[workingStyle]} />
               )}
               {jobType && (
-                <Tag variant="default" size="sm" outlined rounded={false} label={jobTypeLabel[jobType]} />
+                <Tag color="default" size="sm" outlined rounded={false} label={jobTypeLabel[jobType]} />
               )}
               {hasSalary && (
                 <span className="text-xs text-muted self-center">

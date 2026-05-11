@@ -8,15 +8,16 @@ export const tagVariants = cva(
     "active:scale-[0.98]",
     "disabled:opacity-disabled disabled:cursor-not-allowed",
     "rounded-full",
+    "shadow-sm hover:shadow-md hover:brightness-110",
   ].join(" "),
   {
     variants: {
-      variant: {
-        default: "bg-muted shadow-sm hover:shadow-md hover:brightness-110",
-        success: "bg-success shadow-sm hover:shadow-md hover:brightness-110",
-        error: "bg-error shadow-sm hover:shadow-md hover:brightness-110",
-        warning: "bg-warning shadow-sm hover:shadow-md hover:brightness-110",
-        info: "bg-info shadow-sm hover:shadow-md hover:brightness-110",
+      color: {
+        default: "bg-muted",
+        success: "bg-success",
+        error: "bg-error",
+        warning: "bg-warning",
+        info: "bg-info",
       },
       outlined: {
         true: "bg-transparent border",
@@ -36,53 +37,53 @@ export const tagVariants = cva(
       /* Solid variant foregrounds */
       {
         outlined: false,
-        variant: "success",
+        color: "success",
         className: "text-(--color-success-foreground)",
       },
       {
         outlined: false,
-        variant: "warning",
+        color: "warning",
         className: "text-(--color-warning-foreground)",
       },
       {
         outlined: false,
-        variant: "error",
+        color: "error",
         className: "text-(--color-error-foreground)",
       },
       {
         outlined: false,
-        variant: "info",
+        color: "info",
         className: "text-(--color-info-foreground)",
       },
       /* Outline variant foregrounds */
       {
         outlined: true,
-        variant: "default",
+        color: "default",
         className: "border-base text-(--color-text) hover:bg-muted/5",
       },
       {
         outlined: true,
-        variant: "success",
+        color: "success",
         className: "border-success text-success-text hover:bg-success/5",
       },
       {
         outlined: true,
-        variant: "error",
+        color: "error",
         className: "border-error text-error-text hover:bg-error/5",
       },
       {
         outlined: true,
-        variant: "warning",
+        color: "warning",
         className: "border-warning text-warning-text hover:bg-warning/5",
       },
       {
         outlined: true,
-        variant: "info",
+        color: "info",
         className: "border-info text-info-text hover:bg-info/5",
       },
     ],
     defaultVariants: {
-      variant: "default",
+      color: "default",
       size: "md",
       rounded: true,
       outlined: false,

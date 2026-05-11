@@ -9,11 +9,11 @@ type Story = StoryObj<typeof Tag>;
 export const Variants: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
-      <Tag variant="default" label="Default" />
-      <Tag variant="success" label="Success" />
-      <Tag variant="warning" label="Warning" />
-      <Tag variant="error" label="Error" />
-      <Tag variant="info" label="Info" />
+      <Tag color="default" label="Default" />
+      <Tag color="success" label="Success" />
+      <Tag color="warning" label="Warning" />
+      <Tag color="error" label="Error" />
+      <Tag color="info" label="Info" />
     </div>
   ),
 };
@@ -21,11 +21,11 @@ export const Variants: Story = {
 export const Outline: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
-      <Tag variant="default" outlined label="Default" />
-      <Tag variant="success" outlined label="Success" />
-      <Tag variant="warning" outlined label="Warning" />
-      <Tag variant="error" outlined label="Error" />
-      <Tag variant="info" outlined label="Info" />
+      <Tag color="default" outlined label="Default" />
+      <Tag color="success" outlined label="Success" />
+      <Tag color="warning" outlined label="Warning" />
+      <Tag color="error" outlined label="Error" />
+      <Tag color="info" outlined label="Info" />
     </div>
   ),
 };
@@ -43,8 +43,8 @@ export const Sizes: Story = {
 export const Dismissable: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
-      <Tag variant="success" onDismiss={() => alert("dismissed")} label="Dismissable" />
-      <Tag variant="info" outlined onDismiss={() => alert("dismissed")} label="Outline Dismissable" />
+      <Tag color="success" onDismiss={() => alert("dismissed")} label="Dismissable" />
+      <Tag color="info" outlined onDismiss={() => alert("dismissed")} label="Outline Dismissable" />
     </div>
   ),
 };
@@ -52,8 +52,8 @@ export const Dismissable: Story = {
 export const Rounded: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
-      <Tag rounded={false} variant="success" label="Pill off" />
-      <Tag rounded variant="success" label="Pill on" />
+      <Tag rounded={false} color="success" label="Pill off" />
+      <Tag rounded color="success" label="Pill on" />
     </div>
   ),
 };
@@ -62,17 +62,17 @@ export const WithIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
       <Tag
-        variant="success"
+        color="success"
         startAdornment={<Icon name="check-circle" size="sm" />}
         label="Applied"
       />
       <Tag
-        variant="warning"
+        color="warning"
         startAdornment={<Icon name="clock" size="sm" />}
         label="Pending"
       />
       <Tag
-        variant="info"
+        color="info"
         outlined
         startAdornment={<Icon name="info" size="sm" />}
         label="Information"
@@ -85,18 +85,18 @@ export const WithCustomDeleteIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
       <Tag
-        variant="success"
+        color="success"
         onDismiss={() => alert("dismissed with default ✕")}
         label="Default Delete"
       />
       <Tag
-        variant="error"
+        color="error"
         onDismiss={() => alert("dismissed with custom icon")}
         deleteIcon={<Icon name="x-circle" size="sm" />}
         label="Custom Delete"
       />
       <Tag
-        variant="warning"
+        color="warning"
         onDismiss={() => alert("dismissed")}
         deleteIcon={<span className="text-lg">×</span>}
         label="Text Delete"
@@ -109,7 +109,7 @@ export const WithActions: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
       <Tag
-        variant="info"
+        color="info"
         label="Tag with actions"
         actions={[
           {
@@ -125,7 +125,7 @@ export const WithActions: Story = {
         ]}
       />
       <Tag
-        variant="default"
+        color="default"
         outlined
         label="Single action"
         actions={[
@@ -144,18 +144,18 @@ export const Clickable: Story = {
   render: () => (
     <div className="flex flex-wrap gap-sm items-center">
       <Tag
-        variant="default"
+        color="default"
         onClick={() => alert("Default tag clicked")}
         label="Click me"
       />
       <Tag
-        variant="success"
+        color="success"
         startAdornment={<Icon name="check" size="sm" />}
         onClick={() => alert("Success tag clicked")}
         label="Clickable with icon"
       />
       <Tag
-        variant="info"
+        color="info"
         outlined
         onClick={() => alert("Outlined tag clicked")}
         label="Outlined clickable"
@@ -171,7 +171,7 @@ export const Combined: Story = {
         <p className="text-sm text-secondary mb-xs">Full-featured tag</p>
         <div className="flex flex-wrap gap-sm items-center">
           <Tag
-            variant="success"
+            color="success"
             size="lg"
             startAdornment={<Icon name="check-circle" size="sm" />}
             label="Applied on Jan 15"
@@ -193,12 +193,12 @@ export const Combined: Story = {
         <div className="flex flex-wrap gap-sm items-center">
           <Tag
             size={{ base: "sm", md: "md", lg: "lg" }}
-            variant="default"
+            color="default"
             label="Responsive"
           />
           <Tag
             size={{ base: "lg", md: "md", lg: "sm" }}
-            variant="warning"
+            color="warning"
             label="Reverse responsive"
           />
         </div>
@@ -208,11 +208,11 @@ export const Combined: Story = {
         <p className="text-sm text-secondary mb-xs">Multiple variants combined</p>
         <div className="flex flex-wrap gap-sm items-center">
           <Tag
-            variant={{ base: "default", md: "success" }}
+            color={{ base: "default", md: "success" }}
             label="Responsive variant"
           />
           <Tag
-            variant="info"
+            color="info"
             outlined
             rounded
             startAdornment={<Icon name="info" size="sm" />}

@@ -19,10 +19,10 @@ export interface TagAction {
  */
 export interface TagProps
   extends
-    Omit<React.HTMLAttributes<HTMLElement>, "children">,
-    Omit<VariantProps<typeof tagVariants>, "variant" | "size" | "rounded"> {
+    Omit<React.HTMLAttributes<HTMLElement>, "children" | "color">,
+    Omit<VariantProps<typeof tagVariants>, "color" | "size" | "rounded"> {
   /** Color treatment matching semantic intent. */
-  variant?: ResponsiveValue<"default" | "success" | "error" | "warning" | "info">;
+  color?: ResponsiveValue<"default" | "success" | "error" | "warning" | "info">;
   /** Renders border-only with no fill. */
   outlined?: boolean;
   /** Controls padding and font size. */
