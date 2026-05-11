@@ -53,13 +53,26 @@ export const Divider = React.forwardRef<
     const variantClasses = dividerVariants({
       direction: resolvedDirection,
       size: resolvedSize,
-      spacing: resolvedSpacing,
+      spacing: resolvedDirection === "horizontal" ? resolvedSpacing : "none",
       color: resolvedColor,
       appearance: resolvedAppearance,
       fullSize: resolvedFullSize,
     });
 
-    const baseClasses = cn(variantClasses, className);
+    // Apply correct spacing classes based on direction
+    const spacingClasses =
+      resolvedDirection === "vertical"
+        ? {
+            xs: "mx-xs",
+            sm: "mx-sm",
+            md: "mx-md",
+            lg: "mx-lg",
+            xl: "mx-xl",
+            none: "",
+          }[resolvedSpacing]
+        : "";
+
+    const baseClasses = cn(variantClasses, spacingClasses, className);
 
     // Horizontal divider: use semantic <hr> for non-decorative, <div> for decorative
     // consumers will supply appropriate ARIA attributes based on decorative vs semantic usage
@@ -89,10 +102,7 @@ export const Divider = React.forwardRef<
       <div
         ref={ref as React.Ref<HTMLDivElement>}
         role={decorative ? "presentation" : undefined}
-        className={cn(
-          baseClasses,
-          resolvedDirection === "vertical" && "my-0 mx-auto",
-        )}
+        className={baseClasses}
         {...props}
       />
     );
