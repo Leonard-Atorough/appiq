@@ -38,48 +38,48 @@ export const tagVariants = cva(
       {
         outlined: false,
         color: "success",
-        className: "text-(--color-success-foreground)",
+        className: "text-success-foreground",
       },
       {
         outlined: false,
         color: "warning",
-        className: "text-(--color-warning-foreground)",
+        className: "text-warning-foreground",
       },
       {
         outlined: false,
         color: "error",
-        className: "text-(--color-error-foreground)",
+        className: "text-error-foreground",
       },
       {
         outlined: false,
         color: "info",
-        className: "text-(--color-info-foreground)",
+        className: "text-info-foreground",
       },
       /* Outline variant foregrounds */
       {
         outlined: true,
         color: "default",
-        className: "border-base text-(--color-text) hover:bg-muted/5",
+        className: "border-base text-base hover:bg-muted/5",
       },
       {
         outlined: true,
         color: "success",
-        className: "border-success text-success-text hover:bg-success/5",
+        className: "border-success text-success hover:bg-success/5",
       },
       {
         outlined: true,
         color: "error",
-        className: "border-error text-error-text hover:bg-error/5",
+        className: "border-error text-error hover:bg-error/5",
       },
       {
         outlined: true,
         color: "warning",
-        className: "border-warning text-warning-text hover:bg-warning/5",
+        className: "border-warning text-warning hover:bg-warning/5",
       },
       {
         outlined: true,
         color: "info",
-        className: "border-info text-info-text hover:bg-info/5",
+        className: "border-info text-info hover:bg-info/5",
       },
     ],
     defaultVariants: {

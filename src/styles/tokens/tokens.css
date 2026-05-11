@@ -100,23 +100,22 @@
   /* ===== SEMANTIC: TEXT ===== */
   --color-text: var(--gray-800);
   --color-text-secondary: var(--gray-600);
-  --color-text-muted: var(--gray-600);
-  --color-text-light: var(--gray-500); /* decorative/placeholder — not for body text */
+  --color-text-light: var(--gray-50); /* decorative/placeholder — not for body text */
   --color-text-dark: var(--gray-900);
 
   /* ===== SEMANTIC: FEEDBACK ===== */
   --color-success: var(--success);
   --color-success-light: var(--success-light);
+  --color-success-foreground: hsl(210 18% 12%);
   --color-warning: var(--warning);
   --color-warning-light: var(--warning-light);
+  --color-warning-foreground: hsl(210 18% 12%);
   --color-error: var(--error);
   --color-error-light: var(--error-light);
+  --color-error-foreground: hsl(210 18% 12%);
   --color-info: var(--info);
   --color-info-light: var(--info-light);
-  --color-success-text: var(--success);
-  --color-warning-text: var(--warning);
-  --color-error-text: var(--error);
-  --color-info-text: var(--info);
+  --color-info-foreground: hsl(210 18% 12%);
 
   /* ===== SEMANTIC: BORDERS ===== */
   --color-border: var(--gray-200);
@@ -144,10 +143,9 @@
   --font-mono: ui-monospace, Consolas, monospace;
 
   /* FONT SIZE SCALE */
-  /* Named for semantic intent: xs → base → display */
+  /* Named for semantic intent: xs → md → display */
   --font-size-xs: 0.75rem; /* 12px — captions, meta, labels */
   --font-size-sm: 0.875rem; /* 14px — helper text, secondary UI */
-  --font-size-base: 1rem; /* 16px — standard body (desktop) */
   --font-size-md: 1rem; /* 16px — standard body (desktop) */
   --font-size-lg: 1.125rem; /* 18px — standard body (mobile), subheadings */
   --font-size-xl: 1.25rem; /* 20px — subheadings, UI that needs emphasis */
@@ -215,29 +213,29 @@
 
   /* ===== ELEVATION (Z-INDEX) TOKENS ===== */
   /* Stacking context hierarchy for overlays and floating elements */
-  --z-dropdown: 40;  /* dropdowns, popovers */
-  --z-modal: 45;     /* modal backdrops and dialogs */
-  --z-toast: 50;     /* toast notifications — highest overlay */
-  --z-tooltip: 50;   /* tooltips — same as toast since they don't overlap */
+  --z-dropdown: 40; /* dropdowns, popovers */
+  --z-modal: 45; /* modal backdrops and dialogs */
+  --z-toast: 50; /* toast notifications — highest overlay */
+  --z-tooltip: 50; /* tooltips — same as toast since they don't overlap */
 
   /* ===== FOCUS RING TOKENS ===== */
   /* Focus indicators for keyboard navigation */
-  --ring-width: 2px;         /* standard focus ring width */
-  --ring-offset: 2px;        /* space between element and ring */
+  --ring-width: 2px; /* standard focus ring width */
+  --ring-offset: 2px; /* space between element and ring */
   --ring-color: var(--color-primary); /* focus ring color */
 
   /* ===== CONTAINER QUERY TOKENS ===== */
   /* Named breakpoints for container-based responsive design */
-  --container-sm: 28rem;    /* 448px */
-  --container-md: 42rem;    /* 672px */
-  --container-lg: 64rem;    /* 1024px */
-  --container-xl: 80rem;    /* 1280px */
-  --container-max: 96rem;   /* 1536px */
+  --container-sm: 28rem; /* 448px */
+  --container-md: 42rem; /* 672px */
+  --container-lg: 64rem; /* 1024px */
+  --container-xl: 80rem; /* 1280px */
+  --container-max: 96rem; /* 1536px */
 
   /* ===== OPACITY TOKENS ===== */
   /* Semantic opacity levels for different states */
-  --opacity-disabled: 0.5;   /* 50% — disabled/inactive elements */
-  --opacity-muted: 0.7;      /* 70% — muted/secondary content */
+  --opacity-disabled: 0.5; /* 50% — disabled/inactive elements */
+  --opacity-muted: 0.7; /* 70% — muted/secondary content */
 }
 
 /* ===== THEME OVERRIDES — DARK MODE ===== */
@@ -269,7 +267,8 @@
   --color-text: var(--gray-100);
   --color-text-secondary: var(--gray-300);
   --color-text-muted: var(--gray-400);
-  --color-text-light: var(--gray-500);
+  --color-text-light: var(--gray-900);
+  --color-text-dark: var(--gray-50);
 
   /* ===== BORDERS ===== */
   --color-border: var(--gray-700);
@@ -281,20 +280,16 @@
   /* ===== FEEDBACK ===== */
   --color-success: var(--green-400);
   --color-success-light: var(--green-900);
+  --color-success-foreground: hsl(210 18% 90%);
   --color-warning: hsl(45 90% 65%);
   --color-warning-light: hsl(45 80% 15%);
+  --color-warning-foreground: hsl(210 18% 12%);
   --color-error: hsl(0 84% 70%);
-  --color-error-hover: hsl(0 84% 78%); /* lighter hover on dark surface */
-  --color-error-active: hsl(0 84% 65%); /* pressed state — step back toward base */
   --color-error-light: hsl(0 78% 22%);
+  --color-error-foreground: hsl(210 18% 90%);
   --color-info: hsl(210 88% 66%);
   --color-info-light: hsl(210 90% 20%);
-
-  /* Vivid feedback colors are bright enough for text on dark surfaces */
-  --color-success-text: var(--green-400);
-  --color-warning-text: hsl(45 90% 65%);
-  --color-error-text: hsl(0 84% 70%);
-  --color-info-text: hsl(210 88% 66%);
+  --color-info-foreground: hsl(210 18% 90%);
 
   /* ===== DARK MODE SHADOWS ===== */
   /* Layered light shadows on dark surfaces */

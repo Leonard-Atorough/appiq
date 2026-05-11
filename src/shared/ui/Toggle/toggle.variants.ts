@@ -42,7 +42,7 @@ export const checkboxBoxVariants = cva(
 );
 
 /** Icon inside the checked box */
-export const checkboxIconVariants = cva("text-(--color-primary-foreground)", {
+export const checkboxIconVariants = cva("text-primary-foreground", {
   variants: {
     size: {
       sm: "h-2.5 w-2.5",

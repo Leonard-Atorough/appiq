@@ -39,7 +39,6 @@ The component owns a fixed, opinionated layout. Content areas are exposed as nam
 | `Tag`        | `label` (required), `startAdornment`, `deleteIcon`, `actions` |
 | `EmptyState` | `title`, `description`, `icon`, `action`                      |
 | `Toast`      | `title`, `description`, `icon` (auto from `variant`)          |
-| `Tooltip`    | `label` (the tooltip body), `children` (the trigger element)  |
 
 ```tsx
 <Tag

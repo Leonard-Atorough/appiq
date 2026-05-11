@@ -24,11 +24,11 @@ export const tooltipVariants = cva(
       color: {
         default: "bg-surface text-base border-base",
         dark: "bg-(--gray-800) text-(--gray-50) border-(--gray-700)",
-        primary: "bg-primary-500 text-(--color-primary-foreground) border-primary-600",
-        success: "bg-success-light text-success-text border-success",
-        warning: "bg-warning-light text-warning-text border-warning",
-        error: "bg-error-light text-error-text border-error",
-        info: "bg-info-light text-info-text border-info",
+        primary: "bg-primary-500 text-primary-foreground border-primary",
+        success: "bg-success-light text-success-foreground border-success",
+        warning: "bg-warning-light text-warning-foreground border-warning",
+        error: "bg-error-light text-error-foreground border-error",
+        info: "bg-info-light text-info-foreground border-info",
       },
       /** Controls padding, font size, and maximum width. */
       size: {

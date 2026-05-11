@@ -120,6 +120,127 @@ export function useApplicationsModel() {
 }
 ```
 
+## Shared UI Component Paradigms
+
+Every component in `src/shared/ui/` follows exactly one of four composition patterns. Understanding which applies guides API design and implementation.
+
+### Paradigm 1 — Slot-based
+
+The component owns a fixed, opinionated layout. Content areas are exposed as named props ("slots"). No free `children`.
+
+**When to use:** Visual components with a consistent structural skeleton — Tag, EmptyState, Toast, Dropdown.
+
+**Key rules:**
+- Name slots descriptively: `label`, `startAdornment`, `deleteIcon`, `actions`, `icon`, `description`
+- Omit `children` from the interface
+- The component owns layout; consumers cannot re-order slots
+
+**Example:** `Tag` has `label` (required), `startAdornment`, `deleteIcon`, `actions` — layout is fixed.
+
+### Paradigm 2 — Mixed (shell + children)
+
+The component owns a structural outer shell (label, error messages, card border) but the main content is `children`.
+
+**When to use:** Form controls (Field), containers (Card), or orchestrators needing to wire frame to content (DropTarget).
+
+**Key rules:**
+- Named props describe the frame: `label`, `error`, `helperText`, `header`, `footer`
+- `children` fills the main region
+- The component wires accessibility linkage (e.g., `htmlFor`, `aria-describedby`)
+
+**Example:** `Field` owns label/error/helper; `children` is the form control inside.
+
+### Paradigm 3 — Children-only
+
+The component is a styled or behavioural pass-through. `children` is the entire content.
+
+**When to use:** Styled wrappers (Button, Label), behavioural wrappers (DragItem), layout containers (Flex).
+
+**Key rules:**
+- `children: React.ReactNode` (or optional)
+- Extend HTML element attributes and spread `...rest`
+- No named content slots
+
+**Example:** `DragItem` is a wrapper that adds drag behaviour; the wrapped content is just `children`.
+
+### Paradigm 4 — Floating Anchor
+
+The component manages open state, positioning, and keyboard/focus handling between an external trigger element and a floating panel. A behavioral connector, not content owner.
+
+**When to use:** Tooltip, Popover — anchoring panels to external elements while injecting ARIA attributes.
+
+**Key rules:**
+- Trigger is always `React.ReactElement` (via `cloneElement`) or a render prop (receives props to spread)
+- Named props describe panel content: `label` (Tooltip), `children` (Popover)
+- The component injects `aria-describedby`, `aria-expanded`, `aria-controls`
+- Escape, outside-click, and focus-leave handling is entirely the component's responsibility
+
+**Two trigger forms:**
+- **Via children + cloneElement** (Tooltip): Consumer passes a single element; component clones it to inject aria
+- **Via render prop** (Popover): Consumer receives handler props and must spread them
+
+**Why Dropdown is NOT Floating Anchor:** Dropdown owns its `<button>` trigger; `trigger` is content placed inside it (Slot-based).
+
+For detailed rules and decision trees, see [ADR 0009 — Component composition paradigms](../../docs/adrs/0009-component-composition-paradigms.md).
+
+## Interface Extension & CVA Encapsulation
+
+**Core rule:** CVA is an implementation detail. Never expose `VariantProps<T>` or `Omit<VariantProps<...>, ...>` in a public interface.
+
+### Pattern 1 — Styled HTML wrapper (Paradigm 3)
+
+Extend the appropriate HTML element's attributes. Omit only the props the component controls:
+
+```ts
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
+  variant?: ResponsiveValue<"primary" | "secondary" | "ghost">;
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
+}
+```
+
+**Omit when:**
+- The component controls it internally (e.g., `draggable` on DragItem, driven by `disabled`)
+- The component owns the handler (e.g., `onDragStart`)
+- Redefining with a narrower type (e.g., `size` from `number` to `"sm"|"md"|"lg"`)
+- Conflicts with component semantics (e.g., `color` on Tag — HTML color is a legacy string attr)
+- Conflicts with render-prop shape (e.g., `children` on DropTarget)
+
+**Do:** Spread `...rest` onto the root element so consumers can pass `data-testid`, `aria-*`, `style`, `onFocus`, etc.
+
+### Pattern 2 — Composition/orchestration (Paradigms 1, 2, 4)
+
+No HTML extension. Include `className?: string` as an escape hatch:
+
+```ts
+interface TagProps {
+  label: React.ReactNode;
+  color?: ResponsiveValue<"default" | "success" | "error" | "warning" | "info">;
+  className?: string;
+}
+```
+
+### Variant Props — What to do instead
+
+**❌ Don't:**
+```ts
+interface TooltipProps extends Omit<VariantProps<typeof tooltipVariants>, "size"> { }
+```
+
+**✅ Do:**
+```ts
+interface TooltipProps {
+  color?: TooltipColor;  // Explicit union, not VariantProps
+  bordered?: boolean;
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
+}
+```
+
+The component's `.tsx` file still imports and calls `tooltipVariants({...})` directly — that doesn't change. Only the public type is explicit.
+
+**Why:** Decouples public API from CVA's internal shape. Renaming or restructuring the CVA config is never a breaking change to consumers.
+
+For detailed decision-making, see [ADR 0010 — HTML attributes extension and CVA encapsulation](../../docs/adrs/0010-html-extension-and-cva-encapsulation.md).
+
 ## Styling & Design System
 
 ### Design Tokens

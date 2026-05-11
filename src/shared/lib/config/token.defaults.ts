@@ -19,6 +19,7 @@ export const defaultTheme: ThemeConfig = {
     "secondary-bg": "hsl(210 20% 95%)",
 
     // Primary (Green)
+    foreground: "hsl(210 18% 12%)",
     primary: "hsl(119 43% 52%)", // #50bb4e
     "primary-hover": "hsl(119 43% 45%)",
     "primary-active": "hsl(119 43% 35%)",
@@ -36,13 +37,8 @@ export const defaultTheme: ThemeConfig = {
     // Text
     text: "hsl(210 10% 18%)",
     "text-secondary": "hsl(210 10% 42%)",
-    "text-muted": "hsl(210 10% 42%)",
     "text-light": "hsl(210 10% 52%)",
     "text-dark": "hsl(210 18% 8%)",
-    "success-text": "hsl(119 43% 35%)",
-    "warning-text": "hsl(45 93% 20%)",
-    "error-text": "hsl(0 84% 35%)",
-    "info-text": "hsl(210 88% 35%)",
 
     // Borders
     border: "hsl(210 16% 90%)",
@@ -51,12 +47,16 @@ export const defaultTheme: ThemeConfig = {
     // Feedback (Semantic)
     success: "hsl(119 43% 52%)",
     "success-light": "hsl(119 43% 90%)",
+    "success-foreground": "hsl(210 18% 12%)",
     warning: "hsl(45 93% 56%)",
     "warning-light": "hsl(45 93% 90%)",
+    "warning-foreground": "hsl(210 18% 12%)",
     error: "hsl(0 84% 60%)",
     "error-light": "hsl(0 100% 95%)",
+    "error-foreground": "hsl(210 18% 12%)",
     info: "hsl(210 88% 56%)",
     "info-light": "hsl(210 100% 95%)",
+    "info-foreground": "hsl(210 18% 12%)",
 
     // Skeleton & Loading
     skeleton: "hsl(210 20% 90%)",

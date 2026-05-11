@@ -12,6 +12,7 @@ type SemanticColorTokens =
   | "muted-bg"
   | "secondary-bg"
   // Primary & Secondary
+  | "foreground"
   | "primary"
   | "primary-hover"
   | "primary-active"
@@ -25,26 +26,25 @@ type SemanticColorTokens =
   // Text
   | "text"
   | "text-secondary"
-  | "text-muted"
   | "text-light"
   | "text-dark"
   | "primary-text"
-  | "success-text"
-  | "warning-text"
-  | "error-text"
-  | "info-text"
   // Borders
   | "border"
   | "border-muted"
   // Feedback (semantic)
   | "success"
   | "success-light"
+  | "success-foreground"
   | "warning"
   | "warning-light"
+  | "warning-foreground"
   | "error"
   | "error-light"
+  | "error-foreground"
   | "info"
   | "info-light"
+  | "info-foreground"
   // Skeleton & Loading
   | "skeleton";
 

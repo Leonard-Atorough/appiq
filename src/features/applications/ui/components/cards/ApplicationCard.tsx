@@ -61,7 +61,6 @@ export function ApplicationCard({
         size="sm"
         status={statusCardAccent[status]}
         dragId={application.id}
-        draggable
         dragType="application-card"
         data-testid="application-card"
       >
