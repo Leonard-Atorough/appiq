@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import type { ToggleProps } from "./toggle.types";
 import {
   checkboxBoxVariants,
@@ -58,6 +59,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
     },
     ref,
   ) => {
+    const resolvedSize = useResponsive(size ?? "md");
     const generatedId = React.useId();
     const resolvedId = id ?? generatedId;
     const descriptionId = description ? `${resolvedId}-description` : undefined;
@@ -109,26 +111,26 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
           /* Checkbox appearance: Visual box with check/minus icon */
           <span
             className={cn(
-              checkboxBoxVariants({ size, state: hasError ? "error" : state }),
+              checkboxBoxVariants({ size: resolvedSize, state: hasError ? "error" : state }),
               className,
             )}
             aria-hidden="true"
             onClick={() => resolvedRef.current?.click()}
           >
-            {showCheck && <Icon name="check" className={checkboxIconVariants({ size })} />}
-            {showMinus && <Icon name="minus" className={checkboxIconVariants({ size })} />}
+            {showCheck && <Icon name="check" className={checkboxIconVariants({ size: resolvedSize })} />}
+            {showMinus && <Icon name="minus" className={checkboxIconVariants({ size: resolvedSize })} />}
           </span>
         ) : (
           /* Switch appearance: Track with sliding thumb */
           <span
             className={cn(
-              switchTrackVariants({ size, state: hasError ? "error" : state }),
+              switchTrackVariants({ size: resolvedSize, state: hasError ? "error" : state }),
               className,
             )}
             aria-hidden="true"
             onClick={() => resolvedRef.current?.click()}
           >
-            <span className={switchThumbVariants({ size })} />
+            <span className={switchThumbVariants({ size: resolvedSize })} />
           </span>
         )}
       </span>
@@ -146,7 +148,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
             {label && (
               <label
                 htmlFor={resolvedId}
-                className={checkboxLabelVariants({ size, disabled: disabled ?? false })}
+                className={checkboxLabelVariants({ size: resolvedSize, disabled: disabled ?? false })}
               >
                 {label}
               </label>

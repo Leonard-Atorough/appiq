@@ -1,7 +1,5 @@
 import type React from "react";
 import type { ResponsiveValue } from "@/shared/lib";
-import type { VariantProps } from "class-variance-authority";
-import type { popoverVariants } from "./popover.variants";
 
 /** Which interaction opens the popover. */
 export type PopoverOpenOn = "click" | "hover" | "focus";
@@ -12,7 +10,7 @@ export type PopoverSide = "top" | "right" | "bottom" | "left";
 /** Alignment of the panel along the chosen side. */
 export type PopoverAlign = "start" | "center" | "end";
 
-export interface PopoverProps extends Omit<VariantProps<typeof popoverVariants>, "size"> {
+export interface PopoverProps {
   // --- Open state (controlled / uncontrolled) ---
   open?: boolean;
   defaultOpen?: boolean;

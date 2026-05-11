@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ColumnDef, Row } from "@tanstack/react-table";
 import type { ResponsiveValue } from "@/shared/lib";
-import type {
-  dataTableVariants,
-  dataTableCellVariants,
-  dataTableHeadVariants,
-  dataTableRowVariants,
-} from "./dataTable.variants";
-import type { VariantProps } from "class-variance-authority";
-
 
 export type DataTableSize = "sm" | "md" | "lg";
 export type TableDisplayStyle = "default" | "minimal" | "full";
@@ -30,10 +22,7 @@ export interface DataTableKeyboardConfig {
   allowEnterAction?: boolean;
 }
 
-export interface DataTableProps<TData extends Record<string, any> = any> extends Omit<
-  VariantProps<typeof dataTableVariants>,
-  "style" | "density"
-> {
+export interface DataTableProps<TData extends Record<string, any> = any> {
   /** Row data array. Each item maps to one row. Parent is responsible for loading/empty states. */
   data: TData[];
   /** TanStack Table column definitions. */
@@ -69,20 +58,14 @@ export interface DataTableProps<TData extends Record<string, any> = any> extends
 }
 
 /** Styled `<td>` subcomponent. */
-export interface DataTableCellProps
-  extends
-    Omit<React.TdHTMLAttributes<HTMLTableCellElement>, "style">,
-    Omit<VariantProps<typeof dataTableCellVariants>, "textSize" | "style"> {
+export interface DataTableCellProps extends Omit<React.TdHTMLAttributes<HTMLTableCellElement>, "style"> {
   textSize?: ResponsiveValue<DataTableSize>;
   style?: ResponsiveValue<TableDisplayStyle>;
   className?: string;
 }
 
 /** Styled `<tr>` subcomponent. */
-export interface DataTableRowProps
-  extends
-    Omit<React.HTMLAttributes<HTMLTableRowElement>, "style">,
-    Omit<VariantProps<typeof dataTableRowVariants>, "style"> {
+export interface DataTableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowElement>, "style"> {
   textSize?: ResponsiveValue<DataTableSize>;
   style?: ResponsiveValue<TableDisplayStyle>;
   isSelected?: boolean;
@@ -96,10 +79,7 @@ export interface DataTableRowProps
 }
 
 /** Styled `<th>` subcomponent. */
-export interface DataTableHeadProps
-  extends
-    Omit<React.ThHTMLAttributes<HTMLTableCellElement>, "style">,
-    Omit<VariantProps<typeof dataTableHeadVariants>, "textSize" | "style"> {
+export interface DataTableHeadProps extends Omit<React.ThHTMLAttributes<HTMLTableCellElement>, "style"> {
   textSize?: ResponsiveValue<DataTableSize>;
   style?: ResponsiveValue<TableDisplayStyle>;
   /** Renders sort indicator and cursor when true. */

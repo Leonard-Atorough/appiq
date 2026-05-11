@@ -1,11 +1,6 @@
 import type { ResponsiveValue } from "@/shared/lib";
-import type { VariantProps } from "class-variance-authority";
-import type { selectVariants } from "./select.variants";
 
-export interface SelectProps
-  extends
-    Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size">,
-    Omit<VariantProps<typeof selectVariants>, "size"> {
+export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /**
    * Visual feedback variant. Automatically derived from `error`/`success` props —
    * only set this explicitly when you need visual state without message text.

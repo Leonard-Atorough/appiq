@@ -1,6 +1,4 @@
-import type { VariantProps } from "class-variance-authority";
 import type { ResponsiveValue } from "@/shared/lib";
-import type { tagVariants } from "./tag.variants";
 
 export interface TagAction {
   /** Stable identifier for React reconciliation. Defaults to `label` if not provided. */
@@ -17,10 +15,7 @@ export interface TagAction {
  * - Orchestrates a fixed layout with optional visual embellishments
  * - Semantically equivalent to MUI Chip component
  */
-export interface TagProps
-  extends
-    Omit<React.HTMLAttributes<HTMLElement>, "children" | "color">,
-    Omit<VariantProps<typeof tagVariants>, "color" | "size" | "rounded"> {
+export interface TagProps extends Omit<React.HTMLAttributes<HTMLElement>, "children" | "color"> {
   /** Color treatment matching semantic intent. */
   color?: ResponsiveValue<"default" | "success" | "error" | "warning" | "info">;
   /** Renders border-only with no fill. */

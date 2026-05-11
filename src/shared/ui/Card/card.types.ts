@@ -1,22 +1,26 @@
 import type { ResponsiveValue } from "@/shared/lib";
-import type { VariantProps } from "class-variance-authority";
-import type { cardVariants } from "./card.variants";
 
 // Base variant value types
 type CardSize = "sm" | "md" | "lg";
 type CardVariant = "default" | "elevated" | "outlined";
+type CardInteractive = boolean;
 type CardStatus = "none" | "success" | "warning" | "error" | "info";
 
-export interface CardProps
-  extends
-    Omit<React.HTMLAttributes<HTMLDivElement>, "children">,
-    Omit<VariantProps<typeof cardVariants>, "size" | "variant" | "interactive" | "status"> {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   /** Content rendered in the card header (typically a title or summary). */
   header?: React.ReactNode;
   /** Content rendered in the card footer (typically actions or metadata). */
   footer?: React.ReactNode;
   /** Primary card body content. */
   children?: React.ReactNode;
+  /** Size affects padding. */
+  size?: ResponsiveValue<CardSize>;
+  /** Visual treatment. */
+  variant?: ResponsiveValue<CardVariant>;
+  /** Enables interactive state (hover, active). */
+  interactive?: ResponsiveValue<CardInteractive>;
+  /** Semantic status indicated by left border and background. */
+  status?: ResponsiveValue<CardStatus>;
   /** URL of a thumbnail image rendered at the top of the card. */
   thumbnail?: string;
   /** Accessible alt text for the thumbnail image. */
@@ -27,12 +31,6 @@ export interface CardProps
   selected?: boolean;
   /** Prevents interaction and applies a disabled visual style. */
   disabled?: boolean;
-
-  // Responsive layout variants
-  size?: ResponsiveValue<CardSize>;
-  variant?: ResponsiveValue<CardVariant>;
-  status?: ResponsiveValue<CardStatus>;
-
   onDragStart?: React.DragEventHandler<HTMLDivElement>;
   onDragEnd?: React.DragEventHandler<HTMLDivElement>;
   onDragOver?: React.DragEventHandler<HTMLDivElement>;

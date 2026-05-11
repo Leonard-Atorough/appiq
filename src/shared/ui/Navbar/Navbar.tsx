@@ -61,14 +61,16 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
     ref,
   ) => {
     const resolvedSize = useResponsive(size) || "md";
+    const resolvedPosition = useResponsive(position) || "static";
+    const resolvedMenuPosition = useResponsive(menuPosition) || "left";
     return (
-      <header ref={ref} className={cn(navbarVariants({ position, size: resolvedSize }), className)} {...props}>
+      <header ref={ref} className={cn(navbarVariants({ position: resolvedPosition, size: resolvedSize }), className)} {...props}>
         {/* Slot 1: toggle icon (shrink-to-fit) */}
         {menuIcon && <div className="shrink-0 flex items-center">{menuIcon}</div>}
         {/* Slot 2: branding / title (shrink-to-fit) */}
         {title && <div className="shrink-0 flex items-center">{title}</div>}
         {/* Slot 3: navigation menu (flex-1 — takes all remaining space, alignment via menuPosition) */}
-        {menu && <div className={navbarMenuVariants({ menuPosition })}>{menu}</div>}
+        {menu && <div className={navbarMenuVariants({ menuPosition: resolvedMenuPosition })}>{menu}</div>}
         {!menu && <div className="flex-1" />}{" "}
         {/* Empty flex item to push menuEnd to the right if no menu */}
         {/* Slot 4: end actions — profile, search, CTAs (shrink-to-fit) */}

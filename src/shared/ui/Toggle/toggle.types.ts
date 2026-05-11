@@ -1,10 +1,6 @@
-import type { VariantProps } from "class-variance-authority";
-import type { checkboxBoxVariants } from "./toggle.variants";
+import type { ResponsiveValue } from "@/shared/lib";
 
-export interface ToggleProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type">,
-    VariantProps<typeof checkboxBoxVariants> {
+export interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   /**
    * Label text rendered next to the toggle.
    */
@@ -31,4 +27,8 @@ export interface ToggleProps
    * "switch" renders a track with sliding thumb. Defaults to "checkbox".
    */
   type?: "checkbox" | "switch";
+  /** Control size. */
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
+  /** Visual state. */
+  state?: "default" | "error";
 }

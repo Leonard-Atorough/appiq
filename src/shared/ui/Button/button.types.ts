@@ -1,11 +1,6 @@
-import type { VariantProps } from "class-variance-authority";
 import type { ResponsiveValue } from "@/shared/lib";
-import type { buttonVariants } from "./button.variants";
 
-export interface ButtonProps
-  extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, never>,
-    Omit<VariantProps<typeof buttonVariants>, "variant" | "size"> {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
   /** Visual style. `primary` for the main CTA; `ghost`/`link` for low-emphasis actions. */
   variant?: ResponsiveValue<"primary" | "secondary" | "outline" | "ghost" | "link" | "danger">;
   /** Control height and padding. */

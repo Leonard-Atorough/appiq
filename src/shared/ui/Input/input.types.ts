@@ -1,11 +1,6 @@
 import type { ResponsiveValue } from "@/shared/lib";
-import type { VariantProps } from "class-variance-authority";
-import type { inputVariants } from "./input.variants";
 
-export interface InputProps
-  extends
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
-    Omit<VariantProps<typeof inputVariants>, "size"> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Visual feedback variant. Automatically derived from `error`/`success` props —
    * only set this explicitly when you need visual state without message text.
