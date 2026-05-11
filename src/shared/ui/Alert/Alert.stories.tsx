@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
  */
 export const Default: Story = {
   args: {
-    children: "This is an informational message.",
+    description: "This is an informational message.",
   },
 };
 
@@ -29,7 +29,7 @@ export const Success: Story = {
   args: {
     type: "success",
     title: "Success!",
-    children: "Your changes have been saved successfully.",
+    description: "Your changes have been saved successfully.",
   },
 };
 
@@ -40,8 +40,7 @@ export const Error: Story = {
   args: {
     type: "error",
     title: "Error",
-    children:
-      "Something went wrong. Please check your input and try again.",
+    description: "Something went wrong. Please check your input and try again.",
   },
 };
 
@@ -52,7 +51,7 @@ export const Warning: Story = {
   args: {
     type: "warning",
     title: "Warning",
-    children: "This action cannot be undone. Proceed with caution.",
+    description: "This action cannot be undone. Proceed with caution.",
   },
 };
 
@@ -63,7 +62,7 @@ export const WithTitle: Story = {
   args: {
     type: "info",
     title: "Information",
-    children: "Here is some helpful information you should know.",
+    description: "Here is some helpful information you should know.",
   },
 };
 
@@ -74,7 +73,7 @@ export const Dismissible: Story = {
   args: {
     type: "success",
     title: "Success!",
-    children: "Your settings have been updated.",
+    description: "Your settings have been updated.",
     dismissible: true,
   },
 };
@@ -85,18 +84,10 @@ export const Dismissible: Story = {
 export const AllTypes = {
   render: () => (
     <div className="space-y-md">
-      <Alert type="info" title="Information">
-        This is an informational alert.
-      </Alert>
-      <Alert type="success" title="Success">
-        This is a success alert.
-      </Alert>
-      <Alert type="warning" title="Warning">
-        This is a warning alert.
-      </Alert>
-      <Alert type="error" title="Error">
-        This is an error alert.
-      </Alert>
+      <Alert type="info" title="Information" description="This is an informational alert." />
+      <Alert type="success" title="Success" description="This is a success alert." />
+      <Alert type="warning" title="Warning" description="This is a warning alert." />
+      <Alert type="error" title="Error" description="This is an error alert." />
     </div>
   ),
 };
@@ -107,12 +98,8 @@ export const AllTypes = {
 export const DismissibleVariations = {
   render: () => (
     <div className="space-y-md">
-      <Alert type="info" title="Non-dismissible">
-        You cannot close this alert.
-      </Alert>
-      <Alert type="success" title="Dismissible" dismissible>
-        You can close this alert by clicking the X button.
-      </Alert>
+      <Alert type="info" title="Non-dismissible" description="You cannot close this alert." />
+      <Alert type="success" title="Dismissible" dismissible description="You can close this alert by clicking the X button." />
     </div>
   ),
 };
@@ -124,8 +111,7 @@ export const LongContent: Story = {
   args: {
     type: "warning",
     title: "System Maintenance",
-    children:
-      "The system will undergo scheduled maintenance on Saturday from 2 AM to 6 AM UTC. During this time, the service may be unavailable. Please plan accordingly and save your work beforehand.",
+    description: "The system will undergo scheduled maintenance on Saturday from 2 AM to 6 AM UTC. During this time, the service may be unavailable. Please plan accordingly and save your work beforehand.",
     dismissible: true,
   },
 };
@@ -136,9 +122,9 @@ export const LongContent: Story = {
 export const Simple = {
   render: () => (
     <div className="space-y-sm">
-      <Alert type="success">Changes saved</Alert>
-      <Alert type="error">Invalid input provided</Alert>
-      <Alert type="info">New features available</Alert>
+      <Alert type="success" description="Changes saved" />
+      <Alert type="error" description="Invalid input provided" />
+      <Alert type="info" description="New features available" />
     </div>
   ),
 };
@@ -150,7 +136,7 @@ export const Borderless: Story = {
   args: {
     type: "error",
     borderless: true,
-    children: "Email address is required.",
+    description: "Email address is required.",
   },
 };
 
@@ -162,7 +148,7 @@ export const BorderlessWithTitle: Story = {
     type: "error",
     borderless: true,
     title: "Validation Error",
-    children: "Please enter a valid email address.",
+    description: "Please enter a valid email address.",
   },
 };
 
@@ -176,17 +162,13 @@ export const BorderlessVariations = {
         <h3 className="mb-md text-sm font-semibold text-secondary">
           Bordered (Default)
         </h3>
-        <Alert type="error" title="Error">
-          This error has a visible border and padding.
-        </Alert>
+        <Alert type="error" title="Error" description="This error has a visible border and padding." />
       </div>
       <div>
         <h3 className="mb-md text-sm font-semibold text-secondary">
           Borderless (Inline)
         </h3>
-        <Alert type="error" borderless title="Error">
-          This error has no border or padding, ideal for inline form feedback.
-        </Alert>
+        <Alert type="error" borderless title="Error" description="This error has no border or padding, ideal for inline form feedback." />
       </div>
     </div>
   ),
@@ -211,9 +193,8 @@ export const FormErrorExample = {
           type="error"
           borderless
           className="mt-xs"
-        >
-          Email address is required.
-        </Alert>
+          description="Email address is required."
+        />
       </div>
 
       <div className="max-w-sm">
@@ -229,9 +210,8 @@ export const FormErrorExample = {
           type="error"
           borderless
           className="mt-xs"
-        >
-          Password must be at least 8 characters.
-        </Alert>
+          description="Password must be at least 8 characters."
+        />
       </div>
     </div>
   ),
@@ -243,18 +223,10 @@ export const FormErrorExample = {
 export const AllBorderlessTypes = {
   render: () => (
     <div className="space-y-md">
-      <Alert type="info" borderless>
-        This is an informational inline alert.
-      </Alert>
-      <Alert type="success" borderless>
-        This is a success inline alert.
-      </Alert>
-      <Alert type="warning" borderless>
-        This is a warning inline alert.
-      </Alert>
-      <Alert type="error" borderless>
-        This is an error inline alert.
-      </Alert>
+      <Alert type="info" borderless description="This is an informational inline alert." />
+      <Alert type="success" borderless description="This is a success inline alert." />
+      <Alert type="warning" borderless description="This is a warning inline alert." />
+      <Alert type="error" borderless description="This is an error inline alert." />
     </div>
   ),
 };

@@ -2,19 +2,25 @@ import type React from "react";
 
 export type AlertType = "success" | "error" | "warning" | "info";
 
+/**
+ * Alert — Slot-based notification component
+ *
+ * Composes into two semantic content slots: `title` (optional heading) and `description` (required message).
+ * Replaces role-based `children` naming with explicit slot props for clarity.
+ */
 export interface AlertProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children" | "title"> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   /** Alert type/severity — determines color and icon semantics. @default "info" */
   type?: AlertType;
 
   /** Removes the default border and adjusts padding for a more compact look. @default false */
   borderless?: boolean;
 
-  /** Alert title/heading text. Optional. */
+  /** Alert title/heading text. Optional. Rendered above description. */
   title?: React.ReactNode;
 
-  /** Alert message content (required). */
-  children: React.ReactNode;
+  /** Alert message content. Semantic slot for the main message (required). */
+  description: React.ReactNode;
 
   /** Whether the alert can be dismissed by the user. @default false */
   dismissible?: boolean;

@@ -18,10 +18,10 @@ const ICON_MAP: Record<string, string> = {
 };
 
 /**
- * Alert
+ * Alert — Slot-based notification component
  *
- * Simple, inline component for displaying persistent feedback messages.
- * Supports multiple alert types with semantic color coding and optional dismissal.
+ * Displays persistent inline feedback with optional title and dismissal.
+ * Uses semantic slots (`title` + `description`) for composition clarity.
  *
  * Accessibility:
  * - Uses `role="alert"` for error/warning (time-sensitive)
@@ -30,13 +30,17 @@ const ICON_MAP: Record<string, string> = {
  * - Dismissible alerts include accessible close button
  *
  * @example
- * // Simple info alert
- * <Alert>This is an informational message</Alert>
+ * // Simple info alert (description slot)
+ * <Alert description="This is an informational message" />
  *
  * // Error alert with title and dismissible
- * <Alert type="error" title="Error" dismissible onDismiss={() => setShowAlert(false)}>
- *   Something went wrong. Please try again.
- * </Alert>
+ * <Alert
+ *   type="error"
+ *   title="Error"
+ *   description="Something went wrong. Please try again."
+ *   dismissible
+ *   onDismiss={() => setShowAlert(false)}
+ * />
  */
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   (
@@ -44,7 +48,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       type = "info",
       borderless = false,
       title,
-      children,
+      description,
       dismissible = false,
       onDismiss,
       isOpen = true,
@@ -85,7 +89,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         {/* Content */}
         <div className={alertContentVariants()}>
           {title && <div className={alertTitleVariants()}>{title}</div>}
-          <div>{children}</div>
+          <div>{description}</div>
         </div>
 
         {/* Dismiss button */}
