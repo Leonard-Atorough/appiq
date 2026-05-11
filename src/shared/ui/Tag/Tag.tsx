@@ -1,7 +1,7 @@
 import { cn } from "@shared/lib";
 import { useResponsive } from "@/shared/lib";
 import { tagVariants } from "./tag.variants";
-import type { TagProps } from "./tag.types";
+import type { TagAction, TagProps } from "./tag.types";
 import React from "react";
 import { Icon } from "../Icon";
 
@@ -38,7 +38,7 @@ import { Icon } from "../Icon";
 export const Tag = React.forwardRef<HTMLElement, TagProps>(
   (
     {
-      color: variant = "default",
+      color = "default",
       outlined: outline,
       size,
       rounded,
@@ -53,7 +53,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps>(
     },
     ref,
   ) => {
-    const resolvedVariant = useResponsive(variant);
+    const resolvedColor = useResponsive(color);
     const resolvedSize = useResponsive(size);
     const resolvedRounded = useResponsive(rounded ?? false);
     const hasNestedButtons = onDismiss || (actions && actions.length > 0);
@@ -67,7 +67,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps>(
         type={!hasNestedButtons && onClick ? "button" : undefined}
         className={cn(
           tagVariants({
-            variant: resolvedVariant,
+            color: resolvedColor,
             outlined: outline,
             size: resolvedSize,
             rounded: resolvedRounded,
@@ -82,7 +82,7 @@ export const Tag = React.forwardRef<HTMLElement, TagProps>(
 
         <span>{label}</span>
 
-        {actions?.map((action: any) => (
+        {actions?.map((action: TagAction) => (
           <button
             key={action.id ?? action.label}
             type="button"
