@@ -1,8 +1,6 @@
-import type { VariantProps } from "class-variance-authority";
 import type { ResponsiveValue } from "@/shared/lib";
-import type { emptyStateVariants } from "./emptyState.variants";
 
-export interface EmptyStateProps extends Omit<VariantProps<typeof emptyStateVariants>, "size" | "variant"> {
+export interface EmptyStateProps {
   /** Primary heading. */
   title?: string;
   /** Supporting text shown below the title. */

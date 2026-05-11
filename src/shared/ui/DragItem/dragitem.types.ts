@@ -1,4 +1,9 @@
-export interface DragItemProps {
+import type React from "react";
+
+export interface DragItemProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "id" | "draggable" | "onDragStart" | "onDragEnd"
+> {
   /** Unique identifier passed to the paired DropTarget's `onDrop` callback. */
   id: string;
   /**
@@ -11,6 +16,4 @@ export interface DragItemProps {
   children: React.ReactNode;
   /** Prevents dragging when true. */
   disabled?: boolean;
-  /** Extra class(es) merged onto the drag wrapper element. */
-  className?: string;
 }

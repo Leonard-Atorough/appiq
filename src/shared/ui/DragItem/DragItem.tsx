@@ -14,7 +14,7 @@ import type { DragItemProps } from "./dragitem.types";
  *   <Card header={application.position} />
  * </DragItem>
  */
-export const DragItem = ({ id, type, children, disabled = false, className }: DragItemProps) => {
+export const DragItem = ({ id, type, children, disabled = false, className, ...props }: DragItemProps) => {
   React.useEffect(() => {
     if (import.meta.env.DEV && !type) {
       console.warn(
@@ -58,6 +58,7 @@ export const DragItem = ({ id, type, children, disabled = false, className }: Dr
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       className={cn(disabled && "cursor-not-allowed", className)}
+      {...props}
     >
       {children}
     </div>
