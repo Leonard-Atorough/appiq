@@ -96,7 +96,7 @@ describe("Badge", () => {
 
   it("applies dot variant", () => {
     const { container } = render(
-      <Badge value="" variant="dot">
+      <Badge value="" style="dot">
         <div>Content</div>
       </Badge>
     );

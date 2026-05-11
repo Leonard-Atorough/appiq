@@ -11,8 +11,8 @@ export interface BadgeProps {
   color?: "default" | "secondary" | "success" | "error" | "warning" | "info";
   /** The size of the badge. */
   size?: ResponsiveValue<"sm" | "md" | "lg">;
-  /** The variant of the badge. */
-  variant?: ResponsiveValue<"dot" | "standard">;
+  /** The style of the badge. */
+  style?: ResponsiveValue<"dot" | "standard">;
   /** The shape of the badge. */
   shape?: ResponsiveValue<"circle" | "square">;
   /** Whether the badge is visible. */

@@ -1,4 +1,4 @@
-import type { BadgeProps } from "./badge.props";
+import type { BadgeProps } from "./badge.types";
 import { useResponsive } from "@/shared/lib";
 
 import { badgeVariants } from "./badge.variants";
@@ -10,7 +10,7 @@ export function Badge({
   max,
   color = "default",
   size,
-  variant,
+  style,
   shape,
   isVisible = true,
   className,
@@ -18,7 +18,7 @@ export function Badge({
   const displayValue =
     typeof value === "number" && max !== undefined && value > max ? `${max}+` : value;
   const resolvedSize = useResponsive(size);
-  const resolvedVariant = useResponsive(variant);
+  const resolvedStyle = useResponsive(style);
   const resolvedShape = useResponsive(shape);
 
   if (!isVisible) {
@@ -33,7 +33,7 @@ export function Badge({
           badgeVariants({
             color,
             size: resolvedSize,
-            variant: resolvedVariant,
+            style: resolvedStyle,
             shape: resolvedShape,
           }),
           className,

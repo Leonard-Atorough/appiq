@@ -31,6 +31,14 @@ export {
 export { Input, type InputProps } from "./Input";
 export { Label, type LabelProps } from "./Label";
 export { Navbar, type NavbarProps } from "./Navbar";
+export {
+  Pagination,
+  paginationVariants,
+  paginationButtonVariants,
+  paginationEllipsisVariants,
+  type PaginationProps,
+  type PaginationIcons,
+} from "./Pagination";
 export { Select, type SelectProps } from "./Select";
 export { DataTable, type DataTableProps } from "./DataTable";
 export {

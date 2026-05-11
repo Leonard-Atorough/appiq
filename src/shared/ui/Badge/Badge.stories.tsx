@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Badge } from "./Badge";
 import { Button } from "../Button";
 
 const meta: Meta<typeof Badge> = {
-  title: "Badge",
+  title: "Shared/Badge",
   component: Badge,
   argTypes: {
     value: {
@@ -22,7 +22,7 @@ const meta: Meta<typeof Badge> = {
       control: "select",
       options: ["sm", "md", "lg"],
     },
-    variant: {
+    style: {
       control: "select",
       options: ["dot", "standard"],
     },
@@ -71,7 +71,7 @@ export const WithMax: Story = {
 export const Dot: Story = {
   args: {
     value: "",
-    variant: "dot",
+    style: "dot",
     children: <Button>Status</Button>,
     color: "success",
   },
@@ -134,13 +134,13 @@ export const ShapeVariants: Story = {
 export const DotVariant: Story = {
   render: () => (
     <div className="flex gap-lg flex-wrap">
-      <Badge value="" variant="dot" color="success">
+      <Badge value="" style="dot" color="success">
         <Button size="sm">Online</Button>
       </Badge>
-      <Badge value="" variant="dot" color="error">
+      <Badge value="" style="dot" color="error">
         <Button size="sm">Offline</Button>
       </Badge>
-      <Badge value="" variant="dot" color="warning">
+      <Badge value="" style="dot" color="warning">
         <Button size="sm">Away</Button>
       </Badge>
     </div>
@@ -158,7 +158,7 @@ export const Hidden: Story = {
 export const OnAvatar: Story = {
   render: () => (
     <div className="flex gap-lg">
-      <Badge value="1" color="success" variant="dot">
+      <Badge value="1" color="success" style="dot">
         <div className="w-12 h-12 rounded-full bg-surface border-2 border-base" />
       </Badge>
       <Badge value="5" color="error">
