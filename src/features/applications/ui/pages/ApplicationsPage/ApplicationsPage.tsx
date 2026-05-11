@@ -64,7 +64,7 @@ export default function ApplicationsPage() {
         />
       </div>
       <div className="mb-md flex items-center justify-between">
-        <p className="text-md text-muted">Total Applications: {applications.length}</p>
+        <p className="text-base text-muted">Total Applications: {applications.length}</p>
         <Button variant="primary" size="md" onClick={openCreateModal}>
           Add Application
         </Button>

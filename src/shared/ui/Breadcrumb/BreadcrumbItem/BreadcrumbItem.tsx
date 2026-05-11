@@ -21,8 +21,16 @@ export function BreadcrumbItem({
   onItemClick,
   size = "md",
 }: BreadcrumbItemComponentProps) {
-  const { label, ariaLabel, disabled = false, icon, href, onClick, linkComponent, className } =
-    item;
+  const {
+    label,
+    ariaLabel,
+    disabled = false,
+    icon,
+    href,
+    onClick,
+    linkComponent,
+    className,
+  } = item;
 
   // Resolve size: per-item size takes precedence, otherwise use parent size
   const resolvedSize = useResponsive(item.size ?? (size as "sm" | "md" | "lg"));
@@ -32,13 +40,6 @@ export function BreadcrumbItem({
 
   // Determine if should render as link
   const shouldRenderAsLink = !disabled && (!!href || !!onClick) && (!isLast || lastItemAsLink);
-
-  const content = (
-    <>
-      {icon && <span className={breadcrumbIconVariants({ size: resolvedSize })}>{icon}</span>}
-      <span>{label}</span>
-    </>
-  );
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) onClick(e);
@@ -52,19 +53,21 @@ export function BreadcrumbItem({
           href={href}
           onClick={handleClick}
           aria-label={ariaLabel || label}
-          aria-disabled={disabled}
+          aria-disabled={disabled ? "true" : undefined}
           className={breadcrumbLinkVariants({ disabled, size: resolvedSize })}
         >
-          {content}
+          {icon && <span className={breadcrumbIconVariants({ size: resolvedSize })}>{icon}</span>}
+          {label}
         </LinkComponent>
       ) : (
         <span
           aria-label={ariaLabel || label}
-          aria-disabled={disabled}
+          aria-disabled={disabled ? "true" : undefined}
           aria-current={isLast ? "page" : undefined}
           className={breadcrumbTextVariants({ size: resolvedSize })}
         >
-          {content}
+          {icon && <span className={breadcrumbIconVariants({ size: resolvedSize })}>{icon}</span>}
+          {label}
         </span>
       )}
     </li>

@@ -11,7 +11,7 @@ export const dropdownMenuVariants = cva(
     variants: {
       size: {
         sm: "text-sm",
-        md: "text-md",
+        md: "text-base",
         lg: "text-lg",
       },
     },
@@ -24,7 +24,7 @@ export const dropdownMenuVariants = cva(
 export const dropdownItemVariants = cva(
   [
     "flex w-full items-center gap-sm",
-    "px-sm py-xs text-md rounded-md",
+    "px-sm py-xs text-base rounded-md",
     "transition-all duration-fast",
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
     "disabled:opacity-disabled disabled:cursor-not-allowed",

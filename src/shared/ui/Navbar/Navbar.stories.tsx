@@ -39,7 +39,7 @@ export const Default: Story = {
         <button className="px-md py-sm text-sm border border-border rounded hover:bg-muted">
           Settings
         </button>
-        <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
+        <button className="w-8 h-8 rounded-full bg-primary text-link flex items-center justify-center text-xs font-bold">
           JD
         </button>
       </div>
@@ -70,7 +70,7 @@ export const MobileView: Story = {
     ),
     menu: null, // Hidden on mobile
     menuEnd: (
-      <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
+      <button className="w-8 h-8 rounded-full bg-primary text-link flex items-center justify-center text-xs font-bold">
         JD
       </button>
     ),
@@ -234,7 +234,7 @@ export const WithNavMenu: Story = {
           />
         }
         menuEnd={
-          <button className="w-8 h-8 rounded-full bg-primary text-primary-text flex items-center justify-center text-xs font-bold">
+          <button className="w-8 h-8 rounded-full bg-primary text-link flex items-center justify-center text-xs font-bold">
             JD
           </button>
         }

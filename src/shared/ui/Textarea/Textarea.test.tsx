@@ -67,7 +67,7 @@ describe("Textarea", () => {
 
   describe("Variants", () => {
     it.each([
-      ["primary", ["bg-base", "text-base"]],
+      ["primary", ["bg-base", "text-primary"]],
       ["secondary", ["bg-secondary", "text-secondary-foreground"]],
       ["outline", ["bg-transparent", "border-base"]],
       ["ghost", ["bg-transparent", "border-none"]],

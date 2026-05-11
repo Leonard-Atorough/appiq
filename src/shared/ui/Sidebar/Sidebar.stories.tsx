@@ -39,7 +39,7 @@ function NavItems() {
 }
 
 function Logo() {
-  return <div className="font-semibold text-base">AppIQ</div>;
+  return <div className="font-semibold text-primary">AppIQ</div>;
 }
 
 function UserMenu() {

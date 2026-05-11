@@ -16,7 +16,7 @@ export const paginationButtonVariants = cva(
       variant: {
         default: [
           "bg-base hover:bg-surface active:bg-surface-active",
-          "text-base",
+          "text-primary",
           "border border-base",
           "focus-visible:ring-primary",
         ].join(" "),
@@ -46,5 +46,5 @@ export const paginationButtonVariants = cva(
 );
 
 export const paginationEllipsisVariants = cva(
-  ["flex items-center justify-center", "text-base", "px-xs"].join(" "),
+  ["flex items-center justify-center", "text-primary", "px-xs"].join(" "),
 );

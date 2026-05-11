@@ -43,23 +43,23 @@ export const tabTriggerVariants = cva(
         underline: [
           // horizontal: bottom border indicator; vertical: right border indicator
           "border-transparent",
-          "hover:border-base hover:text-base hover:bg-surface",
-          "text-secondary hover:text-base",
-          "aria-selected:text-base",
+          "hover:border-base hover:text-primary hover:bg-surface",
+          "text-secondary hover:text-primary",
+          "aria-selected:text-primary",
         ].join(" "),
         pill: [
           "rounded-md text-secondary",
-          "hover:text-base hover:bg-surface",
-          "aria-selected:bg-surface aria-selected:text-base aria-selected:shadow-sm",
+          "hover:text-primary hover:bg-surface",
+          "aria-selected:bg-surface aria-selected:text-primary aria-selected:shadow-sm",
         ].join(" "),
         boxed: [
-          "text-secondary hover:bg-surface hover:text-base",
-          "aria-selected:bg-surface aria-selected:text-base",
+          "text-secondary hover:bg-surface hover:text-primary",
+          "aria-selected:bg-surface aria-selected:text-primary",
         ].join(" "),
       },
       size: {
         sm: "px-sm py-xs text-sm",
-        md: "px-md py-sm text-md",
+        md: "px-md py-sm text-base",
         lg: "px-lg py-md text-lg",
       },
       fullWidth: {

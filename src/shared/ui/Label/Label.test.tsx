@@ -61,7 +61,7 @@ describe("Label", () => {
     it("applies default classes", () => {
       const { container } = render(<Label>Test Label</Label>);
       const label = container.querySelector("label");
-      expect(label).toHaveClass("font-medium", "text-base");
+      expect(label).toHaveClass("font-medium", "text-primary");
     });
 
     it("applies custom className", () => {
@@ -77,7 +77,7 @@ describe("Label", () => {
         <Label className="custom-class">Test Label</Label>,
       );
       const label = container.querySelector("label");
-      expect(label).toHaveClass("font-medium", "text-base", "custom-class");
+      expect(label).toHaveClass("font-medium", "text-primary", "custom-class");
     });
   });
 

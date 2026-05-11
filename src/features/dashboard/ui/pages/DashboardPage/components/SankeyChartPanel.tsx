@@ -230,7 +230,7 @@ export function SankeyChartPanel({ loading, data }: SankeyChartPanelProps) {
                   }}
                   aria-hidden="true"
                 />
-                <span className="text-md text-secondary font-medium">{SANKEY_NODE_LABELS[id]}</span>
+                <span className="text-primary font-medium">{SANKEY_NODE_LABELS[id]}</span>
               </Flex>
             ))}
           </Flex>

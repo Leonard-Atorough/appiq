@@ -12,14 +12,15 @@ describe("Tag", () => {
     });
 
     it.each([
-      ["button", undefined],
-      ["span", () => {}],
+      ["span", undefined, undefined],
+      ["button", () => {}, undefined],
+      ["span", undefined, () => {}],
     ] as const)(
-      "renders as %s when onClick=%j",
-      (element, onClick) => {
+      "renders as %s when onClick=%j and onDismiss=%j",
+      (element, onClick, onDismiss) => {
         const ref = React.createRef<HTMLElement>();
         render(
-          <Tag ref={ref} onClick={onClick} onDismiss={() => {}} label="Test" />,
+          <Tag ref={ref} onClick={onClick} onDismiss={onDismiss} label="Test" />,
         );
 
         const TagName = element === "span" ? HTMLSpanElement : HTMLButtonElement;

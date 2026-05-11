@@ -55,7 +55,7 @@ export default function DashboardPage() {
             />
             <Card size="md" className="flex-1">
               <Flex direction="column" gap="md">
-                <h3 className="text-md font-semibold text-primary">Recent Activity</h3>
+                <h3 className="text-base font-semibold text-primary">Recent Activity</h3>
                 <p className="text-sm text-muted">
                   No recent activity. Start applying to jobs to see your progress here!
                 </p>

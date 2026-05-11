@@ -51,7 +51,7 @@ describe("Select", () => {
     it.each([
       ["sm", ["h-8", "px-sm", "text-xs"]],
       ["md", ["h-10", "px-md", "text-sm"]],
-      ["lg", ["h-12", "px-lg", "text-md"]],
+      ["lg", ["h-12", "px-lg", "text-base"]],
     ] as const)("applies size=%s with correct classes", (size, classes) => {
       render(
         <Select size={size} data-testid="select">
@@ -334,7 +334,7 @@ describe("Select", () => {
         </Select>
       );
       const select = screen.getByTestId("select");
-      expect(select).toHaveClass("h-12", "px-lg", "text-md", "custom-class");
+      expect(select).toHaveClass("h-12", "px-lg", "text-base", "custom-class");
     });
 
     it("passes through HTML attributes", () => {

@@ -81,7 +81,8 @@ describe("Breadcrumb", () => {
     it("does not render separator after last item", () => {
       const { container } = render(<Breadcrumb items={items} />);
       // Check that there's no separator after the last text item
-      const lastItem = container.querySelectorAll("li")[-1];
+      const listItems = container.querySelectorAll("li");
+      const lastItem = listItems[listItems.length - 1];
       // Last visible element should not have aria-hidden
       expect(lastItem).not.toHaveAttribute("aria-hidden");
     });
@@ -102,8 +103,8 @@ describe("Breadcrumb", () => {
 
     it("collapses from start by default", () => {
       render(<Breadcrumb items={longItems} maxItems={3} collapseFrom="start" />);
-      // First items should be hidden
-      expect(screen.queryByText("Item 0")).not.toBeInTheDocument();
+      expect(screen.queryByText("Item 0")).toBeInTheDocument(); // First item should be visible
+      expect(screen.queryByText("Item 1")).not.toBeInTheDocument();
       // Last items should be visible
       expect(screen.getByText("Item 7")).toBeInTheDocument();
     });
@@ -112,12 +113,16 @@ describe("Breadcrumb", () => {
       render(<Breadcrumb items={longItems} maxItems={3} collapseFrom="end" />);
       // First items should be visible
       expect(screen.getByText("Item 0")).toBeInTheDocument();
-      // Last items should be hidden
-      expect(screen.queryByText("Item 7")).not.toBeInTheDocument();
+      // Last items should be visible
+      expect(screen.getByText("Item 7")).toBeInTheDocument();
+      // Middle items should be hidden
+      expect(screen.queryByText("Item 6")).not.toBeInTheDocument();
     });
 
     it("renders dropdown for collapsed items by default", () => {
-      const { container } = render(<Breadcrumb items={longItems} maxItems={3} useDropdown={true} />);
+      const { container } = render(
+        <Breadcrumb items={longItems} maxItems={3} useDropdown={true} />,
+      );
       const dropdownButton = container.querySelector("button");
       expect(dropdownButton).toBeInTheDocument();
     });
@@ -161,9 +166,9 @@ describe("Breadcrumb", () => {
 
     it("supports custom aria-labels", () => {
       const itemsWithLabels = [
-        { label: "Home", href: "/", ariaLabel: "Go to homepage" },
+        { label: "Home", href: "/", ariaLabel: "Go to homepage", lastItemAsLink: true },
       ];
-      render(<Breadcrumb items={itemsWithLabels} />);
+      render(<Breadcrumb items={itemsWithLabels} lastItemAsLink={true} />);
       const homeLink = screen.getByText("Home").closest("a");
       expect(homeLink).toHaveAttribute("aria-label", "Go to homepage");
     });

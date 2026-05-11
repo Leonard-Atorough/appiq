@@ -72,7 +72,7 @@ export function UpcomingInterviewsPanel({
                       {/* Content */}
                       <Flex direction="column" gap="xs" className="min-w-0 flex-1">
                         <p className="text-sm text-secondary truncate">{interview.company}</p>
-                        <p className="text-md font-semibold text-primary truncate">
+                        <p className="text-base font-semibold text-primary truncate">
                           {interview.position}
                         </p>
                         {startTime ? (

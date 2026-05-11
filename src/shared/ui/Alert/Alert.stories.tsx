@@ -180,7 +180,7 @@ export const BorderlessVariations = {
 export const FormErrorExample = {
   render: () => (
     <div className="space-y-lg">
-      <div className="max-w-sm">
+      <div className="w-full">
         <label className="block text-sm font-semibold text-secondary mb-xs">
           Email Address
         </label>
@@ -197,7 +197,7 @@ export const FormErrorExample = {
         />
       </div>
 
-      <div className="max-w-sm">
+      <div className="w-full">
         <label className="block text-sm font-semibold text-secondary mb-xs">
           Password
         </label>

@@ -67,7 +67,7 @@ export function NotesTab({ application, onSave }: NotesTabProps) {
   return (
     <div className="flex flex-col gap-md p-md">
       <div className="bg-muted rounded-lg p-md">
-        <p className="text-md text-primary leading-relaxed whitespace-pre-wrap">
+        <p className="text-base text-primary leading-relaxed whitespace-pre-wrap">
           {application.notes}
         </p>
       </div>

@@ -15,7 +15,7 @@ export const badgeVariants = cva(
       size: {
         sm: "text-xs p-xs min-w-5 w-auto h-5",
         md: "text-sm p-sm min-w-6  w-auto h-6",
-        lg: "text-md p-md min-w-7 w-auto h-7",
+        lg: "text-base p-md min-w-7 w-auto h-7",
       },
       style: {
         dot: "w-2 h-2 p-0",

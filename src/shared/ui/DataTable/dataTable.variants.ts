@@ -15,7 +15,7 @@ export const dataTableHeadVariants = cva(
     variants: {
       textSize: {
         sm: "py-xs text-sm",
-        md: "py-sm text-md",
+        md: "py-sm text-base",
         lg: "py-md text-lg",
       },
       style: {
@@ -86,7 +86,7 @@ export const dataTableCellVariants = cva(
       textSize: {
         sm: "py-xs text-xs",
         md: "py-sm text-sm",
-        lg: "py-md text-md",
+        lg: "py-md text-base",
       },
       style: {
         default: "",

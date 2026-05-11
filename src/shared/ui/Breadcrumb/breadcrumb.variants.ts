@@ -5,7 +5,7 @@ export const breadcrumbNavVariants = cva("", {
   defaultVariants: {},
 });
 
-export const breadcrumbListVariants = cva("flex items-center gap-md", {
+export const breadcrumbListVariants = cva("flex items-center gap-xs md:gap-sm lg:gap-md", {
   variants: {},
   defaultVariants: {},
 });

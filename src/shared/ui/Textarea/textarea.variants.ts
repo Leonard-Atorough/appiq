@@ -11,13 +11,13 @@ export const textareaVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-base border border-base text-base focus-visible:ring-primary",
+          "bg-base border border-base text-primary focus-visible:ring-primary",
         secondary:
           "bg-secondary border border-base text-secondary-foreground focus-visible:ring-secondary",
         outline:
-          "bg-transparent border border-base text-base focus-visible:ring-primary",
+          "bg-transparent border border-base text-primary focus-visible:ring-primary",
         ghost:
-          "bg-transparent border-none text-base focus-visible:ring-primary",
+          "bg-transparent border-none text-primary focus-visible:ring-primary",
       },
       size: {
         sm: "text-sm px-sm py-xs rounded-md",

@@ -38,28 +38,28 @@ export const tagVariants = cva(
       {
         outlined: false,
         color: "success",
-        className: "text-success-foreground",
+        className: "text-feedback",
       },
       {
         outlined: false,
         color: "warning",
-        className: "text-warning-foreground",
+        className: "text-feedback",
       },
       {
         outlined: false,
         color: "error",
-        className: "text-error-foreground",
+        className: "text-feedback",
       },
       {
         outlined: false,
         color: "info",
-        className: "text-info-foreground",
+        className: "text-feedback",
       },
       /* Outline variant foregrounds */
       {
         outlined: true,
         color: "default",
-        className: "border-base text-base hover:bg-muted/5",
+        className: "border-base text-primary hover:bg-muted/5",
       },
       {
         outlined: true,

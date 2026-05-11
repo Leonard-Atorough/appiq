@@ -64,7 +64,7 @@ describe("Header", () => {
 
   describe("color variants", () => {
     it.each<[string | undefined, string]>([
-      [undefined, "text-foreground"],
+      [undefined, "text-primary"],
       ["secondary", "text-secondary"],
     ])("applies color=%s correctly", (color, expectedClass) => {
       const { container } = render(

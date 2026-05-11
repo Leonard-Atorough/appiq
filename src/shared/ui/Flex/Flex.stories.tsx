@@ -10,7 +10,7 @@ export default meta;
 type Story = StoryObj<typeof Flex>;
 
 const PlaceholderItem = ({ label = 'Item' }: { label?: string }) => (
-  <div className="bg-primary-subtle text-primary-text rounded px-md py-sm text-sm font-medium min-w-max">
+  <div className="bg-primary-subtle text-link rounded px-md py-sm text-sm font-medium min-w-max">
     {label}
   </div>
 );
@@ -203,7 +203,7 @@ export const WithWrap: Story = {
       {Array.from({ length: 12 }).map((_, i) => (
         <div
           key={i}
-          className="bg-primary-subtle text-primary-text rounded px-md py-sm text-sm font-medium"
+          className="bg-primary-subtle text-link rounded px-md py-sm text-sm font-medium"
         >
           Item {i + 1}
         </div>

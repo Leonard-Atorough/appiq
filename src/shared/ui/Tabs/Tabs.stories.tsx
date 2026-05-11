@@ -21,7 +21,7 @@ const sampleTabs = [
     id: "overview",
     label: "Overview",
     content: (
-      <div className="p-md text-base">
+      <div className="p-md text-primary">
         <p>Overview content goes here.</p>
       </div>
     ),
@@ -30,7 +30,7 @@ const sampleTabs = [
     id: "details",
     label: "Details",
     content: (
-      <div className="p-md text-base">
+      <div className="p-md text-primary">
         <p>Details content goes here.</p>
       </div>
     ),
@@ -39,7 +39,7 @@ const sampleTabs = [
     id: "notes",
     label: "Notes",
     content: (
-      <div className="p-md text-base">
+      <div className="p-md text-primary">
         <p>Notes content goes here.</p>
       </div>
     ),

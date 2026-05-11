@@ -100,7 +100,7 @@ describe("Tabs", () => {
   describe("Sizes", () => {
     it.each([
       ["sm", "text-sm"],
-      ["md", "text-md"],
+      ["md", "text-base"],
       ["lg", "text-lg"],
     ] as const)("renders %s size with %s class", (size, textClass) => {
       render(<Tabs tabs={tabs} size={size} />);

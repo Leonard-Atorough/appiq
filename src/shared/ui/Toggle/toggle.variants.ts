@@ -53,12 +53,12 @@ export const checkboxIconVariants = cva("text-primary-foreground", {
   defaultVariants: { size: "md" },
 });
 
-export const checkboxLabelVariants = cva("font-medium text-base select-none cursor-pointer", {
+export const checkboxLabelVariants = cva("font-medium text-primary select-none cursor-pointer", {
   variants: {
     size: {
       sm: "text-sm",
       md: "text-sm",
-      lg: "text-md",
+      lg: "text-base",
     },
     disabled: {
       true: "opacity-disabled cursor-not-allowed",
@@ -112,12 +112,9 @@ export const switchTrackVariants = cva(
  * Position driven by parent track's justify-content via flex (not peer-checked modifiers).
  */
 export const switchThumbVariants = cva(
-  [
-    "rounded-full bg-surface",
-    "transition-all duration-normal",
-    "shadow-sm",
-    "flex-shrink-0",
-  ].join(" "),
+  ["rounded-full bg-surface", "transition-all duration-normal", "shadow-sm", "flex-shrink-0"].join(
+    " ",
+  ),
   {
     variants: {
       size: {

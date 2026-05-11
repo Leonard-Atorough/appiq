@@ -15,7 +15,7 @@ export const headerVariants = cva("leading-tight", {
       bold: "font-bold",
     },
     color: {
-      default: "text-foreground",
+      default: "text-primary",
       secondary: "text-secondary",
     },
   },

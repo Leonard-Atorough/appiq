@@ -50,7 +50,7 @@ describe("Icon Component", () => {
 
   describe("Variants", () => {
     it.each([
-      ["default", "text-base"],
+      ["default", "text-primary"],
       ["muted", "text-muted"],
       ["primary", "text-primary"],
       ["secondary", "text-secondary"],
@@ -67,7 +67,7 @@ describe("Icon Component", () => {
     it("uses default variant when not specified", () => {
       const { container } = render(<Icon name="kebab" />);
       const span = container.querySelector("span");
-      expect(span).toHaveClass("text-base");
+      expect(span).toHaveClass("text-primary");
     });
 
     it("combines size and variant correctly", () => {

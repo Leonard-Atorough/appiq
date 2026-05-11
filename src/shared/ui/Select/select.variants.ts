@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 export const selectVariants = cva(
   [
     "appearance-none flex items-center rounded-md",
-    "border border-base bg-surface text-base",
+    "border border-base bg-surface text-primary",
     "px-md py-sm text-sm",
     "transition-all transition-shadow duration-normal ease-out",
     "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
@@ -17,7 +17,7 @@ export const selectVariants = cva(
       size: {
         sm: "h-8 px-sm text-xs",
         md: "h-10 px-md text-sm",
-        lg: "h-12 px-lg text-md",
+        lg: "h-12 px-lg text-base",
       },
       state: {
         default: "focus-visible:ring-primary",

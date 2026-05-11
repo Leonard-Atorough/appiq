@@ -22,13 +22,13 @@ export const tooltipVariants = cva(
        * `default` matches the page surface; `dark` is the classic inverted tooltip style.
        */
       color: {
-        default: "bg-surface text-base border-base",
+        default: "bg-surface text-primary border-base",
         dark: "bg-(--gray-800) text-(--gray-50) border-(--gray-700)",
         primary: "bg-primary-500 text-primary-foreground border-primary",
-        success: "bg-success-light text-success-foreground border-success",
-        warning: "bg-warning-light text-warning-foreground border-warning",
-        error: "bg-error-light text-error-foreground border-error",
-        info: "bg-info-light text-info-foreground border-info",
+        success: "bg-success-light text-feedback border-success",
+        warning: "bg-warning-light text-feedback border-warning",
+        error: "bg-error-light text-feedback border-error",
+        info: "bg-info-light text-feedback border-info",
       },
       /** Controls padding, font size, and maximum width. */
       size: {

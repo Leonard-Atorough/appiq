@@ -91,7 +91,7 @@ describe("Badge", () => {
       </Badge>
     );
     const badge = container.querySelector("span");
-    expect(badge).toHaveClass("text-md");
+    expect(badge).toHaveClass("text-base");
   });
 
   it("applies dot variant", () => {

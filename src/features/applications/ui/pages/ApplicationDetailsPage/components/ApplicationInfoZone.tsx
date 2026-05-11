@@ -47,7 +47,7 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
       <div className="flex items-start justify-between gap-md">
         <div className="flex flex-col gap-xs min-w-0">
           <h1 className="text-xl font-bold text-primary leading-tight">{position}</h1>
-          <p className="text-md font-medium">{company}</p>
+          <p className="text-base font-medium">{company}</p>
         </div>
         <div className="flex items-center gap-sm shrink-0">
           <Tag color={STATUS_VARIANT[status]} size="md" rounded label={STATUS_LABEL[status]} />
