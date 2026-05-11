@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useState } from "react";
 import { DataTable } from "./DataTable";
-import { Badge } from "@shared/ui/Badge";
+import { Tag } from "@shared/ui/Tag";
 import { Dropdown } from "../Dropdown";
 import { Toggle } from "../Toggle";
 
@@ -73,11 +73,7 @@ const columns: ColumnDef<Application>[] = [
     header: "Status",
     cell: (info) => {
       const s = info.getValue() as Application["status"];
-      return (
-        <Badge variant={statusVariant[s]} size="sm">
-          {s}
-        </Badge>
-      );
+      return <Tag variant={statusVariant[s]} size="sm" label={s} />;
     },
   },
   {
@@ -212,11 +208,7 @@ export const ControlledSelection: Story = {
         header: "Status",
         cell: (info) => {
           const s = info.getValue() as Application["status"];
-          return (
-            <Badge variant={statusVariant[s]} size="sm">
-              {s}
-            </Badge>
-          );
+          return <Tag variant={statusVariant[s]} size="sm" label={s} />;
         },
       },
       {

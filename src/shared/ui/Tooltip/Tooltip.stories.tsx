@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Tooltip } from "./Tooltip";
 import { Button } from "@shared/ui/Button";
-import { Badge } from "@shared/ui/Badge";
+import { Tag } from "@shared/ui/Tag";
 
 const meta: Meta<typeof Tooltip> = { title: "Shared/Tooltip", component: Tooltip };
 export default meta;
@@ -128,13 +128,13 @@ export const OnNonButton: Story = {
   render: () => (
     <div className="flex flex-wrap justify-center gap-lg p-3xl">
       <Tooltip label="Status: Interviewing" color="warning">
-        <Badge variant="warning">Interviewing</Badge>
+        <Tag variant="warning" label="Interviewing" />
       </Tooltip>
       <Tooltip label="Application was rejected" color="error">
-        <Badge variant="error">Rejected</Badge>
+        <Tag variant="error" label="Rejected" />
       </Tooltip>
       <Tooltip label="Offer received — congratulations!" color="success">
-        <Badge variant="success">Offer</Badge>
+        <Tag variant="success" label="Offer" />
       </Tooltip>
     </div>
   ),

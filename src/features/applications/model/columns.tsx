@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { JobApplication } from "@/entities";
-import { Badge } from "@/shared/ui";
+import { Tag } from "@/shared/ui";
 
 const statusVariant: Record<JobApplication["status"], "default" | "info" | "warning" | "success" | "error"> = {
   saved: "default",
@@ -26,9 +26,7 @@ export const applicationColumns: ColumnDef<JobApplication>[] = [
     header: "Status",
     accessorKey: "status",
     cell: (info) => (
-      <Badge variant={statusVariant[info.getValue() as JobApplication["status"]]} size="md">
-        {info.getValue() as string}
-      </Badge>
+      <Tag variant={statusVariant[info.getValue() as JobApplication["status"]]} size="md" label={info.getValue() as string} />
     ),
   },
   {

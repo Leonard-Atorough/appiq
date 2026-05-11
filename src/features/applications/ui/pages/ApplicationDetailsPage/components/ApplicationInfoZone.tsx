@@ -1,4 +1,4 @@
-import { Badge, Button, Icon } from "@/shared/ui";
+import { Tag, Button, Icon } from "@/shared/ui";
 import type { JobApplication, ApplicationStatus } from "@/entities";
 import { formatDate, formatTime, formatSalary } from "../../../../lib/applicationFormatters";
 
@@ -50,9 +50,7 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
           <p className="text-md font-medium">{company}</p>
         </div>
         <div className="flex items-center gap-sm shrink-0">
-          <Badge variant={STATUS_VARIANT[status]} size="md" rounded>
-            {STATUS_LABEL[status]}
-          </Badge>
+          <Tag variant={STATUS_VARIANT[status]} size="md" rounded label={STATUS_LABEL[status]} />
           <Button variant="outline" size="sm" onClick={onEdit}>
             <span className="flex items-center gap-xs">
               <Icon name="edit" size="sm" />
@@ -81,19 +79,13 @@ export function ApplicationInfoZone({ application, onEdit }: ApplicationInfoZone
             </div>
           ))}
         {location && (
-          <Badge variant="default" size="sm" outline rounded={false}>
-            {location}
-          </Badge>
+          <Tag variant="default" size="sm" outlined rounded={false} label={location} />
         )}
         {workingStyle && (
-          <Badge variant="default" size="sm" outline rounded={false}>
-            {workingStyle}
-          </Badge>
+          <Tag variant="default" size="sm" outlined rounded={false} label={workingStyle} />
         )}
         {jobType && (
-          <Badge variant="default" size="sm" outline rounded={false}>
-            {jobType}
-          </Badge>
+          <Tag variant="default" size="sm" outlined rounded={false} label={jobType} />
         )}
         {hasSalary && (
           <span className="text-sm text-muted">{formatSalary(salaryMin!, salaryMax!)}</span>

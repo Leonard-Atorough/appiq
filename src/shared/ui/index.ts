@@ -1,5 +1,5 @@
 export { Alert, alertVariants, type AlertProps, type AlertType } from "./Alert";
-export { Badge, type BadgeProps } from "./Badge";
+export { Tag, type TagProps } from "./Tag";
 export { Button, type ButtonProps } from "./Button";
 export { Card, type CardProps } from "./Card";
 export {

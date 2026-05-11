@@ -1,13 +1,17 @@
 import { cn } from "@shared/lib";
 import { useResponsive } from "@/shared/lib";
-import { badgeVariants } from "./badge.variants";
-import type { BadgeProps } from "./badge.types";
+import { tagVariants } from "./tag.variants";
+import type { TagProps } from "./tag.types";
 import React from "react";
+import { Icon } from "../Icon";
 
 /**
- * Badge
+ * Tag — Semantic chip/tag component
  *
- * A compact label for status, category, or metadata display.
+ * Displays a dismissible, labeled chip with optional icon and actions.
+ * Structure: [startAdornment] + label + [actions] + [deleteIcon]
+ * Uses slot-based composition for fixed, predictable layout.
+ *
  * Automatically adapts its root element based on provided props:
  * - Static label: renders as `<span>`
  * - Clickable (`onClick` only): renders as `<button>`
@@ -16,22 +20,33 @@ import React from "react";
  * Supports responsive styling via ResponsiveValue for size, variant, and rounded.
  *
  * @example
- * <Badge variant="success">Applied</Badge>
- * <Badge variant="warning" onDismiss={() => remove(id)}>Pending</Badge>
- * // Responsive: md=pill, lg=boxed (if using variant for layout)
- * <Badge size={{ base: "sm", md: "md", lg: "lg" }} variant={{ base: "default", lg: "success" }}>Status</Badge>
+ * <Tag label="Applied" variant="success" />
+ * <Tag
+ *   label="Pending"
+ *   variant="warning"
+ *   startAdornment={<Icon />}
+ *   onDismiss={() => remove(id)}
+ *   deleteIcon={<CustomX />}
+ * />
+ * // Responsive: md=pill, lg=boxed
+ * <Tag
+ *   label="Status"
+ *   size={{ base: "sm", md: "md", lg: "lg" }}
+ *   variant={{ base: "default", lg: "success" }}
+ * />
  */
-export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
+export const Tag = React.forwardRef<HTMLElement, TagProps>(
   (
     {
       variant = "default",
-      outline,
+      outlined: outline,
       size,
       rounded,
-      icon,
+      label,
+      startAdornment,
+      deleteIcon = <Icon name="x" size="sm" />,
       onDismiss,
       actions,
-      children,
       onClick,
       className,
       ...props
@@ -51,9 +66,9 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
         ref={ref as React.Ref<HTMLButtonElement & HTMLSpanElement>}
         type={!hasNestedButtons && onClick ? "button" : undefined}
         className={cn(
-          badgeVariants({
+          tagVariants({
             variant: resolvedVariant,
-            outline,
+            outlined: outline,
             size: resolvedSize,
             rounded: resolvedRounded,
           }),
@@ -63,11 +78,11 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
         onClick={!hasNestedButtons ? onClick : undefined}
         {...props}
       >
-        {icon && <span className="flex items-center">{icon}</span>}
+        {startAdornment && <span className="flex items-center">{startAdornment}</span>}
 
-        <span>{children}</span>
+        <span>{label}</span>
 
-        {actions?.map((action) => (
+        {actions?.map((action: any) => (
           <button
             key={action.id ?? action.label}
             type="button"
@@ -91,7 +106,7 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
               onDismiss?.();
             }}
           >
-            <span aria-hidden="true">✕</span>
+            <span aria-hidden="true">{deleteIcon}</span>
           </button>
         )}
       </Tag>
@@ -99,4 +114,4 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
   },
 );
 
-Badge.displayName = "Badge";
+Tag.displayName = "Tag";

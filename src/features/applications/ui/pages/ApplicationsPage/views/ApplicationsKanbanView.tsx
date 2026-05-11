@@ -1,7 +1,7 @@
 import { useApplications } from "@features/applications/data/useApplications";
 import { useApplicationActions } from "@features/applications/data/useApplicationActions";
 import { ApplicationCard } from "../../../components/cards/ApplicationCard";
-import { Badge, DropTarget, Flex, Header, Skeleton, dropTargetVariants } from "@/shared/ui";
+import { Tag, DropTarget, Flex, Header, Skeleton, dropTargetVariants } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 import type { ApplicationStatus } from "@/entities";
 
@@ -78,9 +78,7 @@ export function ApplicationsKanbanView({
           >
             <Flex align="center" justify="between" paddingX="xs" fullWidth>
               <Header level={3} size="h6" weight="semibold">{col.label}</Header>
-              <Badge variant={col.badge} size="sm" outline rounded={false}>
-                {cards.length}
-              </Badge>
+              <Tag variant={col.badge} size="sm" outlined rounded={false} label={cards.length} />
             </Flex>
             <DropTarget
               droppableId={col.id}

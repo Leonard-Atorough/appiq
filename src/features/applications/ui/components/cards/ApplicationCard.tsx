@@ -1,5 +1,5 @@
 import { Card } from "@/shared/ui/Card";
-import { Badge, Dropdown, Icon } from "@/shared/ui";
+import { Tag, Dropdown, Icon } from "@/shared/ui";
 import type { JobApplication, ApplicationStatus } from "@/entities";
 import { formatDate, formatSalary } from "../../../lib/applicationFormatters";
 
@@ -121,14 +121,10 @@ export function ApplicationCard({
           {hasMeta && (
             <div className="flex flex-wrap gap-xs pt-xs border-t border-base">
               {workingStyle && (
-                <Badge variant="default" size="sm" outline rounded={false}>
-                  {workingStyleLabel[workingStyle]}
-                </Badge>
+                <Tag variant="default" size="sm" outlined rounded={false} label={workingStyleLabel[workingStyle]} />
               )}
               {jobType && (
-                <Badge variant="default" size="sm" outline rounded={false}>
-                  {jobTypeLabel[jobType]}
-                </Badge>
+                <Tag variant="default" size="sm" outlined rounded={false} label={jobTypeLabel[jobType]} />
               )}
               {hasSalary && (
                 <span className="text-xs text-muted self-center">
