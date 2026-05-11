@@ -1,4 +1,6 @@
+import React from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import {
   breadcrumbItemVariants,
   breadcrumbLinkVariants,
@@ -22,6 +24,9 @@ export function BreadcrumbItem({
   const { label, ariaLabel, disabled = false, icon, href, onClick, linkComponent, className } =
     item;
 
+  // Resolve size: per-item size takes precedence, otherwise use parent size
+  const resolvedSize = useResponsive(item.size ?? (size as "sm" | "md" | "lg"));
+
   // Determine link component: per-item > global > default <a>
   const LinkComponent = linkComponent || globalLinkComponent || "a";
 
@@ -30,7 +35,7 @@ export function BreadcrumbItem({
 
   const content = (
     <>
-      {icon && <span className={breadcrumbIconVariants({ size })}>{icon}</span>}
+      {icon && <span className={breadcrumbIconVariants({ size: resolvedSize })}>{icon}</span>}
       <span>{label}</span>
     </>
   );
@@ -48,7 +53,7 @@ export function BreadcrumbItem({
           onClick={handleClick}
           aria-label={ariaLabel || label}
           aria-disabled={disabled}
-          className={breadcrumbLinkVariants({ disabled, size })}
+          className={breadcrumbLinkVariants({ disabled, size: resolvedSize })}
         >
           {content}
         </LinkComponent>
@@ -57,7 +62,7 @@ export function BreadcrumbItem({
           aria-label={ariaLabel || label}
           aria-disabled={disabled}
           aria-current={isLast ? "page" : undefined}
-          className={breadcrumbTextVariants({ size })}
+          className={breadcrumbTextVariants({ size: resolvedSize })}
         >
           {content}
         </span>

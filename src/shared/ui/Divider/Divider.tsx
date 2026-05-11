@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import { dividerVariants } from "./divider.variants";
 import type { DividerProps } from "./divider.types";
 
@@ -42,20 +43,27 @@ export const Divider = React.forwardRef<
     },
     ref,
   ) => {
+    const resolvedDirection = useResponsive(direction);
+    const resolvedAppearance = useResponsive(appearance);
+    const resolvedSize = useResponsive(size);
+    const resolvedSpacing = useResponsive(spacing);
+    const resolvedColor = useResponsive(color);
+    const resolvedFullSize = useResponsive(fullSize);
+
     const variantClasses = dividerVariants({
-      direction,
-      size,
-      spacing,
-      color,
-      appearance,
-      fullSize,
+      direction: resolvedDirection,
+      size: resolvedSize,
+      spacing: resolvedSpacing,
+      color: resolvedColor,
+      appearance: resolvedAppearance,
+      fullSize: resolvedFullSize,
     });
 
     const baseClasses = cn(variantClasses, className);
 
     // Horizontal divider: use semantic <hr> for non-decorative, <div> for decorative
     // consumers will supply appropriate ARIA attributes based on decorative vs semantic usage
-    if (direction === "horizontal") {
+    if (resolvedDirection === "horizontal") {
       if (!decorative) {
         return (
           <hr
@@ -83,7 +91,7 @@ export const Divider = React.forwardRef<
         role={decorative ? "presentation" : undefined}
         className={cn(
           baseClasses,
-          direction === "vertical" && "my-0 mx-auto",
+          resolvedDirection === "vertical" && "my-0 mx-auto",
         )}
         {...props}
       />

@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@shared/lib/cn";
+import { useResponsive } from "@/shared/lib";
 import type { BreadcrumbProps } from "./breadcrumb.types";
 import {
   breadcrumbNavVariants,
@@ -48,11 +49,9 @@ export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
     ref,
   ) => {
     const [expandedCollapsed, setExpandedCollapsed] = React.useState(false);
+    const resolvedSize = useResponsive(size);
 
-    const shouldCollapse = React.useMemo(
-      () => items.length > maxItems,
-      [items.length, maxItems],
-    );
+    const shouldCollapse = React.useMemo(() => items.length > maxItems, [items.length, maxItems]);
 
     const { visibleItems, hiddenItems } = React.useMemo(() => {
       if (!shouldCollapse) {
@@ -120,7 +119,7 @@ export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
                     isLast={false}
                     lastItemAsLink={lastItemAsLink}
                     linkComponent={linkComponent}
-                    size={size}
+                    size={resolvedSize}
                   />
                 </React.Fragment>
               ))}
@@ -140,10 +139,10 @@ export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
             // Item is last if it's the final item in the original items array
             const isLast = items[items.length - 1] === item;
             // For start collapse, show dropdown after first item
-            const showCollapsedAfter = collapseFrom === "start" && idx === 0 && hiddenItems.length > 0;
+            const showCollapsedAfter =
+              collapseFrom === "start" && idx === 0 && hiddenItems.length > 0;
             // For end collapse, show dropdown before last item
-            const showCollapsedBefore =
-              collapseFrom === "end" && isLast && hiddenItems.length > 0;
+            const showCollapsedBefore = collapseFrom === "end" && isLast && hiddenItems.length > 0;
 
             return (
               <React.Fragment key={idx}>
@@ -154,7 +153,7 @@ export const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
                   isLast={isLast}
                   lastItemAsLink={lastItemAsLink}
                   linkComponent={linkComponent}
-                  size={size}
+                  size={resolvedSize}
                 />
 
                 {!isLast && !showCollapsedAfter && !showCollapsedBefore && (

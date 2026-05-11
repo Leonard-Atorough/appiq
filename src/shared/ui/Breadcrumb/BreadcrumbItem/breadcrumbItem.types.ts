@@ -1,4 +1,5 @@
 import type { BreadcrumbLinkProps } from "../breadcrumb.types";
+import type { ResponsiveValue } from "@/shared/lib";
 
 /**
  * Individual breadcrumb item configuration.
@@ -19,8 +20,8 @@ export interface BreadcrumbItemProps {
   linkComponent?: React.ComponentType<BreadcrumbLinkProps>;
   /** Additional CSS classes for this item. */
   className?: string;
-  /** Size of text and icon. Default: "md" */
-  size?: "sm" | "md" | "lg";
+  /** Size of text and icon. Default: "md". Supports responsive values. */
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
 }
 
 /**

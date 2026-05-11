@@ -1,4 +1,5 @@
 import type { BreadcrumbItemProps } from "./BreadcrumbItem";
+import type { ResponsiveValue } from "@/shared/lib";
 
 /**
  * Extended anchor element props compatible with router libraries.
@@ -41,6 +42,6 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   separator?: React.ReactNode;
   /** Custom link component for all items (e.g., TanStack Router Link, React Router Link). Can be overridden per-item. */
   linkComponent?: React.ComponentType<BreadcrumbLinkProps>;
-  /** Size of text and icon for all items. Default: "md". Can be overridden per-item. */
-  size?: "sm" | "md" | "lg";
+  /** Size of text and icon for all items. Default: "md". Can be overridden per-item. Supports responsive values. */
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
 }
