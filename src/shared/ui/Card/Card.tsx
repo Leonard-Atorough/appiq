@@ -38,7 +38,6 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       loading,
       selected,
       disabled,
-      draggable,
       dragId,
       dragType,
       size,
@@ -86,12 +85,12 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
           }),
           disabled && "opacity-disabled pointer-events-none",
           loading && "cursor-wait opacity-muted",
-          !loading && !disabled && (dragId || draggable) && "cursor-grab active:cursor-grabbing",
+          !loading && !disabled && dragId && "cursor-grab active:cursor-grabbing",
           selected && "ring-2 ring-(--color-primary) ring-offset-2",
           className,
         )}
         role={interactive !== false && onClick ? "button" : "group"}
-        draggable={dragId ? false : (draggable ?? false)}
+        draggable={false}
         onKeyDown={(e) => {
           if (
             interactive !== false &&

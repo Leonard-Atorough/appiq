@@ -6,7 +6,7 @@ type CardVariant = "default" | "elevated" | "outlined";
 type CardInteractive = boolean;
 type CardStatus = "none" | "success" | "warning" | "error" | "info";
 
-export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+export interface CardProps {
   /** Content rendered in the card header (typically a title or summary). */
   header?: React.ReactNode;
   /** Content rendered in the card footer (typically actions or metadata). */
@@ -31,9 +31,15 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "c
   selected?: boolean;
   /** Prevents interaction and applies a disabled visual style. */
   disabled?: boolean;
+  /** Handler called when the card is clicked (if interactive). */
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  /** Handler for drag start events. Ignored if `dragId` is set. */
   onDragStart?: React.DragEventHandler<HTMLDivElement>;
+  /** Handler for drag end events. Ignored if `dragId` is set. */
   onDragEnd?: React.DragEventHandler<HTMLDivElement>;
+  /** Handler for drag over events. */
   onDragOver?: React.DragEventHandler<HTMLDivElement>;
+  /** Handler for drop events. */
   onDrop?: React.DragEventHandler<HTMLDivElement>;
   /** When set, wraps the card in a DragItem, making it draggable via the HTML drag-and-drop API. */
   dragId?: string;
@@ -42,4 +48,6 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "c
    * A console warning fires in development if `dragId` is set without this.
    */
   dragType?: string;
+  /** Additional class names for styling the card. */
+  className?: string;
 }
