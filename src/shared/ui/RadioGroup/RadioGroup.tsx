@@ -8,6 +8,7 @@ import {
   radioGroupErrorVariants,
 } from "./radioGroup.variants";
 import type { RadioGroupProps, RadioGroupOption } from "./radioGroup.types";
+import { useResponsive } from "@/shared/lib";
 
 /**
  * RadioGroup
@@ -68,6 +69,9 @@ export const RadioGroup = React.forwardRef<HTMLFieldSetElement, RadioGroupProps>
     const isControlled = value !== undefined;
     const selectedValue = isControlled ? value : internalValue;
 
+    const resolvedSize = useResponsive(size);
+    const resolvedDirection = useResponsive(direction);
+
     const handleChange = (newValue: string) => {
       if (!isControlled) {
         setInternalValue(newValue);
@@ -86,7 +90,7 @@ export const RadioGroup = React.forwardRef<HTMLFieldSetElement, RadioGroupProps>
 
         {description && <div className={radioGroupDescriptionVariants()}>{description}</div>}
 
-        <div className={radioGroupVariants({ direction, disabled })}>
+        <div className={radioGroupVariants({ direction: resolvedDirection, disabled })}>
           {options.map((option: RadioGroupOption) => (
             <Radio
               key={option.value}
@@ -95,7 +99,7 @@ export const RadioGroup = React.forwardRef<HTMLFieldSetElement, RadioGroupProps>
               value={option.value}
               label={option.label}
               description={option.description}
-              size={size}
+              size={resolvedSize}
               disabled={disabled || option.disabled}
               required={required}
               checked={selectedValue === option.value}

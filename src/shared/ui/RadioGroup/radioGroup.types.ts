@@ -1,3 +1,4 @@
+import type { ResponsiveValue } from "@/shared/lib";
 import type React from "react";
 
 export interface RadioGroupOption {
@@ -34,7 +35,7 @@ export interface RadioGroupProps extends Omit<React.FieldsetHTMLAttributes<HTMLF
   label?: React.ReactNode;
   
   /** Size variant for all radios in the group */
-  size?: "sm" | "md" | "lg";
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
   
   /** Whether all radios are disabled */
   disabled?: boolean;
@@ -46,7 +47,7 @@ export interface RadioGroupProps extends Omit<React.FieldsetHTMLAttributes<HTMLF
   error?: React.ReactNode;
   
   /** Layout direction */
-  direction?: "vertical" | "horizontal";
+  direction?: ResponsiveValue<"vertical" | "horizontal">;
   
   /** Optional description text for the group */
   description?: React.ReactNode;
