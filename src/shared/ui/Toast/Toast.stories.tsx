@@ -111,7 +111,8 @@ export const LiveDemo: Story = {
             <Toast
               key={t.key}
               // Spreading all props except `key`
-              {...((({ key, ...rest }) => rest)(t) as ToastProps) }
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              {...((({ key, ...props }) => props)(t) as ToastProps) }
               duration={4000}
               onDismiss={() => setToasts((prev) => prev.filter((x) => x.key !== t.key))}
             />
