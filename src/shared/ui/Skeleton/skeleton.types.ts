@@ -1,5 +1,8 @@
-import type { VariantProps } from "class-variance-authority";
-import type { skeletonVariants } from "./skeleton.variants";
+/** Size tokens shared across all skeleton shapes. */
+type SkeletonSize = "xs" | "sm" | "md" | "lg" | "xl";
+
+/** Shape variant tokens for the base Skeleton. */
+type SkeletonVariant = "text" | "avatar" | "image" | "icon";
 
 /**
  * Base props for all skeleton components
@@ -14,7 +17,12 @@ export interface BaseSkeletonProps extends React.HTMLAttributes<HTMLDivElement> 
 /**
  * Generic skeleton component accepting all variants
  */
-export interface SkeletonProps extends BaseSkeletonProps, VariantProps<typeof skeletonVariants> {}
+export interface SkeletonProps extends BaseSkeletonProps {
+  /** Shape variant. */
+  variant?: SkeletonVariant;
+  /** Size. */
+  size?: SkeletonSize;
+}
 
 /**
  * Text skeleton for rendering placeholder text
@@ -25,7 +33,7 @@ export interface SkeletonTextProps extends BaseSkeletonProps {
   /** Height of the text skeleton */
   height?: string | number;
   /** Size of the text skeleton (xs, sm, md, lg, xl) */
-  size?: VariantProps<typeof skeletonVariants>["size"];
+  size?: SkeletonSize;
 }
 
 /**
@@ -33,7 +41,7 @@ export interface SkeletonTextProps extends BaseSkeletonProps {
  */
 export interface SkeletonAvatarProps extends BaseSkeletonProps {
   /** Size of the avatar skeleton (xs, sm, md, lg, xl) */
-  size?: VariantProps<typeof skeletonVariants>["size"];
+  size?: SkeletonSize;
   /** Shape of the avatar: "square" or "circle" */
   shape?: "square" | "circle";
 }
@@ -53,7 +61,7 @@ export interface SkeletonImageProps extends BaseSkeletonProps {
  */
 export interface SkeletonIconProps extends BaseSkeletonProps {
   /** Size of the icon skeleton (xs, sm, md, lg, xl) */
-  size?: VariantProps<typeof skeletonVariants>["size"];
+  size?: SkeletonSize;
 }
 
 /**

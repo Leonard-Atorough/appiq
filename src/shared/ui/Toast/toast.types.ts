@@ -1,7 +1,6 @@
-import type { VariantProps } from "class-variance-authority";
-import type { toastVariants } from "./toast.variants";
-
-export interface ToastProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof toastVariants> {
+export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Semantic colour treatment. Default: "default". */
+  variant?: "default" | "success" | "error" | "warning" | "info";
   /** Main notification message. */
   title: string;
   /** Optional supporting detail shown below the title. */

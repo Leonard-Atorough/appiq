@@ -1,8 +1,5 @@
 import type React from "react";
 import type { ResponsiveValue } from "@/shared/lib";
-import type { VariantProps } from "class-variance-authority";
-import type { tabTriggerVariants } from "./tabs.variants";
-
 export interface TabItem {
   /** Unique identifier used to track the active tab. */
   id: string;
@@ -13,7 +10,7 @@ export interface TabItem {
   disabled?: boolean;
 }
 
-export interface TabsProps extends Omit<VariantProps<typeof tabTriggerVariants>, "variant"> {
+export interface TabsProps {
   /** Tab definitions. Each item requires a unique `id` and a `label`. */
   tabs: TabItem[];
   /** Controlled active tab id. Pair with `onChange` to manage state externally. */
@@ -28,6 +25,8 @@ export interface TabsProps extends Omit<VariantProps<typeof tabTriggerVariants>,
   orientation?: "horizontal" | "vertical";
   /** Extra classes on the root wrapper element. */
   className?: string;
-  /** Tab variant can be responsive. */
+  /** Visual style of the tab triggers. */
   variant?: ResponsiveValue<"underline" | "pill" | "boxed">;
+  /** Controls padding and font size of tab triggers. */
+  size?: ResponsiveValue<"sm" | "md" | "lg">;
 }

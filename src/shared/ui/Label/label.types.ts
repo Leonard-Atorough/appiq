@@ -1,8 +1,4 @@
-import type { VariantProps } from "class-variance-authority";
-import type { labelVariants } from "./label.variants";
-
-export interface LabelProps
-  extends React.LabelHTMLAttributes<HTMLLabelElement>, VariantProps<typeof labelVariants> {
+export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /** Label content. Accepts any ReactNode for complex structures (e.g. text + badge). */
   children: React.ReactNode | string;
   /** id of the associated form control. Required for a11y when used standalone; `Field` handles this automatically. */

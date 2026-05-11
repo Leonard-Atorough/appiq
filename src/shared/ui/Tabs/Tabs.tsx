@@ -43,6 +43,7 @@ export function Tabs({
   className,
 }: TabsProps) {
   const resolvedVariant = useResponsive(variant);
+  const resolvedSize = useResponsive(size);
   const isControlled = controlledActive !== undefined;
   const [internalActive, setInternalActive] = React.useState<string>(
     defaultTab ?? tabs.find((t) => !t.disabled)?.id ?? "",
@@ -127,7 +128,7 @@ export function Tabs({
             aria-controls={hasContent ? getPanelId(tab.id) : undefined}
             disabled={tab.disabled}
             tabIndex={tab.id === activeId ? 0 : -1}
-            className={cn(tabTriggerVariants({ variant: resolvedVariant, size, fullWidth, orientation }))}
+            className={cn(tabTriggerVariants({ variant: resolvedVariant, size: resolvedSize, fullWidth, orientation }))}
             onClick={() => handleSelect(tab.id)}
             onKeyDown={(e) => handleKeyDown(e, tab.id)}
           >
