@@ -88,10 +88,9 @@
   --color-primary-active: var(--green-700);
   --color-primary-light: var(--green-50);
   --color-primary-foreground: hsl(210 18% 12%);
-  --color-primary-text: var(--green-700); /* link/inline text on page backgrounds */
 
   /* ===== SEMANTIC: SECONDARY ===== */
-  --color-secondary: var(--purple-500);
+  --color-secondary: var(--purple-300);
   --color-secondary-hover: var(--purple-600);
   --color-secondary-active: var(--purple-700);
   --color-secondary-light: var(--purple-50);
@@ -102,20 +101,20 @@
   --color-text-secondary: var(--gray-600);
   --color-text-light: var(--gray-50); /* decorative/placeholder — not for body text */
   --color-text-dark: var(--gray-900);
+  --color-text-link: var(--green-500); /* links on light backgrounds */
+  --color-text-feedback: hsl(
+    210 18% 12%
+  ); /* for text on feedback colors (success, warning, error, info) */
 
   /* ===== SEMANTIC: FEEDBACK ===== */
   --color-success: var(--success);
   --color-success-light: var(--success-light);
-  --color-success-foreground: hsl(210 18% 12%);
   --color-warning: var(--warning);
   --color-warning-light: var(--warning-light);
-  --color-warning-foreground: hsl(210 18% 12%);
   --color-error: var(--error);
   --color-error-light: var(--error-light);
-  --color-error-foreground: hsl(210 18% 12%);
   --color-info: var(--info);
   --color-info-light: var(--info-light);
-  --color-info-foreground: hsl(210 18% 12%);
 
   /* ===== SEMANTIC: BORDERS ===== */
   --color-border: var(--gray-200);
@@ -254,7 +253,6 @@
   --color-primary-active: var(--green-500);
   --color-primary-light: var(--green-900);
   --color-primary-foreground: hsl(210 18% 12%);
-  --color-primary-text: var(--green-300); /* link/inline text on dark surfaces */
 
   /* ===== SECONDARY ===== */
   --color-secondary: var(--purple-300);
@@ -269,6 +267,10 @@
   --color-text-muted: var(--gray-400);
   --color-text-light: var(--gray-900);
   --color-text-dark: var(--gray-50);
+  --color-text-link: var(--green-900); /* links on dark surfaces */
+  --color-text-feedback: hsl(
+    210 18% 90%
+  ); /* for text on feedback colors (success, warning, error, info) */
 
   /* ===== BORDERS ===== */
   --color-border: var(--gray-700);

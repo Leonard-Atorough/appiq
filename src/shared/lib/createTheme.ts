@@ -28,23 +28,20 @@ type SemanticColorTokens =
   | "text-secondary"
   | "text-light"
   | "text-dark"
-  | "primary-text"
+  | "text-link"
+  | "text-feedback"
   // Borders
   | "border"
   | "border-muted"
   // Feedback (semantic)
   | "success"
   | "success-light"
-  | "success-foreground"
   | "warning"
   | "warning-light"
-  | "warning-foreground"
   | "error"
   | "error-light"
-  | "error-foreground"
   | "info"
   | "info-light"
-  | "info-foreground"
   // Skeleton & Loading
   | "skeleton";
 

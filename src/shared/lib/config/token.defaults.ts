@@ -25,7 +25,6 @@ export const defaultTheme: ThemeConfig = {
     "primary-active": "hsl(119 43% 35%)",
     "primary-light": "hsl(119 43% 95%)",
     "primary-foreground": "hsl(210 18% 12%)",
-    "primary-text": "hsl(119 43% 35%)",
 
     // Secondary (Purple)
     secondary: "hsl(299 35% 55%)",
@@ -39,6 +38,9 @@ export const defaultTheme: ThemeConfig = {
     "text-secondary": "hsl(210 10% 42%)",
     "text-light": "hsl(210 10% 52%)",
     "text-dark": "hsl(210 18% 8%)",
+    "text-link": "hsl(119 43% 35%)",
+    "text-feedback":
+      "hsl(210 18% 12%)" /* for text on feedback colors (success, warning, error, info) */,
 
     // Borders
     border: "hsl(210 16% 90%)",
@@ -47,16 +49,12 @@ export const defaultTheme: ThemeConfig = {
     // Feedback (Semantic)
     success: "hsl(119 43% 52%)",
     "success-light": "hsl(119 43% 90%)",
-    "success-foreground": "hsl(210 18% 12%)",
     warning: "hsl(45 93% 56%)",
     "warning-light": "hsl(45 93% 90%)",
-    "warning-foreground": "hsl(210 18% 12%)",
     error: "hsl(0 84% 60%)",
     "error-light": "hsl(0 100% 95%)",
-    "error-foreground": "hsl(210 18% 12%)",
     info: "hsl(210 88% 56%)",
     "info-light": "hsl(210 100% 95%)",
-    "info-foreground": "hsl(210 18% 12%)",
 
     // Skeleton & Loading
     skeleton: "hsl(210 20% 90%)",
